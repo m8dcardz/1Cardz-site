@@ -381,6 +381,20 @@ body>footer{padding-block:clamp(70px,10vw,120px) 48px}
 .sheet-foot{position:relative;z-index:1;color:#8c93ad}
 @media (max-width:560px){.page{padding:14px}}
 
+/* hide back-side labels once a card is face up (no ghosting through the flip) */
+.coverflip .cside *,.flip .face.back *{-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.coverflip[aria-pressed="true"] .back-side{visibility:hidden;transition:visibility 0s .45s}
+.coverflip[aria-pressed="false"] .back-side{transition:visibility 0s 0s}
+.coverflip[aria-pressed="true"] .tap,.coverflip[aria-pressed="true"] .globe{opacity:0;transition:opacity .2s}
+/* ===== mobile: shorter top binder ===== */
+@media (max-width:560px){
+  body>header .cover .copy p{display:none}
+  body>header .cover{row-gap:16px}
+  body>header .cover .copy{gap:12px;padding-top:16px}
+  html body>header .cover .window{width:min(48%,160px);margin-bottom:20px}
+  html body>header .cover{row-gap:14px}
+  body>header .cover .row{gap:10px 14px}
+}
 /* ===== mobile: top binder tidy-up ===== */
 @media (max-width:900px){
   body>header .cover{grid-template-columns:30px minmax(0,1fr);row-gap:22px;padding-right:56px}
