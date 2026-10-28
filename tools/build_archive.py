@@ -7,7 +7,7 @@ posts = json.loads((root/'tools'/'posts.json').read_text())
 
 head_end = src.index('<style>')
 head = src[:head_end]
-head = re.sub(r'<title>.*?</title>', '<title>1 Cardz Archive</title>', head)
+head = re.sub(r'<title>.*?</title>', '<title>1 Cardz Stories</title>', head)
 head = re.sub(r'<link rel="preload"[^>]*>\n', '', head)
 head = head.replace('href="https://1cardz.news/"', 'href="https://1cardz.news/archive.html"')
 head = re.sub(r'<meta name="description"[^>]*>', '<meta name="description" content="Every 1Cardz.news clip from Zia and Luna, newest first.">', head)
@@ -87,7 +87,7 @@ body = f'''{header}
 <main>
   <section class="wrap arch" id="set" aria-labelledby="set-h">
     <div class="sheet-head">
-      <h2 id="set-h">Past Posts</h2>
+      <h2 id="set-h">Stories</h2>
       <p>Every news clip from the 8 AM and 8 PM drops, {n} so far ({span}). The rows fit your screen, so widen the window for more cards per row. Tap a card to flip it, then tap Sound to hear the story.</p>
       <div class="chips" role="group" aria-label="Filter posts">{"".join(chips)}</div>
       <div class="sheet-tools">
