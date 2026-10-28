@@ -1019,7 +1019,9 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
   /* bottom binder video: load only when scrolled near */
   document.querySelectorAll('video.lazy-cover').forEach(v=>{
     const go=()=>{if(v.dataset.loaded)return;v.dataset.loaded=1;v.poster=v.dataset.poster;v.src=v.dataset.src;if(!reduce){v.autoplay=true;const pr=v.play();if(pr)pr.catch(()=>{})}};
-    if('IntersectionObserver' in window){const o=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){go();o.disconnect()}},{rootMargin:'800px 0px'});o.observe(v)}else go();
+    /* download last: wait until everything else on the page has finished loading, then for the browser to go idle */
+    const later=()=>{const idle=window.requestIdleCallback||(f=>setTimeout(f,1500));idle(go,{timeout:4000})};
+    if(document.readyState==='complete')later();else addEventListener('load',later,{once:true});
   });
 
   /* barcode */
