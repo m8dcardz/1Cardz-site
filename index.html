@@ -777,7 +777,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
       <div class="rings" aria-hidden="true"><span class="ring"></span><span class="ring"></span><span class="ring"></span></div>
       <div class="pockets">
 
-        <div class="pocket"><div class="tcg holo flip" role="button" tabindex="0" aria-pressed="false" aria-label="Zia, holo rare 001 of 101. Tap to flip">
+        <div class="pocket"><div class="tcg holo flip" role="button" tabindex="0" aria-pressed="true" aria-label="Zia, holo rare 001 of 101. Tap to flip">
           <div class="inner">
             <div class="face back"><em>001/101</em><span>Tap to flip</span></div>
             <div class="face front">
@@ -795,7 +795,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
           <div class="shine"></div><div class="glare"></div>
         </div></div>
 
-        <div class="pocket"><div class="tcg holo flip" role="button" tabindex="0" aria-pressed="false" aria-label="Luna, holo rare 002 of 101. Tap to flip">
+        <div class="pocket"><div class="tcg holo flip" role="button" tabindex="0" aria-pressed="true" aria-label="Luna, holo rare 002 of 101. Tap to flip">
           <div class="inner">
             <div class="face back"><em>002/101</em><span>Tap to flip</span></div>
             <div class="face front">
@@ -813,13 +813,13 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
           <div class="shine"></div><div class="glare"></div>
         </div></div>
 
-        <div class="pocket"><div class="tcg holo flip" role="button" tabindex="0" aria-pressed="false" aria-label="The Studio, holo rare 003 of 101. Tap to flip">
+        <div class="pocket"><div class="tcg holo flip" role="button" tabindex="0" aria-pressed="true" aria-label="The Studio, holo rare 003 of 101. Tap to flip">
           <div class="inner">
             <div class="face back"><em>003/101</em><span>Tap to flip</span></div>
             <div class="face front">
               <header class="nm"><h3>The Studio</h3><span class="cost" data-g="⌂">Set</span></header>
               <div class="art"><img src="img/studio-card.webp" alt="The arcade-library studio with the yellow NEWS sign"><div class="shine"></div></div>
-              <div class="typeline"><span>Location · Home base</span><span>Field</span><i class="setsym holo" aria-hidden="true">★</i></div>
+              <div class="typeline"><span>Home base · Location</span><span>Field</span><i class="setsym holo" aria-hidden="true">★</i></div>
               <div class="txt">
                 <p><b>Arcade library.</b> Half library, half high-score hall. The librarian shushes. The cabinets don't.</p>
                 <p><b>Rule.</b> The furniture is strictly off duty. The camera does laps so it doesn't have to.</p>
@@ -831,7 +831,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
           <div class="shine"></div><div class="glare"></div>
         </div></div>
 
-        <div class="pocket"><div class="tcg holo secret flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Into the Inkdark, Lorcana, secret rare 004 of 101. Tap to flip and play">
+        <div class="pocket"><div class="tcg holo secret flip clipcard" role="button" tabindex="0" aria-pressed="true" aria-label="Clip: Into the Inkdark, Lorcana, secret rare 004 of 101. Tap to flip and play">
           <div class="inner">
             <div class="face back"><em>004/101</em><span>Tap to flip</span></div>
             <div class="face front">
@@ -850,7 +850,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
           <div class="shine"></div><div class="glare"></div>
         </div></div>
 
-        <div class="pocket"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Chorus of Steel, FaB, uncommon 005 of 101. Tap to flip and play">
+        <div class="pocket"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="true" aria-label="Clip: Chorus of Steel, FaB, uncommon 005 of 101. Tap to flip and play">
           <div class="inner">
             <div class="face back"><em>005/101</em><span>Tap to flip</span></div>
             <div class="face front">
@@ -869,7 +869,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
           <div class="shine"></div><div class="glare"></div>
         </div></div>
 
-        <div class="pocket"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Doug's Collection, Pokémon, uncommon 006 of 101. Tap to flip and play">
+        <div class="pocket"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="true" aria-label="Clip: Doug's Collection, Pokémon, uncommon 006 of 101. Tap to flip and play">
           <div class="inner">
             <div class="face back"><em>006/101</em><span>Tap to flip</span></div>
             <div class="face front">
@@ -1191,6 +1191,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
   function hydrate(c){const v=c.querySelector('video[data-poster]');if(v&&!v.poster){v.poster=v.dataset.poster}
     const a=c.querySelector('.art[data-p]');if(a&&!a.style.getPropertyValue('--p'))a.style.setProperty('--p','url('+a.dataset.p+')')}
   document.querySelectorAll('.flip').forEach(c=>{new MutationObserver(()=>{if(c.getAttribute('aria-pressed')==='true')hydrate(c)}).observe(c,{attributes:true,attributeFilter:['aria-pressed']})});
+  document.querySelectorAll('.flip[aria-pressed="true"]').forEach(hydrate);
   /* headline box first: start the top binder video only once the headline stills are in */
   (function(){const v=document.querySelector('video.top-cover');if(!v)return;let done=false;
     const go=()=>{if(done)return;done=true;v.src=v.dataset.src;if(!reduce){v.autoplay=true;const pr=v.play();if(pr)pr.catch(()=>{})}};
