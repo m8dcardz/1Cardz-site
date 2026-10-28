@@ -342,7 +342,7 @@ body>footer{padding-block:clamp(70px,10vw,120px) 48px}
 .lcd-label{display:inline-flex;align-items:center;gap:8px;color:#ffd23f;flex:none}
 .lcd-label i{width:8px;height:8px;border-radius:50%;background:#ffd23f;box-shadow:0 0 10px #ffd23f;animation:pulse 1.2s ease-in-out infinite}
 .lcdbox .gd-pause{margin-left:0;flex:none}
-.lcd{position:relative;flex:1;min-width:0;height:50px;overflow:hidden;border-radius:8px;
+.lcd{position:relative;flex:1;min-width:0;height:40px;overflow:hidden;border-radius:8px;
   background:radial-gradient(ellipse at 50% 0%,#0f2a2c,#061314 80%);
   box-shadow:inset 0 0 0 1px rgba(124,243,255,.25),inset 0 3px 12px rgba(0,0,0,.8),0 0 24px rgba(45,226,230,.12)}
 .lcd::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
@@ -353,12 +353,12 @@ body>footer{padding-block:clamp(70px,10vw,120px) 48px}
 .lcdbox:hover .lcd-track{animation-play-state:paused}
 @keyframes lcdScroll{to{transform:translateX(-50%)}}
 .lcd-run{display:flex;align-items:center;white-space:nowrap;padding-right:40px}
-.lcd-item{font-family:"VT323",ui-monospace,monospace;font-size:34px;line-height:1;letter-spacing:.04em;color:#7dfcff;background:none;border:0;padding:0 6px;cursor:pointer;white-space:nowrap;
+.lcd-item{font-family:"VT323",ui-monospace,monospace;font-size:29px;line-height:1;letter-spacing:.04em;color:#7dfcff;background:none;border:0;padding:0 6px;cursor:pointer;white-space:nowrap;
   text-shadow:0 0 6px rgba(125,252,255,.85),0 0 16px rgba(45,226,230,.45)}
 .lcd-item b{font-weight:400;color:#ffd76a;text-shadow:0 0 6px rgba(255,215,106,.85),0 0 16px rgba(233,196,106,.4);margin-right:8px}
 .lcd-item:hover{color:#fff}
 .lcd-sep{font-family:"VT323",monospace;font-size:24px;color:#ff8ad8;text-shadow:0 0 8px rgba(255,138,216,.8);padding:0 26px}
-@media (max-width:560px){.lcd{height:42px}.lcd-item{font-size:28px}.lcd-label span{display:none}}
+@media (max-width:560px){.lcd{height:34px}.lcd-item{font-size:24px}.lcd-label span{display:none}}
 /* ================= CARD PAGE ON THE GLASS DISPLAY BACKDROP ================= */
 .page{border-radius:18px;isolation:isolate;overflow:hidden;color:#e9ecf5;
   padding:clamp(18px,2.8vw,34px);
