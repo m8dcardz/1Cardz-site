@@ -240,12 +240,9 @@ body>footer{padding-block:clamp(70px,10vw,120px) 48px}
   .cover-back{grid-template-columns:30px minmax(0,1fr)}
   .cover{grid-template-columns:30px minmax(0,1fr);padding-right:clamp(48px,8vw,70px);--vt:22px;--vr:56px;--vb:22px;--vl:56px}
   .window{grid-column:2;justify-self:start;width:min(100%,220px)}
-  .pockets{grid-template-columns:repeat(2,minmax(0,1fr))}
   .keygrid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:560px){
-  .pockets{grid-template-columns:minmax(0,1fr)}
-  .pocket{max-width:330px;width:100%;justify-self:center}
   .page{padding-left:52px}
   .keygrid{grid-template-columns:1fr}
   .cover .stitch{left:40px}
@@ -398,6 +395,14 @@ body>footer{padding-block:clamp(70px,10vw,120px) 48px}
   html body>header .cover .drop b{font-size:40px}
   html body>header .cover{row-gap:14px}
   body>header .cover .row{gap:10px 14px}
+}
+/* cards: always 3 per row; tighter on small screens */
+@media (max-width:560px){
+  .pockets{gap:8px}
+  .pocket{padding:3px;border-radius:8px}
+  .page{padding:10px !important}
+  .flip .back span{font-size:6cqw;padding:2cqw 4cqw}
+  .snd{font-size:5cqw}
 }
 /* ===== mobile: top binder tidy-up ===== */
 @media (max-width:900px){
