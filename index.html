@@ -627,6 +627,7 @@ body>footer .cover{--vb:42px}
 .stylepick button{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;background:none;border:0;color:#c9cfe4;padding:11px 14px;cursor:pointer}
 .stylepick button[aria-pressed="true"]{background:var(--foil);color:var(--cover)}
 .sheet-tools{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:center;flex-basis:100%}
+.btn.ghost{background:transparent;color:var(--foil);box-shadow:inset 0 0 0 1px rgba(233,196,106,.6)}
 /* no foil on face-down cards */
 .flip[aria-pressed="false"]>.shine{display:none}
 /* stronger holo on the back cover video */
@@ -764,6 +765,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
       <p>Fifteen cards, all face down. Seven hold the latest news clips from Zia and Luna, and the rest bring in the hosts, the studio and the daily schedule. Tap a card to flip it, then tap Sound to hear the story.</p>
       <div class="sheet-tools">
   <button class="btn" id="flipAll" type="button" aria-pressed="false">Flip all cards</button>
+        <a class="btn ghost" href="archive.html">All past posts</a>
       </div>
     </div>
     <div class="page">
