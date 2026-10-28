@@ -326,7 +326,17 @@ body>footer{padding-block:clamp(70px,10vw,120px) 48px}
 .hl-tab:first-child[aria-selected="true"]{box-shadow:inset 0 1px 0 rgba(255,255,255,.45),inset -1px 0 0 rgba(255,255,255,.12),inset 0 6px 14px rgba(124,243,255,.10)}
 .hl-tab:last-child[aria-selected="true"]{box-shadow:inset 0 1px 0 rgba(255,255,255,.45),inset 1px 0 0 rgba(255,255,255,.12),inset 0 6px 14px rgba(124,243,255,.10)}
 .hl-tab b{left:0;right:0}
-.gd .lcdbox{border-radius:18px 18px 0 0;overflow:hidden}
+.gd .lcdbox:first-child{border-radius:18px 18px 0 0;overflow:hidden}
+.lcd-label{width:112px;flex:none}
+.lcdbox:has(+.lcdbox-market){border-bottom:0;padding-bottom:6px}
+.lcdbox-market{padding-top:6px !important}
+@media (max-width:560px){.lcd-label{width:auto}.lcd-spacer{display:none}.lcdbox-market .lcd{margin-right:0}}
+.lcd-spacer{visibility:hidden}
+.lcdbox-market{padding-top:0;border-top:0}
+.lcdbox-market .lcd{display:block;text-decoration:none}
+.lcdbox-market .lcd-track{animation-duration:70s}
+.lcd-item .mp{color:#fff;text-shadow:0 0 6px rgba(255,255,255,.7)}
+.lcd-item .up{color:#5be39b;text-shadow:0 0 6px rgba(91,227,155,.7)}.lcd-item .down{color:#ff7a8a;text-shadow:0 0 6px rgba(255,122,138,.7)}
 .hl-tab[aria-selected="true"]+.hl-tab{border-left-color:transparent}
 .gd-tabs{overflow:visible}
 .hl-tab[aria-selected="true"] i{color:var(--foil)}
@@ -687,6 +697,13 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
       <div class="lcd-track" id="lcdTrack"><div class="lcd-run"><button class="lcd-item" type="button" data-card="Into the Inkdark"><b>LORCANA</b> Into the Inkdark opens for preorder, release expected Feb 12, 2027</button><span class="lcd-sep" aria-hidden="true">◆</span><button class="lcd-item" type="button" data-card="Chorus of Steel"><b>FLESH AND BLOOD</b> Smash Palace: Chorus of Steel lands October 30 with heroes Zane and Killjoy</button><span class="lcd-sep" aria-hidden="true">◆</span><button class="lcd-item" type="button" data-card="Mihawk Banned"><b>ONE PIECE</b> OP14-020 Dracule Mihawk is banned, alternate arts included</button><span class="lcd-sep" aria-hidden="true">◆</span></div><div class="lcd-run" aria-hidden="true"><button class="lcd-item" type="button" data-card="Into the Inkdark"><b>LORCANA</b> Into the Inkdark opens for preorder, release expected Feb 12, 2027</button><span class="lcd-sep" aria-hidden="true">◆</span><button class="lcd-item" type="button" data-card="Chorus of Steel"><b>FLESH AND BLOOD</b> Smash Palace: Chorus of Steel lands October 30 with heroes Zane and Killjoy</button><span class="lcd-sep" aria-hidden="true">◆</span><button class="lcd-item" type="button" data-card="Mihawk Banned"><b>ONE PIECE</b> OP14-020 Dracule Mihawk is banned, alternate arts included</button><span class="lcd-sep" aria-hidden="true">◆</span></div></div>
     </div>
     <button class="gd-pause mono" type="button" id="hlPause" aria-pressed="false">Pause</button>
+    </div>
+    <div class="lcdbox lcdbox-market">
+    <div class="lcd-label mono"><i></i><span>Market</span></div>
+    <a class="lcd" href="#mw-h" aria-label="Market prices, see Market Watch">
+      <div class="lcd-track" id="mlcdTrack"></div>
+    </a>
+    <span class="gd-pause mono lcd-spacer" aria-hidden="true">Pause</span>
     </div>
     <div class="gd-stage" aria-live="polite">
         <article class="hl on" id="hl0" role="tabpanel" aria-labelledby="hlt0">
@@ -1107,11 +1124,11 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
   (function(){
     const panels=[...document.querySelectorAll('.hl')],tabs=[...document.querySelectorAll('.hl-tab')],pb=document.getElementById('hlPause');
     const DUR=7000;let cur=0,t0=performance.now(),paused=reduce,hover=false;
-    if(reduce){pb.setAttribute('aria-pressed','true');pb.textContent='Play';document.querySelector('.lcdbox').classList.add('paused')}
+    if(reduce){pb.setAttribute('aria-pressed','true');pb.textContent='Play';document.querySelectorAll('.lcdbox').forEach(x=>x.classList.add('paused'))}
     function show(i){cur=(i+panels.length)%panels.length;panels.forEach((p,k)=>{p.hidden=k!==cur;p.classList.toggle('on',k===cur)});
       tabs.forEach((t,k)=>{t.setAttribute('aria-selected',String(k===cur));t.style.setProperty('--p','0%')});t0=performance.now()}
     tabs.forEach((t,k)=>t.addEventListener('click',()=>show(k)));
-    pb.addEventListener('click',()=>{paused=!paused;pb.setAttribute('aria-pressed',String(paused));pb.textContent=paused?'Play':'Pause';document.querySelector('.lcdbox').classList.toggle('paused',paused);t0=performance.now()-(parseFloat(tabs[cur].style.getPropertyValue('--p'))||0)/100*DUR});
+    pb.addEventListener('click',()=>{paused=!paused;pb.setAttribute('aria-pressed',String(paused));pb.textContent=paused?'Play':'Pause';document.querySelectorAll('.lcdbox').forEach(x=>x.classList.toggle('paused',paused));t0=performance.now()-(parseFloat(tabs[cur].style.getPropertyValue('--p'))||0)/100*DUR});
     const gd=document.querySelector('.gd');gd.addEventListener('pointerenter',()=>hover=true);gd.addEventListener('pointerleave',()=>{hover=false});
     let held=0;
     function loop(now){if(paused||hover){t0=now-held}else{held=now-t0;if(held>=DUR){show(cur+1);held=0}}
@@ -1170,6 +1187,10 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
         '<div class="mw-trend">'+spark(i.history)+chg(i.history)+'</div></li>').join('');
       requestAnimationFrame(()=>list.querySelectorAll('.mw-fill').forEach(f=>f.style.width=f.dataset.w+'%'));
       upd.textContent='TCGplayer prices as of '+fmtDate(data.updated);
+      const ml=document.getElementById('mlcdTrack');
+      if(ml){const run=data.items.filter(i=>i.price!=null).map(i=>{const h=i.history||[];let c='';if(h.length>1){const p=(h[h.length-1][1]-h[0][1])/h[0][1]*100;const k=Math.abs(p)<0.05?'':p>0?'up':'down';if(k)c=' <span class="'+k+'">'+(k==='up'?'▲':'▼')+Math.abs(p).toFixed(1)+'%</span>'}
+          return '<span class="lcd-item"><b>'+i.game.toUpperCase()+'</b> '+i.name+' <span class="mp">'+usd(i.price)+'</span>'+c+'</span><span class="lcd-sep" aria-hidden="true">◆</span>'}).join('');
+        ml.innerHTML='<div class="lcd-run">'+run+'</div><div class="lcd-run" aria-hidden="true">'+run+'</div>';}
       const tk=document.getElementById('mtick');
       if(tk){const all=data.items.filter(i=>i.price!=null);
         const one=all.map(i=>{const h=i.history||[];let c='';if(h.length>1){const p=(h[h.length-1][1]-h[0][1])/h[0][1]*100;const k=Math.abs(p)<0.05?'flat':p>0?'up':'down';c='<span class="c '+k+'">'+(k==='up'?'▲':k==='down'?'▼':'■')+' '+Math.abs(p).toFixed(1)+'%</span>'}
