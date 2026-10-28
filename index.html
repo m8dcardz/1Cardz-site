@@ -628,6 +628,11 @@ body>footer .cover{--vb:42px}
 .stylepick button[aria-pressed="true"]{background:var(--foil);color:var(--cover)}
 .sheet-tools{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:center;flex-basis:100%}
 .btn.ghost{background:transparent;color:var(--foil);box-shadow:inset 0 0 0 1px rgba(233,196,106,.6)}
+/* clip cards: show only the flavor line under the video */
+:root:not(.classic) .clipcard .face:not(.back) .txt{display:block}
+.clipcard .txt>p:not(.flav){display:none}
+.clipcard .txt>p.flav{margin:0;border:0;padding:0}
+.tcg .txt p.src{font-family:var(--f-mono);font-size:.78em;letter-spacing:.04em;opacity:.7;margin-top:.2em}
 /* no foil on face-down cards */
 .flip[aria-pressed="false"]>.shine{display:none}
 /* stronger holo on the back cover video */
@@ -780,8 +785,8 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
               <div class="art"><img src="img/zia.webp" alt="Zia with silver ponytail and round tortoiseshell glasses" style="object-position:50% 14%"><div class="shine"></div></div>
               <div class="typeline"><span>Reporter · Special edition</span><span>Lead</span><i class="setsym holo" aria-hidden="true">★</i></div>
               <div class="txt">
-                <p><b>Opener.</b> “Zia here!” then straight into the story.</p>
-                <p><b>Style.</b> Warm, playful, quick with a grin.</p>
+                <p><b>Opener.</b> “Zia here!” and the story is out before your coffee is.</p>
+                <p><b>Style.</b> Sunny, speedy and allergic to boring.</p>
                 <p class="flav">First light, first pull, first to know.</p>
               </div>
               <footer class="foot"><span>1CZ · 001/101</span><span class="rar" title="Holo rare">★</span></footer>
@@ -798,8 +803,8 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
               <div class="art"><img src="img/luna.webp" alt="Luna with a black low bun and black rectangular glasses" style="object-position:50% 0%"><div class="shine"></div></div>
               <div class="typeline"><span>Librarian · Limited edition</span><span>Co-host</span><i class="setsym holo" aria-hidden="true">★</i></div>
               <div class="txt">
-                <p><b>Opener.</b> “Luna here!” then the night's headline.</p>
-                <p><b>Style.</b> Gentle, precise, quietly excited.</p>
+                <p><b>Opener.</b> “Luna here!” then the night's headline, filed and footnoted.</p>
+                <p><b>Style.</b> Soft voice, sharp facts, zero late returns.</p>
                 <p class="flav">Every story sleeved. Every secret shelved.</p>
               </div>
               <footer class="foot"><span>1CZ · 002/101</span><span class="rar" title="Holo rare">★</span></footer>
@@ -816,8 +821,9 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
               <div class="art"><img src="img/studio-card.webp" alt="The arcade-library studio with the yellow NEWS sign"><div class="shine"></div></div>
               <div class="typeline"><span>Location · Locked set</span><span>Field</span><i class="setsym holo" aria-hidden="true">★</i></div>
               <div class="txt">
-                <p><b>Arcade library.</b> Tall shelves, glowing cabinets, a mezzanine and one curved console desk.</p>
-                <p><b>Rule.</b> Nothing in the set moves. Only the camera does.</p>
+                <p><b>Arcade library.</b> Shelves to the ceiling, cabinets that glow and one curved desk where the news lands.</p>
+                <p><b>Rule.</b> Nothing in the set moves. The camera does all the cardio.</p>
+                <p class="flav">Open all night. Quiet please, unless you pulled a chase.</p>
               </div>
               <footer class="foot"><span>1CZ · 003/101</span><span class="rar" title="Holo rare">★</span></footer>
             </div>
@@ -835,7 +841,8 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
               <div class="typeline"><span>Clip · Zia · Oct 28 · 8 AM</span><i class="setsym sec" aria-hidden="true">✦</i></div>
               <div class="txt">
                 <p>Preorders are open, with release expected February 12, 2027 and the first serialized Illustrious cards.</p>
-                <p class="flav">Source: ICv2</p>
+                <p class="flav">Ink now, brag in February.</p>
+                <p class="src">Source: ICv2</p>
               </div>
               <footer class="foot"><span>1CZ · 004/101</span><span class="rar" title="Secret rare">✦</span></footer>
             </div>
@@ -853,7 +860,8 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
               <div class="typeline"><span>Clip · Luna · Oct 27 · 8 PM</span><i class="setsym unc" aria-hidden="true">◆</i></div>
               <div class="txt">
                 <p>Smash Palace arrives October 30, bringing back Ultimate Pit Fight with two new heroes.</p>
-                <p class="flav">Source: Flesh and Blood official site</p>
+                <p class="flav">Bring a friend. Then flatten them, lovingly.</p>
+                <p class="src">Source: Flesh and Blood official site</p>
               </div>
               <footer class="foot"><span>1CZ · 005/101</span><span class="rar" title="Uncommon">◆</span></footer>
             </div>
@@ -871,7 +879,8 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
               <div class="typeline"><span>Clip · Zia · Oct 27 · 3 PM</span><i class="setsym unc" aria-hidden="true">◆</i></div>
               <div class="txt">
                 <p>Items from Doug Ferguson's Pokémon collection go to auction on November 3.</p>
-                <p class="flav">Source: ICv2</p>
+                <p class="flav">Somebody's grail is about to change addresses.</p>
+                <p class="src">Source: ICv2</p>
               </div>
               <footer class="foot"><span>1CZ · 006/101</span><span class="rar" title="Uncommon">◆</span></footer>
             </div>
@@ -889,7 +898,8 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
               <div class="typeline"><span>Clip · Luna · Oct 27 · 12 PM</span><i class="setsym unc" aria-hidden="true">◆</i></div>
               <div class="txt">
                 <p>OP14-020 Dracule Mihawk is banned, alternate arts included, and now in effect.</p>
-                <p class="flav">Source: Official One Piece Card Game site</p>
+                <p class="flav">Sheathe the swords. Rebuild the deck.</p>
+                <p class="src">Source: Official One Piece Card Game site</p>
               </div>
               <footer class="foot"><span>1CZ · 007/101</span><span class="rar" title="Uncommon">◆</span></footer>
             </div>
@@ -907,7 +917,8 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
               <div class="typeline"><span>Clip · Luna · Oct 26 · 10 PM</span><i class="setsym unc" aria-hidden="true">◆</i></div>
               <div class="txt">
                 <p>The Deck Crafter's Collection is out now, and Lorcana heads to Disney Cruise Line ships in 2027.</p>
-                <p class="flav">Source: Official announcements</p>
+                <p class="flav">Staples in the box. Sea legs in 2027.</p>
+                <p class="src">Source: Official announcements</p>
               </div>
               <footer class="foot"><span>1CZ · 008/101</span><span class="rar" title="Uncommon">◆</span></footer>
             </div>
@@ -925,7 +936,8 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
               <div class="typeline"><span>Clip · Luna · Oct 25 · 8 PM</span><i class="setsym unc" aria-hidden="true">◆</i></div>
               <div class="txt">
                 <p>A UK collector sold Pokémon cards for over $2 million, reportedly a UK record.</p>
-                <p class="flav">Source: Reported</p>
+                <p class="flav">Some binders are worth more than houses.</p>
+                <p class="src">Source: Reported</p>
               </div>
               <footer class="foot"><span>1CZ · 009/101</span><span class="rar" title="Uncommon">◆</span></footer>
             </div>
@@ -943,7 +955,8 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
               <div class="typeline"><span>Clip · Luna · Oct 26 · 10 PM</span><i class="setsym unc" aria-hidden="true">◆</i></div>
               <div class="txt">
                 <p>The Deck Crafter's Collection is out now, packed with competitive staples, and Lorcana heads to Disney Cruise Line ships in 2027.</p>
-                <p class="flav">Source: Official announcements</p>
+                <p class="flav">New staples. Same old shuffle face.</p>
+                <p class="src">Source: Official announcements</p>
               </div>
               <footer class="foot"><span>1CZ · 010/101</span><span class="rar" title="Uncommon">◆</span></footer>
             </div>
@@ -958,8 +971,9 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
               <div class="art mic"><video class="loopv" src="img/loop-mic.mp4" data-poster="img/loop-mic.jpg" muted loop playsinline preload="none" aria-label="Close-up of the royal-blue news mic in use"></video></div>
               <div class="typeline"><span>Prop · Royal blue</span><i class="setsym unc" aria-hidden="true">◆</i></div>
               <div class="txt">
-                <p><b>Flag screen.</b> Lit from the first frame, RGB light flowing behind a steady logo.</p>
-                <p><b>Held.</b> By the grip, just below the chin.</p>
+                <p><b>Flag screen.</b> RGB swirling behind the logo from frame one, like it's always on air.</p>
+                <p><b>Held.</b> By the grip, just below the chin. Mic drops are strictly metaphorical.</p>
+                <p class="flav">It hears every headline first and has never spoiled one.</p>
               </div>
               <footer class="foot"><span>1CZ · 011/101</span><span class="rar" title="Uncommon">◆</span></footer>
             </div>
@@ -974,8 +988,9 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
               <div class="art type sun"><video class="loopv" src="img/loop-am.mp4" data-poster="img/loop-am.jpg" muted loop playsinline preload="none" aria-label="Zia on set for the morning edition"></video><strong>08:00</strong></div>
               <div class="typeline"><span>Schedule · Daily</span><i class="setsym com" aria-hidden="true">●</i></div>
               <div class="txt">
-                <p><b>Zia's slot.</b> Story researched and shot from 6:00 AM, live at 8:00.</p>
-                <p><b>Posts to.</b> Instagram Reels, YouTube Shorts, TikTok.</p>
+                <p><b>Zia's slot.</b> Researched from 6:00 AM, live at 8:00, served hot like fresh toast.</p>
+                <p><b>Posts to.</b> Instagram Reels, YouTube Shorts and TikTok, all at once.</p>
+                <p class="flav">The early bird gets the pull rates.</p>
               </div>
               <footer class="foot"><span>1CZ · 012/101</span><span class="rar" title="Common">●</span></footer>
             </div>
@@ -990,8 +1005,9 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
               <div class="art type moon"><video class="loopv" src="img/loop-pm.mp4" data-poster="img/loop-pm.jpg" muted loop playsinline preload="none" aria-label="Luna on set for the night edition"></video><strong>20:00</strong></div>
               <div class="typeline"><span>Schedule · Daily</span><i class="setsym com" aria-hidden="true">●</i></div>
               <div class="txt">
-                <p><b>Luna's slot.</b> A different story, prepared from 6:00 PM, live at 8:00.</p>
-                <p><b>Length.</b> 8 seconds, about 22 words, captions burned in.</p>
+                <p><b>Luna's slot.</b> A brand new story, prepped from 6:00 PM, live at 8:00.</p>
+                <p><b>Length.</b> 8 seconds, about 22 words. Shorter than your shuffle.</p>
+                <p class="flav">Lights low, sleeves on, one more story before bed.</p>
               </div>
               <footer class="foot"><span>1CZ · 013/101</span><span class="rar" title="Common">●</span></footer>
             </div>
@@ -1006,8 +1022,9 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
               <div class="art games"><video class="loopv" src="img/loop-beat.mp4" data-poster="img/loop-beat.jpg" muted loop playsinline preload="none" aria-label="A quick montage of the latest clips"></video><span>Pokémon</span><span>Magic</span><span>One Piece</span><span>Yu-Gi-Oh!</span><span>Lorcana</span><span>Riftbound</span></div>
               <div class="typeline"><span>Coverage · Six games</span><i class="setsym com" aria-hidden="true">●</i></div>
               <div class="txt">
-                <p><b>Sources.</b> Official publisher pages and established trade press.</p>
-                <p><b>Rules.</b> Leaks are labeled as reported. No prices, no buying advice.</p>
+                <p><b>Sources.</b> Publisher pages and trusted trade press. Rumor mills need not apply.</p>
+                <p><b>Rules.</b> Leaks are labeled as reported. No buying advice, ever.</p>
+                <p class="flav">Six games, two hosts, zero chill.</p>
               </div>
               <footer class="foot"><span>1CZ · 014/101</span><span class="rar" title="Common">●</span></footer>
             </div>
@@ -1022,7 +1039,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
               <div class="art type" style="background:#f6f2e6"><span class="count" id="count">--:--:--</span></div>
               <div class="typeline"><span>Secret rare</span><span id="who">—</span><i class="setsym sec" aria-hidden="true">✦</i></div>
               <div class="txt">
-                <p><b>Counting down</b> to the next clip on all three channels.</p>
+                <p><b>Counting down.</b> At zero, a fresh clip hits all three channels.</p>
                 <p class="flav">Stay curious. Shuffle up.</p>
               </div>
               <footer class="foot"><span>1CZ · 015/101</span><span class="rar" title="Secret rare">✦</span></footer>

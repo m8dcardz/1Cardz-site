@@ -625,6 +625,11 @@ body>footer .cover{--vb:42px}
 .stylepick button[aria-pressed="true"]{background:var(--foil);color:var(--cover)}
 .sheet-tools{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:center;flex-basis:100%}
 .btn.ghost{background:transparent;color:var(--foil);box-shadow:inset 0 0 0 1px rgba(233,196,106,.6)}
+/* clip cards: show only the flavor line under the video */
+:root:not(.classic) .clipcard .face:not(.back) .txt{display:block}
+.clipcard .txt>p:not(.flav){display:none}
+.clipcard .txt>p.flav{margin:0;border:0;padding:0}
+.tcg .txt p.src{font-family:var(--f-mono);font-size:.78em;letter-spacing:.04em;opacity:.7;margin-top:.2em}
 /* no foil on face-down cards */
 .flip[aria-pressed="false"]>.shine{display:none}
 /* stronger holo on the back cover video */
@@ -745,7 +750,8 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
               <div class="typeline"><span>Clip · Luna · Oct 28 · 8 PM</span><i class="setsym sec" aria-hidden="true">✦</i></div>
               <div class="txt">
                 <p>The Reality Fracture Secret Lair Bundle is delayed by shipping and production issues, after the Star Trek Commander Decks slipped first.</p>
-                <p class="flav">Source: ICv2, October 20</p>
+                <p class="flav">Good things come to those who refresh the tracking page.</p>
+                <p class="src">Source: ICv2, October 20</p>
               </div>
               <footer class="foot"><span>1CZ · Post 008</span><span class="rar" title="Secret rare">✦</span></footer>
             </div>
@@ -762,7 +768,8 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
               <div class="typeline"><span>Clip · Zia · Oct 28 · 8 AM</span><i class="setsym unc" aria-hidden="true">◆</i></div>
               <div class="txt">
                 <p>Preorders are open, with release expected February 12, 2027 and the first serialized Illustrious cards.</p>
-                <p class="flav">Source: ICv2</p>
+                <p class="flav">Ink now, brag in February.</p>
+                <p class="src">Source: ICv2</p>
               </div>
               <footer class="foot"><span>1CZ · Post 007</span><span class="rar" title="Uncommon">◆</span></footer>
             </div>
@@ -779,7 +786,8 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
               <div class="typeline"><span>Clip · Luna · Oct 27 · 8 PM</span><i class="setsym unc" aria-hidden="true">◆</i></div>
               <div class="txt">
                 <p>Smash Palace arrives October 30, bringing back Ultimate Pit Fight with two new heroes.</p>
-                <p class="flav">Source: Flesh and Blood official site</p>
+                <p class="flav">Bring a friend. Then flatten them, lovingly.</p>
+                <p class="src">Source: Flesh and Blood official site</p>
               </div>
               <footer class="foot"><span>1CZ · Post 006</span><span class="rar" title="Uncommon">◆</span></footer>
             </div>
@@ -796,7 +804,8 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
               <div class="typeline"><span>Clip · Zia · Oct 27 · 3 PM</span><i class="setsym unc" aria-hidden="true">◆</i></div>
               <div class="txt">
                 <p>Items from Doug Ferguson&#x27;s Pokémon collection go to auction on November 3.</p>
-                <p class="flav">Source: ICv2</p>
+                <p class="flav">Somebody&#x27;s grail is about to change addresses.</p>
+                <p class="src">Source: ICv2</p>
               </div>
               <footer class="foot"><span>1CZ · Post 005</span><span class="rar" title="Uncommon">◆</span></footer>
             </div>
@@ -813,7 +822,8 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
               <div class="typeline"><span>Clip · Luna · Oct 27 · 12 PM</span><i class="setsym unc" aria-hidden="true">◆</i></div>
               <div class="txt">
                 <p>OP14-020 Dracule Mihawk is banned, alternate arts included, and now in effect.</p>
-                <p class="flav">Source: Official One Piece Card Game site</p>
+                <p class="flav">Sheathe the swords. Rebuild the deck.</p>
+                <p class="src">Source: Official One Piece Card Game site</p>
               </div>
               <footer class="foot"><span>1CZ · Post 004</span><span class="rar" title="Uncommon">◆</span></footer>
             </div>
@@ -830,7 +840,8 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
               <div class="typeline"><span>Clip · Luna · Oct 26 · 10 PM</span><i class="setsym unc" aria-hidden="true">◆</i></div>
               <div class="txt">
                 <p>The Deck Crafter&#x27;s Collection is out now, and Lorcana heads to Disney Cruise Line ships in 2027.</p>
-                <p class="flav">Source: Official announcements</p>
+                <p class="flav">Staples in the box. Sea legs in 2027.</p>
+                <p class="src">Source: Official announcements</p>
               </div>
               <footer class="foot"><span>1CZ · Post 003</span><span class="rar" title="Uncommon">◆</span></footer>
             </div>
@@ -847,7 +858,8 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
               <div class="typeline"><span>Clip · Luna · Oct 26 · 10 PM</span><i class="setsym unc" aria-hidden="true">◆</i></div>
               <div class="txt">
                 <p>The Deck Crafter&#x27;s Collection is out now, packed with competitive staples, and Lorcana heads to Disney Cruise Line ships in 2027.</p>
-                <p class="flav">Source: Official announcements</p>
+                <p class="flav">New staples. Same old shuffle face.</p>
+                <p class="src">Source: Official announcements</p>
               </div>
               <footer class="foot"><span>1CZ · Post 002</span><span class="rar" title="Uncommon">◆</span></footer>
             </div>
@@ -864,7 +876,8 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
               <div class="typeline"><span>Clip · Luna · Oct 25 · 8 PM</span><i class="setsym unc" aria-hidden="true">◆</i></div>
               <div class="txt">
                 <p>A UK collector sold Pokémon cards for over $2 million, reportedly a UK record.</p>
-                <p class="flav">Source: Reported</p>
+                <p class="flav">Some binders are worth more than houses.</p>
+                <p class="src">Source: Reported</p>
               </div>
               <footer class="foot"><span>1CZ · Post 001</span><span class="rar" title="Uncommon">◆</span></footer>
             </div>

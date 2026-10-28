@@ -52,7 +52,8 @@ for k, p in enumerate(newest):
               <div class="typeline"><span>Clip · {e(p['host'])} · {when_label(p['when'])}</span><i class="setsym {symc}" aria-hidden="true">{sym}</i></div>
               <div class="txt">
                 <p>{e(p['blurb'])}</p>
-                <p class="flav">Source: {e(p['source'])}</p>
+                <p class="flav">{e(p.get('quip',''))}</p>
+                <p class="src">Source: {e(p['source'])}</p>
               </div>
               <footer class="foot"><span>1CZ · Post {num}</span><span class="rar" title="{rt}">{sym}</span></footer>
             </div>
