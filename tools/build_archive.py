@@ -178,8 +178,8 @@ js = r'''<script>
 
   /* next drop + top card */
   const p2=n=>String(n).padStart(2,'0');
-  const HOSTS={zia:{name:'Zia',time:'8:00 AM',img:'img/zia.webp',pos:'50% 14%',edition:'Host · Morning edition',line:'“Zia here!”'},
-               luna:{name:'Luna',time:'8:00 PM',img:'img/luna.webp',pos:'50% 12%',edition:'Host · Night edition',line:'“Luna here!”'}};
+  const HOSTS={zia:{name:'Zia',time:'8:00 AM',img:'img/zia.webp',pos:'50% 14%',edition:'Reporter · Special edition',line:'“Zia here!”'},
+               luna:{name:'Luna',time:'8:00 PM',img:'img/luna.webp',pos:'50% 12%',edition:'Librarian · Limited edition',line:'“Luna here!”'}};
   let shown=null;
   function next(now){const d=new Date(now);d.setUTCMinutes(0,0,0);
     if(d.getUTCHours()<12){d.setUTCHours(12);return{at:d,host:'Luna · 8 PM',who:'luna'}}

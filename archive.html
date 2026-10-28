@@ -706,7 +706,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
             <header class="nm"><h3 id="ncName">Luna</h3><span class="cost" id="ncTime" data-g="☾">8:00 PM</span></header>
 
             <div class="art"><img id="ncImg" src="img/luna.webp" alt="Luna, the next host" style="object-position:50% 12%"><span class="live">Up next</span></div>
-            <div class="typeline"><span id="ncEdition">Host · Night edition</span><span>HKT</span><i class="setsym holo" aria-hidden="true">★</i></div>
+            <div class="typeline"><span id="ncEdition">Librarian · Limited edition</span><span>HKT</span><i class="setsym holo" aria-hidden="true">★</i></div>
             <div class="txt">
               <p><b id="ncLine">“Luna here!”</b></p>
               <p>On air in <span class="cd" id="ncCount">--:--:--</span></p>
@@ -976,8 +976,8 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
 
   /* next drop + top card */
   const p2=n=>String(n).padStart(2,'0');
-  const HOSTS={zia:{name:'Zia',time:'8:00 AM',img:'img/zia.webp',pos:'50% 14%',edition:'Host · Morning edition',line:'“Zia here!”'},
-               luna:{name:'Luna',time:'8:00 PM',img:'img/luna.webp',pos:'50% 12%',edition:'Host · Night edition',line:'“Luna here!”'}};
+  const HOSTS={zia:{name:'Zia',time:'8:00 AM',img:'img/zia.webp',pos:'50% 14%',edition:'Reporter · Special edition',line:'“Zia here!”'},
+               luna:{name:'Luna',time:'8:00 PM',img:'img/luna.webp',pos:'50% 12%',edition:'Librarian · Limited edition',line:'“Luna here!”'}};
   let shown=null;
   function next(now){const d=new Date(now);d.setUTCMinutes(0,0,0);
     if(d.getUTCHours()<12){d.setUTCHours(12);return{at:d,host:'Luna · 8 PM',who:'luna'}}

@@ -696,7 +696,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
             <header class="nm"><h3 id="ncName">Luna</h3><span class="cost" id="ncTime" data-g="☾">8:00 PM</span></header>
 
             <div class="art"><img id="ncImg" src="img/luna.webp" alt="Luna, the next host" style="object-position:50% 12%"><span class="live">Up next</span></div>
-            <div class="typeline"><span id="ncEdition">Host · Night edition</span><span>HKT</span><i class="setsym holo" aria-hidden="true">★</i></div>
+            <div class="typeline"><span id="ncEdition">Librarian · Limited edition</span><span>HKT</span><i class="setsym holo" aria-hidden="true">★</i></div>
             <div class="txt">
               <p><b id="ncLine">“Luna here!”</b></p>
               <p>On air in <span class="cd" id="ncCount">--:--:--</span></p>
@@ -778,11 +778,11 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
             <div class="face front">
               <header class="nm"><h3>Zia</h3><span class="cost" data-g="☀">8:00 AM</span></header>
               <div class="art"><img src="img/zia.webp" alt="Zia with silver ponytail and round tortoiseshell glasses" style="object-position:50% 14%"><div class="shine"></div></div>
-              <div class="typeline"><span>Host · Morning edition</span><span>Lead</span><i class="setsym holo" aria-hidden="true">★</i></div>
+              <div class="typeline"><span>Reporter · Special edition</span><span>Lead</span><i class="setsym holo" aria-hidden="true">★</i></div>
               <div class="txt">
                 <p><b>Opener.</b> “Zia here!” then straight into the story.</p>
                 <p><b>Style.</b> Warm, playful, quick with a grin.</p>
-                <p class="flav">Silver ponytail. Round tortoiseshell glasses. Never swapped.</p>
+                <p class="flav">First light, first pull, first to know.</p>
               </div>
               <footer class="foot"><span>1CZ · 001/101</span><span class="rar" title="Holo rare">★</span></footer>
             </div>
@@ -796,11 +796,11 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
             <div class="face front">
               <header class="nm"><h3>Luna</h3><span class="cost" data-g="☾">8:00 PM</span></header>
               <div class="art"><img src="img/luna.webp" alt="Luna with a black low bun and black rectangular glasses" style="object-position:50% 0%"><div class="shine"></div></div>
-              <div class="typeline"><span>Host · Night edition</span><span>Co-host</span><i class="setsym holo" aria-hidden="true">★</i></div>
+              <div class="typeline"><span>Librarian · Limited edition</span><span>Co-host</span><i class="setsym holo" aria-hidden="true">★</i></div>
               <div class="txt">
                 <p><b>Opener.</b> “Luna here!” then the night's headline.</p>
                 <p><b>Style.</b> Gentle, precise, quietly excited.</p>
-                <p class="flav">Black low bun. Black rectangular glasses. Never swapped.</p>
+                <p class="flav">Every story sleeved. Every secret shelved.</p>
               </div>
               <footer class="foot"><span>1CZ · 002/101</span><span class="rar" title="Holo rare">★</span></footer>
             </div>
@@ -1260,8 +1260,8 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
       document.getElementById('ncEdition').textContent=h.edition;document.getElementById('ncLine').textContent=h.line;
       document.getElementById('coverCard').setAttribute('aria-label',`Up next: ${h.name} at ${h.time} Hong Kong time. Tap to flip back`)}}
   let shown=null;
-  const HOSTS={zia:{name:'Zia',time:'8:00 AM',img:'img/zia.webp',pos:'50% 14%',edition:'Host · Morning edition',line:'“Zia here!”'},
-               luna:{name:'Luna',time:'8:00 PM',img:'img/luna.webp',pos:'50% 12%',edition:'Host · Night edition',line:'“Luna here!”'}};
+  const HOSTS={zia:{name:'Zia',time:'8:00 AM',img:'img/zia.webp',pos:'50% 14%',edition:'Reporter · Special edition',line:'“Zia here!”'},
+               luna:{name:'Luna',time:'8:00 PM',img:'img/luna.webp',pos:'50% 12%',edition:'Librarian · Limited edition',line:'“Luna here!”'}};
   const cc=document.getElementById('coverCard'),cw=document.getElementById('coverWin');
   if(!reduce){
     cw.addEventListener('pointermove',e=>{const r=cw.getBoundingClientRect(),px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
