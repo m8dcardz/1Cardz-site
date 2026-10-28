@@ -421,6 +421,24 @@ body>header.cover-zone{padding-top:10px}
 body>header .cover{--vt:42px}
 @media (max-width:900px){body>header .cover{--vt:32px}}
 @media (max-width:560px){body>header .cover{--vt:30px}}
+/* thinner binder sides; bottom binder's bottom edge matches the top binder's top edge */
+.cover{grid-template-columns:36px minmax(0,1fr) minmax(0,330px);--vl:62px;--vr:52px}
+.cover-back{grid-template-columns:36px minmax(0,1fr)}
+.cover .stitch{left:46px;right:10px}
+.strap{right:clamp(8px,1.6vw,16px);width:16px}
+body>footer .cover{--vb:42px}
+@media (max-width:900px){
+  .cover,.cover-back,body>header .cover{grid-template-columns:20px minmax(0,1fr)}
+  .cover{--vl:38px;--vr:40px;padding-right:44px}
+  .cover .stitch{left:28px;right:8px}
+  .strap{width:12px;right:8px}
+  body>footer .cover{--vb:32px}
+}
+@media (max-width:560px){
+  .cover{--vl:32px;--vr:34px;padding-right:38px}
+  .cover .stitch{left:24px}
+  body>footer .cover{--vb:30px}
+}
 /* ===== mobile: top binder tidy-up ===== */
 @media (max-width:900px){
   body>header .cover{grid-template-columns:30px minmax(0,1fr);row-gap:22px;padding-right:56px}
