@@ -3,82 +3,34 @@
  "source": "TCGplayer market price via TCGCSV",
  "items": [
   {
-   "id": "704143-Normal",
-   "kind": "sealed",
-   "game": "Pokémon",
-   "name": "30th Celebration Elite Trainer Box",
-   "set": "30th Celebration",
-   "price": 117.71,
-   "low": 104.0,
-   "url": "https://www.tcgplayer.com/product/704143",
-   "history": [
-    [
-     "2026-10-27",
-     117.71
-    ]
-   ]
-  },
-  {
-   "id": "692983-Normal",
+   "id": "692980-Normal",
    "kind": "sealed",
    "game": "Magic",
-   "name": "Reality Fracture Collector Booster Display",
+   "name": "Reality Fracture Play Booster Display",
    "set": "Reality Fracture",
-   "price": 391.38,
-   "low": 378.95,
-   "url": "https://www.tcgplayer.com/product/692983",
+   "price": 122.65,
+   "low": 115.0,
+   "url": "https://www.tcgplayer.com/product/692980",
    "history": [
     [
      "2026-10-27",
-     391.38
+     122.65
     ]
    ]
   },
   {
-   "id": "704752-Normal",
+   "id": "689336-Normal",
    "kind": "sealed",
    "game": "One Piece",
-   "name": "The World's Strongest Warriors Booster Box",
-   "set": "World's Strongest Warriors",
-   "price": 310.97,
-   "low": 299.99,
-   "url": "https://www.tcgplayer.com/product/704752",
+   "name": "The Time of Battle Booster Box",
+   "set": "The Time of Battle",
+   "price": 204.9,
+   "low": 199.0,
+   "url": "https://www.tcgplayer.com/product/689336",
    "history": [
     [
      "2026-10-27",
-     310.97
-    ]
-   ]
-  },
-  {
-   "id": "694826-Normal",
-   "kind": "sealed",
-   "game": "Yu-Gi-Oh!",
-   "name": "Magnificent Monsters Display",
-   "set": "Magnificent Monsters",
-   "price": 268.86,
-   "low": 253.69,
-   "url": "https://www.tcgplayer.com/product/694826",
-   "history": [
-    [
-     "2026-10-27",
-     268.86
-    ]
-   ]
-  },
-  {
-   "id": "635368-Normal",
-   "kind": "sealed",
-   "game": "Riftbound",
-   "name": "Origins Booster Display",
-   "set": "Origins",
-   "price": 226.11,
-   "low": 221.77,
-   "url": "https://www.tcgplayer.com/product/635368",
-   "history": [
-    [
-     "2026-10-27",
-     226.11
+     204.9
     ]
    ]
   },
@@ -99,50 +51,50 @@
    ]
   },
   {
-   "id": "704873-Holofoil",
-   "kind": "single",
-   "game": "Pokémon",
-   "name": "Mega Darkrai ex 116/084",
-   "set": "Pitch Black",
-   "price": 141.59,
-   "low": 133.81,
-   "url": "https://www.tcgplayer.com/product/704873",
+   "id": "693380-Normal",
+   "kind": "sealed",
+   "game": "Riftbound",
+   "name": "Vendetta Booster Display",
+   "set": "Vendetta",
+   "price": 126.22,
+   "low": 114.61,
+   "url": "https://www.tcgplayer.com/product/693380",
    "history": [
     [
      "2026-10-27",
-     141.59
+     126.22
     ]
    ]
   },
   {
-   "id": "702385-1st Edition",
-   "kind": "single",
+   "id": "691167-Normal",
+   "kind": "sealed",
    "game": "Yu-Gi-Oh!",
-   "name": "Magician of Dark Chaos – Black Chaos (Starlight)",
+   "name": "Chaos Origins Booster Box [1st Edition]",
    "set": "Chaos Origins",
-   "price": 473.26,
-   "low": 438.13,
-   "url": "https://www.tcgplayer.com/product/702385",
+   "price": 88.74,
+   "low": 79.99,
+   "url": "https://www.tcgplayer.com/product/691167",
    "history": [
     [
      "2026-10-27",
-     473.26
+     88.74
     ]
    ]
   },
   {
-   "id": "712117-Foil",
-   "kind": "single",
-   "game": "One Piece",
-   "name": "Rocks.D.Xebec (Super Alt Art)",
-   "set": "World's Strongest Warriors",
-   "price": 6100.0,
-   "low": 5399.95,
-   "url": "https://www.tcgplayer.com/product/712117",
+   "id": "693103-Normal",
+   "kind": "sealed",
+   "game": "Gundam",
+   "name": "Eternal Nexus Booster Box",
+   "set": "Eternal Nexus",
+   "price": 104.1,
+   "low": 82.99,
+   "url": "https://www.tcgplayer.com/product/693103",
    "history": [
     [
      "2026-10-27",
-     6100.0
+     104.1
     ]
    ]
   },
@@ -150,7 +102,7 @@
    "id": "706993-Foil",
    "kind": "single",
    "game": "Magic",
-   "name": "The Theorist, Jace Beleren (Fracture Foil)",
+   "name": "The Theorist, Jace Beleren (Showcase) (Fracture Foil)",
    "set": "Reality Fracture",
    "price": 493.95,
    "low": 483.88,
@@ -163,34 +115,996 @@
    ]
   },
   {
-   "id": "653102-Foil",
+   "id": "695986-Foil",
    "kind": "single",
-   "game": "Riftbound",
-   "name": "Ahri, Nine-Tailed Fox (Signature)",
-   "set": "Origins",
-   "price": 3711.35,
-   "low": 5000.99,
-   "url": "https://www.tcgplayer.com/product/653102",
+   "game": "One Piece",
+   "name": "Sakazuki (Manga)",
+   "set": "The Time of Battle",
+   "price": 1111.83,
+   "low": 780.0,
+   "url": "https://www.tcgplayer.com/product/695986",
    "history": [
     [
      "2026-10-27",
-     3711.35
+     1111.83
     ]
    ]
   },
   {
-   "id": "684339-Holofoil",
+   "id": "693465-Holofoil",
    "kind": "single",
    "game": "Pokémon",
-   "name": "Mega Zygarde ex 124/088",
-   "set": "Perfect Order",
-   "price": 87.18,
-   "low": 83.01,
-   "url": "https://www.tcgplayer.com/product/684339",
+   "name": "Cinccino ex - 119/086",
+   "set": "Chaos Rising",
+   "price": 34.99,
+   "low": 33.74,
+   "url": "https://www.tcgplayer.com/product/693465",
    "history": [
     [
      "2026-10-27",
-     87.18
+     34.99
+    ]
+   ]
+  },
+  {
+   "id": "709103-Foil",
+   "kind": "single",
+   "game": "Riftbound",
+   "name": "Jayce, Defender of Tomorrow (Signature)",
+   "set": "Vendetta",
+   "price": 1193.04,
+   "low": 800.0,
+   "url": "https://www.tcgplayer.com/product/709103",
+   "history": [
+    [
+     "2026-10-27",
+     1193.04
+    ]
+   ]
+  },
+  {
+   "id": "702385-1st Edition",
+   "kind": "single",
+   "game": "Yu-Gi-Oh!",
+   "name": "Magician of Dark Chaos - Black Chaos (Starlight Rare) (Extended Art)",
+   "set": "Chaos Origins",
+   "price": 473.26,
+   "low": 438.13,
+   "url": "https://www.tcgplayer.com/product/702385",
+   "history": [
+    [
+     "2026-10-27",
+     473.26
+    ]
+   ]
+  },
+  {
+   "id": "707601-Holofoil",
+   "kind": "single",
+   "game": "Gundam",
+   "name": "Wing Gundam Zero (EW) (LR++)",
+   "set": "Freedom Ascension",
+   "price": 3910.18,
+   "low": 4249.0,
+   "url": "https://www.tcgplayer.com/product/707601",
+   "history": [
+    [
+     "2026-10-27",
+     3910.18
+    ]
+   ]
+  }
+ ],
+ "pool": [
+  {
+   "id": "692939-Normal",
+   "kind": "sealed",
+   "game": "Pokémon",
+   "name": "Pitch Black Booster Box",
+   "set": "Pitch Black",
+   "price": 181.95,
+   "low": 159.99,
+   "url": "https://www.tcgplayer.com/product/692939",
+   "history": [
+    [
+     "2026-10-27",
+     181.95
+    ]
+   ]
+  },
+  {
+   "id": "692947-Normal",
+   "kind": "sealed",
+   "game": "Pokémon",
+   "name": "Pitch Black Elite Trainer Box",
+   "set": "Pitch Black",
+   "price": 75.94,
+   "low": 54.44,
+   "url": "https://www.tcgplayer.com/product/692947",
+   "history": [
+    [
+     "2026-10-27",
+     75.94
+    ]
+   ]
+  },
+  {
+   "id": "704873-Holofoil",
+   "kind": "single",
+   "game": "Pokémon",
+   "name": "Mega Darkrai ex - 116/084",
+   "set": "Pitch Black",
+   "price": 141.59,
+   "low": 133.81,
+   "url": "https://www.tcgplayer.com/product/704873",
+   "history": [
+    [
+     "2026-10-27",
+     141.59
+    ]
+   ]
+  },
+  {
+   "id": "704877-Holofoil",
+   "kind": "single",
+   "game": "Pokémon",
+   "name": "Mega Darkrai ex - 120/084",
+   "set": "Pitch Black",
+   "price": 125.27,
+   "low": 123.5,
+   "url": "https://www.tcgplayer.com/product/704877",
+   "history": [
+    [
+     "2026-10-27",
+     125.27
+    ]
+   ]
+  },
+  {
+   "id": "704874-Holofoil",
+   "kind": "single",
+   "game": "Pokémon",
+   "name": "Morpeko ex - 117/084",
+   "set": "Pitch Black",
+   "price": 58.38,
+   "low": 56.24,
+   "url": "https://www.tcgplayer.com/product/704874",
+   "history": [
+    [
+     "2026-10-27",
+     58.38
+    ]
+   ]
+  },
+  {
+   "id": "684444-Normal",
+   "kind": "sealed",
+   "game": "Pokémon",
+   "name": "Chaos Rising Booster Box",
+   "set": "Chaos Rising",
+   "price": 182.19,
+   "low": 164.25,
+   "url": "https://www.tcgplayer.com/product/684444",
+   "history": [
+    [
+     "2026-10-27",
+     182.19
+    ]
+   ]
+  },
+  {
+   "id": "684450-Normal",
+   "kind": "sealed",
+   "game": "Pokémon",
+   "name": "Chaos Rising Elite Trainer Box",
+   "set": "Chaos Rising",
+   "price": 71.7,
+   "low": 47.5,
+   "url": "https://www.tcgplayer.com/product/684450",
+   "history": [
+    [
+     "2026-10-27",
+     71.7
+    ]
+   ]
+  },
+  {
+   "id": "693518-Holofoil",
+   "kind": "single",
+   "game": "Pokémon",
+   "name": "Mega Greninja ex - 122/086",
+   "set": "Chaos Rising",
+   "price": 113.77,
+   "low": 107.55,
+   "url": "https://www.tcgplayer.com/product/693518",
+   "history": [
+    [
+     "2026-10-27",
+     113.77
+    ]
+   ]
+  },
+  {
+   "id": "693517-Holofoil",
+   "kind": "single",
+   "game": "Pokémon",
+   "name": "Mega Greninja ex - 116/086",
+   "set": "Chaos Rising",
+   "price": 109.8,
+   "low": 107.99,
+   "url": "https://www.tcgplayer.com/product/693517",
+   "history": [
+    [
+     "2026-10-27",
+     109.8
+    ]
+   ]
+  },
+  {
+   "id": "693465-Holofoil",
+   "kind": "single",
+   "game": "Pokémon",
+   "name": "Cinccino ex - 119/086",
+   "set": "Chaos Rising",
+   "price": 34.99,
+   "low": 33.74,
+   "url": "https://www.tcgplayer.com/product/693465",
+   "history": [
+    [
+     "2026-10-27",
+     34.99
+    ]
+   ]
+  },
+  {
+   "id": "692983-Normal",
+   "kind": "sealed",
+   "game": "Magic",
+   "name": "Reality Fracture Collector Booster Display",
+   "set": "Reality Fracture",
+   "price": 391.38,
+   "low": 378.95,
+   "url": "https://www.tcgplayer.com/product/692983",
+   "history": [
+    [
+     "2026-10-27",
+     391.38
+    ]
+   ]
+  },
+  {
+   "id": "692980-Normal",
+   "kind": "sealed",
+   "game": "Magic",
+   "name": "Reality Fracture Play Booster Display",
+   "set": "Reality Fracture",
+   "price": 122.65,
+   "low": 115.0,
+   "url": "https://www.tcgplayer.com/product/692980",
+   "history": [
+    [
+     "2026-10-27",
+     122.65
+    ]
+   ]
+  },
+  {
+   "id": "706993-Foil",
+   "kind": "single",
+   "game": "Magic",
+   "name": "The Theorist, Jace Beleren (Showcase) (Fracture Foil)",
+   "set": "Reality Fracture",
+   "price": 493.95,
+   "low": 483.88,
+   "url": "https://www.tcgplayer.com/product/706993",
+   "history": [
+    [
+     "2026-10-27",
+     493.95
+    ]
+   ]
+  },
+  {
+   "id": "707001-Foil",
+   "kind": "single",
+   "game": "Magic",
+   "name": "Craterclaw Colossus (Borderless) (Facet Foil) (0455)",
+   "set": "Reality Fracture",
+   "price": 444.26,
+   "low": 377.75,
+   "url": "https://www.tcgplayer.com/product/707001",
+   "history": [
+    [
+     "2026-10-27",
+     444.26
+    ]
+   ]
+  },
+  {
+   "id": "715919-Foil",
+   "kind": "single",
+   "game": "Magic",
+   "name": "Hexhaven Invigorator (Borderless) (Facet Foil)",
+   "set": "Reality Fracture",
+   "price": 420.13,
+   "low": 343.0,
+   "url": "https://www.tcgplayer.com/product/715919",
+   "history": [
+    [
+     "2026-10-27",
+     420.13
+    ]
+   ]
+  },
+  {
+   "id": "709724-Normal",
+   "kind": "sealed",
+   "game": "Magic",
+   "name": "Mystery Booster Commander Edition Booster Display",
+   "set": "Mystery Booster Commander Edition",
+   "price": 379.88,
+   "low": 374.89,
+   "url": "https://www.tcgplayer.com/product/709724",
+   "history": [
+    [
+     "2026-10-27",
+     379.88
+    ]
+   ]
+  },
+  {
+   "id": "709751-Foil",
+   "kind": "single",
+   "game": "Magic",
+   "name": "Ekthi, Contaminator Priest",
+   "set": "Mystery Booster Commander Edition",
+   "price": 191.66,
+   "low": 191.66,
+   "url": "https://www.tcgplayer.com/product/709751",
+   "history": [
+    [
+     "2026-10-27",
+     191.66
+    ]
+   ]
+  },
+  {
+   "id": "709789-Foil",
+   "kind": "single",
+   "game": "Magic",
+   "name": "Greensleeves",
+   "set": "Mystery Booster Commander Edition",
+   "price": 179.99,
+   "low": 200.0,
+   "url": "https://www.tcgplayer.com/product/709789",
+   "history": [
+    [
+     "2026-10-27",
+     179.99
+    ]
+   ]
+  },
+  {
+   "id": "709796-Foil",
+   "kind": "single",
+   "game": "Magic",
+   "name": "Davvol, Evincar of Rath",
+   "set": "Mystery Booster Commander Edition",
+   "price": 159.99,
+   "low": 150.0,
+   "url": "https://www.tcgplayer.com/product/709796",
+   "history": [
+    [
+     "2026-10-27",
+     159.99
+    ]
+   ]
+  },
+  {
+   "id": "704752-Normal",
+   "kind": "sealed",
+   "game": "One Piece",
+   "name": "The World's Strongest Warriors Booster Box",
+   "set": "The World's Strongest Warriors",
+   "price": 310.97,
+   "low": 299.99,
+   "url": "https://www.tcgplayer.com/product/704752",
+   "history": [
+    [
+     "2026-10-27",
+     310.97
+    ]
+   ]
+  },
+  {
+   "id": "712117-Foil",
+   "kind": "single",
+   "game": "One Piece",
+   "name": "Rocks.D.Xebec (118) (Super Alternate Art)",
+   "set": "The World's Strongest Warriors",
+   "price": 6100.0,
+   "low": 5399.95,
+   "url": "https://www.tcgplayer.com/product/712117",
+   "history": [
+    [
+     "2026-10-27",
+     6100.0
+    ]
+   ]
+  },
+  {
+   "id": "712084-Foil",
+   "kind": "single",
+   "game": "One Piece",
+   "name": "Shanks (022) (Manga)",
+   "set": "The World's Strongest Warriors",
+   "price": 1486.69,
+   "low": 1210.0,
+   "url": "https://www.tcgplayer.com/product/712084",
+   "history": [
+    [
+     "2026-10-27",
+     1486.69
+    ]
+   ]
+  },
+  {
+   "id": "712114-Foil",
+   "kind": "single",
+   "game": "One Piece",
+   "name": "Monkey.D.Luffy (079) (Super Leader Alternate Art)",
+   "set": "The World's Strongest Warriors",
+   "price": 1383.43,
+   "low": 1298.99,
+   "url": "https://www.tcgplayer.com/product/712114",
+   "history": [
+    [
+     "2026-10-27",
+     1383.43
+    ]
+   ]
+  },
+  {
+   "id": "689336-Normal",
+   "kind": "sealed",
+   "game": "One Piece",
+   "name": "The Time of Battle Booster Box",
+   "set": "The Time of Battle",
+   "price": 204.9,
+   "low": 199.0,
+   "url": "https://www.tcgplayer.com/product/689336",
+   "history": [
+    [
+     "2026-10-27",
+     204.9
+    ]
+   ]
+  },
+  {
+   "id": "695986-Foil",
+   "kind": "single",
+   "game": "One Piece",
+   "name": "Sakazuki (Manga)",
+   "set": "The Time of Battle",
+   "price": 1111.83,
+   "low": 780.0,
+   "url": "https://www.tcgplayer.com/product/695986",
+   "history": [
+    [
+     "2026-10-27",
+     1111.83
+    ]
+   ]
+  },
+  {
+   "id": "696052-Foil",
+   "kind": "single",
+   "game": "One Piece",
+   "name": "Kuzan (Manga)",
+   "set": "The Time of Battle",
+   "price": 1088.18,
+   "low": 650.0,
+   "url": "https://www.tcgplayer.com/product/696052",
+   "history": [
+    [
+     "2026-10-27",
+     1088.18
+    ]
+   ]
+  },
+  {
+   "id": "696108-Foil",
+   "kind": "single",
+   "game": "One Piece",
+   "name": "Borsalino (Manga)",
+   "set": "The Time of Battle",
+   "price": 1001.12,
+   "low": 599.19,
+   "url": "https://www.tcgplayer.com/product/696108",
+   "history": [
+    [
+     "2026-10-27",
+     1001.12
+    ]
+   ]
+  },
+  {
+   "id": "711263-Normal",
+   "kind": "sealed",
+   "game": "Yu-Gi-Oh!",
+   "name": "Beyond the Brave Booster Box [1st Edition]",
+   "set": "Beyond the Brave",
+   "price": 59.34,
+   "low": 56.95,
+   "url": "https://www.tcgplayer.com/product/711263",
+   "history": [
+    [
+     "2026-10-27",
+     59.34
+    ]
+   ]
+  },
+  {
+   "id": "719866-1st Edition",
+   "kind": "single",
+   "game": "Yu-Gi-Oh!",
+   "name": "The Great Gallant Bandit (Starlight Rare) (Extended Art)",
+   "set": "Beyond the Brave",
+   "price": 399.84,
+   "low": 320.0,
+   "url": "https://www.tcgplayer.com/product/719866",
+   "history": [
+    [
+     "2026-10-27",
+     399.84
+    ]
+   ]
+  },
+  {
+   "id": "719879-1st Edition",
+   "kind": "single",
+   "game": "Yu-Gi-Oh!",
+   "name": "Red-Eyes Black Dragon Exceed (Starlight Rare) (Extended Art)",
+   "set": "Beyond the Brave",
+   "price": 264.44,
+   "low": 236.0,
+   "url": "https://www.tcgplayer.com/product/719879",
+   "history": [
+    [
+     "2026-10-27",
+     264.44
+    ]
+   ]
+  },
+  {
+   "id": "722991-1st Edition",
+   "kind": "single",
+   "game": "Yu-Gi-Oh!",
+   "name": "Hey, Space Trunade! (Starlight Rare)",
+   "set": "Beyond the Brave",
+   "price": 100.27,
+   "low": 82.45,
+   "url": "https://www.tcgplayer.com/product/722991",
+   "history": [
+    [
+     "2026-10-27",
+     100.27
+    ]
+   ]
+  },
+  {
+   "id": "691167-Normal",
+   "kind": "sealed",
+   "game": "Yu-Gi-Oh!",
+   "name": "Chaos Origins Booster Box [1st Edition]",
+   "set": "Chaos Origins",
+   "price": 88.74,
+   "low": 79.99,
+   "url": "https://www.tcgplayer.com/product/691167",
+   "history": [
+    [
+     "2026-10-27",
+     88.74
+    ]
+   ]
+  },
+  {
+   "id": "702385-1st Edition",
+   "kind": "single",
+   "game": "Yu-Gi-Oh!",
+   "name": "Magician of Dark Chaos - Black Chaos (Starlight Rare) (Extended Art)",
+   "set": "Chaos Origins",
+   "price": 473.26,
+   "low": 438.13,
+   "url": "https://www.tcgplayer.com/product/702385",
+   "history": [
+    [
+     "2026-10-27",
+     473.26
+    ]
+   ]
+  },
+  {
+   "id": "702388-1st Edition",
+   "kind": "single",
+   "game": "Yu-Gi-Oh!",
+   "name": "Black Luster Soldier - Soldier of Light and Darkness (Starlight Rare) (Extended Art)",
+   "set": "Chaos Origins",
+   "price": 280.74,
+   "low": 209.99,
+   "url": "https://www.tcgplayer.com/product/702388",
+   "history": [
+    [
+     "2026-10-27",
+     280.74
+    ]
+   ]
+  },
+  {
+   "id": "703795-1st Edition",
+   "kind": "single",
+   "game": "Yu-Gi-Oh!",
+   "name": "Pot of Sloth (Starlight Rare)",
+   "set": "Chaos Origins",
+   "price": 137.71,
+   "low": 116.5,
+   "url": "https://www.tcgplayer.com/product/703795",
+   "history": [
+    [
+     "2026-10-27",
+     137.71
+    ]
+   ]
+  },
+  {
+   "id": "706239-Normal",
+   "kind": "sealed",
+   "game": "Lorcana",
+   "name": "Disney Lorcana: Hyperia City Booster Box",
+   "set": "Hyperia City",
+   "price": 146.14,
+   "low": 1.0,
+   "url": "https://www.tcgplayer.com/product/706239",
+   "history": [
+    [
+     "2026-10-27",
+     146.14
+    ]
+   ]
+  },
+  {
+   "id": "722591-Holofoil",
+   "kind": "single",
+   "game": "Lorcana",
+   "name": "Mickey Mouse - Best in Town (Iconic)",
+   "set": "Hyperia City",
+   "price": 1862.41,
+   "low": 1990.0,
+   "url": "https://www.tcgplayer.com/product/722591",
+   "history": [
+    [
+     "2026-10-27",
+     1862.41
+    ]
+   ]
+  },
+  {
+   "id": "722592-Holofoil",
+   "kind": "single",
+   "game": "Lorcana",
+   "name": "Cinderella - Unintentional Icon (Iconic)",
+   "set": "Hyperia City",
+   "price": 1138.25,
+   "low": 1400.0,
+   "url": "https://www.tcgplayer.com/product/722592",
+   "history": [
+    [
+     "2026-10-27",
+     1138.25
+    ]
+   ]
+  },
+  {
+   "id": "722586-Holofoil",
+   "kind": "single",
+   "game": "Lorcana",
+   "name": "Ariel - Collector of Oddities (Enchanted)",
+   "set": "Hyperia City",
+   "price": 385.5,
+   "low": 389.99,
+   "url": "https://www.tcgplayer.com/product/722586",
+   "history": [
+    [
+     "2026-10-27",
+     385.5
+    ]
+   ]
+  },
+  {
+   "id": "690384-Normal",
+   "kind": "sealed",
+   "game": "Lorcana",
+   "name": "Disney Lorcana: Attack of the Vine! Booster Box",
+   "set": "Attack of the Vine!",
+   "price": 180.75,
+   "low": 176.0,
+   "url": "https://www.tcgplayer.com/product/690384",
+   "history": [
+    [
+     "2026-10-27",
+     180.75
+    ]
+   ]
+  },
+  {
+   "id": "702667-Holofoil",
+   "kind": "single",
+   "game": "Lorcana",
+   "name": "Belle & Beast - Certain as the Sun (Iconic)",
+   "set": "Attack of the Vine!",
+   "price": 1831.91,
+   "low": 1348.5,
+   "url": "https://www.tcgplayer.com/product/702667",
+   "history": [
+    [
+     "2026-10-27",
+     1831.91
+    ]
+   ]
+  },
+  {
+   "id": "702666-Holofoil",
+   "kind": "single",
+   "game": "Lorcana",
+   "name": "Lilo & Stitch - Fun-Loving Friends (Iconic)",
+   "set": "Attack of the Vine!",
+   "price": 1555.9,
+   "low": 935.67,
+   "url": "https://www.tcgplayer.com/product/702666",
+   "history": [
+    [
+     "2026-10-27",
+     1555.9
+    ]
+   ]
+  },
+  {
+   "id": "704725-Holofoil",
+   "kind": "single",
+   "game": "Lorcana",
+   "name": "Winnie the Pooh & Piglet - Hunny Mages (Enchanted)",
+   "set": "Attack of the Vine!",
+   "price": 755.21,
+   "low": 554.99,
+   "url": "https://www.tcgplayer.com/product/704725",
+   "history": [
+    [
+     "2026-10-27",
+     755.21
+    ]
+   ]
+  },
+  {
+   "id": "711365-Normal",
+   "kind": "sealed",
+   "game": "Riftbound",
+   "name": "Radiance Booster Display",
+   "set": "Radiance",
+   "price": 127.13,
+   "low": 120.0,
+   "url": "https://www.tcgplayer.com/product/711365",
+   "history": [
+    [
+     "2026-10-27",
+     127.13
+    ]
+   ]
+  },
+  {
+   "id": "724654-Foil",
+   "kind": "single",
+   "game": "Riftbound",
+   "name": "Riven, The Exile (Signature)",
+   "set": "Radiance",
+   "price": 1285.55,
+   "low": 1500.0,
+   "url": "https://www.tcgplayer.com/product/724654",
+   "history": [
+    [
+     "2026-10-27",
+     1285.55
+    ]
+   ]
+  },
+  {
+   "id": "724642-Foil",
+   "kind": "single",
+   "game": "Riftbound",
+   "name": "Evelynn, Agony's Embrace (Signature)",
+   "set": "Radiance",
+   "price": 1175.0,
+   "low": 1398.01,
+   "url": "https://www.tcgplayer.com/product/724642",
+   "history": [
+    [
+     "2026-10-27",
+     1175.0
+    ]
+   ]
+  },
+  {
+   "id": "724655-Foil",
+   "kind": "single",
+   "game": "Riftbound",
+   "name": "Seraphine, Starry-Eyed Songstress (Signature)",
+   "set": "Radiance",
+   "price": 1110.98,
+   "low": 1300.0,
+   "url": "https://www.tcgplayer.com/product/724655",
+   "history": [
+    [
+     "2026-10-27",
+     1110.98
+    ]
+   ]
+  },
+  {
+   "id": "693380-Normal",
+   "kind": "sealed",
+   "game": "Riftbound",
+   "name": "Vendetta Booster Display",
+   "set": "Vendetta",
+   "price": 126.22,
+   "low": 114.61,
+   "url": "https://www.tcgplayer.com/product/693380",
+   "history": [
+    [
+     "2026-10-27",
+     126.22
+    ]
+   ]
+  },
+  {
+   "id": "709668-Foil",
+   "kind": "single",
+   "game": "Riftbound",
+   "name": "Akali, Rogue Assassin (Signature)",
+   "set": "Vendetta",
+   "price": 3229.71,
+   "low": 2137.81,
+   "url": "https://www.tcgplayer.com/product/709668",
+   "history": [
+    [
+     "2026-10-27",
+     3229.71
+    ]
+   ]
+  },
+  {
+   "id": "709666-Foil",
+   "kind": "single",
+   "game": "Riftbound",
+   "name": "Zed, Master of Shadows (Signature)",
+   "set": "Vendetta",
+   "price": 1276.92,
+   "low": 999.0,
+   "url": "https://www.tcgplayer.com/product/709666",
+   "history": [
+    [
+     "2026-10-27",
+     1276.92
+    ]
+   ]
+  },
+  {
+   "id": "709103-Foil",
+   "kind": "single",
+   "game": "Riftbound",
+   "name": "Jayce, Defender of Tomorrow (Signature)",
+   "set": "Vendetta",
+   "price": 1193.04,
+   "low": 800.0,
+   "url": "https://www.tcgplayer.com/product/709103",
+   "history": [
+    [
+     "2026-10-27",
+     1193.04
+    ]
+   ]
+  },
+  {
+   "id": "693621-Normal",
+   "kind": "sealed",
+   "game": "Gundam",
+   "name": "Freedom Ascension Booster Box",
+   "set": "Freedom Ascension",
+   "price": 181.09,
+   "low": 171.98,
+   "url": "https://www.tcgplayer.com/product/693621",
+   "history": [
+    [
+     "2026-10-27",
+     181.09
+    ]
+   ]
+  },
+  {
+   "id": "707601-Holofoil",
+   "kind": "single",
+   "game": "Gundam",
+   "name": "Wing Gundam Zero (EW) (LR++)",
+   "set": "Freedom Ascension",
+   "price": 3910.18,
+   "low": 4249.0,
+   "url": "https://www.tcgplayer.com/product/707601",
+   "history": [
+    [
+     "2026-10-27",
+     3910.18
+    ]
+   ]
+  },
+  {
+   "id": "707600-Holofoil",
+   "kind": "single",
+   "game": "Gundam",
+   "name": "Strike Freedom Gundam (LR++)",
+   "set": "Freedom Ascension",
+   "price": 2605.72,
+   "low": 2399.0,
+   "url": "https://www.tcgplayer.com/product/707600",
+   "history": [
+    [
+     "2026-10-27",
+     2605.72
+    ]
+   ]
+  },
+  {
+   "id": "707604-Holofoil",
+   "kind": "single",
+   "game": "Gundam",
+   "name": "Nu Gundam (LR++)",
+   "set": "Freedom Ascension",
+   "price": 1532.38,
+   "low": 1399.01,
+   "url": "https://www.tcgplayer.com/product/707604",
+   "history": [
+    [
+     "2026-10-27",
+     1532.38
+    ]
+   ]
+  },
+  {
+   "id": "693103-Normal",
+   "kind": "sealed",
+   "game": "Gundam",
+   "name": "Eternal Nexus Booster Box",
+   "set": "Eternal Nexus",
+   "price": 104.1,
+   "low": 82.99,
+   "url": "https://www.tcgplayer.com/product/693103",
+   "history": [
+    [
+     "2026-10-27",
+     104.1
+    ]
+   ]
+  },
+  {
+   "id": "702815-Holofoil",
+   "kind": "single",
+   "game": "Gundam",
+   "name": "Phoenix Gundam (Power Unleashed) (EX) (LR++)",
+   "set": "Eternal Nexus",
+   "price": 1094.36,
+   "low": 800.0,
+   "url": "https://www.tcgplayer.com/product/702815",
+   "history": [
+    [
+     "2026-10-27",
+     1094.36
     ]
    ]
   }
