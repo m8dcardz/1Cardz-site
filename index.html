@@ -332,6 +332,8 @@ body>footer{padding-block:clamp(70px,10vw,120px) 48px}
 .lcdbox-market{padding-top:6px !important}
 @media (max-width:560px){.lcd-label{width:auto}.lcd-spacer{display:none}.lcdbox-market .lcd{margin-right:0}}
 .lcd-spacer{visibility:hidden}
+.lcdbox-market .lcd-label{color:#5be39b}
+.lcdbox-market .lcd-label i{background:#5be39b;box-shadow:0 0 10px #5be39b}
 .lcdbox-market{padding-top:0;border-top:0}
 .lcdbox-market .lcd{display:block;text-decoration:none}
 .lcdbox-market .lcd-track{animation-duration:70s}
@@ -696,14 +698,12 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
     <div class="lcd" id="lcd">
       <div class="lcd-track" id="lcdTrack"><div class="lcd-run"><button class="lcd-item" type="button" data-card="Into the Inkdark"><b>LORCANA</b> Into the Inkdark opens for preorder, release expected Feb 12, 2027</button><span class="lcd-sep" aria-hidden="true">◆</span><button class="lcd-item" type="button" data-card="Chorus of Steel"><b>FLESH AND BLOOD</b> Smash Palace: Chorus of Steel lands October 30 with heroes Zane and Killjoy</button><span class="lcd-sep" aria-hidden="true">◆</span><button class="lcd-item" type="button" data-card="Mihawk Banned"><b>ONE PIECE</b> OP14-020 Dracule Mihawk is banned, alternate arts included</button><span class="lcd-sep" aria-hidden="true">◆</span></div><div class="lcd-run" aria-hidden="true"><button class="lcd-item" type="button" data-card="Into the Inkdark"><b>LORCANA</b> Into the Inkdark opens for preorder, release expected Feb 12, 2027</button><span class="lcd-sep" aria-hidden="true">◆</span><button class="lcd-item" type="button" data-card="Chorus of Steel"><b>FLESH AND BLOOD</b> Smash Palace: Chorus of Steel lands October 30 with heroes Zane and Killjoy</button><span class="lcd-sep" aria-hidden="true">◆</span><button class="lcd-item" type="button" data-card="Mihawk Banned"><b>ONE PIECE</b> OP14-020 Dracule Mihawk is banned, alternate arts included</button><span class="lcd-sep" aria-hidden="true">◆</span></div></div>
     </div>
-    <button class="gd-pause mono" type="button" id="hlPause" aria-pressed="false">Pause</button>
     </div>
     <div class="lcdbox lcdbox-market">
     <div class="lcd-label mono"><i></i><span>Market</span></div>
     <a class="lcd" href="#mw-h" aria-label="Market prices, see Market Watch">
       <div class="lcd-track" id="mlcdTrack"></div>
     </a>
-    <span class="gd-pause mono lcd-spacer" aria-hidden="true">Pause</span>
     </div>
     <div class="gd-stage" aria-live="polite">
         <article class="hl on" id="hl0" role="tabpanel" aria-labelledby="hlt0">
@@ -1122,7 +1122,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
 
   /* glass headline display: rotate 3 stories every 7 s */
   (function(){
-    const panels=[...document.querySelectorAll('.hl')],tabs=[...document.querySelectorAll('.hl-tab')],pb=document.getElementById('hlPause');
+    const panels=[...document.querySelectorAll('.hl')],tabs=[...document.querySelectorAll('.hl-tab')],pb=document.getElementById('hlPause')||document.createElement('button');
     const DUR=7000;let cur=0,t0=performance.now(),paused=reduce,hover=false;
     if(reduce){pb.setAttribute('aria-pressed','true');pb.textContent='Play';document.querySelectorAll('.lcdbox').forEach(x=>x.classList.add('paused'))}
     function show(i){cur=(i+panels.length)%panels.length;panels.forEach((p,k)=>{p.hidden=k!==cur;p.classList.toggle('on',k===cur)});
