@@ -424,6 +424,48 @@ body>header .cover{--vt:42px}
   body>header .cover .drop .mono{font-size:15px}
   body>header .cover .drop b{font-size:30px}
 }
+
+/* ================= MARKET WATCH ================= */
+.mw-wrap{padding-block:clamp(56px,8vw,96px) 0}
+.mw{border-radius:18px;overflow:hidden}
+.mw-top{display:flex;align-items:center;gap:12px 18px;flex-wrap:wrap;padding:14px clamp(14px,2.4vw,24px);border-bottom:1px solid rgba(255,255,255,.1);position:relative;z-index:4}
+.mw-label{display:inline-flex;align-items:center;gap:8px;color:#ffd23f}
+.mw-label i{width:8px;height:8px;border-radius:50%;background:#ffd23f;box-shadow:0 0 10px #ffd23f;animation:pulse 1.2s ease-in-out infinite}
+.mw-tabs{display:inline-flex;border:1px solid rgba(255,255,255,.2);border-radius:99px;padding:3px;gap:2px}
+.mw-tab{background:none;border:0;color:#aab1c9;padding:7px 14px;border-radius:99px;cursor:pointer;font-size:12px}
+.mw-tab[aria-selected="true"]{background:rgba(255,255,255,.14);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+.mw-upd{margin-left:auto;color:#8c93ad;font-size:11.5px}
+.mw-head{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1.6fr) 110px;gap:18px;padding:10px clamp(14px,2.4vw,24px) 6px;color:#8c93ad;font-size:11px;position:relative;z-index:4}
+.mw-list{list-style:none;margin:0;padding:0 0 6px;position:relative;z-index:4}
+.mw-row{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1.6fr) 110px;gap:18px;align-items:center;padding:12px clamp(14px,2.4vw,24px);border-top:1px solid rgba(255,255,255,.06);position:relative}
+.mw-row:hover,.mw-row:focus-within{background:rgba(255,255,255,.05)}
+.mw-name{min-width:0;display:grid;gap:3px}
+.mw-name a{color:#fff;text-decoration:none;font-weight:700;font-size:15.5px;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mw-name a:hover{text-decoration:underline;text-decoration-color:rgba(233,196,106,.7);text-underline-offset:3px}
+.mw-meta{display:flex;gap:8px;align-items:center;color:#aab1c9;font-size:13px;min-width:0}
+.mw-game{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#18203f;background:linear-gradient(180deg,#fbe7a6,var(--foil));border-radius:99px;padding:2px 8px;flex:none}
+.mw-meta span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mw-bar{display:flex;align-items:center;gap:12px;min-width:0}
+.mw-track{flex:1;height:10px;border-radius:99px;background:rgba(255,255,255,.06);position:relative;min-width:40px}
+.mw-fill{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:linear-gradient(90deg,#2de2e6,#7cf3ff);box-shadow:0 0 12px rgba(45,226,230,.35);transition:width .7s cubic-bezier(.2,.7,.1,1)}
+.mw-price{font-family:"Oxanium",var(--f-display);font-weight:700;font-size:19px;color:#fff;font-variant-numeric:tabular-nums;min-width:96px;text-align:right}
+.mw-trend{display:grid;justify-items:end;gap:2px}
+.mw-trend svg{width:96px;height:26px;overflow:visible}
+.mw-chg{font-family:var(--f-mono);font-size:12px;font-variant-numeric:tabular-nums}
+.mw-chg.up{color:#5be39b}.mw-chg.down{color:#ff7a8a}.mw-chg.flat,.mw-chg.new{color:#8c93ad}
+.mw-tip{position:absolute;z-index:6;pointer-events:none;background:#0c1124;border:1px solid rgba(233,196,106,.5);border-radius:8px;padding:8px 10px;font-size:12.5px;color:#dfe3f1;box-shadow:0 10px 24px rgba(0,0,0,.5);white-space:nowrap}
+.mw-tip b{color:#fff}
+.mw-foot{margin:0;padding:12px clamp(14px,2.4vw,24px) 16px;color:#8c93ad;font-size:12.5px;border-top:1px solid rgba(255,255,255,.08);position:relative;z-index:4}
+@media (max-width:640px){
+  .mw-head{display:none}
+  .mw-row{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"n n" "b t";gap:8px 12px}
+  .mw-name a{white-space:normal}
+  .mw-trend{justify-items:end}
+  .mw-name{grid-area:n}.mw-trend{grid-area:t}.mw-bar{grid-area:b}
+  .mw-trend svg{width:72px;height:22px}
+  .mw-price{font-size:17px;min-width:84px}
+  .mw-upd{margin-left:0;width:100%}
+}
 /* ================= BORDERLESS FACES (default; add .classic on <html> for framed) =================
    Full-bleed art with floating frosted plates: name plate on top, type plate + rules panel at the bottom. */
 .setsym{display:none}
@@ -940,13 +982,19 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
     </div>
   </section>
 
-  <section class="wrap key" aria-labelledby="key-h">
-    <div class="sheet-head"><h2 id="key-h">Rarity key</h2><p>Every card in the set carries one of four symbols on its type line.</p></div>
-    <div class="keygrid">
-      <div><span class="sym">●</span><b>Common</b><span>The schedule and the beat. They show up every day.</span></div>
-      <div><span class="sym">◆</span><b>Uncommon</b><span>Recent clips and the props on set.</span></div>
-      <div><span class="sym">★</span><b>Holo rare</b><span>The hosts and the set. Foil finish.</span></div>
-      <div><span class="sym">✦</span><b>Secret rare</b><span>The newest clip and the next drop.</span></div>
+  <section class="wrap key mw-wrap" aria-labelledby="mw-h">
+    <div class="gd mw">
+      <div class="mw-top">
+        <span class="mono mw-label"><i></i><span id="mw-h">Market Watch</span></span>
+        <div class="mw-tabs" role="tablist" aria-label="Market Watch view">
+          <button type="button" role="tab" class="mw-tab mono" data-kind="sealed" aria-selected="true">Sealed</button>
+          <button type="button" role="tab" class="mw-tab mono" data-kind="single" aria-selected="false">Chase singles</button>
+        </div>
+        <span class="mono mw-upd" id="mwUpd">—</span>
+      </div>
+      <div class="mw-head mono" aria-hidden="true"><span>Item</span><span>Market price</span><span>Trend</span></div>
+      <ol class="mw-list" id="mwList"></ol>
+      <p class="mw-foot">Top sellers on TCGplayer, priced at the TCGplayer market price (recent sold average, USD) and refreshed daily. Prices move fast; this is a snapshot, not buying or selling advice.</p>
     </div>
   </section>
 </main>
@@ -1076,6 +1124,48 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
     const later=()=>{const idle=window.requestIdleCallback||(f=>setTimeout(f,1500));idle(go,{timeout:4000})};
     if(document.readyState==='complete')later();else addEventListener('load',later,{once:true});
   });
+
+  /* Market Watch: render the embedded snapshot, then refresh from data/market.json (updated daily) */
+  (function(){
+    const SNAP={"updated": "2026-10-27T20:05:13+0000", "source": "TCGplayer market price via TCGCSV", "items": [{"id": "704143-Normal", "kind": "sealed", "game": "Pokémon", "name": "30th Celebration Elite Trainer Box", "set": "30th Celebration", "price": 117.71, "low": 104.0, "url": "https://www.tcgplayer.com/product/704143", "history": [["2026-10-27", 117.71]]}, {"id": "692983-Normal", "kind": "sealed", "game": "Magic", "name": "Reality Fracture Collector Booster Display", "set": "Reality Fracture", "price": 391.38, "low": 378.95, "url": "https://www.tcgplayer.com/product/692983", "history": [["2026-10-27", 391.38]]}, {"id": "704752-Normal", "kind": "sealed", "game": "One Piece", "name": "The World's Strongest Warriors Booster Box", "set": "World's Strongest Warriors", "price": 310.97, "low": 299.99, "url": "https://www.tcgplayer.com/product/704752", "history": [["2026-10-27", 310.97]]}, {"id": "694826-Normal", "kind": "sealed", "game": "Yu-Gi-Oh!", "name": "Magnificent Monsters Display", "set": "Magnificent Monsters", "price": 268.86, "low": 253.69, "url": "https://www.tcgplayer.com/product/694826", "history": [["2026-10-27", 268.86]]}, {"id": "635368-Normal", "kind": "sealed", "game": "Riftbound", "name": "Origins Booster Display", "set": "Origins", "price": 226.11, "low": 221.77, "url": "https://www.tcgplayer.com/product/635368", "history": [["2026-10-27", 226.11]]}, {"id": "692939-Normal", "kind": "sealed", "game": "Pokémon", "name": "Pitch Black Booster Box", "set": "Pitch Black", "price": 181.95, "low": 159.99, "url": "https://www.tcgplayer.com/product/692939", "history": [["2026-10-27", 181.95]]}, {"id": "704873-Holofoil", "kind": "single", "game": "Pokémon", "name": "Mega Darkrai ex 116/084", "set": "Pitch Black", "price": 141.59, "low": 133.81, "url": "https://www.tcgplayer.com/product/704873", "history": [["2026-10-27", 141.59]]}, {"id": "702385-1st Edition", "kind": "single", "game": "Yu-Gi-Oh!", "name": "Magician of Dark Chaos – Black Chaos (Starlight)", "set": "Chaos Origins", "price": 473.26, "low": 438.13, "url": "https://www.tcgplayer.com/product/702385", "history": [["2026-10-27", 473.26]]}, {"id": "712117-Foil", "kind": "single", "game": "One Piece", "name": "Rocks.D.Xebec (Super Alt Art)", "set": "World's Strongest Warriors", "price": 6100.0, "low": 5399.95, "url": "https://www.tcgplayer.com/product/712117", "history": [["2026-10-27", 6100.0]]}, {"id": "706993-Foil", "kind": "single", "game": "Magic", "name": "The Theorist, Jace Beleren (Fracture Foil)", "set": "Reality Fracture", "price": 493.95, "low": 483.88, "url": "https://www.tcgplayer.com/product/706993", "history": [["2026-10-27", 493.95]]}, {"id": "653102-Foil", "kind": "single", "game": "Riftbound", "name": "Ahri, Nine-Tailed Fox (Signature)", "set": "Origins", "price": 3711.35, "low": 5000.99, "url": "https://www.tcgplayer.com/product/653102", "history": [["2026-10-27", 3711.35]]}, {"id": "684339-Holofoil", "kind": "single", "game": "Pokémon", "name": "Mega Zygarde ex 124/088", "set": "Perfect Order", "price": 87.18, "low": 83.01, "url": "https://www.tcgplayer.com/product/684339", "history": [["2026-10-27", 87.18]]}]};
+    const list=document.getElementById('mwList'),upd=document.getElementById('mwUpd'),tabs=[...document.querySelectorAll('.mw-tab')];
+    if(!list)return;
+    let data=SNAP,kind='sealed';
+    const usd=v=>v==null?'—':'$'+v.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+    const fmtDate=s=>{const d=new Date(String(s).slice(0,10)+'T12:00:00Z');return isNaN(d)?s:d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'})};
+    function spark(h){
+      if(!h||h.length<2)return '<svg viewBox="0 0 96 26" aria-hidden="true"><line x1="2" y1="13" x2="94" y2="13" stroke="rgba(255,255,255,.25)" stroke-width="2" stroke-dasharray="3 4"/></svg>';
+      const v=h.map(x=>x[1]),mn=Math.min(...v),mx=Math.max(...v),r=mx-mn||1;
+      const pts=v.map((y,i)=>[2+i*(92/(v.length-1)),22-((y-mn)/r)*18]);
+      const up=v[v.length-1]>=v[0],c=up?'#5be39b':'#ff7a8a',l=pts[pts.length-1];
+      return '<svg viewBox="0 0 96 26" aria-hidden="true"><polyline fill="none" stroke="'+c+'" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" points="'+pts.map(p=>p.map(n=>n.toFixed(1)).join(',')).join(' ')+'"/><circle cx="'+l[0].toFixed(1)+'" cy="'+l[1].toFixed(1)+'" r="3" fill="'+c+'"/></svg>';
+    }
+    function chg(h){
+      if(!h||h.length<2)return '<span class="mw-chg new">trend from '+(h&&h[0]?fmtDate(h[0][0]).replace(/, \d{4}$/,''):'today')+'</span>';
+      const a=h[0][1],b=h[h.length-1][1],p=(b-a)/a*100,cls=Math.abs(p)<0.05?'flat':p>0?'up':'down',ar=cls==='up'?'▲':cls==='down'?'▼':'■';
+      return '<span class="mw-chg '+cls+'">'+ar+' '+Math.abs(p).toFixed(1)+'% · '+h.length+'d</span>';
+    }
+    function render(){
+      const items=data.items.filter(i=>i.kind===kind&&i.price!=null).sort((a,b)=>b.price-a.price);
+      const max=Math.max(...items.map(i=>i.price));
+      list.innerHTML=items.map(i=>'<li class="mw-row" tabindex="0" data-tip="'+(i.name+' · '+i.set).replace(/"/g,'&quot;')+'|'+usd(i.price)+'|'+usd(i.low)+'">'+
+        '<div class="mw-name"><a href="'+i.url+'" target="_blank" rel="noopener">'+i.name+'</a><div class="mw-meta"><span class="mw-game">'+i.game+'</span><span>'+i.set+'</span></div></div>'+
+        '<div class="mw-bar"><div class="mw-track"><div class="mw-fill" style="width:0%" data-w="'+Math.max(2,i.price/max*100).toFixed(1)+'"></div></div><span class="mw-price">'+usd(i.price)+'</span></div>'+
+        '<div class="mw-trend">'+spark(i.history)+chg(i.history)+'</div></li>').join('');
+      requestAnimationFrame(()=>list.querySelectorAll('.mw-fill').forEach(f=>f.style.width=f.dataset.w+'%'));
+      upd.textContent='TCGplayer prices as of '+fmtDate(data.updated);
+    }
+    tabs.forEach(t=>t.addEventListener('click',()=>{kind=t.dataset.kind;tabs.forEach(x=>x.setAttribute('aria-selected',String(x===t)));render()}));
+    /* hover tooltip */
+    const tip=document.createElement('div');tip.className='mw-tip';tip.hidden=true;document.querySelector('.mw').appendChild(tip);
+    list.addEventListener('pointermove',e=>{const r=e.target.closest('.mw-row');if(!r){tip.hidden=true;return}
+      const [n,p,l]=r.dataset.tip.split('|');tip.innerHTML='<b>'+n+'</b><br>Market '+p+' · Lowest listing '+l;tip.hidden=false;
+      const box=document.querySelector('.mw').getBoundingClientRect();let x=e.clientX-box.left+14,y=e.clientY-box.top+14;
+      x=Math.min(x,box.width-tip.offsetWidth-8);tip.style.left=x+'px';tip.style.top=y+'px'});
+    list.addEventListener('pointerleave',()=>tip.hidden=true);
+    render();
+    fetch('data/market.json?v='+Date.now()).then(r=>r.ok?r.json():null).then(d=>{if(d&&d.items&&d.items.length){data=d;render()}}).catch(()=>{});
+  })();
 
   /* barcode */
   const bc=document.getElementById('barcode');let seed=1209;
