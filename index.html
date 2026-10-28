@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>1 Cardz Binder</title>
+<link rel="preload" as="image" href="img/clip1.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="img/clip2.jpg">
+<link rel="preload" as="image" href="img/clip4.jpg">
 <link rel="canonical" href="https://1cardz.news/">
 <meta name="description" content="1Cardz.news: daily trading card game news from Zia and Luna, filed in a collector's binder.">
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -534,7 +537,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
 
 <header class="wrap cover-zone">
   <div class="cover">
-    <video class="cover-video" src="img/cover-loop.mp4" poster="img/cover-poster.jpg" autoplay muted loop playsinline aria-hidden="true"></video>
+    <video class="cover-video top-cover" data-src="img/cover-loop.mp4" poster="img/cover-poster.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
     <div class="cover-holo" aria-hidden="true"></div>
     <div class="cover-gloss" aria-hidden="true"></div>
     <div class="stitch" aria-hidden="true"></div>
@@ -551,7 +554,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
     <div class="window holo" id="coverWin">
       <div class="coverflip" id="coverCard" role="button" tabindex="0" aria-pressed="false" aria-label="Tap to flip and see which host is up next">
         <div class="cside back-side">
-          <div class="back"></div><img class="globe" src="img/globe.webp" alt="">
+          <div class="back"></div><img class="globe" src="img/globe.webp" alt="" fetchpriority="low">
           <span class="tap">Tap to flip</span>
         </div>
         <div class="cside front">
@@ -592,7 +595,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
             <p>Disney Lorcana’s next set is expected on February 12, 2027, and brings the first serialized Illustrious cards.</p>
             <div class="hl-foot"><span class="mono hl-src">Source · ICv2</span><button class="hl-watch" type="button" data-card="Into the Inkdark">▶ Watch the clip</button></div>
           </div>
-          <div class="hl-shot"><img src="img/clip1.jpg" alt="Still from the Lorcana news clip with Zia" loading="lazy"></div>
+          <div class="hl-shot"><img src="img/clip1.jpg" alt="Still from the Lorcana news clip with Zia" fetchpriority="high"></div>
         </article>
         <article class="hl" id="hl1" role="tabpanel" aria-labelledby="hlt1" hidden>
           <div class="hl-copy">
@@ -601,7 +604,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
             <p>Ultimate Pit Fight multiplayer is back, with two new heroes, Zane and Killjoy.</p>
             <div class="hl-foot"><span class="mono hl-src">Source · Flesh and Blood official site, TCGplayer</span><button class="hl-watch" type="button" data-card="Chorus of Steel">▶ Watch the clip</button></div>
           </div>
-          <div class="hl-shot"><img src="img/clip2.jpg" alt="Still from the Flesh and Blood news clip with Luna" loading="lazy"></div>
+          <div class="hl-shot"><img src="img/clip2.jpg" alt="Still from the Flesh and Blood news clip with Luna" fetchpriority="high"></div>
         </article>
         <article class="hl" id="hl2" role="tabpanel" aria-labelledby="hlt2" hidden>
           <div class="hl-copy">
@@ -610,7 +613,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
             <p>The ban covers alternate arts and is now in effect. Bandai also announced a fourth anniversary event for the OP-18 launch.</p>
             <div class="hl-foot"><span class="mono hl-src">Source · Official One Piece Card Game site</span><button class="hl-watch" type="button" data-card="Mihawk Banned">▶ Watch the clip</button></div>
           </div>
-          <div class="hl-shot"><img src="img/clip4.jpg" alt="Still from the One Piece news clip with Luna" loading="lazy"></div>
+          <div class="hl-shot"><img src="img/clip4.jpg" alt="Still from the One Piece news clip with Luna" fetchpriority="high"></div>
         </article>
     </div>
     <div class="gd-tabs" role="tablist" aria-label="Headlines"><button class="hl-tab" id="hlt0" type="button" role="tab" aria-controls="hl0" aria-selected="true"><i>01</i><span>Lorcana</span><b><em></em></b></button><button class="hl-tab" id="hlt1" type="button" role="tab" aria-controls="hl1" aria-selected="false"><i>02</i><span>Flesh and Blood</span><b><em></em></b></button><button class="hl-tab" id="hlt2" type="button" role="tab" aria-controls="hl2" aria-selected="false"><i>03</i><span>One Piece</span><b><em></em></b></button></div>
@@ -1016,6 +1019,12 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
   function hydrate(c){const v=c.querySelector('video[data-poster]');if(v&&!v.poster){v.poster=v.dataset.poster}
     const a=c.querySelector('.art[data-p]');if(a&&!a.style.getPropertyValue('--p'))a.style.setProperty('--p','url('+a.dataset.p+')')}
   document.querySelectorAll('.flip').forEach(c=>{new MutationObserver(()=>{if(c.getAttribute('aria-pressed')==='true')hydrate(c)}).observe(c,{attributes:true,attributeFilter:['aria-pressed']})});
+  /* headline box first: start the top binder video only once the headline stills are in */
+  (function(){const v=document.querySelector('video.top-cover');if(!v)return;let done=false;
+    const go=()=>{if(done)return;done=true;v.src=v.dataset.src;if(!reduce){v.autoplay=true;const pr=v.play();if(pr)pr.catch(()=>{})}};
+    const imgs=[...document.querySelectorAll('.hl-shot img')];
+    Promise.all(imgs.map(i=>i.complete?1:new Promise(r=>{i.addEventListener('load',r,{once:true});i.addEventListener('error',r,{once:true})}))).then(go);
+    setTimeout(go,2500);})();
   /* bottom binder video: load only when scrolled near */
   document.querySelectorAll('video.lazy-cover').forEach(v=>{
     const go=()=>{if(v.dataset.loaded)return;v.dataset.loaded=1;v.poster=v.dataset.poster;v.src=v.dataset.src;if(!reduce){v.autoplay=true;const pr=v.play();if(pr)pr.catch(()=>{})}};
