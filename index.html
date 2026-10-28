@@ -397,6 +397,12 @@ body>footer{padding-block:clamp(70px,10vw,120px) 48px}
 .coverflip[aria-pressed="true"] .back-side{visibility:hidden;transition:visibility 0s .45s}
 .coverflip[aria-pressed="false"] .back-side{transition:visibility 0s 0s}
 .coverflip[aria-pressed="true"] .tap,.coverflip[aria-pressed="true"] .globe{opacity:0;transition:opacity .2s}
+/* top card: flat two-step flip (Safari showed a white block with the 3D back-face version) */
+.coverflip,.coverflip[aria-pressed="true"]{transform-style:flat;transform:none;transition:none}
+.coverflip .cside,.coverflip .cside.front,.coverflip .cside *{-webkit-backface-visibility:visible;backface-visibility:visible}
+.coverflip .cside.front{transform:none}
+.coverflip[aria-pressed] .cside{visibility:visible;transition:none}
+.coverflip[data-face="back"] .cside.front,.coverflip[data-face="front"] .back-side{visibility:hidden}
 /* ===== mobile: shorter top binder ===== */
 @media (max-width:560px){
   body>header .cover .copy p,body>header .cover .row .btn{display:none}
@@ -691,7 +697,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
       </div>
     </div>
     <div class="window holo" id="coverWin">
-      <div class="coverflip" id="coverCard" role="button" tabindex="0" aria-pressed="false" aria-label="Tap to flip and see which host is up next">
+      <div class="coverflip" id="coverCard" role="button" tabindex="0" aria-pressed="false" data-face="back" aria-label="Tap to flip and see which host is up next">
         <div class="cside back-side">
           <div class="back"></div><video class="globe" src="img/globe.mp4" poster="img/globe-poster.jpg" autoplay muted loop playsinline aria-hidden="true"></video>
           <span class="tap">Tap to flip</span>
@@ -1288,7 +1294,15 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
     cw.addEventListener('pointerleave',()=>{['--mx','--my'].forEach(k=>cw.style.setProperty(k,'50%'));
       cw.style.setProperty('--rx','0deg');cw.style.setProperty('--ry','0deg');cw.style.setProperty('--o','0')});
   }
-  cc.addEventListener('click',()=>cc.setAttribute('aria-pressed',cc.getAttribute('aria-pressed')==='true'?'false':'true'));
+  /* two-step flip (turn to edge, swap sides, turn back): no 3D back-faces, so Safari draws it cleanly */
+  let ccBusy=false;
+  cc.addEventListener('click',()=>{if(ccBusy)return;const to=cc.getAttribute('aria-pressed')!=='true';
+    const set=()=>{cc.setAttribute('aria-pressed',String(to));cc.dataset.face=to?'front':'back'};
+    if(reduce){set();return}ccBusy=true;
+    cc.style.transition='transform .26s cubic-bezier(.5,0,.9,.6)';cc.style.transform='perspective(900px) rotateY(90deg)';
+    setTimeout(()=>{set();cc.style.transition='none';cc.style.transform='perspective(900px) rotateY(-90deg)';void cc.offsetWidth;
+      cc.style.transition='transform .4s cubic-bezier(.15,.6,.3,1)';cc.style.transform='perspective(900px) rotateY(0deg)';
+      setTimeout(()=>{ccBusy=false},410)},260)});
   cc.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();cc.click()}});
   clock();setInterval(clock,1000);
 })();
