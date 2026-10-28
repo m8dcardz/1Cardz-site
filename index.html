@@ -223,8 +223,8 @@ main,body>footer,body>header{overflow-x:clip}
 /* covers span almost the whole window; the content between them stays narrower */
 .cover{margin-inline:0}
 body>header.wrap,body>footer.wrap{max-width:1400px;padding-left:max(4vw, env(safe-area-inset-left, 0px));padding-right:max(4vw, env(safe-area-inset-right, 0px))}
-main>.wrap,.glassdeck.wrap{max-width:min(1200px,91vw)}
-@media (max-width:700px){main>.wrap,.glassdeck.wrap{max-width:none}}
+main>.wrap,.glassdeck.wrap,.mtick-wrap.wrap{max-width:min(1200px,91vw)}
+@media (max-width:700px){main>.wrap,.glassdeck.wrap,.mtick-wrap.wrap{max-width:none}}
 body>header,body>footer{overflow-x:visible}
 
 body>footer{padding-block:clamp(70px,10vw,120px) 48px}
@@ -425,6 +425,21 @@ body>header .cover{--vt:42px}
   body>header .cover .drop b{font-size:30px}
 }
 
+
+/* market ticker strip under the headline box */
+.mtick-wrap{margin-top:calc(-1 * clamp(26px,4vw,64px));margin-bottom:clamp(36px,5vw,64px)}
+.mtick{display:flex;align-items:stretch;text-decoration:none;color:inherit;background:#05070e;border-radius:12px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(233,196,106,.35),0 14px 30px rgba(0,0,0,.4)}
+.mtick-lbl{flex:none;display:flex;align-items:center;gap:8px;padding:0 14px;color:#18203f;background:linear-gradient(180deg,#fbe7a6,var(--foil));font-size:11.5px}
+.mtick-view{flex:1;min-width:0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+.mtick-track{display:flex;width:max-content;animation:mtick 60s linear infinite}
+.mtick:hover .mtick-track{animation-play-state:paused}
+@keyframes mtick{to{transform:translateX(-50%)}}
+.mtick-item{display:flex;align-items:center;gap:10px;padding:12px 20px;border-right:1px solid rgba(255,255,255,.08);white-space:nowrap;font-size:14.5px;color:#dfe3f1}
+.mtick-item .p{font-family:"Oxanium",var(--f-display);font-weight:700;color:#fff;font-variant-numeric:tabular-nums}
+.mtick-item .c{font-family:var(--f-mono);font-size:12px}
+.mtick-item .c.up{color:#5be39b}.mtick-item .c.down{color:#ff7a8a}.mtick-item .c.flat{color:#8c93ad}
+@media (prefers-reduced-motion:reduce){.mtick-track{animation:none}.mtick-view{overflow-x:auto}}
+@media (max-width:560px){.mtick-item{font-size:13px;padding:10px 14px}}
 /* ================= MARKET WATCH ================= */
 .mw-wrap{padding-block:clamp(56px,8vw,96px) 0}
 .mw{border-radius:18px;overflow:hidden}
@@ -705,6 +720,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
     <div class="gd-tabs" role="tablist" aria-label="Headlines"><button class="hl-tab" id="hlt0" type="button" role="tab" aria-controls="hl0" aria-selected="true"><i>01</i><span>Lorcana</span><b><em></em></b></button><button class="hl-tab" id="hlt1" type="button" role="tab" aria-controls="hl1" aria-selected="false"><i>02</i><span>Flesh and Blood</span><b><em></em></b></button><button class="hl-tab" id="hlt2" type="button" role="tab" aria-controls="hl2" aria-selected="false"><i>03</i><span>One Piece</span><b><em></em></b></button></div>
   </div>
 </section>
+<div class="wrap mtick-wrap"><a class="mtick" href="#mw-h" aria-label="Market prices, see Market Watch"><span class="mtick-lbl mono">Market</span><div class="mtick-view"><div class="mtick-track" id="mtick"></div></div></a></div>
 <main>
   <section class="wrap" id="set" aria-labelledby="set-h">
     <div class="sheet-head">
@@ -1154,6 +1170,11 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
         '<div class="mw-trend">'+spark(i.history)+chg(i.history)+'</div></li>').join('');
       requestAnimationFrame(()=>list.querySelectorAll('.mw-fill').forEach(f=>f.style.width=f.dataset.w+'%'));
       upd.textContent='TCGplayer prices as of '+fmtDate(data.updated);
+      const tk=document.getElementById('mtick');
+      if(tk){const all=data.items.filter(i=>i.price!=null);
+        const one=all.map(i=>{const h=i.history||[];let c='';if(h.length>1){const p=(h[h.length-1][1]-h[0][1])/h[0][1]*100;const k=Math.abs(p)<0.05?'flat':p>0?'up':'down';c='<span class="c '+k+'">'+(k==='up'?'▲':k==='down'?'▼':'■')+' '+Math.abs(p).toFixed(1)+'%</span>'}
+          return '<span class="mtick-item"><span class="mw-game">'+i.game+'</span><span>'+i.name+'</span><span class="p">'+usd(i.price)+'</span>'+c+'</span>'}).join('');
+        tk.innerHTML=one+one;}
     }
     tabs.forEach(t=>t.addEventListener('click',()=>{kind=t.dataset.kind;tabs.forEach(x=>x.setAttribute('aria-selected',String(x===t)));render()}));
     /* hover tooltip */
