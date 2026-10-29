@@ -715,13 +715,12 @@ body>header .cover .drop .mono{letter-spacing:-.07em;word-spacing:-.3em}
   html body>header .cover{grid-template-columns:20px minmax(0,1fr) auto;column-gap:10px;row-gap:0;padding-top:calc(var(--vt) + 8px);padding-bottom:10px;align-items:center}
   html body>header .cover .spine{grid-row:1}
   html body>header .cover .copy{grid-column:2;grid-row:1;gap:6px;padding:0 0 0 14px}
-  html body>header .cover .window{grid-column:3;grid-row:1;justify-self:end;width:118px;margin:0}
+  html body>header .cover .window{grid-column:3;grid-row:1;justify-self:end;width:138px;margin:0}
   html body>header .cover h1{font-size:44px;white-space:normal;line-height:.86}
   html body>header .cover h1 br{display:inline}
   body>header .cover .label{font-size:9px;letter-spacing:.08em;flex-wrap:nowrap;white-space:nowrap}
   body>header .cover .label span:nth-child(3){display:none}
-  body>header .coverflip .face .txt,body>header .coverflip .face .typeline,body>header .coverflip .face .foot{display:none}
-  body>header .coverflip .face .art{flex:1 1 auto}
+  body>header .coverflip .face .txt p.flav{display:none}
   html body>header .cover .drop{gap:0}
   html body>header .cover .drop b{font-size:30px}
   body>header .cover .drop .mono{font-size:12px}
@@ -763,6 +762,20 @@ body>header .cover .drop .mono{letter-spacing:-.07em;word-spacing:-.3em}
   body>footer .cover .copy>.mono{font-size:9.5px}
   body>footer .cover .copy{gap:6px}
 }
+/* top card: fans out (two card backs to the left, main card tilts right), then flips */
+@property --tz{syntax:'<angle>';inherits:false;initial-value:0deg}
+.window{transform:perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) rotate(var(--tz));transition:transform .5s cubic-bezier(.2,.7,.1,1),--tz .45s cubic-bezier(.3,.8,.2,1)}
+.window:hover{transition:transform .08s linear,--tz .45s cubic-bezier(.3,.8,.2,1)}
+.window.fanned{--tz:6deg}
+.window>.coverflip{z-index:1}
+.window>.fan{position:absolute;inset:0;z-index:0;border-radius:14px;background:url(img/card.webp) center/cover;
+  box-shadow:0 0 0 3px #3e5fbf inset,0 0 0 2px rgba(233,196,106,.55),0 12px 26px rgba(0,0,0,.5);
+  transform-origin:50% 100%;opacity:0;transform:rotate(0deg);transition:transform .45s cubic-bezier(.3,.8,.2,1),opacity .25s;pointer-events:none}
+.window.fanned>.fan{opacity:1}
+.window.fanned>.fan1{transform:translateX(-10%) rotate(-15deg)}
+.window.fanned>.fan2{transform:translateX(-20%) rotate(-27deg)}
+@media (prefers-reduced-motion: reduce){.window>.fan{transition:none}}
+@media (max-width:560px){.window.fanned>.fan1{transform:translateX(-5%) rotate(-9deg)}.window.fanned>.fan2{transform:translateX(-10%) rotate(-17deg)}.window.fanned{--tz:5deg}}
 /* top binder runs on downward: no bottom edge on the video or the stitching */
 body>header .cover{--vb:-14px !important;border-bottom-left-radius:0;border-bottom-right-radius:0}
 body>header .cover .stitch{border-bottom:0;bottom:-4px;border-bottom-left-radius:0;border-bottom-right-radius:0}
@@ -806,6 +819,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
       </div>
     </div>
     <div class="window holo" id="coverWin">
+      <div class="fan fan1" aria-hidden="true"></div><div class="fan fan2" aria-hidden="true"></div>
       <div class="coverflip" id="coverCard" role="button" tabindex="0" aria-pressed="false" data-face="back" aria-label="Tap to flip and see which host is up next">
         <div class="cside back-side">
           <div class="back"></div><video class="globe" src="img/globe.mp4" poster="img/globe-poster.jpg" autoplay muted loop playsinline aria-hidden="true"></video>
@@ -1408,13 +1422,16 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
   }
   /* two-step flip (turn to edge, swap sides, turn back): no 3D back-faces, so Safari draws it cleanly */
   let ccBusy=false;
-  cc.addEventListener('click',()=>{if(ccBusy)return;const to=cc.getAttribute('aria-pressed')!=='true';
-    const set=()=>{cc.setAttribute('aria-pressed',String(to));cc.dataset.face=to?'front':'back'};
-    if(reduce){set();return}ccBusy=true;
+  const FAN=420;
+  function doFlip(to,done){const set=()=>{cc.setAttribute('aria-pressed',String(to));cc.dataset.face=to?'front':'back'};
+    if(reduce){set();done&&done();return}
     cc.style.transition='transform .26s cubic-bezier(.5,0,.9,.6)';cc.style.transform='perspective(900px) rotateY(90deg)';
     setTimeout(()=>{set();cc.style.transition='none';cc.style.transform='perspective(900px) rotateY(-90deg)';void cc.offsetWidth;
       cc.style.transition='transform .4s cubic-bezier(.15,.6,.3,1)';cc.style.transform='perspective(900px) rotateY(0deg)';
-      setTimeout(()=>{ccBusy=false},410)},260)});
+      setTimeout(()=>{done&&done()},410)},260)}
+  cc.addEventListener('click',()=>{if(ccBusy)return;ccBusy=true;const to=cc.getAttribute('aria-pressed')!=='true';
+    if(to){cw.classList.add('fanned');setTimeout(()=>doFlip(true,()=>{ccBusy=false}),reduce?0:FAN)}
+    else{doFlip(false,()=>{cw.classList.remove('fanned');setTimeout(()=>{ccBusy=false},reduce?0:FAN)})}});
   cc.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();cc.click()}});
   clock();setInterval(clock,1000);
 })();

@@ -199,14 +199,16 @@ js = r'''<script>
       cw.style.setProperty('--rx',((.5-py)*16).toFixed(2)+'deg');cw.style.setProperty('--ry',((px-.5)*20).toFixed(2)+'deg');cw.style.setProperty('--o','1')});
     cw.addEventListener('pointerleave',()=>{['--mx','--my'].forEach(k=>cw.style.setProperty(k,'50%'));cw.style.setProperty('--rx','0deg');cw.style.setProperty('--ry','0deg');cw.style.setProperty('--o','0')})}
   /* two-step flip (turn to edge, swap sides, turn back): no 3D back-faces, so Safari draws it cleanly */
-  let ccBusy=false;
-  cc.addEventListener('click',()=>{if(ccBusy)return;const to=cc.getAttribute('aria-pressed')!=='true';
-    const set=()=>{cc.setAttribute('aria-pressed',String(to));cc.dataset.face=to?'front':'back'};
-    if(reduce){set();return}ccBusy=true;
+  let ccBusy=false;const FAN=420;
+  function doFlip(to,done){const set=()=>{cc.setAttribute('aria-pressed',String(to));cc.dataset.face=to?'front':'back'};
+    if(reduce){set();done&&done();return}
     cc.style.transition='transform .26s cubic-bezier(.5,0,.9,.6)';cc.style.transform='perspective(900px) rotateY(90deg)';
     setTimeout(()=>{set();cc.style.transition='none';cc.style.transform='perspective(900px) rotateY(-90deg)';void cc.offsetWidth;
       cc.style.transition='transform .4s cubic-bezier(.15,.6,.3,1)';cc.style.transform='perspective(900px) rotateY(0deg)';
-      setTimeout(()=>{ccBusy=false},410)},260)});
+      setTimeout(()=>{done&&done()},410)},260)}
+  cc.addEventListener('click',()=>{if(ccBusy)return;ccBusy=true;const to=cc.getAttribute('aria-pressed')!=='true';
+    if(to){cw.classList.add('fanned');setTimeout(()=>doFlip(true,()=>{ccBusy=false}),reduce?0:FAN)}
+    else{doFlip(false,()=>{cw.classList.remove('fanned');setTimeout(()=>{ccBusy=false},reduce?0:FAN)})}});
   cc.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();cc.click()}});
   clock();setInterval(clock,1000);
 })();
