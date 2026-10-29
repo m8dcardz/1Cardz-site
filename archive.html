@@ -168,7 +168,7 @@ main,body>footer,body>header{overflow-x:clip}
 .shine,.glare{position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2}
 .holo .shine{mix-blend-mode:color-dodge;opacity:calc(.06 + var(--o) * .5);
   background:
-    repeating-linear-gradient(115deg,var(--holo-a) 0%,var(--holo-b) 6%,var(--holo-c) 12%,var(--holo-a) 18%) calc(var(--mx) * 1.2) calc(var(--my) * .8)/300% 300%,
+    repeating-linear-gradient(115deg,var(--holo-a) 0%,var(--holo-b) 6%,var(--holo-c) 12%,var(--holo-a) 18%) calc(var(--mx) * .9 + 5%) calc(var(--my) * .8 + 10%)/300% 300%,
     repeating-linear-gradient(35deg,rgba(0,0,0,.35) 0 2px,transparent 2px 6px);
   filter:saturate(1.2) contrast(1.1)}
 .holo .art .shine{z-index:1}
@@ -774,9 +774,9 @@ body>header .cover .drop .mono{letter-spacing:-.07em;word-spacing:-.3em}
 .window>.fan.fan1{z-index:1}
 @media (prefers-reduced-motion: reduce){.window>.fan{transition:none}}
 @media (max-width:560px){.window.fanned>.fan1{transform:translateX(-5%) rotate(-6deg)}.window.fanned>.fan2{transform:translateX(-10%) rotate(-17deg)}.window.fanned{--tz:5deg}}
-/* top card face up: much lighter holo so the host is easy to see */
-.window:has(.coverflip[aria-pressed="true"])>.shine{opacity:calc(.02 + var(--o) * .14) !important}
-.window:has(.coverflip[aria-pressed="true"])>.glare{opacity:.5}
+/* top card face up: holo at half strength so the host is easy to see */
+.window:has(.coverflip[aria-pressed="true"])>.shine{opacity:calc(.03 + var(--o) * .25) !important}
+.window:has(.coverflip[aria-pressed="true"])>.glare{opacity:.6}
 /* top binder runs on downward: no bottom edge on the video or the stitching */
 body>header .cover{--vb:-14px !important;border-bottom-left-radius:0;border-bottom-right-radius:0}
 body>header .cover .stitch{border-bottom:0;bottom:-4px;border-bottom-left-radius:0;border-bottom-right-radius:0}
