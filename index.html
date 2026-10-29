@@ -673,14 +673,14 @@ a.soc.sm:hover{transform:translateY(-2px) scale(1.06)}
 /* tighter top binder (about 15% shorter) */
 body>header .cover{padding-top:calc(var(--vt) + 14px);padding-bottom:clamp(14px,1.8vw,26px)}
 body>header .cover .copy{gap:12px}
-@media (min-width:901px){body>header .cover .window{width:min(100%,258px)}}
+@media (min-width:901px){body>header .cover .window{width:min(100%,219px)}}
 @media (min-width:561px) and (max-width:900px){
-  body>header .cover .window{width:min(62%,196px);margin-bottom:16px}
+  body>header .cover .window{width:min(53%,167px);margin-bottom:16px}
   body>header .cover{row-gap:14px}
   body>header .cover .copy{padding-top:0}
 }
 @media (max-width:560px){
-  html body>header .cover .window{width:min(80%,232px);margin-bottom:4px}
+  html body>header .cover .window{width:min(68%,197px);margin-bottom:4px}
   body>header .cover .label span:nth-child(2){display:none}
   body>header .cover .label{flex-wrap:nowrap}
   body>header .cover .copy{gap:8px;padding-top:0}
@@ -715,7 +715,7 @@ body>header .cover .drop .mono{letter-spacing:-.07em;word-spacing:-.3em}
   html body>header .cover{grid-template-columns:20px minmax(0,1fr) auto;column-gap:10px;row-gap:0;padding-top:calc(var(--vt) + 8px);padding-bottom:10px;align-items:center}
   html body>header .cover .spine{grid-row:1}
   html body>header .cover .copy{grid-column:2;grid-row:1;gap:6px;padding:0 0 0 14px}
-  html body>header .cover .window{grid-column:3;grid-row:1;justify-self:end;width:138px;margin:0}
+  html body>header .cover .window{grid-column:3;grid-row:1;justify-self:end;width:117px;margin:0}
   html body>header .cover h1{font-size:44px;white-space:normal;line-height:.86}
   html body>header .cover h1 br{display:inline}
   body>header .cover .label{font-size:9px;letter-spacing:.08em;flex-wrap:nowrap;white-space:nowrap}
@@ -901,6 +901,14 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
 @keyframes playGlow{50%{text-shadow:0 0 3px #3ee07a,0 0 7px rgba(62,224,122,.6)}}
 .su-row{align-items:stretch}
 .su-btn{padding-top:0 !important;padding-bottom:0 !important;display:inline-flex;align-items:center;justify-content:center;line-height:1}
+/* newsletter: form along the bottom, metallic grey button; card back holo -15% */
+.signup .su-body{grid-template-columns:1fr !important;gap:10px !important;align-items:stretch}
+.signup .su-form{width:100%}
+.su-btn{background:linear-gradient(180deg,#f4f6f9 0%,#d3d8df 38%,#9ea5b1 52%,#c4c9d2 70%,#e6e9ee 100%) !important;color:#1a1f2e !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9),inset 0 -1px 0 rgba(0,0,0,.18),0 2px 0 #6b717c,0 4px 12px rgba(0,0,0,.3) !important;border:1px solid #8a919c !important;text-shadow:0 1px 0 rgba(255,255,255,.6)}
+.su-btn:hover{filter:brightness(1.06)}
+.window.holo:not(:has(.coverflip[aria-pressed="true"]))>.shine{opacity:calc(.051 + var(--o) * .425)}
+.window .back::after{background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.2975) 50%,transparent 60%)}
 </style>
 </head>
 <body>
