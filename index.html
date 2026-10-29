@@ -937,6 +937,22 @@ button.holo-btn{border:0;cursor:default}
 .holo-btn:nth-child(4){animation-duration:5.2s;animation-delay:-0.7s}
 .holo-btn:nth-child(5){animation-duration:4.4s;animation-delay:-3.1s}
 .holo-btn:nth-child(6){animation-duration:3.9s;animation-delay:-1.9s}}
+/* Hit The Holo: daily collection counter + caught card flying into the binder */
+.storm-found{display:inline-flex;align-items:center;gap:8px;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#ffd23f;text-shadow:0 0 8px rgba(255,210,63,.6);white-space:nowrap}
+.storm-found b{font-family:"Press Start 2P",ui-monospace,monospace;font-size:10px;font-weight:400;color:#fff;text-shadow:0 0 8px rgba(255,210,63,.8)}
+.sf-pips{display:inline-flex;gap:3px}
+.sf-pips span{width:7px;height:10px;border-radius:2px;background:rgba(255,255,255,.12);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+.sf-pips span.on{background:linear-gradient(135deg,#ff8ad8,#ffd23f 40%,#7cf3ff 75%,#c58cff);box-shadow:0 0 6px rgba(255,210,63,.7)}
+.storm-found.done{animation:sfDone 1.2s ease-out 2}
+@keyframes sfDone{40%{transform:scale(1.12);filter:brightness(1.5)}}
+.storm-flyer{position:fixed;left:0;top:0;z-index:9999;pointer-events:none;border-radius:7%;background:#16224d url(img/card.webp) center/cover;
+  box-shadow:0 0 0 2px #7cf3ff,0 0 26px 6px rgba(124,243,255,.65),0 18px 40px rgba(0,0,0,.5);transform-origin:center;will-change:transform,width,height}
+.storm-flyer::after{content:"";position:absolute;inset:0;border-radius:inherit;mix-blend-mode:overlay;opacity:.85;
+  background:linear-gradient(115deg,#ff5ac8,#ffe65a 25%,#5affc8 50%,#5aaaff 75%,#c86eff);background-size:200% 200%;animation:flyHolo 1s linear infinite}
+@keyframes flyHolo{to{background-position:200% 0}}
+.pocket.storm-land{animation:stormLand .7s ease-out}
+@keyframes stormLand{0%{filter:brightness(2.2) drop-shadow(0 0 30px #ffd23f)}100%{filter:none}}
+@media (max-width:700px){.storm-hud{flex-wrap:wrap;row-gap:4px}.storm-found{font-size:9px}.sf-pips span{width:5px;height:8px}}
 </style>
 </head>
 <body>
@@ -991,7 +1007,8 @@ button.holo-btn{border:0;cursor:default}
     <canvas id="stormCanvas" aria-hidden="true"></canvas>
     <div class="storm-hud">
       <span class="mono storm-label"><i></i><span id="storm-h">Hit The Holo</span></span>
-      <span class="mono storm-hint" id="stormHint">Catch a shiny holo card to flip one in the binder</span>
+      <span class="mono storm-hint" id="stormHint">Catch shiny holo cards to collect today's binder set</span>
+      <span class="mono storm-found" id="stormFound" aria-live="polite"><b id="stormFoundN">0/0</b> found today<i class="sf-pips" id="stormPips" aria-hidden="true"></i></span>
       
     </div>
     <button class="storm-a11y" id="stormBtn" type="button">Catch a holo card: flip a random face-down card in Fresh Hits</button>
@@ -1576,6 +1593,17 @@ button.holo-btn{border:0;cursor:default}
     const pockets=()=>[...document.querySelectorAll('.pockets .flip')];
     const up=()=>pockets().filter(c=>c.getAttribute('aria-pressed')==='true').length;
     const upd=()=>{if(score)score.textContent=up()+' / '+pockets().length};
+    /* daily collection (Hong Kong date), remembered in this browser */
+    const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Hong_Kong'}).format(new Date()),KEY='1cz-holo-found';
+    let col={day:today,found:[]};try{const o=JSON.parse(localStorage.getItem(KEY)||'null');if(o&&o.day===today&&Array.isArray(o.found))col=o}catch(e){}
+    const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(col))}catch(e){}};
+    const setIdx=pockets().map((c,i)=>c.getAttribute('aria-pressed')!=='true'?i:-1).filter(i=>i>=0); /* the cards that start face down are today's set */
+    col.found=col.found.filter(i=>setIdx.includes(i));
+    col.found.forEach(i=>{const f=pockets()[i];if(f)f.setAttribute('aria-pressed','true')});
+    const fN=document.getElementById('stormFoundN'),pips=document.getElementById('stormPips'),fBox=document.getElementById('stormFound');
+    if(pips)pips.replaceChildren(...setIdx.map(()=>document.createElement('span')));
+    const updFound=()=>{if(fN)fN.textContent=col.found.length+'/'+setIdx.length;if(pips)[...pips.children].forEach((p,i)=>p.classList.toggle('on',i<col.found.length))};
+    updFound();
     let W=0,H=0,dpr=1,cards=[],bursts=[],stars=[],run=false,last=0;
     function size(){const r=box.getBoundingClientRect();dpr=Math.min(2,devicePixelRatio||1);W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
     function spawn(c){const ch=H*(.42+Math.random()*.04),cw=ch*63/88;c=c||{};
@@ -1607,24 +1635,35 @@ button.holo-btn{border:0;cursor:default}
       ctx.globalAlpha=1;bursts=bursts.filter(b=>b.t<.8);requestAnimationFrame(step)}
     function hitAt(px,py){for(let i=cards.length-1;i>=0;i--){const c=cards[i];if(c.flip>0)continue;const dx=px-c.x,dy=py-c.y,co=Math.cos(-c.r),si=Math.sin(-c.r),lx=dx*co-dy*si,ly=dx*si+dy*co;
       if(Math.abs(lx)<=c.w/2+6&&Math.abs(ly)<=c.h/2+6)return c}return null}
-    function reveal(){const down=pockets().filter(c=>c.getAttribute('aria-pressed')!=='true'&&!c._pend);
-      if(!down.length){hint.textContent='Binder complete! Catch one more to shuffle them all face down';
-        pockets().forEach((c,i)=>setTimeout(()=>c.setAttribute('aria-pressed','false'),i*60));setTimeout(upd,1200);return}
-      const c=down[Math.floor(Math.random()*down.length)],pk=c.closest('.pocket');c._pend=true;
-      const name=(c.querySelector('h3')||{}).textContent||'a card';hint.textContent='Holo caught! Flipping a card in the binder...';
+    function flyer(from){if(!from||reduce)return null;const d=document.createElement('div');d.className='storm-flyer';d.setAttribute('aria-hidden','true');document.body.append(d);
+      d.style.width=from.w+'px';d.style.height=from.h+'px';d.style.transform='translate('+(from.x-from.w/2)+'px,'+(from.y-from.h/2)+'px) rotate('+from.r+'rad)';return d}
+    function reveal(from){const all=pockets(),setLeft=setIdx.filter(i=>!col.found.includes(i)&&!all[i]._pend);
+      let down=setLeft.map(i=>all[i]).filter(c=>c.getAttribute('aria-pressed')!=='true');
+      if(!down.length)down=setLeft.map(i=>all[i]);
+      if(!down.length){hint.textContent='Set complete! A new set starts tomorrow';fBox&&(fBox.classList.remove('done'),void fBox.offsetWidth,fBox.classList.add('done'));return}
+      const c=down[Math.floor(Math.random()*down.length)],pk=c.closest('.pocket'),idx=all.indexOf(c);c._pend=true;
+      if(c.getAttribute('aria-pressed')==='true')c.setAttribute('aria-pressed','false');
+      const name=(c.querySelector('h3')||{}).textContent||'a card';hint.textContent='Holo caught! Sending it to the binder...';
+      const fl=flyer(from),t0=performance.now(),dur=1150,ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
       pk.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'});
-      /* wait until the scroll has settled and the card is on screen, then flip it */
-      let lastY=-1,still=0,t0=performance.now();
-      (function wait(){const y=scrollY;still=(Math.abs(y-lastY)<1)?still+1:0;lastY=y;
-        if((still>=6&&performance.now()-t0>250)||performance.now()-t0>2500){setTimeout(()=>{
-          c._pend=false;c.setAttribute('aria-pressed','true');pk.classList.remove('storm-hit');void pk.offsetWidth;pk.classList.add('storm-hit');
-          hint.textContent='You flipped '+name+'! '+(down.length-1?(down.length-1)+' still face down':'Binder complete!');
-          const all=document.getElementById('flipAll');if(all){const u=pockets().every(f=>f.getAttribute('aria-pressed')==='true');all.textContent=u?'Turn all face down':'Flip all cards';all.setAttribute('aria-pressed',String(u))}
-          upd()},200)}else requestAnimationFrame(wait)})();
+      let lastY=-1,still=0;
+      (function wait(){const now=performance.now(),y=scrollY;still=(Math.abs(y-lastY)<1)?still+1:0;lastY=y;const p=Math.min(1,(now-t0)/dur);
+        if(fl){const r=c.getBoundingClientRect(),e=ease(p),tw=r.width,th=r.height,tx=r.left+tw/2,ty=r.top+th/2,
+          w=from.w+(tw-from.w)*e,h=from.h+(th-from.h)*e,x=from.x+(tx-from.x)*e,y2=from.y+(ty-from.y)*e,rot=from.r*(1-e)+e*Math.PI*2,lift=Math.sin(e*Math.PI)*-60;
+          fl.style.width=w+'px';fl.style.height=h+'px';fl.style.transform='translate('+(x-w/2)+'px,'+(y2-h/2+lift)+'px) rotate('+rot+'rad)'}
+        if((p>=1&&still>=6)||now-t0>3200){if(fl)fl.remove();
+          c._pend=false;c.setAttribute('aria-pressed','true');pk.classList.remove('storm-hit','storm-land');void pk.offsetWidth;pk.classList.add('storm-land','storm-hit');
+          if(!col.found.includes(idx)){col.found.push(idx);save();updFound()}
+          const left=setIdx.length-col.found.length;
+          hint.textContent='You found '+name+'! '+(left?left+' left in today\'s set':'Set complete! A new set starts tomorrow');
+          if(!left&&fBox){fBox.classList.remove('done');void fBox.offsetWidth;fBox.classList.add('done')}
+          const fa=document.getElementById('flipAll');if(fa){const u=pockets().every(f=>f.getAttribute('aria-pressed')==='true');fa.textContent=u?'Turn all face down':'Flip all cards';fa.setAttribute('aria-pressed',String(u))}
+          upd()}else requestAnimationFrame(wait)})();
     }
     function miss(c){c.vx*=-1.4;c.vy*=-1.4;c.vr=(Math.random()<.5?-1:1)*9;hint.textContent='Not that one! Catch a shiny holo card';}
     function catchCard(c){c.flip=.001;c.vr*=.3;const cols=['#ffd23f','#7cf3ff','#ff8ad8','#5be39b','#fff'];
-      bursts.push({x:c.x,y:c.y,t:0,p:Array.from({length:22},()=>{const a=Math.random()*6.28,v=80+Math.random()*220;return{vx:Math.cos(a)*v,vy:Math.sin(a)*v,s:1.5+Math.random()*2.5,c:cols[Math.random()*5|0]}})});reveal()}
+      bursts.push({x:c.x,y:c.y,t:0,p:Array.from({length:22},()=>{const a=Math.random()*6.28,v=80+Math.random()*220;return{vx:Math.cos(a)*v,vy:Math.sin(a)*v,s:1.5+Math.random()*2.5,c:cols[Math.random()*5|0]}})});
+      const br=box.getBoundingClientRect(),from={x:br.left+c.x,y:br.top+c.y,w:c.w,h:c.h,r:c.r};if(!reduce)c.flip=.97;reveal(from)}
     box.addEventListener('pointerdown',e=>{const r=box.getBoundingClientRect(),c=hitAt(e.clientX-r.left,e.clientY-r.top);if(!c)return;if(c.holo)catchCard(c);else miss(c)});
     box.addEventListener('pointermove',e=>{const r=box.getBoundingClientRect();box.style.cursor=hitAt(e.clientX-r.left,e.clientY-r.top)?'pointer':'crosshair'});
     btn.addEventListener('click',()=>{const c=cards.find(x=>x.flip===0&&x.holo);if(c)catchCard(c);else reveal()});
