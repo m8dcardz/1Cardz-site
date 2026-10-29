@@ -806,7 +806,8 @@ body>footer .cover .copy>.mono{color:#fff !important;text-shadow:0 1px 3px rgba(
 /* no caption line under the card pages */
 .sheet-foot{display:none !important}
 /* Hit The Holo game box (5:1, under the top binder) */
-.storm-wrap.wrap{max-width:1400px;padding-left:max(4vw, env(safe-area-inset-left, 0px));padding-right:max(4vw, env(safe-area-inset-right, 0px));margin-top:calc(-1 * clamp(12px,3.6vw,52px))}
+.storm-wrap.wrap{max-width:1400px;padding-left:max(4vw, env(safe-area-inset-left, 0px));padding-right:max(4vw, env(safe-area-inset-right, 0px));margin-top:calc(-1 * clamp(29px,calc(5.86vw - 12px),67px))}
+@media (max-width:560px){.storm-wrap.wrap{margin-top:-31px}}
 .storm{width:100%}
 .storm-wrap+.glassdeck{margin-top:clamp(16px,2.4vw,28px) !important}
 .storm{aspect-ratio:5/1;min-height:120px;padding:0 !important;cursor:crosshair;user-select:none;-webkit-user-select:none;touch-action:manipulation}
@@ -856,8 +857,8 @@ section.signup-deck.wrap{max-width:1400px;margin:clamp(40px,6vw,80px) auto 0 !im
 section.signup-deck+footer{padding-top:0 !important}
 .signup.gd{border-radius:18px 18px 0 0 !important;border-bottom:0 !important}
 .signup .su-top{display:none}
-.signup .su-body{grid-template-columns:auto minmax(0,1fr) minmax(0,1.15fr);gap:clamp(12px,2vw,26px);padding:12px clamp(14px,2.4vw,24px);align-items:center}
-.signup .su-body::before{content:"Newsletter";font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#ff8ad8;display:flex;align-items:center;gap:6px}
+.signup .su-body{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(12px,2vw,26px);padding:12px clamp(14px,2.4vw,24px);align-items:center}
+.signup h3.su-label{font-family:var(--f-mono) !important;font-size:11px !important;font-weight:500;letter-spacing:.14em;text-transform:uppercase;margin:0 0 4px;line-height:1.2}
 .signup h3{font-size:clamp(17px,1.6vw,21px) !important;margin:0 0 2px}
 .signup .su-copy p{font-size:13px;line-height:1.35;color:#aab1c9}
 .su-lbl,.su-fine{display:none}
@@ -865,7 +866,7 @@ section.signup-deck+footer{padding-top:0 !important}
 .su-btn{padding:10px 16px !important}
 .su-msg{margin:4px 0 0;min-height:0;font-size:13px}
 .su-msg:empty{display:none}
-@media (max-width:900px){.signup .su-body{grid-template-columns:1fr}.signup .su-body::before{display:none}.signup .su-copy p{display:none}}
+@media (max-width:900px){.signup .su-body{grid-template-columns:1fr;gap:8px}.signup .su-copy p{display:none}}
 @media (max-width:700px){.su-row{flex-direction:row}.su-btn{width:auto}}
 /* top binder runs on downward: no bottom edge on the video or the stitching */
 body>header .cover{--vb:-14px !important;border-bottom-left-radius:0;border-bottom-right-radius:0}
