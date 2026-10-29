@@ -764,15 +764,16 @@ body>header .cover .drop .mono{letter-spacing:-.07em;word-spacing:-.3em}
 .window{transform:perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) rotate(var(--tz));transition:transform .5s cubic-bezier(.2,.7,.1,1),--tz .45s cubic-bezier(.3,.8,.2,1)}
 .window:hover{transition:transform .08s linear,--tz .45s cubic-bezier(.3,.8,.2,1)}
 .window.fanned{--tz:6deg}
-.window>.coverflip{z-index:1}
+.window>.coverflip{z-index:2}
 .window>.fan{position:absolute;inset:0;z-index:0;border-radius:14px;background:url(img/card.webp) center/cover;
   box-shadow:0 0 0 3px #3e5fbf inset,0 0 0 2px rgba(233,196,106,.55),0 12px 26px rgba(0,0,0,.5);
   transform-origin:50% 100%;opacity:0;transform:rotate(0deg);transition:transform .45s cubic-bezier(.3,.8,.2,1),opacity .25s;pointer-events:none}
 .window.fanned>.fan{opacity:1}
-.window.fanned>.fan1{transform:translateX(-10%) rotate(-15deg)}
+.window.fanned>.fan1{transform:translateX(-10%) rotate(-10.5deg)}
 .window.fanned>.fan2{transform:translateX(-20%) rotate(-27deg)}
+.window>.fan.fan1{z-index:1}
 @media (prefers-reduced-motion: reduce){.window>.fan{transition:none}}
-@media (max-width:560px){.window.fanned>.fan1{transform:translateX(-5%) rotate(-9deg)}.window.fanned>.fan2{transform:translateX(-10%) rotate(-17deg)}.window.fanned{--tz:5deg}}
+@media (max-width:560px){.window.fanned>.fan1{transform:translateX(-5%) rotate(-6deg)}.window.fanned>.fan2{transform:translateX(-10%) rotate(-17deg)}.window.fanned{--tz:5deg}}
 /* top binder runs on downward: no bottom edge on the video or the stitching */
 body>header .cover{--vb:-14px !important;border-bottom-left-radius:0;border-bottom-right-radius:0}
 body>header .cover .stitch{border-bottom:0;bottom:-4px;border-bottom-left-radius:0;border-bottom-right-radius:0}
@@ -1144,9 +1145,13 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
     setTimeout(()=>{set();cc.style.transition='none';cc.style.transform='perspective(900px) rotateY(-90deg)';void cc.offsetWidth;
       cc.style.transition='transform .4s cubic-bezier(.15,.6,.3,1)';cc.style.transform='perspective(900px) rotateY(0deg)';
       setTimeout(()=>{done&&done()},410)},260)}
+  /* fan on hover (mouse) or on tap, flip after the fan */
+  let hov=false;const canHover=matchMedia('(hover: hover)').matches;
+  if(canHover){cw.addEventListener('pointerenter',()=>{hov=true;cw.classList.add('fanned')});
+    cw.addEventListener('pointerleave',()=>{hov=false;if(!ccBusy&&cc.getAttribute('aria-pressed')!=='true')cw.classList.remove('fanned')})}
   cc.addEventListener('click',()=>{if(ccBusy)return;ccBusy=true;const to=cc.getAttribute('aria-pressed')!=='true';
-    if(to){cw.classList.add('fanned');setTimeout(()=>doFlip(true,()=>{ccBusy=false}),reduce?0:FAN)}
-    else{doFlip(false,()=>{cw.classList.remove('fanned');setTimeout(()=>{ccBusy=false},reduce?0:FAN)})}});
+    if(to){const wait=(cw.classList.contains('fanned')||reduce)?0:FAN;cw.classList.add('fanned');setTimeout(()=>doFlip(true,()=>{ccBusy=false}),wait)}
+    else{doFlip(false,()=>{if(!hov)cw.classList.remove('fanned');setTimeout(()=>{ccBusy=false;if(!hov)cw.classList.remove('fanned')},reduce?0:FAN)})}});
   cc.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();cc.click()}});
   clock();setInterval(clock,1000);
 })();

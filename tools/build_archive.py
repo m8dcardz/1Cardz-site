@@ -206,9 +206,13 @@ js = r'''<script>
     setTimeout(()=>{set();cc.style.transition='none';cc.style.transform='perspective(900px) rotateY(-90deg)';void cc.offsetWidth;
       cc.style.transition='transform .4s cubic-bezier(.15,.6,.3,1)';cc.style.transform='perspective(900px) rotateY(0deg)';
       setTimeout(()=>{done&&done()},410)},260)}
+  /* fan on hover (mouse) or on tap, flip after the fan */
+  let hov=false;const canHover=matchMedia('(hover: hover)').matches;
+  if(canHover){cw.addEventListener('pointerenter',()=>{hov=true;cw.classList.add('fanned')});
+    cw.addEventListener('pointerleave',()=>{hov=false;if(!ccBusy&&cc.getAttribute('aria-pressed')!=='true')cw.classList.remove('fanned')})}
   cc.addEventListener('click',()=>{if(ccBusy)return;ccBusy=true;const to=cc.getAttribute('aria-pressed')!=='true';
-    if(to){cw.classList.add('fanned');setTimeout(()=>doFlip(true,()=>{ccBusy=false}),reduce?0:FAN)}
-    else{doFlip(false,()=>{cw.classList.remove('fanned');setTimeout(()=>{ccBusy=false},reduce?0:FAN)})}});
+    if(to){const wait=(cw.classList.contains('fanned')||reduce)?0:FAN;cw.classList.add('fanned');setTimeout(()=>doFlip(true,()=>{ccBusy=false}),wait)}
+    else{doFlip(false,()=>{if(!hov)cw.classList.remove('fanned');setTimeout(()=>{ccBusy=false;if(!hov)cw.classList.remove('fanned')},reduce?0:FAN)})}});
   cc.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();cc.click()}});
   clock();setInterval(clock,1000);
 })();
