@@ -654,6 +654,15 @@ body>footer .cover{--vb:42px}
 .socials-inline{display:inline-flex;gap:6px;vertical-align:middle;margin-inline:2px}
 .soc.sm{width:24px;height:24px;box-shadow:0 1px 0 var(--foil-2),0 3px 8px rgba(0,0,0,.4)}
 .soc.sm svg{width:14px;height:14px}
+/* bottom binder: shorter, smaller headline, social icons in their own brand colors */
+body>footer .cover{padding-top:clamp(14px,2.6vw,34px);padding-bottom:calc(var(--vb) + 6px)}
+body>footer .cover .copy{gap:12px;padding-block:clamp(8px,1.6vw,20px)}
+.cover-back h2{font-size:clamp(32px,4.8vw,64px)}
+.soc.sm{color:#fff;box-shadow:0 2px 6px rgba(0,0,0,.45)}
+.soc.sm.ig{background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fdf497 5%,#fd5949 45%,#d6249f 60%,#285aeb 90%)}
+.soc.sm.yt{background:#ff0000}
+.soc.sm.tt{background:#000}
+.soc.sm.tt svg{filter:drop-shadow(-1px -1px 0 #25f4ee) drop-shadow(1px 1px 0 #fe2c55)}
 /* top binder runs on downward: no bottom edge on the video or the stitching */
 body>header .cover{--vb:-14px !important;border-bottom-left-radius:0;border-bottom-right-radius:0}
 body>header .cover .stitch{border-bottom:0;bottom:-4px;border-bottom-left-radius:0;border-bottom-right-radius:0}
@@ -1084,9 +1093,8 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
     <div class="stitch" aria-hidden="true"></div>
     <div class="spine" aria-hidden="true"></div>
     <div class="copy">
-      <span class="mono label">Back cover</span>
       <h2 class="foil">Stay curious.<br>Shuffle up.</h2>
-      <p>New stories at 8:00 AM and 8:00 PM on <span class="socials-inline"><span class="soc sm" title="Instagram Reels" aria-label="Instagram Reels"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor"/></svg></span><span class="soc sm" title="YouTube Shorts" aria-label="YouTube Shorts"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 9l5.2 3L10 15z" fill="currentColor"/></svg></span><span class="soc sm" title="TikTok" aria-label="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3v11.5a3.5 3.5 0 1 1-3.5-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M13 3c.6 2.8 2.5 4.6 5.5 4.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></span>. Game names belong to their publishers.</p>
+      <p>New stories at 8:00 AM and 8:00 PM on <span class="socials-inline"><span class="soc sm ig" title="Instagram Reels" aria-label="Instagram Reels"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor"/></svg></span><span class="soc sm yt" title="YouTube Shorts" aria-label="YouTube Shorts"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 8.2l6.3 3.8-6.3 3.8z" fill="currentColor"/></svg></span><span class="soc sm tt" title="TikTok" aria-label="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3v11.5a3.5 3.5 0 1 1-3.5-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M13 3c.6 2.8 2.5 4.6 5.5 4.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span></span>. Game names belong to their publishers.</p>
       <div class="barcode" id="barcode" aria-hidden="true"></div>
       <a class="domain" href="https://1cardz.news">1Cardz.news</a>
       <span class="mono" style="color:#c9cfe4">1CZ-2026 · Vol. 1</span>
