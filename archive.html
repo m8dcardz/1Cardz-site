@@ -763,14 +763,14 @@ body>header .cover .drop .mono{letter-spacing:-.07em;word-spacing:-.3em}
 @property --tz{syntax:'<angle>';inherits:false;initial-value:0deg}
 .window{transform:perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) rotate(var(--tz));transition:transform .5s cubic-bezier(.2,.7,.1,1),--tz .45s cubic-bezier(.3,.8,.2,1)}
 .window:hover{transition:transform .08s linear,--tz .45s cubic-bezier(.3,.8,.2,1)}
-.window.fanned{--tz:6deg}
+.window.fanned{--tz:4.8deg}
 .window>.coverflip{z-index:2}
 .window>.fan{position:absolute;inset:0;z-index:0;border-radius:14px;background:url(img/card.webp) center/cover;
   box-shadow:0 0 0 3px #3e5fbf inset,0 0 0 2px rgba(233,196,106,.55),0 12px 26px rgba(0,0,0,.5);
   transform-origin:50% 100%;opacity:0;transform:rotate(0deg);transition:transform .45s cubic-bezier(.3,.8,.2,1),opacity .25s;pointer-events:none}
 .window.fanned>.fan{opacity:1}
-.window.fanned>.fan1{transform:translateX(-10%) rotate(-10.5deg)}
-.window.fanned>.fan2{transform:translateX(-20%) rotate(-27deg)}
+.window.fanned>.fan1{transform:translateX(-8%) rotate(-8.4deg)}
+.window.fanned>.fan2{transform:translateX(-16%) rotate(-21.6deg)}
 .window>.fan.fan1{z-index:1}
 @media (prefers-reduced-motion: reduce){.window>.fan{transition:none}}
 @media (max-width:560px){.window.fanned>.fan1{transform:translateX(-5%) rotate(-6deg)}.window.fanned>.fan2{transform:translateX(-10%) rotate(-17deg)}.window.fanned{--tz:5deg}}
