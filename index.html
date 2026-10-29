@@ -1227,7 +1227,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
       tabs.forEach((t,k)=>{t.setAttribute('aria-selected',String(k===cur));t.style.setProperty('--p','0%')});t0=performance.now()}
     tabs.forEach((t,k)=>t.addEventListener('click',()=>show(k)));
     pb.addEventListener('click',()=>{paused=!paused;pb.setAttribute('aria-pressed',String(paused));pb.textContent=paused?'Play':'Pause';document.querySelectorAll('.lcdbox').forEach(x=>x.classList.toggle('paused',paused));t0=performance.now()-(parseFloat(tabs[cur].style.getPropertyValue('--p'))||0)/100*DUR});
-    const gd=document.querySelector('.gd');gd.addEventListener('pointerenter',()=>hover=true);gd.addEventListener('pointerleave',()=>{hover=false});
+    /* the rotation timer keeps running on hover */
     let held=0;
     function loop(now){if(paused||hover){t0=now-held}else{held=now-t0;if(held>=DUR){show(cur+1);held=0}}
       tabs[cur].style.setProperty('--p',(Math.min(1,held/DUR)*100).toFixed(1)+'%');requestAnimationFrame(loop)}
