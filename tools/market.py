@@ -88,11 +88,11 @@ def main(path="data/market.json"):
         hist = [h for h in old.get(iid, {}).get("history", []) if h[0] != day] + [[day, round(it["price"], 2)]]
         pool.append({"id": iid, "kind": it["kind"], "game": it["game"], "name": it["name"], "set": it["set"],
                      "price": round(it["price"], 2), "low": it["low"],
-                     "url": f"https://www.tcgplayer.com/product/{it['pid']}", "history": sorted(hist)[-30:]})
+                     "history": sorted(hist)[-30:]})
     di = datetime.date.fromisoformat(day).toordinal()
     feat = rotate([p for p in pool if p["kind"] == "sealed"], FEATURE, di) + rotate([p for p in pool if p["kind"] == "single"], FEATURE, di)
     os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
-    json.dump({"updated": stamp, "source": "TCGplayer market price via TCGCSV",
+    json.dump({"updated": stamp, "source": "Market price, recent sold average (USD)",
                "items": feat, "pool": pool}, open(path, "w"), ensure_ascii=False, indent=1)
     print("wrote", path, "featured", len(feat), "pool", len(pool), stamp)
 

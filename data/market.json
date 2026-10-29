@@ -1,6 +1,6 @@
 {
  "updated": "2026-10-28T20:06:05+0000",
- "source": "TCGplayer market price via TCGCSV",
+ "source": "Market price, recent sold average (USD)",
  "items": [
   {
    "id": "689336-Normal",
@@ -10,7 +10,6 @@
    "set": "The Time of Battle",
    "price": 202.38,
    "low": 194.0,
-   "url": "https://www.tcgplayer.com/product/689336",
    "history": [
     [
      "2026-10-27",
@@ -30,7 +29,6 @@
    "set": "Pitch Black",
    "price": 182.33,
    "low": 159.99,
-   "url": "https://www.tcgplayer.com/product/692939",
    "history": [
     [
      "2026-10-27",
@@ -50,7 +48,6 @@
    "set": "Vendetta",
    "price": 125.54,
    "low": 113.89,
-   "url": "https://www.tcgplayer.com/product/693380",
    "history": [
     [
      "2026-10-27",
@@ -70,7 +67,6 @@
    "set": "Chaos Origins",
    "price": 89.43,
    "low": 79.99,
-   "url": "https://www.tcgplayer.com/product/691167",
    "history": [
     [
      "2026-10-27",
@@ -90,7 +86,6 @@
    "set": "Eternal Nexus",
    "price": 104.1,
    "low": 82.99,
-   "url": "https://www.tcgplayer.com/product/693103",
    "history": [
     [
      "2026-10-27",
@@ -110,7 +105,6 @@
    "set": "Attack of the Vine!",
    "price": 180.65,
    "low": 166.01,
-   "url": "https://www.tcgplayer.com/product/690384",
    "history": [
     [
      "2026-10-27",
@@ -130,7 +124,6 @@
    "set": "The Time of Battle",
    "price": 1111.83,
    "low": 759.83,
-   "url": "https://www.tcgplayer.com/product/695986",
    "history": [
     [
      "2026-10-27",
@@ -150,7 +143,6 @@
    "set": "Chaos Rising",
    "price": 35.6,
    "low": 32.67,
-   "url": "https://www.tcgplayer.com/product/693465",
    "history": [
     [
      "2026-10-27",
@@ -170,7 +162,6 @@
    "set": "Vendetta",
    "price": 1276.92,
    "low": 999.0,
-   "url": "https://www.tcgplayer.com/product/709666",
    "history": [
     [
      "2026-10-27",
@@ -190,7 +181,6 @@
    "set": "Chaos Origins",
    "price": 469.06,
    "low": 434.99,
-   "url": "https://www.tcgplayer.com/product/702385",
    "history": [
     [
      "2026-10-27",
@@ -210,7 +200,6 @@
    "set": "Freedom Ascension",
    "price": 3910.18,
    "low": 4249.0,
-   "url": "https://www.tcgplayer.com/product/707601",
    "history": [
     [
      "2026-10-27",
@@ -230,7 +219,6 @@
    "set": "Attack of the Vine!",
    "price": 1555.9,
    "low": 935.67,
-   "url": "https://www.tcgplayer.com/product/702666",
    "history": [
     [
      "2026-10-27",
@@ -252,7 +240,6 @@
    "set": "Pitch Black",
    "price": 182.33,
    "low": 159.99,
-   "url": "https://www.tcgplayer.com/product/692939",
    "history": [
     [
      "2026-10-27",
@@ -272,7 +259,6 @@
    "set": "Pitch Black",
    "price": 66.95,
    "low": 54.44,
-   "url": "https://www.tcgplayer.com/product/692947",
    "history": [
     [
      "2026-10-27",
@@ -292,7 +278,6 @@
    "set": "Pitch Black",
    "price": 140.94,
    "low": 130.0,
-   "url": "https://www.tcgplayer.com/product/704873",
    "history": [
     [
      "2026-10-27",
@@ -312,7 +297,6 @@
    "set": "Pitch Black",
    "price": 125.12,
    "low": 123.0,
-   "url": "https://www.tcgplayer.com/product/704877",
    "history": [
     [
      "2026-10-27",
@@ -332,7 +316,6 @@
    "set": "Pitch Black",
    "price": 58.53,
    "low": 56.73,
-   "url": "https://www.tcgplayer.com/product/704874",
    "history": [
     [
      "2026-10-27",
@@ -352,7 +335,6 @@
    "set": "Chaos Rising",
    "price": 181.45,
    "low": 164.25,
-   "url": "https://www.tcgplayer.com/product/684444",
    "history": [
     [
      "2026-10-27",
@@ -372,7 +354,6 @@
    "set": "Chaos Rising",
    "price": 70.43,
    "low": 47.5,
-   "url": "https://www.tcgplayer.com/product/684450",
    "history": [
     [
      "2026-10-27",
@@ -392,7 +373,6 @@
    "set": "Chaos Rising",
    "price": 113.08,
    "low": 107.55,
-   "url": "https://www.tcgplayer.com/product/693518",
    "history": [
     [
      "2026-10-27",
@@ -412,7 +392,6 @@
    "set": "Chaos Rising",
    "price": 111.02,
    "low": 98.0,
-   "url": "https://www.tcgplayer.com/product/693517",
    "history": [
     [
      "2026-10-27",
@@ -432,7 +411,6 @@
    "set": "Chaos Rising",
    "price": 35.6,
    "low": 32.67,
-   "url": "https://www.tcgplayer.com/product/693465",
    "history": [
     [
      "2026-10-27",
@@ -452,7 +430,6 @@
    "set": "Reality Fracture",
    "price": 378.55,
    "low": 384.0,
-   "url": "https://www.tcgplayer.com/product/692983",
    "history": [
     [
      "2026-10-27",
@@ -472,7 +449,6 @@
    "set": "Reality Fracture",
    "price": 122.17,
    "low": 115.0,
-   "url": "https://www.tcgplayer.com/product/692980",
    "history": [
     [
      "2026-10-27",
@@ -492,7 +468,6 @@
    "set": "Reality Fracture",
    "price": 493.95,
    "low": 483.88,
-   "url": "https://www.tcgplayer.com/product/706993",
    "history": [
     [
      "2026-10-27",
@@ -512,7 +487,6 @@
    "set": "Reality Fracture",
    "price": 437.8,
    "low": 375.0,
-   "url": "https://www.tcgplayer.com/product/707001",
    "history": [
     [
      "2026-10-27",
@@ -532,7 +506,6 @@
    "set": "Reality Fracture",
    "price": 420.13,
    "low": 339.0,
-   "url": "https://www.tcgplayer.com/product/715919",
    "history": [
     [
      "2026-10-27",
@@ -552,7 +525,6 @@
    "set": "Mystery Booster Commander Edition",
    "price": 367.71,
    "low": 367.0,
-   "url": "https://www.tcgplayer.com/product/709724",
    "history": [
     [
      "2026-10-27",
@@ -572,7 +544,6 @@
    "set": "Mystery Booster Commander Edition",
    "price": 229.99,
    "low": 229.0,
-   "url": "https://www.tcgplayer.com/product/709803",
    "history": [
     [
      "2026-10-28",
@@ -588,7 +559,6 @@
    "set": "Mystery Booster Commander Edition",
    "price": 191.66,
    "low": 181.51,
-   "url": "https://www.tcgplayer.com/product/709751",
    "history": [
     [
      "2026-10-27",
@@ -608,7 +578,6 @@
    "set": "Mystery Booster Commander Edition",
    "price": 179.99,
    "low": 200.0,
-   "url": "https://www.tcgplayer.com/product/709789",
    "history": [
     [
      "2026-10-27",
@@ -628,7 +597,6 @@
    "set": "The World's Strongest Warriors",
    "price": 308.59,
    "low": 298.01,
-   "url": "https://www.tcgplayer.com/product/704752",
    "history": [
     [
      "2026-10-27",
@@ -648,7 +616,6 @@
    "set": "The World's Strongest Warriors",
    "price": 6100.0,
    "low": 5999.95,
-   "url": "https://www.tcgplayer.com/product/712117",
    "history": [
     [
      "2026-10-27",
@@ -668,7 +635,6 @@
    "set": "The World's Strongest Warriors",
    "price": 1486.69,
    "low": 1200.0,
-   "url": "https://www.tcgplayer.com/product/712084",
    "history": [
     [
      "2026-10-27",
@@ -688,7 +654,6 @@
    "set": "The World's Strongest Warriors",
    "price": 1383.43,
    "low": 1275.0,
-   "url": "https://www.tcgplayer.com/product/712114",
    "history": [
     [
      "2026-10-27",
@@ -708,7 +673,6 @@
    "set": "The Time of Battle",
    "price": 202.38,
    "low": 194.0,
-   "url": "https://www.tcgplayer.com/product/689336",
    "history": [
     [
      "2026-10-27",
@@ -728,7 +692,6 @@
    "set": "The Time of Battle",
    "price": 1111.83,
    "low": 759.83,
-   "url": "https://www.tcgplayer.com/product/695986",
    "history": [
     [
      "2026-10-27",
@@ -748,7 +711,6 @@
    "set": "The Time of Battle",
    "price": 1088.18,
    "low": 648.5,
-   "url": "https://www.tcgplayer.com/product/696052",
    "history": [
     [
      "2026-10-27",
@@ -768,7 +730,6 @@
    "set": "The Time of Battle",
    "price": 1001.12,
    "low": 599.19,
-   "url": "https://www.tcgplayer.com/product/696108",
    "history": [
     [
      "2026-10-27",
@@ -788,7 +749,6 @@
    "set": "Beyond the Brave",
    "price": 56.93,
    "low": 56.89,
-   "url": "https://www.tcgplayer.com/product/711263",
    "history": [
     [
      "2026-10-27",
@@ -808,7 +768,6 @@
    "set": "Beyond the Brave",
    "price": 395.04,
    "low": 313.0,
-   "url": "https://www.tcgplayer.com/product/719866",
    "history": [
     [
      "2026-10-27",
@@ -828,7 +787,6 @@
    "set": "Beyond the Brave",
    "price": 263.6,
    "low": 235.22,
-   "url": "https://www.tcgplayer.com/product/719879",
    "history": [
     [
      "2026-10-27",
@@ -848,7 +806,6 @@
    "set": "Beyond the Brave",
    "price": 99.99,
    "low": 82.45,
-   "url": "https://www.tcgplayer.com/product/722991",
    "history": [
     [
      "2026-10-27",
@@ -868,7 +825,6 @@
    "set": "Chaos Origins",
    "price": 89.43,
    "low": 79.99,
-   "url": "https://www.tcgplayer.com/product/691167",
    "history": [
     [
      "2026-10-27",
@@ -888,7 +844,6 @@
    "set": "Chaos Origins",
    "price": 469.06,
    "low": 434.99,
-   "url": "https://www.tcgplayer.com/product/702385",
    "history": [
     [
      "2026-10-27",
@@ -908,7 +863,6 @@
    "set": "Chaos Origins",
    "price": 280.74,
    "low": 209.99,
-   "url": "https://www.tcgplayer.com/product/702388",
    "history": [
     [
      "2026-10-27",
@@ -928,7 +882,6 @@
    "set": "Chaos Origins",
    "price": 134.99,
    "low": 129.99,
-   "url": "https://www.tcgplayer.com/product/703795",
    "history": [
     [
      "2026-10-27",
@@ -948,7 +901,6 @@
    "set": "Hyperia City",
    "price": 138.69,
    "low": 1.0,
-   "url": "https://www.tcgplayer.com/product/706239",
    "history": [
     [
      "2026-10-27",
@@ -968,7 +920,6 @@
    "set": "Hyperia City",
    "price": 1862.41,
    "low": 1990.0,
-   "url": "https://www.tcgplayer.com/product/722591",
    "history": [
     [
      "2026-10-27",
@@ -988,7 +939,6 @@
    "set": "Hyperia City",
    "price": 1138.25,
    "low": 1375.0,
-   "url": "https://www.tcgplayer.com/product/722592",
    "history": [
     [
      "2026-10-27",
@@ -1008,7 +958,6 @@
    "set": "Hyperia City",
    "price": 379.35,
    "low": 398.3,
-   "url": "https://www.tcgplayer.com/product/722586",
    "history": [
     [
      "2026-10-27",
@@ -1028,7 +977,6 @@
    "set": "Attack of the Vine!",
    "price": 180.65,
    "low": 166.01,
-   "url": "https://www.tcgplayer.com/product/690384",
    "history": [
     [
      "2026-10-27",
@@ -1048,7 +996,6 @@
    "set": "Attack of the Vine!",
    "price": 1831.91,
    "low": 1348.5,
-   "url": "https://www.tcgplayer.com/product/702667",
    "history": [
     [
      "2026-10-27",
@@ -1068,7 +1015,6 @@
    "set": "Attack of the Vine!",
    "price": 1555.9,
    "low": 935.67,
-   "url": "https://www.tcgplayer.com/product/702666",
    "history": [
     [
      "2026-10-27",
@@ -1088,7 +1034,6 @@
    "set": "Attack of the Vine!",
    "price": 755.21,
    "low": 554.99,
-   "url": "https://www.tcgplayer.com/product/704725",
    "history": [
     [
      "2026-10-27",
@@ -1108,7 +1053,6 @@
    "set": "Radiance",
    "price": 121.04,
    "low": 115.0,
-   "url": "https://www.tcgplayer.com/product/711365",
    "history": [
     [
      "2026-10-27",
@@ -1128,7 +1072,6 @@
    "set": "Radiance",
    "price": 1285.55,
    "low": 1449.99,
-   "url": "https://www.tcgplayer.com/product/724654",
    "history": [
     [
      "2026-10-27",
@@ -1148,7 +1091,6 @@
    "set": "Radiance",
    "price": 1175.0,
    "low": 1100.0,
-   "url": "https://www.tcgplayer.com/product/724642",
    "history": [
     [
      "2026-10-27",
@@ -1168,7 +1110,6 @@
    "set": "Radiance",
    "price": 1110.98,
    "low": 1245.01,
-   "url": "https://www.tcgplayer.com/product/724655",
    "history": [
     [
      "2026-10-27",
@@ -1188,7 +1129,6 @@
    "set": "Vendetta",
    "price": 125.54,
    "low": 113.89,
-   "url": "https://www.tcgplayer.com/product/693380",
    "history": [
     [
      "2026-10-27",
@@ -1208,7 +1148,6 @@
    "set": "Vendetta",
    "price": 3229.71,
    "low": 2137.81,
-   "url": "https://www.tcgplayer.com/product/709668",
    "history": [
     [
      "2026-10-27",
@@ -1228,7 +1167,6 @@
    "set": "Vendetta",
    "price": 1276.92,
    "low": 999.0,
-   "url": "https://www.tcgplayer.com/product/709666",
    "history": [
     [
      "2026-10-27",
@@ -1248,7 +1186,6 @@
    "set": "Vendetta",
    "price": 1152.22,
    "low": 877.1,
-   "url": "https://www.tcgplayer.com/product/709667",
    "history": [
     [
      "2026-10-28",
@@ -1264,7 +1201,6 @@
    "set": "Freedom Ascension",
    "price": 172.19,
    "low": 160.0,
-   "url": "https://www.tcgplayer.com/product/693621",
    "history": [
     [
      "2026-10-27",
@@ -1284,7 +1220,6 @@
    "set": "Freedom Ascension",
    "price": 3910.18,
    "low": 4249.0,
-   "url": "https://www.tcgplayer.com/product/707601",
    "history": [
     [
      "2026-10-27",
@@ -1304,7 +1239,6 @@
    "set": "Freedom Ascension",
    "price": 2605.72,
    "low": 2399.0,
-   "url": "https://www.tcgplayer.com/product/707600",
    "history": [
     [
      "2026-10-27",
@@ -1324,7 +1258,6 @@
    "set": "Freedom Ascension",
    "price": 1532.38,
    "low": 1250.0,
-   "url": "https://www.tcgplayer.com/product/707604",
    "history": [
     [
      "2026-10-27",
@@ -1344,7 +1277,6 @@
    "set": "Eternal Nexus",
    "price": 104.1,
    "low": 82.99,
-   "url": "https://www.tcgplayer.com/product/693103",
    "history": [
     [
      "2026-10-27",
@@ -1364,7 +1296,6 @@
    "set": "Eternal Nexus",
    "price": 1094.36,
    "low": 799.99,
-   "url": "https://www.tcgplayer.com/product/702815",
    "history": [
     [
      "2026-10-27",

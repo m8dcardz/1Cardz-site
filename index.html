@@ -493,7 +493,7 @@ body>footer .cover{--vb:42px}
 .mw-row{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1.6fr) 110px;gap:18px;align-items:center;padding:12px clamp(14px,2.4vw,24px);border-top:1px solid rgba(255,255,255,.06);position:relative}
 .mw-row:hover,.mw-row:focus-within{background:rgba(255,255,255,.05)}
 .mw-name{min-width:0;display:grid;gap:3px}
-.mw-name a{color:#fff;text-decoration:none;font-weight:700;font-size:15.5px;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mw-name a,.mw-name .mw-title{color:#fff;text-decoration:none;font-weight:700;font-size:15.5px;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .mw-name a:hover{text-decoration:underline;text-decoration-color:rgba(233,196,106,.7);text-underline-offset:3px}
 .mw-meta{display:flex;gap:8px;align-items:center;color:#aab1c9;font-size:13px;min-width:0}
 .mw-game{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#18203f;background:linear-gradient(180deg,#fbe7a6,var(--foil));border-radius:99px;padding:2px 8px;flex:none}
@@ -512,7 +512,7 @@ body>footer .cover{--vb:42px}
 @media (max-width:640px){
   .mw-head{display:none}
   .mw-row{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"n n" "b t";gap:8px 12px}
-  .mw-name a{white-space:normal}
+  .mw-name a,.mw-name .mw-title{white-space:normal}
   .mw-trend{justify-items:end}
   .mw-name{grid-area:n}.mw-trend{grid-area:t}.mw-bar{grid-area:b}
   .mw-trend svg{width:72px;height:22px}
@@ -860,7 +860,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
     </div>
     <div class="lcdbox lcdbox-market">
     <div class="lcd-label mono"><i></i><span>Market</span></div>
-    <a class="lcd" href="#mw-h" aria-label="Market prices, see Market Watch">
+    <a class="lcd" href="market.html" aria-label="Market prices: open the Market page">
       <div class="lcd-track" id="mlcdTrack"></div>
     </a>
     </div>
@@ -879,7 +879,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
             <div class="hl-meta mono"><span class="hl-game">Flesh and Blood</span><span>Oct 27 · 8:00 PM HKT</span><span>With Luna</span></div>
             <h3>Smash Palace: Chorus of Steel lands October 30</h3>
             <p>Ultimate Pit Fight multiplayer is back, with two new heroes, Zane and Killjoy.</p>
-            <div class="hl-foot"><span class="mono hl-src">Source · Flesh and Blood official site, TCGplayer</span><button class="hl-watch" type="button" data-card="Chorus of Steel">▶ Watch the clip</button></div>
+            <div class="hl-foot"><span class="mono hl-src">Source · Flesh and Blood official site</span><button class="hl-watch" type="button" data-card="Chorus of Steel">▶ Watch the clip</button></div>
           </div>
           <div class="hl-shot"><img src="img/clip2.jpg" alt="Still from the Flesh and Blood news clip with Luna" fetchpriority="high"></div>
         </article>
@@ -1186,21 +1186,6 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
     </div>
   </section>
 
-  <section class="wrap key mw-wrap" aria-labelledby="mw-h">
-    <div class="gd mw">
-      <div class="mw-top">
-        <span class="mono mw-label"><i></i><span id="mw-h">Market Watch</span></span>
-        <div class="mw-tabs" role="tablist" aria-label="Market Watch view">
-          <button type="button" role="tab" class="mw-tab mono" data-kind="sealed" aria-selected="true">Sealed</button>
-          <button type="button" role="tab" class="mw-tab mono" data-kind="single" aria-selected="false">Chase singles</button>
-        </div>
-        <span class="mono mw-upd" id="mwUpd">—</span>
-      </div>
-      <div class="mw-head mono" aria-hidden="true"><span>Item</span><span>Market price</span><span>Trend</span></div>
-      <ol class="mw-list" id="mwList"></ol>
-      <p class="mw-foot">Top sellers on TCGplayer, priced at the TCGplayer market price (recent sold average, USD) and refreshed daily. Prices move fast; this is a snapshot, not buying or selling advice.</p>
-    </div>
-  </section>
 </main>
 
 <footer class="wrap">
@@ -1344,9 +1329,8 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
 
   /* Market Watch: render the embedded snapshot, then refresh from data/market.json (updated daily) */
   (function(){
-    const SNAP={"updated": "2026-10-27T20:05:13+0000", "source": "TCGplayer market price via TCGCSV", "items": [{"id": "692980-Normal", "kind": "sealed", "game": "Magic", "name": "Reality Fracture Play Booster Display", "set": "Reality Fracture", "price": 122.65, "low": 115.0, "url": "https://www.tcgplayer.com/product/692980", "history": [["2026-10-27", 122.65]]}, {"id": "689336-Normal", "kind": "sealed", "game": "One Piece", "name": "The Time of Battle Booster Box", "set": "The Time of Battle", "price": 204.9, "low": 199.0, "url": "https://www.tcgplayer.com/product/689336", "history": [["2026-10-27", 204.9]]}, {"id": "692939-Normal", "kind": "sealed", "game": "Pokémon", "name": "Pitch Black Booster Box", "set": "Pitch Black", "price": 181.95, "low": 159.99, "url": "https://www.tcgplayer.com/product/692939", "history": [["2026-10-27", 181.95]]}, {"id": "693380-Normal", "kind": "sealed", "game": "Riftbound", "name": "Vendetta Booster Display", "set": "Vendetta", "price": 126.22, "low": 114.61, "url": "https://www.tcgplayer.com/product/693380", "history": [["2026-10-27", 126.22]]}, {"id": "691167-Normal", "kind": "sealed", "game": "Yu-Gi-Oh!", "name": "Chaos Origins Booster Box [1st Edition]", "set": "Chaos Origins", "price": 88.74, "low": 79.99, "url": "https://www.tcgplayer.com/product/691167", "history": [["2026-10-27", 88.74]]}, {"id": "693103-Normal", "kind": "sealed", "game": "Gundam", "name": "Eternal Nexus Booster Box", "set": "Eternal Nexus", "price": 104.1, "low": 82.99, "url": "https://www.tcgplayer.com/product/693103", "history": [["2026-10-27", 104.1]]}, {"id": "706993-Foil", "kind": "single", "game": "Magic", "name": "The Theorist, Jace Beleren (Showcase) (Fracture Foil)", "set": "Reality Fracture", "price": 493.95, "low": 483.88, "url": "https://www.tcgplayer.com/product/706993", "history": [["2026-10-27", 493.95]]}, {"id": "695986-Foil", "kind": "single", "game": "One Piece", "name": "Sakazuki (Manga)", "set": "The Time of Battle", "price": 1111.83, "low": 780.0, "url": "https://www.tcgplayer.com/product/695986", "history": [["2026-10-27", 1111.83]]}, {"id": "693465-Holofoil", "kind": "single", "game": "Pokémon", "name": "Cinccino ex - 119/086", "set": "Chaos Rising", "price": 34.99, "low": 33.74, "url": "https://www.tcgplayer.com/product/693465", "history": [["2026-10-27", 34.99]]}, {"id": "709103-Foil", "kind": "single", "game": "Riftbound", "name": "Jayce, Defender of Tomorrow (Signature)", "set": "Vendetta", "price": 1193.04, "low": 800.0, "url": "https://www.tcgplayer.com/product/709103", "history": [["2026-10-27", 1193.04]]}, {"id": "702385-1st Edition", "kind": "single", "game": "Yu-Gi-Oh!", "name": "Magician of Dark Chaos - Black Chaos (Starlight Rare) (Extended Art)", "set": "Chaos Origins", "price": 473.26, "low": 438.13, "url": "https://www.tcgplayer.com/product/702385", "history": [["2026-10-27", 473.26]]}, {"id": "707601-Holofoil", "kind": "single", "game": "Gundam", "name": "Wing Gundam Zero (EW) (LR++)", "set": "Freedom Ascension", "price": 3910.18, "low": 4249.0, "url": "https://www.tcgplayer.com/product/707601", "history": [["2026-10-27", 3910.18]]}]};
+    const SNAP={"updated": "2026-10-28T20:06:05+0000", "source": "Market price, recent sold average (USD)", "items": [{"id": "689336-Normal", "kind": "sealed", "game": "One Piece", "name": "The Time of Battle Booster Box", "set": "The Time of Battle", "price": 202.38, "low": 194.0, "history": [["2026-10-27", 204.9], ["2026-10-28", 202.38]]}, {"id": "692939-Normal", "kind": "sealed", "game": "Pokémon", "name": "Pitch Black Booster Box", "set": "Pitch Black", "price": 182.33, "low": 159.99, "history": [["2026-10-27", 181.95], ["2026-10-28", 182.33]]}, {"id": "693380-Normal", "kind": "sealed", "game": "Riftbound", "name": "Vendetta Booster Display", "set": "Vendetta", "price": 125.54, "low": 113.89, "history": [["2026-10-27", 126.22], ["2026-10-28", 125.54]]}, {"id": "691167-Normal", "kind": "sealed", "game": "Yu-Gi-Oh!", "name": "Chaos Origins Booster Box [1st Edition]", "set": "Chaos Origins", "price": 89.43, "low": 79.99, "history": [["2026-10-27", 88.74], ["2026-10-28", 89.43]]}, {"id": "693103-Normal", "kind": "sealed", "game": "Gundam", "name": "Eternal Nexus Booster Box", "set": "Eternal Nexus", "price": 104.1, "low": 82.99, "history": [["2026-10-27", 104.1], ["2026-10-28", 104.1]]}, {"id": "690384-Normal", "kind": "sealed", "game": "Lorcana", "name": "Disney Lorcana: Attack of the Vine! Booster Box", "set": "Attack of the Vine!", "price": 180.65, "low": 166.01, "history": [["2026-10-27", 180.75], ["2026-10-28", 180.65]]}, {"id": "695986-Foil", "kind": "single", "game": "One Piece", "name": "Sakazuki (Manga)", "set": "The Time of Battle", "price": 1111.83, "low": 759.83, "history": [["2026-10-27", 1111.83], ["2026-10-28", 1111.83]]}, {"id": "693465-Holofoil", "kind": "single", "game": "Pokémon", "name": "Cinccino ex - 119/086", "set": "Chaos Rising", "price": 35.6, "low": 32.67, "history": [["2026-10-27", 34.99], ["2026-10-28", 35.6]]}, {"id": "709666-Foil", "kind": "single", "game": "Riftbound", "name": "Zed, Master of Shadows (Signature)", "set": "Vendetta", "price": 1276.92, "low": 999.0, "history": [["2026-10-27", 1276.92], ["2026-10-28", 1276.92]]}, {"id": "702385-1st Edition", "kind": "single", "game": "Yu-Gi-Oh!", "name": "Magician of Dark Chaos - Black Chaos (Starlight Rare) (Extended Art)", "set": "Chaos Origins", "price": 469.06, "low": 434.99, "history": [["2026-10-27", 473.26], ["2026-10-28", 469.06]]}, {"id": "707601-Holofoil", "kind": "single", "game": "Gundam", "name": "Wing Gundam Zero (EW) (LR++)", "set": "Freedom Ascension", "price": 3910.18, "low": 4249.0, "history": [["2026-10-27", 3910.18], ["2026-10-28", 3910.18]]}, {"id": "702666-Holofoil", "kind": "single", "game": "Lorcana", "name": "Lilo & Stitch - Fun-Loving Friends (Iconic)", "set": "Attack of the Vine!", "price": 1555.9, "low": 935.67, "history": [["2026-10-27", 1555.9], ["2026-10-28", 1555.9]]}]};
     const list=document.getElementById('mwList'),upd=document.getElementById('mwUpd'),tabs=[...document.querySelectorAll('.mw-tab')];
-    if(!list)return;
     let data=SNAP,kind='sealed';
     const usd=v=>v==null?'—':'$'+v.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
     const fmtDate=s=>{const d=new Date(String(s).slice(0,10)+'T12:00:00Z');return isNaN(d)?s:d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'})};
@@ -1363,14 +1347,15 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
       return '<span class="mw-chg '+cls+'">'+ar+' '+Math.abs(p).toFixed(1)+'% · '+h.length+'d</span>';
     }
     function render(){
+      if(list){
       const items=data.items.filter(i=>i.kind===kind&&i.price!=null).sort((a,b)=>b.price-a.price);
       const max=Math.max(...items.map(i=>i.price));
       list.innerHTML=items.map(i=>'<li class="mw-row" tabindex="0" data-tip="'+(i.name+' · '+i.set).replace(/"/g,'&quot;')+'|'+usd(i.price)+'|'+usd(i.low)+'">'+
-        '<div class="mw-name"><a href="'+i.url+'" target="_blank" rel="noopener">'+i.name+'</a><div class="mw-meta"><span class="mw-game">'+i.game+'</span><span>'+i.set+'</span></div></div>'+
+        '<div class="mw-name"><span class="mw-title">'+i.name+'</span><div class="mw-meta"><span class="mw-game">'+i.game+'</span><span>'+i.set+'</span></div></div>'+
         '<div class="mw-bar"><div class="mw-track"><div class="mw-fill" style="width:0%" data-w="'+Math.max(2,i.price/max*100).toFixed(1)+'"></div></div><span class="mw-price">'+usd(i.price)+'</span></div>'+
         '<div class="mw-trend">'+spark(i.history)+chg(i.history)+'</div></li>').join('');
       requestAnimationFrame(()=>list.querySelectorAll('.mw-fill').forEach(f=>f.style.width=f.dataset.w+'%'));
-      upd.textContent='TCGplayer prices as of '+fmtDate(data.updated);
+      upd.textContent='Prices as of '+fmtDate(data.updated);}
       const ml=document.getElementById('mlcdTrack');
       if(ml){const run=data.items.filter(i=>i.price!=null).map(i=>{const h=i.history||[];let c='';if(h.length>1){const p=(h[h.length-1][1]-h[0][1])/h[0][1]*100;const k=Math.abs(p)<0.05?'':p>0?'up':'down';if(k)c=' <span class="'+k+'">'+(k==='up'?'▲':'▼')+Math.abs(p).toFixed(1)+'%</span>'}
           return '<span class="lcd-item"><b>'+i.game.toUpperCase()+'</b> '+i.name+' <span class="mp">'+usd(i.price)+'</span>'+c+'</span><span class="lcd-sep" aria-hidden="true">◆</span>'}).join('');
@@ -1381,6 +1366,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
           return '<span class="mtick-item"><span class="mw-game">'+i.game+'</span><span>'+i.name+'</span><span class="p">'+usd(i.price)+'</span>'+c+'</span>'}).join('');
         tk.innerHTML=one+one;}
     }
+    if(list){
     tabs.forEach(t=>t.addEventListener('click',()=>{kind=t.dataset.kind;tabs.forEach(x=>x.setAttribute('aria-selected',String(x===t)));render()}));
     /* hover tooltip */
     const tip=document.createElement('div');tip.className='mw-tip';tip.hidden=true;document.querySelector('.mw').appendChild(tip);
@@ -1389,6 +1375,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
       const box=document.querySelector('.mw').getBoundingClientRect();let x=e.clientX-box.left+14,y=e.clientY-box.top+14;
       x=Math.min(x,box.width-tip.offsetWidth-8);tip.style.left=x+'px';tip.style.top=y+'px'});
     list.addEventListener('pointerleave',()=>tip.hidden=true);
+    }
     render();
     fetch('data/market.json?v='+Date.now()).then(r=>r.ok?r.json():null).then(d=>{if(d&&d.items&&d.items.length){data=d;render()}}).catch(()=>{});
   })();

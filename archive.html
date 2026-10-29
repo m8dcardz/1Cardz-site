@@ -490,7 +490,7 @@ body>footer .cover{--vb:42px}
 .mw-row{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1.6fr) 110px;gap:18px;align-items:center;padding:12px clamp(14px,2.4vw,24px);border-top:1px solid rgba(255,255,255,.06);position:relative}
 .mw-row:hover,.mw-row:focus-within{background:rgba(255,255,255,.05)}
 .mw-name{min-width:0;display:grid;gap:3px}
-.mw-name a{color:#fff;text-decoration:none;font-weight:700;font-size:15.5px;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mw-name a,.mw-name .mw-title{color:#fff;text-decoration:none;font-weight:700;font-size:15.5px;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .mw-name a:hover{text-decoration:underline;text-decoration-color:rgba(233,196,106,.7);text-underline-offset:3px}
 .mw-meta{display:flex;gap:8px;align-items:center;color:#aab1c9;font-size:13px;min-width:0}
 .mw-game{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#18203f;background:linear-gradient(180deg,#fbe7a6,var(--foil));border-radius:99px;padding:2px 8px;flex:none}
@@ -509,7 +509,7 @@ body>footer .cover{--vb:42px}
 @media (max-width:640px){
   .mw-head{display:none}
   .mw-row{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"n n" "b t";gap:8px 12px}
-  .mw-name a{white-space:normal}
+  .mw-name a,.mw-name .mw-title{white-space:normal}
   .mw-trend{justify-items:end}
   .mw-name{grid-area:n}.mw-trend{grid-area:t}.mw-bar{grid-area:b}
   .mw-trend svg{width:72px;height:22px}
