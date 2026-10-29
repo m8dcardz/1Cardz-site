@@ -705,6 +705,34 @@ body>header .cover .drop .mono{letter-spacing:-.07em;word-spacing:-.3em}
 .lcdbox .lcd{flex:1 1 100%;min-width:0;margin-right:0 !important}
 .lcd-spacer{display:none !important}
 @media (max-width:560px){.lcdbox{row-gap:4px}.lcd-label{font-size:9.5px;gap:5px}.lcd-label i{width:5px;height:5px}}
+/* headlines LCD: five stories, same scroll speed */
+#lcdTrack{animation-duration:94s}
+/* mobile: binders as short as possible */
+@media (max-width:560px){
+  html body>header .cover{grid-template-columns:20px minmax(0,1fr) auto;column-gap:10px;row-gap:0;padding-top:calc(var(--vt) + 8px);padding-bottom:10px;align-items:center}
+  html body>header .cover .spine{grid-row:1}
+  html body>header .cover .copy{grid-column:2;grid-row:1;gap:6px;padding:0 0 0 14px}
+  html body>header .cover .window{grid-column:3;grid-row:1;justify-self:end;width:118px;margin:0}
+  html body>header .cover h1{font-size:44px;white-space:normal;line-height:.86}
+  html body>header .cover h1 br{display:inline}
+  body>header .cover .label{font-size:9px;letter-spacing:.08em;flex-wrap:nowrap;white-space:nowrap}
+  body>header .cover .label span:nth-child(3){display:none}
+  body>header .coverflip .face .txt,body>header .coverflip .face .typeline,body>header .coverflip .face .foot{display:none}
+  body>header .coverflip .face .art{flex:1 1 auto}
+  html body>header .cover .drop{gap:0}
+  html body>header .cover .drop b{font-size:30px}
+  body>header .cover .drop .mono{font-size:12px}
+  body>header .cover .coverflip .tap{font-size:7cqw}
+  body>footer .cover{padding-top:10px;padding-bottom:calc(var(--vb) + 4px)}
+  body>footer .cover .copy{gap:6px;padding-block:6px}
+  .cover-back h2{font-size:26px}
+  .cover-back .copy p.back-lines{gap:3px;font-size:12px}
+  .soc.sm{width:24px;height:24px}
+  .soc.sm svg{width:14px;height:14px}
+  .cover-back .barcode{height:20px;padding:3px 8px}
+  .domain{font-size:20px}
+  body>footer .cover .copy>.mono{font-size:9px}
+}
 /* top binder runs on downward: no bottom edge on the video or the stitching */
 body>header .cover{--vb:-14px !important;border-bottom-left-radius:0;border-bottom-right-radius:0}
 body>header .cover .stitch{border-bottom:0;bottom:-4px;border-bottom-left-radius:0;border-bottom-right-radius:0}
