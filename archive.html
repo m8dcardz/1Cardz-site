@@ -667,6 +667,22 @@ body>footer .cover .copy{gap:12px;padding-block:clamp(8px,1.6vw,20px)}
 .soc.sm svg{width:16px;height:16px}
 a.soc.sm:hover{transform:translateY(-2px) scale(1.06)}
 .cover-back .barcode{height:28px;padding:5px 10px}
+/* tighter top binder (about 15% shorter) */
+body>header .cover{padding-top:calc(var(--vt) + 14px);padding-bottom:clamp(14px,1.8vw,26px)}
+body>header .cover .copy{gap:12px}
+@media (min-width:901px){body>header .cover .window{width:min(100%,258px)}}
+@media (min-width:561px) and (max-width:900px){
+  body>header .cover .window{width:min(62%,196px);margin-bottom:16px}
+  body>header .cover{row-gap:14px}
+  body>header .cover .copy{padding-top:0}
+}
+@media (max-width:560px){
+  html body>header .cover .window{width:min(80%,232px);margin-bottom:4px}
+  body>header .cover .label span:nth-child(2){display:none}
+  body>header .cover .label{flex-wrap:nowrap}
+  body>header .cover .copy{gap:8px;padding-top:0}
+  html body>header .cover{row-gap:10px}
+}
 /* top binder runs on downward: no bottom edge on the video or the stitching */
 body>header .cover{--vb:-14px !important;border-bottom-left-radius:0;border-bottom-right-radius:0}
 body>header .cover .stitch{border-bottom:0;bottom:-4px;border-bottom-left-radius:0;border-bottom-right-radius:0}
