@@ -709,7 +709,7 @@ body>header .cover .drop .mono{letter-spacing:-.07em;word-spacing:-.3em}
 .lcd-spacer{display:none !important}
 @media (max-width:560px){.lcdbox{row-gap:4px}.lcd-label{font-size:9.5px;gap:5px}.lcd-label i{width:5px;height:5px}}
 /* headlines LCD: five stories, same scroll speed */
-#lcdTrack{animation-duration:94s}
+#lcdTrack{animation-duration:84s}
 /* mobile: binders as short as possible */
 @media (max-width:560px){
   html body>header .cover{grid-template-columns:20px minmax(0,1fr) auto;column-gap:10px;row-gap:0;padding-top:calc(var(--vt) + 8px);padding-bottom:10px;align-items:center}
@@ -735,6 +735,22 @@ body>header .cover .drop .mono{letter-spacing:-.07em;word-spacing:-.3em}
   .cover-back .barcode{height:20px;padding:3px 8px}
   .domain{font-size:20px}
   body>footer .cover .copy>.mono{font-size:9px}
+}
+/* headline stories share one fixed-size slot: switching stories never changes the box height */
+.gd-stage{display:grid}
+.gd-stage>.hl{grid-area:1/1}
+.gd-stage>.hl[hidden]{display:grid !important;visibility:hidden;pointer-events:none}
+@media (max-width:560px){
+  body>footer .cover{padding-top:14px;padding-bottom:calc(var(--vb) + 6px)}
+  body>footer .cover .copy{gap:5px;padding-block:3px}
+  .cover-back h2{font-size:23px}
+  .cover-back .copy p.back-lines{gap:2px;font-size:11px;line-height:1.25}
+  .cover-back .back-lines .socials-inline{margin:1px 0}
+  .soc.sm{width:22px;height:22px}
+  .soc.sm svg{width:13px;height:13px}
+  .cover-back .barcode{height:16px;padding:2px 8px}
+  .domain{font-size:18px;line-height:1.1}
+  body>footer .cover .copy>.mono{font-size:8.5px}
 }
 /* top binder runs on downward: no bottom edge on the video or the stitching */
 body>header .cover{--vb:-14px !important;border-bottom-left-radius:0;border-bottom-right-radius:0}
