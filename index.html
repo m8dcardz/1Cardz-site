@@ -892,11 +892,10 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
   *,*::before,*::after{animation:none!important;transition:none!important}
 }
 /* headline rotation: slide/fade transition, green glow on watch arrow, newsletter button matches input */
-.gd-stage>.hl{transition:opacity .55s ease,transform .55s ease,visibility 0s linear 0s}
-.gd-stage>.hl[hidden]{opacity:0;transform:translateX(-48px);transition:opacity .45s ease,transform .45s ease,visibility 0s linear .45s}
-.gd-stage>.hl.on{opacity:1;animation:hlSlide .75s cubic-bezier(.2,.7,.1,1)}
-@keyframes hlSlide{from{opacity:0;transform:translateX(56px);filter:blur(5px)}to{opacity:1;transform:none;filter:none}}
-@media (prefers-reduced-motion:reduce){.gd-stage>.hl,.gd-stage>.hl[hidden]{transition:none;transform:none}.gd-stage>.hl.on{animation:none}}
+.gd-stage>.hl{transition:opacity .6s ease,visibility 0s linear 0s;transform:none !important;filter:none !important;will-change:opacity}
+.gd-stage>.hl[hidden]{opacity:0;transition:opacity .6s ease,visibility 0s linear .6s}
+.gd-stage>.hl.on{opacity:1;animation:none !important}
+@media (prefers-reduced-motion:reduce){.gd-stage>.hl,.gd-stage>.hl[hidden]{transition:none}}
 .hl-play{color:#19e35c;text-shadow:0 0 4px #3ee07a,0 0 10px #3ee07a,0 0 18px rgba(62,224,122,.9);animation:playGlow 1.6s ease-in-out infinite}
 @keyframes playGlow{50%{text-shadow:0 0 3px #3ee07a,0 0 7px rgba(62,224,122,.6)}}
 .su-row{align-items:stretch}
