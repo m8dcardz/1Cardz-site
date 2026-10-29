@@ -917,11 +917,12 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
 @media (prefers-reduced-motion:no-preference){.holo-btn{animation:holoFoil 4s linear infinite}}
 @keyframes holoFoil{to{background-position:220% 0}}
 .holo-btn:hover,.holo-btn:focus-visible,.holo-btn:active,.holo-btn[aria-current="page"]{color:#ffd23f;
-  text-shadow:-1px -1px 0 #16224d,1px -1px 0 #16224d,-1px 1px 0 #16224d,1px 1px 0 #16224d,0 0 8px rgba(255,210,63,.8);
-  box-shadow:inset 0 1px 0 #fff,0 4px 0 #6b5a2a,0 0 18px rgba(255,210,63,.55),0 0 0 2px rgba(255,210,63,.7)}
-.holo-btn:active{transform:translateY(3px);box-shadow:inset 0 1px 0 #fff,0 1px 0 #6b5a2a,0 0 0 2px rgba(255,210,63,.7)}
+  text-shadow:0 0 1px #16224d,0 0 2px #16224d,0 0 6px #ffd23f,0 0 12px #ffb800,0 0 20px rgba(255,184,0,.8)}
+.holo-btn:active{transform:translateY(3px);box-shadow:inset 0 1px 0 #fff,0 1px 0 #6b5a2a}
+button.holo-btn{border:0;cursor:default}
+.holo-soon:hover,.holo-soon:active{color:#16224d;text-shadow:0 1px 0 rgba(255,255,255,.55);transform:none}
 .holo-btn:focus-visible{outline:2px solid #fff;outline-offset:3px}
-@media (max-width:560px){.holo-nav{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-inline:9px}.holo-btn{text-align:center;font-size:10px;padding:12px 8px}}
+@media (max-width:560px){.holo-nav{gap:10px;margin-inline:9px}.holo-btn{font-size:9px;padding:11px 12px}}
 </style>
 </head>
 <body>
@@ -982,10 +983,13 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
     <button class="storm-a11y" id="stormBtn" type="button">Catch a holo card: flip a random face-down card in Fresh Hits</button>
   </div>
   <nav class="holo-nav" aria-label="Site sections">
+    <a class="holo-btn" href="index.html" aria-current="page">Home</a>
     <a class="holo-btn" href="news.html">Headlines</a>
     <a class="holo-btn" href="archive.html">Stories</a>
     <a class="holo-btn" href="market.html">Market</a>
     <a class="holo-btn" href="#newsletter">Newsletter</a>
+    <button class="holo-btn holo-soon" type="button" aria-disabled="true">Coming soon</button>
+    <button class="holo-btn holo-soon" type="button" aria-disabled="true">Coming soon</button>
   </nav>
 </section>
 
