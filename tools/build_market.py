@@ -18,7 +18,7 @@ fs = src.index('<footer class="wrap">'); footer = src[fs:src.index('\n</footer>'
 scrolltop = src[src.index('<script>'):src.index('</script>')+len('</script>')]
 header = re.sub(r'<p>The trading card game news channel.*?</p>',
     '<p>Market Watch. Daily market prices for sealed product and chase singles from the newest sets across seven games.</p>', header, flags=re.S)
-header = header.replace('<a class="btn" href="#set">Open the binder</a>', '<a class="btn" href="index.html">Back to the binder</a>')
+header = header.replace('<a class="btn" href="#set" id="seeLatest">See the latest</a>', '<a class="btn" href="index.html">Back to the binder</a>')
 
 # cover behaviour (videos, barcode, clock, fan + flip) reused from the archive page script
 a_js = arch[arch.rindex('<script>'):]

@@ -19,7 +19,7 @@ fs = src.index('<footer class="wrap">'); footer = src[fs:src.index('\n</footer>'
 scrolltop = src[src.index('<script>'):src.index('</script>')+len('</script>')]
 header = re.sub(r'<p>The trading card game news channel.*?</p>',
     '<p>News Headlines. Every story from the 8 AM and 8 PM drops, newest first, in plain text.</p>', header, flags=re.S)
-header = header.replace('<a class="btn" href="#set">Open the binder</a>', '<a class="btn" href="index.html">Back to the binder</a>')
+header = header.replace('<a class="btn" href="#set" id="seeLatest">See the latest</a>', '<a class="btn" href="index.html">Back to the binder</a>')
 a_js = arch[arch.rindex('<script>'):]
 cover_js = a_js[a_js.index('  /* binder videos: top first, bottom last */'):a_js.rindex('})();')]
 

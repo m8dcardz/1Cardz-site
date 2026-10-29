@@ -837,7 +837,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
       <h1 class="foil">TCG <br>News</h1>
       <p>The trading card game news channel, filed like a binder. Two hosts, one arcade-library studio and two new stories every day, each one sleeved and numbered.</p>
       <div class="row">
-        <a class="btn" href="#set">Open the binder</a>
+        <a class="btn" href="#set" id="seeLatest">See the latest</a>
         <div class="drop"><span class="mono">Next drop</span><b id="coverCount">--:--:--</b><span class="mono" id="coverWho">—</span></div>
       </div>
     </div>
@@ -1430,6 +1430,8 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
         btn.disabled=true;fetch(url,{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({email:v,list:box.dataset.list})})
           .then(r=>{if(!r.ok)throw 0;msg.textContent='You\'re in! Watch your inbox for the next drop.';f.reset()})
           .catch(()=>{msg.textContent='Something went wrong. Please try again in a minute.';msg.classList.add('err')}).finally(()=>{btn.disabled=false})})})})();
+  /* "See the latest": open and play the newest clip (the first headline's clip) */
+  (function(){const b=document.getElementById('seeLatest');if(!b)return;b.addEventListener('click',e=>{const w=document.querySelector('#hl0 .hl-watch');if(!w)return;e.preventDefault();w.click()})})();
   /* barcode */
   const bc=document.getElementById('barcode');let seed=1209;
   for(let i=0;i<46;i++){seed=(seed*9301+49297)%233280;const w=1+Math.floor(seed/233280*3.5);const el=document.createElement('i');el.style.width=w+'px';el.style.marginRight=(i%3?1:2)+'px';bc.appendChild(el)}

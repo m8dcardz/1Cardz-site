@@ -32,7 +32,7 @@ span = f"{fd.strftime('%b')} {fd.day} – {ld.strftime('%b')} {ld.day}, {ld.year
 header = header.replace('<span>101 Cards</span>', f'<span>{n} posts</span>')
 header = re.sub(r'<p>The trading card game news channel.*?</p>',
     '<p>The archive. Every clip Zia and Luna have posted, sleeved and numbered, newest first. Tap any card to flip it and play the story.</p>', header, flags=re.S)
-header = header.replace('<a class="btn" href="#set">Open the binder</a>', '<a class="btn" href="index.html">Back to the binder</a>')
+header = header.replace('<a class="btn" href="#set" id="seeLatest">See the latest</a>', '<a class="btn" href="index.html">Back to the binder</a>')
 
 e = html.escape
 cards = []
