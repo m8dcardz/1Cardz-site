@@ -777,6 +777,25 @@ body>header .cover .drop .mono{letter-spacing:-.07em;word-spacing:-.3em}
 /* top card face up: holo at 75% strength */
 .window:has(.coverflip[aria-pressed="true"])>.shine{opacity:calc(.045 + var(--o) * .375) !important}
 .window:has(.coverflip[aria-pressed="true"])>.glare{opacity:.8}
+/* sign-up box (headline-box glass design; reusable: set data-list and the text) */
+.signup-deck{margin-top:calc(-1 * clamp(24px,4vw,56px))}
+.signup .su-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:12px clamp(14px,2.4vw,22px);border-bottom:1px solid rgba(255,255,255,.1);position:relative;z-index:4}
+.signup .su-label{display:inline-flex;align-items:center;gap:6px;color:#ff8ad8;font-size:10.5px;letter-spacing:.14em}
+.signup .su-label i{width:6px;height:6px;border-radius:50%;background:#ff8ad8;box-shadow:0 0 10px #ff8ad8;animation:pulse 1.2s ease-in-out infinite}
+.signup .su-tag{color:#8c93ad;font-size:10.5px}
+.signup .su-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(18px,3vw,40px);align-items:center;padding:clamp(20px,3vw,32px) clamp(18px,3vw,30px);position:relative;z-index:4}
+.signup h3{font-family:var(--f-display);font-weight:800;font-stretch:82%;font-size:clamp(26px,3.2vw,38px);color:#fff;margin:0 0 8px;text-transform:none}
+.signup .su-copy p{margin:0;color:#c9cfe4;max-width:52ch}
+.su-lbl{display:block;color:#aab1c9;font-size:10.5px;margin-bottom:6px}
+.su-row{display:flex;gap:10px}
+.su-row input{flex:1;min-width:0;font:inherit;font-size:16px;color:#fff;background:rgba(5,8,20,.55);border:1px solid rgba(255,255,255,.22);border-radius:8px;padding:12px 14px;outline:none;box-shadow:inset 0 0 0 1px rgba(124,243,255,0)}
+.su-row input::placeholder{color:#6f7690}
+.su-row input:focus{border-color:#7cf3ff;box-shadow:0 0 0 3px rgba(124,243,255,.18)}
+.su-btn{white-space:nowrap}
+.su-msg{min-height:1.4em;margin:8px 0 0;font-size:14px;color:#5be39b}
+.su-msg.err{color:#ff8a9a}
+.su-fine{margin:2px 0 0;font-size:12px;color:#7d84a0}
+@media (max-width:700px){.signup .su-body{grid-template-columns:1fr}.su-row{flex-direction:column}.su-btn{width:100%}}
 /* top binder runs on downward: no bottom edge on the video or the stitching */
 body>header .cover{--vb:-14px !important;border-bottom-left-radius:0;border-bottom-right-radius:0}
 body>header .cover .stitch{border-bottom:0;bottom:-4px;border-bottom-left-radius:0;border-bottom-right-radius:0}
