@@ -1481,7 +1481,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
     function spawn(c){const ch=H*(.42+Math.random()*.2),cw=ch*63/88;c=c||{};
       Object.assign(c,{w:cw,h:ch,x:Math.random()*(W-cw)+cw/2,y:Math.random()*(H-ch)+ch/2,vx:(Math.random()<.5?-1:1)*(60+Math.random()*170),vy:(Math.random()<.5?-1:1)*(40+Math.random()*120),
         r:Math.random()*6.28,vr:(Math.random()-.5)*5,flip:0,gone:false,a:0,holo:!!c.holo,hp:Math.random()*6.28});return c}
-    function init(){size();const n=W<500?6:W<900?9:13;cards=Array.from({length:n},()=>spawn());cards.slice(-3).forEach(c=>c.holo=true)}
+    function init(){size();const n=W<500?6:W<900?9:13;cards=Array.from({length:n},()=>spawn());cards.slice(0,3).forEach(c=>c.holo=true)}
     function step(t){if(!run)return;const dt=Math.min(.05,(t-(last||t))/1000);last=t;ctx.clearRect(0,0,W,H);
       for(const c of cards){
         if(c.flip>0){c.flip+=dt*2.2;c.vx*=.9;c.vy*=.9;if(c.flip>=1){spawn(c)}}
@@ -1500,19 +1500,26 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
           ctx.globalCompositeOperation='overlay';ctx.fillStyle=g;ctx.fillRect(-c.w/2,-c.h/2,c.w,c.h);ctx.globalCompositeOperation='soft-light';ctx.fillRect(-c.w/2,-c.h/2,c.w,c.h);
           ctx.globalCompositeOperation='screen';const sh=ctx.createLinearGradient(-c.w/2,0,c.w/2,0),q=(Math.sin(c.hp*1.3)+1)/2;sh.addColorStop(Math.max(0,q-.15),'rgba(255,255,255,0)');sh.addColorStop(q,'rgba(255,255,255,.45)');sh.addColorStop(Math.min(1,q+.15),'rgba(255,255,255,0)');ctx.fillStyle=sh;ctx.fillRect(-c.w/2,-c.h/2,c.w,c.h);ctx.globalCompositeOperation='source-over'}
         ctx.restore();
-        ctx.lineWidth=Math.max(1.5,c.w*.035);ctx.strokeStyle=c.flip>0?'#ffd23f':(c.holo?'#ffd23f':'#3e5fbf');ctx.stroke();ctx.restore()}
+        ctx.lineWidth=Math.max(1.5,c.w*.035);ctx.strokeStyle=(c.flip>0&&!c.holo)?'#ffd23f':'#3e5fbf';ctx.stroke();ctx.restore()}
       for(const b of bursts){b.t+=dt;for(const p of b.p){const k=b.t;ctx.globalAlpha=Math.max(0,1-k*1.4);ctx.fillStyle=p.c;ctx.beginPath();ctx.arc(b.x+p.vx*k,b.y+p.vy*k+60*k*k,p.s,0,6.28);ctx.fill()}}
       ctx.globalAlpha=1;bursts=bursts.filter(b=>b.t<.8);requestAnimationFrame(step)}
     function hitAt(px,py){for(let i=cards.length-1;i>=0;i--){const c=cards[i];if(c.flip>0)continue;const dx=px-c.x,dy=py-c.y,co=Math.cos(-c.r),si=Math.sin(-c.r),lx=dx*co-dy*si,ly=dx*si+dy*co;
       if(Math.abs(lx)<=c.w/2+6&&Math.abs(ly)<=c.h/2+6)return c}return null}
-    function reveal(){const down=pockets().filter(c=>c.getAttribute('aria-pressed')!=='true');
+    function reveal(){const down=pockets().filter(c=>c.getAttribute('aria-pressed')!=='true'&&!c._pend);
       if(!down.length){hint.textContent='Binder complete! Catch one more to shuffle them all face down';
         pockets().forEach((c,i)=>setTimeout(()=>c.setAttribute('aria-pressed','false'),i*60));setTimeout(upd,1200);return}
-      const c=down[Math.floor(Math.random()*down.length)];c.setAttribute('aria-pressed','true');
-      const name=(c.querySelector('h3')||{}).textContent||'a card';hint.textContent='You flipped '+name+'! '+(down.length-1?(down.length-1)+' still face down':'Binder complete!');
-      const pk=c.closest('.pocket');pk.classList.remove('storm-hit');void pk.offsetWidth;pk.classList.add('storm-hit');setTimeout(()=>pk.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'}),350);
-      const all=document.getElementById('flipAll');if(all){const u=pockets().every(f=>f.getAttribute('aria-pressed')==='true');all.textContent=u?'Turn all face down':'Flip all cards';all.setAttribute('aria-pressed',String(u))}
-      upd()}
+      const c=down[Math.floor(Math.random()*down.length)],pk=c.closest('.pocket');c._pend=true;
+      const name=(c.querySelector('h3')||{}).textContent||'a card';hint.textContent='Holo caught! Flipping a card in the binder...';
+      pk.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'});
+      /* wait until the scroll has settled and the card is on screen, then flip it */
+      let lastY=-1,still=0,t0=performance.now();
+      (function wait(){const y=scrollY;still=(Math.abs(y-lastY)<1)?still+1:0;lastY=y;
+        if((still>=6&&performance.now()-t0>250)||performance.now()-t0>2500){setTimeout(()=>{
+          c._pend=false;c.setAttribute('aria-pressed','true');pk.classList.remove('storm-hit');void pk.offsetWidth;pk.classList.add('storm-hit');
+          hint.textContent='You flipped '+name+'! '+(down.length-1?(down.length-1)+' still face down':'Binder complete!');
+          const all=document.getElementById('flipAll');if(all){const u=pockets().every(f=>f.getAttribute('aria-pressed')==='true');all.textContent=u?'Turn all face down':'Flip all cards';all.setAttribute('aria-pressed',String(u))}
+          upd()},200)}else requestAnimationFrame(wait)})();
+    }
     function miss(c){c.vx*=-1.4;c.vy*=-1.4;c.vr=(Math.random()<.5?-1:1)*9;hint.textContent='Not that one! Catch a shiny holo card';}
     function catchCard(c){c.flip=.001;c.vr*=.3;const cols=['#ffd23f','#7cf3ff','#ff8ad8','#5be39b','#fff'];
       bursts.push({x:c.x,y:c.y,t:0,p:Array.from({length:22},()=>{const a=Math.random()*6.28,v=80+Math.random()*220;return{vx:Math.cos(a)*v,vy:Math.sin(a)*v,s:1.5+Math.random()*2.5,c:cols[Math.random()*5|0]}})});reveal()}
