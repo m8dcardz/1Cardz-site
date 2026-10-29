@@ -700,6 +700,14 @@ body>header .cover .drop .mono{letter-spacing:-.07em;word-spacing:-.3em}
   box-shadow:0 0 0 1.5px rgba(255,255,255,.7),0 6px 18px rgba(0,0,0,.45);opacity:.85;transition:transform .2s,opacity .2s}
 .hl-shot:hover::before,.hl-shot:focus-visible::before{opacity:1;transform:scale(1.08)}
 .hl-shot:focus-visible{outline:2px solid #e9c46a;outline-offset:3px}
+/* mobile: small Headlines / Market labels above each LCD line */
+@media (max-width:560px){
+  .lcdbox{flex-wrap:wrap;row-gap:4px}
+  .lcd-label{width:100%;gap:5px;font-size:9.5px;letter-spacing:.14em;line-height:1}
+  .lcd-label span{display:inline !important}
+  .lcd-label i{width:5px;height:5px}
+  .lcdbox .lcd{flex:1 1 100%;min-width:0}
+}
 /* top binder runs on downward: no bottom edge on the video or the stitching */
 body>header .cover{--vb:-14px !important;border-bottom-left-radius:0;border-bottom-right-radius:0}
 body>header .cover .stitch{border-bottom:0;bottom:-4px;border-bottom-left-radius:0;border-bottom-right-radius:0}
