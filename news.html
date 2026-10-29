@@ -796,6 +796,10 @@ body>header .cover .drop .mono{letter-spacing:-.07em;word-spacing:-.3em}
 .su-msg.err{color:#ff8a9a}
 .su-fine{margin:2px 0 0;font-size:12px;color:#7d84a0}
 @media (max-width:700px){.signup .su-body{grid-template-columns:1fr}.su-row{flex-direction:column}.su-btn{width:100%}}
+/* back cover: no barcode anywhere; brighter text */
+.cover-back .barcode{display:none !important}
+.cover-back .copy p.back-lines{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.85),0 0 12px rgba(0,0,0,.6)}
+body>footer .cover .copy>.mono{color:#fff !important;text-shadow:0 1px 3px rgba(0,0,0,.85)}
 /* top binder runs on downward: no bottom edge on the video or the stitching */
 body>header .cover{--vb:-14px !important;border-bottom-left-radius:0;border-bottom-right-radius:0}
 body>header .cover .stitch{border-bottom:0;bottom:-4px;border-bottom-left-radius:0;border-bottom-right-radius:0}
@@ -977,7 +981,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
       <p class="back-lines"><span>New stories at 8:00 AM and 8:00 PM on</span><span class="socials-inline"><a class="soc sm ig" href="https://www.instagram.com/1cardz_news/" target="_blank" rel="noopener" title="1Cardz on Instagram" aria-label="1Cardz on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor"/></svg></a><a class="soc sm yt" href="https://www.youtube.com/@1Cardzcom" target="_blank" rel="noopener" title="1Cardz on YouTube" aria-label="1Cardz on YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 8.2l6.3 3.8-6.3 3.8z" fill="currentColor"/></svg></a><a class="soc sm tt" href="https://www.tiktok.com/@1cardz.com" target="_blank" rel="noopener" title="1Cardz on TikTok" aria-label="1Cardz on TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3v11.5a3.5 3.5 0 1 1-3.5-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M13 3c.6 2.8 2.5 4.6 5.5 4.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a></span><span>Game names belong to their publishers.</span></p>
       <div class="barcode" id="barcode" aria-hidden="true"></div>
       <a class="domain" href="https://1cardz.news">1Cardz.news</a>
-      <span class="mono" style="color:#c9cfe4">1CZ-2026 · Vol. 1</span>
+      <span class="mono" style="color:#c9cfe4">1CZ-2026 · 1Cardz.news</span>
     </div>
     <div class="strap" aria-hidden="true"></div>
   </div>
