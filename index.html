@@ -808,7 +808,7 @@ body>footer .cover .copy>.mono{color:#fff !important;text-shadow:0 1px 3px rgba(
 .pockets>.pocket:nth-child(-n+3) .holo .shine,.pockets>.pocket:nth-child(-n+3) .tcg.holo>.shine{opacity:calc(.051 + var(--o) * .425)}
 /* no caption line under the card pages */
 .sheet-foot{display:none !important}
-/* card storm game box (5:1, under the top binder) */
+/* Lucky Draw game box (5:1, under the top binder) */
 .storm-wrap.wrap{max-width:1400px;padding-left:max(4vw, env(safe-area-inset-left, 0px));padding-right:max(4vw, env(safe-area-inset-right, 0px));margin-top:calc(-1 * clamp(26px,4.6vw,66px))}
 .storm{width:100%}
 .storm-wrap+.glassdeck{margin-top:clamp(16px,2.4vw,28px) !important}
@@ -898,9 +898,9 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
   <div class="gd storm" id="storm">
     <canvas id="stormCanvas" aria-hidden="true"></canvas>
     <div class="storm-hud">
-      <span class="mono storm-label"><i></i><span id="storm-h">Card storm</span></span>
+      <span class="mono storm-label"><i></i><span id="storm-h">Lucky Draw</span></span>
       <span class="mono storm-hint" id="stormHint">Catch a shiny holo card to flip one in the binder</span>
-      <span class="mono storm-score" id="stormScore">0 / 15</span>
+      
     </div>
     <button class="storm-a11y" id="stormBtn" type="button">Catch a holo card: flip a random face-down card in Fresh Hits</button>
   </div>
@@ -1475,10 +1475,10 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
     const img=new Image();img.src='img/card.webp';
     const pockets=()=>[...document.querySelectorAll('.pockets .flip')];
     const up=()=>pockets().filter(c=>c.getAttribute('aria-pressed')==='true').length;
-    const upd=()=>{score.textContent=up()+' / '+pockets().length};
+    const upd=()=>{if(score)score.textContent=up()+' / '+pockets().length};
     let W=0,H=0,dpr=1,cards=[],bursts=[],run=false,last=0;
     function size(){const r=box.getBoundingClientRect();dpr=Math.min(2,devicePixelRatio||1);W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
-    function spawn(c){const ch=H*(.42+Math.random()*.2),cw=ch*63/88;c=c||{};
+    function spawn(c){const ch=H*(.42+Math.random()*.04),cw=ch*63/88;c=c||{};
       Object.assign(c,{w:cw,h:ch,x:Math.random()*(W-cw)+cw/2,y:Math.random()*(H-ch)+ch/2,vx:(Math.random()<.5?-1:1)*(60+Math.random()*170),vy:(Math.random()<.5?-1:1)*(40+Math.random()*120),
         r:Math.random()*6.28,vr:(Math.random()-.5)*5,flip:0,gone:false,a:0,holo:!!c.holo,hp:Math.random()*6.28});return c}
     function init(){size();const n=W<500?6:W<900?9:13;cards=Array.from({length:n},()=>spawn());cards.slice(0,3).forEach(c=>c.holo=true)}
