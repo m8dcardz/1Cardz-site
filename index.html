@@ -688,6 +688,18 @@ body>header .cover .copy{gap:12px}
 }
 /* tighter "Next drop" and host/time labels */
 body>header .cover .drop .mono{letter-spacing:-.07em;word-spacing:-.3em}
+/* bottom binder: tighter, matches the top binder on wide screens */
+@media (min-width:1100px){
+  body>footer .cover{padding-top:clamp(10px,1.4vw,20px)}
+  body>footer .cover .copy{gap:9px;padding-block:clamp(4px,.8vw,12px)}
+}
+/* headline stills open and play the clip, like the Watch button */
+.hl-shot{cursor:pointer}
+.hl-shot::before{content:"";position:absolute;z-index:2;left:50%;top:50%;width:54px;height:54px;translate:-50% -50%;border-radius:50%;
+  background:rgba(10,14,34,.55) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 6.5l9 5.5-9 5.5z' fill='%23fff'/%3E%3C/svg%3E") 56% 50%/26px no-repeat;
+  box-shadow:0 0 0 1.5px rgba(255,255,255,.7),0 6px 18px rgba(0,0,0,.45);opacity:.85;transition:transform .2s,opacity .2s}
+.hl-shot:hover::before,.hl-shot:focus-visible::before{opacity:1;transform:scale(1.08)}
+.hl-shot:focus-visible{outline:2px solid #e9c46a;outline-offset:3px}
 /* top binder runs on downward: no bottom edge on the video or the stitching */
 body>header .cover{--vb:-14px !important;border-bottom-left-radius:0;border-bottom-right-radius:0}
 body>header .cover .stitch{border-bottom:0;bottom:-4px;border-bottom-left-radius:0;border-bottom-right-radius:0}
@@ -1220,6 +1232,10 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
     function loop(now){if(paused||hover){t0=now-held}else{held=now-t0;if(held>=DUR){show(cur+1);held=0}}
       tabs[cur].style.setProperty('--p',(Math.min(1,held/DUR)*100).toFixed(1)+'%');requestAnimationFrame(loop)}
     requestAnimationFrame(loop);
+    /* clicking a headline still does the same as its Watch button */
+    document.querySelectorAll('.hl').forEach(h=>{const sh=h.querySelector('.hl-shot'),w=h.querySelector('.hl-watch');if(!sh||!w)return;
+      sh.setAttribute('role','button');sh.setAttribute('tabindex','0');sh.setAttribute('aria-label','Play the clip: '+(h.querySelector('h3')||{textContent:''}).textContent);
+      sh.addEventListener('click',()=>w.click());sh.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();w.click()}})});
     document.querySelectorAll('.hl-watch,.lcd-item').forEach(b=>b.addEventListener('click',()=>{
       const card=[...document.querySelectorAll('.clipcard')].find(c=>c.querySelector('h3')&&c.querySelector('h3').textContent.trim()===b.dataset.card);
       if(!card)return;card.setAttribute('aria-pressed','true');card.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'});
