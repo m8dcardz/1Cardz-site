@@ -752,6 +752,17 @@ body>header .cover .drop .mono{letter-spacing:-.07em;word-spacing:-.3em}
   .domain{font-size:18px;line-height:1.1}
   body>footer .cover .copy>.mono{font-size:8.5px}
 }
+/* mobile back cover: no barcode, bigger text in the same height */
+@media (max-width:560px){
+  .cover-back .barcode{display:none}
+  .cover-back h2{font-size:27px}
+  .cover-back .copy p.back-lines{font-size:12.5px;gap:3px}
+  .soc.sm{width:26px;height:26px}
+  .soc.sm svg{width:15px;height:15px}
+  .domain{font-size:21px}
+  body>footer .cover .copy>.mono{font-size:9.5px}
+  body>footer .cover .copy{gap:6px}
+}
 /* top binder runs on downward: no bottom edge on the video or the stitching */
 body>header .cover{--vb:-14px !important;border-bottom-left-radius:0;border-bottom-right-radius:0}
 body>header .cover .stitch{border-bottom:0;bottom:-4px;border-bottom-left-radius:0;border-bottom-right-radius:0}
