@@ -853,6 +853,23 @@ body>footer .cover .copy>.mono{color:#fff !important;text-shadow:0 1px 3px rgba(
 @property --rgb{syntax:'<color>';inherits:true;initial-value:#ff2e4d}
 @keyframes rgbFlash{0%{--rgb:#ff2e4d}16%{--rgb:#ffd23f}33%{--rgb:#3ee07a}50%{--rgb:#2de2e6}66%{--rgb:#3a6bff}83%{--rgb:#c04dff}100%{--rgb:#ff2e4d}}
 @media (prefers-reduced-motion: reduce){.storm.style-arcade{animation-duration:12s}}
+/* newsletter box: compact strip sitting on top of the bottom binder; holo game box square corners */
+.storm.style-arcade{border-radius:0 !important}
+section.signup-deck.wrap{max-width:1400px;margin:clamp(40px,6vw,80px) auto 0 !important;padding-block:0 !important;padding-left:max(4vw, env(safe-area-inset-left, 0px));padding-right:max(4vw, env(safe-area-inset-right, 0px))}
+section.signup-deck+footer{padding-top:0 !important}
+.signup.gd{border-radius:18px 18px 0 0 !important;border-bottom:0 !important}
+.signup .su-top{display:none}
+.signup .su-body{grid-template-columns:auto minmax(0,1fr) minmax(0,1.15fr);gap:clamp(12px,2vw,26px);padding:12px clamp(14px,2.4vw,24px);align-items:center}
+.signup .su-body::before{content:"Newsletter";font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#ff8ad8;display:flex;align-items:center;gap:6px}
+.signup h3{font-size:clamp(17px,1.6vw,21px) !important;margin:0 0 2px}
+.signup .su-copy p{font-size:13px;line-height:1.35;color:#aab1c9}
+.su-lbl,.su-fine{display:none}
+.su-row input{padding:9px 12px;font-size:15px}
+.su-btn{padding:10px 16px !important}
+.su-msg{margin:4px 0 0;min-height:0;font-size:13px}
+.su-msg:empty{display:none}
+@media (max-width:900px){.signup .su-body{grid-template-columns:1fr}.signup .su-body::before{display:none}.signup .su-copy p{display:none}}
+@media (max-width:700px){.su-row{flex-direction:row}.su-btn{width:auto}}
 /* top binder runs on downward: no bottom edge on the video or the stitching */
 body>header .cover{--vb:-14px !important;border-bottom-left-radius:0;border-bottom-right-radius:0}
 body>header .cover .stitch{border-bottom:0;bottom:-4px;border-bottom-left-radius:0;border-bottom-right-radius:0}
@@ -983,26 +1000,6 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
   </div>
 </section>
 
-<section class="wrap glassdeck signup-deck" aria-labelledby="su-h">
-  <div class="gd signup" data-list="newsletter">
-    <div class="su-top"><span class="mono su-label"><i></i><span>Newsletter</span></span><span class="mono su-tag">Free · no spam</span></div>
-    <div class="su-body">
-      <div class="su-copy">
-        <h3 id="su-h">Get the drop in your inbox</h3>
-        <p>The week's biggest TCG headlines, the market movers and the next clips from Zia and Luna. No spam, no buying advice, unsubscribe any time.</p>
-      </div>
-      <form class="su-form" novalidate>
-        <label class="su-lbl mono" for="su-email">Email address</label>
-        <div class="su-row">
-          <input id="su-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required>
-          <button class="btn su-btn" type="submit">Sign me up</button>
-        </div>
-        <p class="su-msg" role="status" aria-live="polite"></p>
-        <p class="su-fine">We only use your email to send this newsletter. Game names belong to their publishers.</p>
-      </form>
-    </div>
-  </div>
-</section>
 <main>
   <section class="wrap" id="set" aria-labelledby="set-h">
     <div class="sheet-head">
@@ -1295,6 +1292,26 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
 
 </main>
 
+<section class="wrap signup-deck" aria-labelledby="su-h">
+  <div class="gd signup" data-list="newsletter">
+    <div class="su-top"><span class="mono su-label"><i></i><span>Newsletter</span></span><span class="mono su-tag">Free · no spam</span></div>
+    <div class="su-body">
+      <div class="su-copy">
+        <h3 id="su-h">Get the drop in your inbox</h3>
+        <p>The week's biggest TCG headlines, the market movers and the next clips from Zia and Luna. No spam, no buying advice, unsubscribe any time.</p>
+      </div>
+      <form class="su-form" novalidate>
+        <label class="su-lbl mono" for="su-email">Email address</label>
+        <div class="su-row">
+          <input id="su-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required>
+          <button class="btn su-btn" type="submit">Sign me up</button>
+        </div>
+        <p class="su-msg" role="status" aria-live="polite"></p>
+        <p class="su-fine">We only use your email to send this newsletter. Game names belong to their publishers.</p>
+      </form>
+    </div>
+  </div>
+</section>
 <footer class="wrap">
   <div class="cover cover-back">
     <video class="cover-video lazy-cover" data-src="img/cover-holo-loop.mp4" data-poster="img/cover-holo-poster.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
