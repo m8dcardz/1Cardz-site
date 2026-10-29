@@ -808,7 +808,7 @@ body>footer .cover .copy>.mono{color:#fff !important;text-shadow:0 1px 3px rgba(
 .pockets>.pocket:nth-child(-n+3) .holo .shine,.pockets>.pocket:nth-child(-n+3) .tcg.holo>.shine{opacity:calc(.051 + var(--o) * .425)}
 /* no caption line under the card pages */
 .sheet-foot{display:none !important}
-/* Hit The Holo game box (5:1, under the top binder) */
+/* Shuffle Machine (was Hit The Holo) game box (5:1, under the top binder) */
 .storm-wrap.wrap{max-width:1400px;padding-left:max(4vw, env(safe-area-inset-left, 0px));padding-right:max(4vw, env(safe-area-inset-right, 0px));margin-top:calc(-1 * clamp(12px,3.6vw,52px))}
 .storm{width:100%}
 .storm-wrap+.glassdeck{margin-top:clamp(10px,1.6vw,18px) !important}
@@ -908,7 +908,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
 .su-btn:hover{filter:brightness(1.06)}
 .window.holo:not(:has(.coverflip[aria-pressed="true"]))>.shine{opacity:calc(.051 + var(--o) * .425)}
 .window .back::after{background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.2975) 50%,transparent 60%)}
-/* holo foil nav buttons under Hit The Holo: dark blue text, yellow when active */
+/* holo foil nav buttons under the Shuffle Machine: dark blue text, yellow when active */
 .holo-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin:calc(10px + clamp(14px,2vw,22px)) 10px 0}
 .holo-btn{font-family:"Press Start 2P",ui-monospace,monospace;font-size:11px;line-height:1.4;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;
   padding:13px 20px;border-radius:10px;color:#16224d;text-shadow:0 1px 0 rgba(255,255,255,.55);
@@ -937,7 +937,7 @@ button.holo-btn{border:0;cursor:default}
 .holo-btn:nth-child(4){animation-duration:5.2s;animation-delay:-0.7s}
 .holo-btn:nth-child(5){animation-duration:4.4s;animation-delay:-3.1s}
 .holo-btn:nth-child(6){animation-duration:3.9s;animation-delay:-1.9s}}
-/* Hit The Holo: daily collection counter + caught card flying into the binder */
+/* Shuffle Machine (was Hit The Holo): daily collection counter + caught card flying into the binder */
 .storm-found{display:inline-flex;align-items:center;gap:8px;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#ffd23f;text-shadow:0 0 8px rgba(255,210,63,.6);white-space:nowrap}
 .storm-found b{font-family:"Press Start 2P",ui-monospace,monospace;font-size:10px;font-weight:400;color:#fff;text-shadow:0 0 8px rgba(255,210,63,.8)}
 .sf-pips{display:inline-flex;gap:3px}
@@ -1006,7 +1006,7 @@ button.holo-btn{border:0;cursor:default}
     <div class="storm-bg" aria-hidden="true"></div><div class="storm-fx" aria-hidden="true"></div>
     <canvas id="stormCanvas" aria-hidden="true"></canvas>
     <div class="storm-hud">
-      <span class="mono storm-label"><i></i><span id="storm-h">Hit The Holo</span></span>
+      <span class="mono storm-label"><i></i><span id="storm-h">Shuffle Machine</span></span>
       <span class="mono storm-hint" id="stormHint">Catch shiny holo cards to collect today's binder set</span>
       <span class="mono storm-found" id="stormFound" aria-live="polite"><b id="stormFoundN">0/0</b> found today<i class="sf-pips" id="stormPips" aria-hidden="true"></i></span>
       
@@ -1597,14 +1597,14 @@ button.holo-btn{border:0;cursor:default}
     const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Hong_Kong'}).format(new Date()),KEY='1cz-holo-found';
     let col={day:today,found:[]};try{const o=JSON.parse(localStorage.getItem(KEY)||'null');if(o&&o.day===today&&Array.isArray(o.found))col=o}catch(e){}
     const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(col))}catch(e){}};
-    const setIdx=pockets().map((c,i)=>c.getAttribute('aria-pressed')!=='true'?i:-1).filter(i=>i>=0); /* the cards that start face down are today's set */
+    const SET_SIZE=8,setIdx=pockets().map((c,i)=>c.getAttribute('aria-pressed')!=='true'?i:-1).filter(i=>i>=0).slice(0,SET_SIZE); /* today's set: the first 8 cards that start face down */
     col.found=col.found.filter(i=>setIdx.includes(i));
     col.found.forEach(i=>{const f=pockets()[i];if(f)f.setAttribute('aria-pressed','true')});
     const fN=document.getElementById('stormFoundN'),pips=document.getElementById('stormPips'),fBox=document.getElementById('stormFound');
     if(pips)pips.replaceChildren(...setIdx.map(()=>document.createElement('span')));
     const updFound=()=>{if(fN)fN.textContent=col.found.length+'/'+setIdx.length;if(pips)[...pips.children].forEach((p,i)=>p.classList.toggle('on',i<col.found.length))};
     updFound();
-    let W=0,H=0,dpr=1,cards=[],bursts=[],stars=[],run=false,last=0;
+    let W=0,H=0,dpr=1,cards=[],bursts=[],stars=[],minis=[],rings=[],run=false,last=0;
     function size(){const r=box.getBoundingClientRect();dpr=Math.min(2,devicePixelRatio||1);W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
     function spawn(c){const ch=H*(.42+Math.random()*.04),cw=ch*63/88;c=c||{};
       Object.assign(c,{w:cw,h:ch,x:Math.random()*(W-cw)+cw/2,y:Math.random()*(H-ch)+ch/2,vx:(Math.random()<.5?-1:1)*(60+Math.random()*170),vy:(Math.random()<.5?-1:1)*(40+Math.random()*120),
@@ -1632,6 +1632,16 @@ button.holo-btn{border:0;cursor:default}
         ctx.restore();
         ctx.lineWidth=Math.max(1.5,c.w*.035);ctx.strokeStyle=(c.flip>0&&!c.holo)?'#ffd23f':'#3e5fbf';ctx.stroke();ctx.restore()}
       for(const b of bursts){b.t+=dt;for(const p of b.p){const k=b.t;ctx.globalAlpha=Math.max(0,1-k*1.4);ctx.fillStyle=p.c;ctx.beginPath();ctx.arc(b.x+p.vx*k,b.y+p.vy*k+60*k*k,p.s,0,6.28);ctx.fill()}}
+      /* pack burst: a ring flash and 5 mini cards spinning out */
+      for(const g of rings){g.t+=dt;const k=g.t/.55;ctx.globalAlpha=Math.max(0,1-k);ctx.strokeStyle='#fff';ctx.lineWidth=6*(1-k)+1;ctx.shadowColor='#ffd23f';ctx.shadowBlur=20;ctx.beginPath();ctx.arc(g.x,g.y,g.r0+k*g.r1,0,6.28);ctx.stroke();ctx.shadowBlur=0}
+      rings=rings.filter(g=>g.t<.55);
+      for(const m of minis){m.t+=dt;m.vy+=520*dt;m.vx*=.992;m.x+=m.vx*dt;m.y+=m.vy*dt;m.r+=m.vr*dt;const life=Math.max(0,1-m.t/1.5);
+        ctx.save();ctx.translate(m.x,m.y);ctx.rotate(m.r);ctx.scale(Math.cos(m.t*m.fs),1);ctx.globalAlpha=life;
+        ctx.beginPath();ctx.roundRect(-m.w/2,-m.h/2,m.w,m.h,m.w*.08);ctx.fillStyle='#16224d';ctx.fill();ctx.save();ctx.clip();
+        if(img.complete&&img.naturalWidth)ctx.drawImage(img,-m.w/2,-m.h/2,m.w,m.h);
+        ctx.globalCompositeOperation='overlay';ctx.fillStyle=m.c;ctx.fillRect(-m.w/2,-m.h/2,m.w,m.h);ctx.globalCompositeOperation='source-over';ctx.restore();
+        ctx.lineWidth=1.5;ctx.strokeStyle=m.c;ctx.shadowColor=m.c;ctx.shadowBlur=10;ctx.stroke();ctx.restore()}
+      minis=minis.filter(m=>m.t<1.5);
       ctx.globalAlpha=1;bursts=bursts.filter(b=>b.t<.8);requestAnimationFrame(step)}
     function hitAt(px,py){for(let i=cards.length-1;i>=0;i--){const c=cards[i];if(c.flip>0)continue;const dx=px-c.x,dy=py-c.y,co=Math.cos(-c.r),si=Math.sin(-c.r),lx=dx*co-dy*si,ly=dx*si+dy*co;
       if(Math.abs(lx)<=c.w/2+6&&Math.abs(ly)<=c.h/2+6)return c}return null}
@@ -1663,6 +1673,10 @@ button.holo-btn{border:0;cursor:default}
     function miss(c){c.vx*=-1.4;c.vy*=-1.4;c.vr=(Math.random()<.5?-1:1)*9;hint.textContent='Not that one! Catch a shiny holo card';}
     function catchCard(c){c.flip=.001;c.vr*=.3;const cols=['#ffd23f','#7cf3ff','#ff8ad8','#5be39b','#fff'];
       bursts.push({x:c.x,y:c.y,t:0,p:Array.from({length:22},()=>{const a=Math.random()*6.28,v=80+Math.random()*220;return{vx:Math.cos(a)*v,vy:Math.sin(a)*v,s:1.5+Math.random()*2.5,c:cols[Math.random()*5|0]}})});
+      if(!reduce){rings.push({x:c.x,y:c.y,t:0,r0:c.h*.3,r1:c.h*1.1});
+        const mc=['#ff8ad8','#ffd23f','#7cf3ff','#5be39b','#c58cff'];
+        for(let i=0;i<5;i++){const a=-Math.PI/2+(i-2)*1.05+(Math.random()-.5)*.35,v=150+Math.random()*120,mw=c.w*.42;
+          minis.push({x:c.x,y:c.y,w:mw,h:mw*88/63,vx:Math.cos(a)*v,vy:Math.sin(a)*v-60,r:c.r,vr:(Math.random()<.5?-1:1)*(6+Math.random()*6),fs:6+Math.random()*6,t:0,c:mc[i]})}}
       const br=box.getBoundingClientRect(),from={x:br.left+c.x,y:br.top+c.y,w:c.w,h:c.h,r:c.r};if(!reduce)c.flip=.97;reveal(from)}
     box.addEventListener('pointerdown',e=>{const r=box.getBoundingClientRect(),c=hitAt(e.clientX-r.left,e.clientY-r.top);if(!c)return;if(c.holo)catchCard(c);else miss(c)});
     box.addEventListener('pointermove',e=>{const r=box.getBoundingClientRect();box.style.cursor=hitAt(e.clientX-r.left,e.clientY-r.top)?'pointer':'crosshair'});
