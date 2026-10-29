@@ -1,0 +1,117 @@
+[
+ {
+  "n": 1,
+  "name": "Zia, On Air",
+  "holo": false
+ },
+ {
+  "n": 2,
+  "name": "Headline Grin",
+  "holo": false
+ },
+ {
+  "n": 3,
+  "name": "Auction Alert",
+  "holo": false
+ },
+ {
+  "n": 4,
+  "name": "Spoiler Stance",
+  "holo": false
+ },
+ {
+  "n": 5,
+  "name": "Pad Pull",
+  "holo": false
+ },
+ {
+  "n": 6,
+  "name": "Side Scoop",
+  "holo": false
+ },
+ {
+  "n": 7,
+  "name": "Luna Arrives",
+  "holo": false
+ },
+ {
+  "n": 8,
+  "name": "Ban Notice",
+  "holo": false
+ },
+ {
+  "n": 9,
+  "name": "Night Desk",
+  "holo": false
+ },
+ {
+  "n": 10,
+  "name": "Controller Calm",
+  "holo": false
+ },
+ {
+  "n": 11,
+  "name": "Close Read",
+  "holo": false
+ },
+ {
+  "n": 12,
+  "name": "Pocket Check",
+  "holo": false
+ },
+ {
+  "n": 13,
+  "name": "Arcade Aisle",
+  "holo": false
+ },
+ {
+  "n": 14,
+  "name": "Big Laugh",
+  "holo": false
+ },
+ {
+  "n": 15,
+  "name": "Final Word",
+  "holo": false
+ },
+ {
+  "n": 16,
+  "name": "Zia",
+  "holo": false
+ },
+ {
+  "n": 17,
+  "name": "Luna",
+  "holo": false
+ },
+ {
+  "n": 18,
+  "name": "The Studio",
+  "holo": false
+ },
+ {
+  "n": 19,
+  "name": "News Mic",
+  "holo": false
+ },
+ {
+  "n": 20,
+  "name": "1 Cardz News",
+  "holo": false
+ },
+ {
+  "n": 21,
+  "name": "Holo Zia",
+  "holo": true
+ },
+ {
+  "n": 22,
+  "name": "Holo Luna",
+  "holo": true
+ },
+ {
+  "n": 23,
+  "name": "Holo Globe",
+  "holo": true
+ }
+]

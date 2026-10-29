@@ -1007,7 +1007,7 @@ button.holo-btn{border:0;cursor:default}
     <canvas id="stormCanvas" aria-hidden="true"></canvas>
     <div class="storm-hud">
       <span class="mono storm-label"><i></i><span id="storm-h">Shuffle Machine</span></span>
-      <span class="mono storm-hint" id="stormHint">Catch shiny holo cards to collect today's binder set</span>
+      <span class="mono storm-hint" id="stormHint">Tap any card to flip it. Catch a holo to collect today's set</span>
       <span class="mono storm-found" id="stormFound" aria-live="polite"><b id="stormFoundN">0/0</b> found today<i class="sf-pips" id="stormPips" aria-hidden="true"></i></span>
       
     </div>
@@ -1590,6 +1590,10 @@ button.holo-btn{border:0;cursor:default}
   (function(){const box=document.getElementById('storm'),cv=document.getElementById('stormCanvas');if(!box||!cv)return;
     const ctx=cv.getContext('2d'),hint=document.getElementById('stormHint'),score=document.getElementById('stormScore'),btn=document.getElementById('stormBtn');
     const img=new Image();img.src='img/card.webp';
+    /* card faces: 20 plain + 3 holo, loaded when the machine first comes into view */
+    const FACE_NAMES=["Zia, On Air", "Headline Grin", "Auction Alert", "Spoiler Stance", "Pad Pull", "Side Scoop", "Luna Arrives", "Ban Notice", "Night Desk", "Controller Calm", "Close Read", "Pocket Check", "Arcade Aisle", "Big Laugh", "Final Word", "Zia", "Luna", "The Studio", "News Mic", "1 Cardz News", "Holo Zia", "Holo Luna", "Holo Globe"],PLAIN=20,faceImg=[];let facesLoaded=false;
+    const loadFaces=()=>{if(facesLoaded)return;facesLoaded=true;FACE_NAMES.forEach((n,i)=>{const im=new Image();im.decoding='async';im.src='img/faces/f'+String(i+1).padStart(2,'0')+'.webp';faceImg[i]=im})};
+    const faceOk=i=>{const f=faceImg[i];return f&&f.complete&&f.naturalWidth};
     const pockets=()=>[...document.querySelectorAll('.pockets .flip')];
     const up=()=>pockets().filter(c=>c.getAttribute('aria-pressed')==='true').length;
     const upd=()=>{if(score)score.textContent=up()+' / '+pockets().length};
@@ -1609,28 +1613,35 @@ button.holo-btn{border:0;cursor:default}
     function spawn(c){const ch=H*(.42+Math.random()*.04),cw=ch*63/88;c=c||{};
       Object.assign(c,{w:cw,h:ch,x:Math.random()*(W-cw)+cw/2,y:Math.random()*(H-ch)+ch/2,vx:(Math.random()<.5?-1:1)*(60+Math.random()*170),vy:(Math.random()<.5?-1:1)*(40+Math.random()*120),
         r:Math.random()*6.28,vr:(Math.random()-.5)*5,flip:0,gone:false,a:0,holo:!!c.holo,hp:Math.random()*6.28,bw:cw,bh:ch,zp:Math.random()*6.28,zs:.6+Math.random()*1.4});return c}
-    function init(){size();const n=W<500?11:W<900?16:23;cards=Array.from({length:n},()=>spawn());cards.slice(0,3).forEach(c=>c.holo=true)}
+    function init(){size();const n=W<500?11:W<900?16:23;cards=Array.from({length:n},()=>spawn());cards.slice(0,3).forEach((c,i)=>{c.holo=true;c.face=PLAIN+i});
+      const deck=[...Array(PLAIN).keys()].sort(()=>Math.random()-.5);cards.slice(3).forEach((c,i)=>{c.face=deck[i%PLAIN]})}
     function step(t){if(!run)return;const dt=Math.min(.05,(t-(last||t))/1000);last=t;ctx.clearRect(0,0,W,H);
       if(box.classList.contains('style-hyper')){if(!stars.length)stars=Array.from({length:90},()=>({x:Math.random()*2-1,y:Math.random()*2-1,z:Math.random()}));ctx.strokeStyle='rgba(180,220,255,.7)';for(const s of stars){s.z-=dt*.5;if(s.z<=.02){s.z=1;s.x=Math.random()*2-1;s.y=Math.random()*2-1}const px=W/2+s.x/s.z*W*.25,py=H/2+s.y/s.z*H*.4,qx=W/2+s.x/(s.z+.06)*W*.25,qy=H/2+s.y/(s.z+.06)*H*.4;ctx.lineWidth=(1-s.z)*2;ctx.beginPath();ctx.moveTo(qx,qy);ctx.lineTo(px,py);ctx.stroke()}}
-      for(const c of cards){
+      for(const c of [...cards.filter(x=>!(x.peek>0)),...cards.filter(x=>x.peek>0)]){
+        if(c.peek>0){c.peek+=dt;const tr=Math.round(c.r/6.2832)*6.2832;c.r+=(tr-c.r)*Math.min(1,dt*9);if(c.peek>=1.9)c.peek=0}
+        const mv=c.peek>0?.12:1;if(c.peek>0){const hh=c.h*.8;c.y+=(Math.max(hh,Math.min(H-hh,c.y))-c.y)*Math.min(1,dt*6)}
         if(c.flip>0){c.flip+=dt*2.2;c.vx*=.9;c.vy*=.9;if(c.flip>=1){spawn(c)}}
         c.zp+=c.zs*dt;if(Math.random()<dt*.3)c.zs=.6+Math.random()*1.4;const k=1+.15*Math.sin(c.zp);c.w=c.bw*k;c.h=c.bh*k;
-        if(c.flip===0){c.a=Math.min(1,c.a+dt*2);c.x+=c.vx*dt;c.y+=c.vy*dt;c.r+=c.vr*dt;
+        if(c.flip===0){c.a=Math.min(1,c.a+dt*2);c.x+=c.vx*dt*mv;c.y+=c.vy*dt*mv;c.r+=c.vr*dt*mv;
           const hw=c.w*.45,hh=c.h*.45;
           if(c.x<hw){c.x=hw;c.vx=Math.abs(c.vx)}if(c.x>W-hw){c.x=W-hw;c.vx=-Math.abs(c.vx)}
           if(c.y<hh){c.y=hh;c.vy=Math.abs(c.vy)}if(c.y>H-hh){c.y=H-hh;c.vy=-Math.abs(c.vy)}
           if(Math.random()<dt*.6){c.vr+=(Math.random()-.5)*3;c.vr=Math.max(-6,Math.min(6,c.vr))}}
         ctx.save();ctx.translate(c.x,c.y);ctx.rotate(c.r);
-        const sx=c.flip>0?Math.cos(c.flip*Math.PI):1,sc=c.flip>0?1+c.flip*.6:1;ctx.scale(sx*sc,sc);ctx.globalAlpha=(c.flip>0?1-c.flip:1)*c.a;
+        let sx=1,sc=1,faceUp=false;
+        if(c.flip>0){sx=Math.cos(c.flip*Math.PI);sc=1+c.flip*.6;faceUp=sx<0}
+        else if(c.peek>0){const p=c.peek,an=p<.3?p/.3*Math.PI:p<1.6?Math.PI:Math.min(2*Math.PI,Math.PI+(p-1.6)/.3*Math.PI);sx=Math.cos(an);sc=1+.6*(p<.3?p/.3:p<1.6?1:Math.max(0,1-(p-1.6)/.3));faceUp=sx<0}
+        if(Math.abs(sx)<.02)sx=sx<0?-.02:.02;
+        ctx.scale(sx*sc,sc);if(faceUp)ctx.scale(-1,1);ctx.globalAlpha=(c.flip>0?1-c.flip:1)*c.a;
         ctx.shadowColor='rgba(124,243,255,.55)';ctx.shadowBlur=c.flip>0?30:12;
         const rr=c.w*.07;ctx.beginPath();ctx.roundRect(-c.w/2,-c.h/2,c.w,c.h,rr);ctx.fillStyle='#16224d';ctx.fill();
-        ctx.shadowBlur=0;ctx.save();ctx.clip();if(img.complete&&img.naturalWidth)ctx.drawImage(img,-c.w/2,-c.h/2,c.w,c.h);
-        if(c.holo){c.hp+=dt*1.6;const o=Math.sin(c.hp)*c.w*.6,g=ctx.createLinearGradient(-c.w/2+o,-c.h/2,c.w/2+o,c.h/2);
+        ctx.shadowBlur=0;ctx.save();ctx.clip();if(faceUp&&faceOk(c.face))ctx.drawImage(faceImg[c.face],-c.w/2,-c.h/2,c.w,c.h);else if(img.complete&&img.naturalWidth)ctx.drawImage(img,-c.w/2,-c.h/2,c.w,c.h);
+        if(c.holo&&!faceUp){c.hp+=dt*1.6;const o=Math.sin(c.hp)*c.w*.6,g=ctx.createLinearGradient(-c.w/2+o,-c.h/2,c.w/2+o,c.h/2);
           g.addColorStop(0,'rgba(255,90,200,.85)');g.addColorStop(.25,'rgba(255,230,90,.85)');g.addColorStop(.5,'rgba(90,255,200,.85)');g.addColorStop(.75,'rgba(90,170,255,.85)');g.addColorStop(1,'rgba(200,110,255,.85)');
           ctx.globalCompositeOperation='overlay';ctx.fillStyle=g;ctx.fillRect(-c.w/2,-c.h/2,c.w,c.h);ctx.globalCompositeOperation='soft-light';ctx.fillRect(-c.w/2,-c.h/2,c.w,c.h);
           ctx.globalCompositeOperation='screen';const sh=ctx.createLinearGradient(-c.w/2,0,c.w/2,0),q=(Math.sin(c.hp*1.3)+1)/2;sh.addColorStop(Math.max(0,q-.15),'rgba(255,255,255,0)');sh.addColorStop(q,'rgba(255,255,255,.45)');sh.addColorStop(Math.min(1,q+.15),'rgba(255,255,255,0)');ctx.fillStyle=sh;ctx.fillRect(-c.w/2,-c.h/2,c.w,c.h);ctx.globalCompositeOperation='source-over'}
         ctx.restore();
-        ctx.lineWidth=Math.max(1.5,c.w*.035);ctx.strokeStyle=(c.flip>0&&!c.holo)?'#ffd23f':'#3e5fbf';ctx.stroke();ctx.restore()}
+        ctx.lineWidth=Math.max(1.5,c.w*.035);ctx.strokeStyle=faceUp?'#ffd23f':(c.flip>0&&!c.holo)?'#ffd23f':'#3e5fbf';ctx.stroke();ctx.restore()}
       for(const b of bursts){b.t+=dt;for(const p of b.p){const k=b.t;ctx.globalAlpha=Math.max(0,1-k*1.4);ctx.fillStyle=p.c;ctx.beginPath();ctx.arc(b.x+p.vx*k,b.y+p.vy*k+60*k*k,p.s,0,6.28);ctx.fill()}}
       /* pack burst: a ring flash and 5 mini cards spinning out */
       for(const g of rings){g.t+=dt;const k=g.t/.55;ctx.globalAlpha=Math.max(0,1-k);ctx.strokeStyle='#fff';ctx.lineWidth=6*(1-k)+1;ctx.shadowColor='#ffd23f';ctx.shadowBlur=20;ctx.beginPath();ctx.arc(g.x,g.y,g.r0+k*g.r1,0,6.28);ctx.stroke();ctx.shadowBlur=0}
@@ -1643,7 +1654,7 @@ button.holo-btn{border:0;cursor:default}
         ctx.lineWidth=1.5;ctx.strokeStyle=m.c;ctx.shadowColor=m.c;ctx.shadowBlur=10;ctx.stroke();ctx.restore()}
       minis=minis.filter(m=>m.t<1.5);
       ctx.globalAlpha=1;bursts=bursts.filter(b=>b.t<.8);requestAnimationFrame(step)}
-    function hitAt(px,py){for(let i=cards.length-1;i>=0;i--){const c=cards[i];if(c.flip>0)continue;const dx=px-c.x,dy=py-c.y,co=Math.cos(-c.r),si=Math.sin(-c.r),lx=dx*co-dy*si,ly=dx*si+dy*co;
+    function hitAt(px,py){const order=[...cards.filter(x=>!(x.peek>0)),...cards.filter(x=>x.peek>0)];for(let i=order.length-1;i>=0;i--){const c=order[i];if(c.flip>0)continue;const dx=px-c.x,dy=py-c.y,co=Math.cos(-c.r),si=Math.sin(-c.r),lx=dx*co-dy*si,ly=dx*si+dy*co;
       if(Math.abs(lx)<=c.w/2+6&&Math.abs(ly)<=c.h/2+6)return c}return null}
     function flyer(from){if(!from||reduce)return null;const d=document.createElement('div');d.className='storm-flyer';d.setAttribute('aria-hidden','true');document.body.append(d);
       d.style.width=from.w+'px';d.style.height=from.h+'px';d.style.transform='translate('+(from.x-from.w/2)+'px,'+(from.y-from.h/2)+'px) rotate('+from.r+'rad)';return d}
@@ -1670,7 +1681,7 @@ button.holo-btn{border:0;cursor:default}
           const fa=document.getElementById('flipAll');if(fa){const u=pockets().every(f=>f.getAttribute('aria-pressed')==='true');fa.textContent=u?'Turn all face down':'Flip all cards';fa.setAttribute('aria-pressed',String(u))}
           upd()}else requestAnimationFrame(wait)})();
     }
-    function miss(c){c.vx*=-1.4;c.vy*=-1.4;c.vr=(Math.random()<.5?-1:1)*9;hint.textContent='Not that one! Catch a shiny holo card';}
+    function miss(c){if(c.peek>0)return;loadFaces();c.peek=.001;hint.textContent='You pulled '+(FACE_NAMES[c.face]||'a card')+'! Catch a holo to collect it';}
     function catchCard(c){c.flip=.001;c.vr*=.3;const cols=['#ffd23f','#7cf3ff','#ff8ad8','#5be39b','#fff'];
       bursts.push({x:c.x,y:c.y,t:0,p:Array.from({length:22},()=>{const a=Math.random()*6.28,v=80+Math.random()*220;return{vx:Math.cos(a)*v,vy:Math.sin(a)*v,s:1.5+Math.random()*2.5,c:cols[Math.random()*5|0]}})});
       if(!reduce){rings.push({x:c.x,y:c.y,t:0,r0:c.h*.3,r1:c.h*1.1});
@@ -1681,7 +1692,7 @@ button.holo-btn{border:0;cursor:default}
     box.addEventListener('pointerdown',e=>{const r=box.getBoundingClientRect(),c=hitAt(e.clientX-r.left,e.clientY-r.top);if(!c)return;if(c.holo)catchCard(c);else miss(c)});
     box.addEventListener('pointermove',e=>{const r=box.getBoundingClientRect();box.style.cursor=hitAt(e.clientX-r.left,e.clientY-r.top)?'pointer':'crosshair'});
     btn.addEventListener('click',()=>{const c=cards.find(x=>x.flip===0&&x.holo);if(c)catchCard(c);else reveal()});
-    new IntersectionObserver(es=>{const v=es[0].isIntersecting;if(v&&!run){run=true;last=0;requestAnimationFrame(step)}else if(!v)run=false}).observe(box);
+    new IntersectionObserver(es=>{const v=es[0].isIntersecting;if(v)loadFaces();if(v&&!run){run=true;last=0;requestAnimationFrame(step)}else if(!v)run=false}).observe(box);
     addEventListener('resize',()=>{const ow=W;size();if(Math.abs(W-ow)>40)init()});
     if(reduce)cards=[];init();if(reduce)cards.forEach(c=>{c.vx*=.25;c.vy*=.25;c.vr*=.25});upd();
     document.querySelectorAll('.pockets .flip').forEach(c=>new MutationObserver(upd).observe(c,{attributes:true,attributeFilter:['aria-pressed']}));
