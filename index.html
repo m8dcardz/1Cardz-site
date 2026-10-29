@@ -777,6 +777,9 @@ body>header .cover .drop .mono{letter-spacing:-.07em;word-spacing:-.3em}
 .window>.fan.fan1{z-index:1}
 @media (prefers-reduced-motion: reduce){.window>.fan{transition:none}}
 @media (max-width:560px){.window.fanned>.fan1{transform:translateX(-5%) rotate(-6deg)}.window.fanned>.fan2{transform:translateX(-10%) rotate(-17deg)}.window.fanned{--tz:5deg}}
+/* top card face up: much lighter holo so the host is easy to see */
+.window:has(.coverflip[aria-pressed="true"])>.shine{opacity:calc(.02 + var(--o) * .14) !important}
+.window:has(.coverflip[aria-pressed="true"])>.glare{opacity:.5}
 /* top binder runs on downward: no bottom edge on the video or the stitching */
 body>header .cover{--vb:-14px !important;border-bottom-left-radius:0;border-bottom-right-radius:0}
 body>header .cover .stitch{border-bottom:0;bottom:-4px;border-bottom-left-radius:0;border-bottom-right-radius:0}
