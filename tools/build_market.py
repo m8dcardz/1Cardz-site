@@ -45,6 +45,18 @@ extra_css = '''<style>
 .mkt-count{color:#8c93ad}
 .mw-head-2{display:none}
 @media (min-width:1100px){.mkt .mw-head-2{display:block}}
+/* Market box: arcade cabinet style (neon bezel + blurred studio + scanlines) */
+.mkt .gd.mw.mkt-arcade{border:0 !important;border-radius:20px !important;overflow:hidden;background:#0b0912;backdrop-filter:none;-webkit-backdrop-filter:none;
+  box-shadow:0 0 0 10px #0d0b16,0 0 0 13px #2a2340,0 0 24px 13px rgba(255,62,165,.35) !important;margin-top:22px}
+.mkt-arcade::before,.mkt-arcade::after{display:none !important}
+.mkt-arcade .mkt-bg,.mkt-arcade .mkt-fx{position:absolute;inset:0;pointer-events:none;border-radius:inherit}
+.mkt-arcade .mkt-bg{z-index:0;background:url(img/cover-poster.jpg) center/cover;filter:blur(10px) saturate(1.3) brightness(.38);transform:scale(1.1)}
+.mkt-arcade .mkt-fx{z-index:5;box-shadow:inset 0 0 0 2px #ff3ea5,inset 0 0 22px rgba(255,62,165,.55);background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 1px,transparent 1px 3px)}
+.mkt-arcade>*:not(.mkt-bg):not(.mkt-fx){position:relative;z-index:4}
+.mkt-arcade .mw-label{font-family:"Press Start 2P",var(--f-mono);font-size:9px;letter-spacing:.06em;color:#ff8ad8;text-shadow:0 0 8px #ff3ea5}
+.mkt-arcade .mw-label i{background:#ff3ea5;box-shadow:0 0 10px #ff3ea5}
+.mkt-arcade .mw-row{border-top-color:rgba(255,62,165,.12)}
+@media (max-width:560px){.mkt .gd.mw.mkt-arcade{box-shadow:0 0 0 7px #0d0b16,0 0 0 9px #2a2340,0 0 18px 9px rgba(255,62,165,.35) !important}}
 </style>'''
 
 chips = ['<button type="button" class="chip" data-k="all" aria-pressed="true">All</button>',
@@ -64,7 +76,8 @@ body = f'''{header}
       <div class="chips" role="group" aria-label="Filter the list">{"".join(chips)}</div>
       <div class="sheet-tools"><a class="btn ghost" href="index.html">Back to the binder</a><a class="btn ghost" href="archive.html">Stories</a></div>
     </div>
-    <div class="gd mw">
+    <div class="gd mw mkt-arcade">
+      <div class="mkt-bg" aria-hidden="true"></div><div class="mkt-fx" aria-hidden="true"></div>
       <div class="mw-top">
         <span class="mono mw-label"><i></i><span>Market Watch</span></span>
         <span class="mono mkt-count" id="mktCount">—</span>

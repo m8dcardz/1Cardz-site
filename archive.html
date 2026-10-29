@@ -9,7 +9,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500;12..96,75..100,700;12..96,75..100,800&family=Atkinson+Hyperlegible:wght@400;700&family=DM+Mono:wght@400;500&family=VT323&family=Russo+One&family=Oxanium:wght@700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500;12..96,75..100,700;12..96,75..100,800&family=Atkinson+Hyperlegible:wght@400;700&family=DM+Mono:wght@400;500&family=VT323&family=Russo+One&family=Oxanium:wght@700&family=Press+Start+2P&display=swap">
 <style>
 /* Layout: the site is a collector's binder on a playmat. Cover first, then nine-pocket pages of sleeved cards, a rarity key, and the back cover. One committed look (a physical object), colors set explicitly. */
 :root{
@@ -805,6 +805,47 @@ body>footer .cover .copy>.mono{color:#fff !important;text-shadow:0 1px 3px rgba(
 .pockets>.pocket:nth-child(-n+3) .holo .shine,.pockets>.pocket:nth-child(-n+3) .tcg.holo>.shine{opacity:calc(.051 + var(--o) * .425)}
 /* no caption line under the card pages */
 .sheet-foot{display:none !important}
+/* Lucky Draw game box (5:1, under the top binder) */
+.storm-wrap.wrap{max-width:1400px;padding-left:max(4vw, env(safe-area-inset-left, 0px));padding-right:max(4vw, env(safe-area-inset-right, 0px));margin-top:calc(-1 * clamp(12px,3.6vw,52px))}
+.storm{width:100%}
+.storm-wrap+.glassdeck{margin-top:clamp(16px,2.4vw,28px) !important}
+.storm{aspect-ratio:5/1;min-height:120px;padding:0 !important;cursor:crosshair;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.storm canvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:4}
+.storm-hud{position:absolute;left:0;right:0;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px clamp(12px,2vw,20px);pointer-events:none}
+.storm-label{display:inline-flex;align-items:center;gap:6px;color:#7cf3ff;font-size:10.5px;letter-spacing:.14em}
+.storm-label i{width:6px;height:6px;border-radius:50%;background:#7cf3ff;box-shadow:0 0 10px #7cf3ff;animation:pulse 1.2s ease-in-out infinite}
+.storm-hint{color:#c9cfe4;font-size:10.5px;letter-spacing:.1em;text-align:center;text-shadow:0 1px 6px rgba(0,0,0,.8)}
+.storm-score{color:#ffd23f;font-size:11px;letter-spacing:.12em;text-shadow:0 0 8px rgba(255,210,63,.5)}
+.storm-a11y{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;padding:0}
+.storm-a11y:focus-visible{width:auto;height:auto;clip:auto;left:10px;bottom:10px;z-index:6;padding:6px 10px;border-radius:6px;background:#0b1029;color:#fff;outline:2px solid #e9c46a}
+.pocket.storm-hit{animation:stormHit 1.6s ease-out}
+@keyframes stormHit{0%{box-shadow:0 0 0 0 rgba(124,243,255,.9)}40%{box-shadow:0 0 0 8px rgba(124,243,255,.5),0 0 40px rgba(124,243,255,.7)}100%{box-shadow:0 0 0 0 rgba(124,243,255,0)}}
+@media (max-width:700px){.storm{aspect-ratio:5/2}.storm-hint{display:none}}
+/* Lucky Draw frame styles. Default "style-arcade" (neon cabinet bezel + blurred studio).
+   Saved alternate "style-hyper" (rainbow RGB edge + hyperspace streaks): swap the class on #storm. */
+.storm .storm-bg,.storm .storm-fx{position:absolute;inset:0;pointer-events:none;border-radius:inherit}
+.storm .storm-bg{z-index:0}.storm .storm-fx{z-index:5}
+.storm-plate{display:none}
+.storm.style-arcade{border:0 !important;border-radius:20px !important;overflow:hidden;
+  box-shadow:0 0 0 10px #0d0b16,0 0 0 13px #2a2340,0 0 24px 13px rgba(255,62,165,.35) !important;backdrop-filter:none;-webkit-backdrop-filter:none;background:#0b0912}
+.storm.style-arcade::before,.storm.style-arcade::after{display:none}
+.storm.style-arcade .storm-bg{background:url(img/cover-poster.jpg) center/cover;filter:blur(8px) saturate(1.3) brightness(.55);transform:scale(1.1)}
+.storm.style-arcade .storm-fx{box-shadow:inset 0 0 0 2px #ff3ea5,inset 0 0 18px rgba(255,62,165,.6);
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 1px,transparent 1px 3px)}
+.storm.style-arcade .storm-label{font-family:"Press Start 2P",var(--f-mono);font-size:9px;letter-spacing:.06em;color:#ff8ad8;text-shadow:0 0 8px #ff3ea5}
+.storm.style-arcade .storm-label i{background:#ff3ea5;box-shadow:0 0 10px #ff3ea5}
+.storm.style-arcade~.storm-plate{display:block;margin:22px auto 0;width:max-content;font-family:"Press Start 2P",var(--f-mono);font-size:9px;letter-spacing:.06em;color:#ffd23f;
+  background:#1a1427;padding:8px 14px;border-radius:6px;box-shadow:inset 0 0 0 2px #3a3060;animation:plateBlink 1.2s steps(2) infinite}
+@keyframes plateBlink{50%{opacity:.3}}
+.storm.style-hyper{border:0 !important;border-radius:16px !important;overflow:hidden;background:#04050c;box-shadow:0 20px 50px rgba(0,0,0,.5) !important}
+.storm.style-hyper::before{content:"";display:block;position:absolute;inset:0;z-index:6;pointer-events:none;border-radius:inherit;padding:3px;
+  background:conic-gradient(from var(--ha),#ff3ea5,#ffd23f,#3ee07a,#2de2e6,#7a5cff,#ff3ea5);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:hyperSpin 4s linear infinite}
+.storm.style-hyper::after{display:none}
+@property --ha{syntax:'<angle>';inherits:false;initial-value:0deg}
+@keyframes hyperSpin{to{--ha:360deg}}
+.storm.style-hyper .storm-bg{background:radial-gradient(ellipse at center,#16224d,#04050c 70%)}
+.storm.style-hyper .storm-label{color:#fff}.storm.style-hyper .storm-label i{background:#fff;box-shadow:0 0 10px #fff}
+@media (max-width:560px){.storm.style-arcade{box-shadow:0 0 0 7px #0d0b16,0 0 0 9px #2a2340,0 0 18px 9px rgba(255,62,165,.35) !important}}
 /* top binder runs on downward: no bottom edge on the video or the stitching */
 body>header .cover{--vb:-14px !important;border-bottom-left-radius:0;border-bottom-right-radius:0}
 body>header .cover .stitch{border-bottom:0;bottom:-4px;border-bottom-left-radius:0;border-bottom-right-radius:0}
