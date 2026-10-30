@@ -47,7 +47,7 @@ for k, p in enumerate(newest):
     symc = 'sec' if k == 0 else 'unc'
     c = p.get('clip')
     yt = p.get('yt')
-    if yt:
+    if yt and not c:
         art = f'<div class="art clip ytart" data-p="img/yt-{yt}.jpg"></div>'
         btn = f'<a class="snd ytwatch" href="https://www.youtube.com/shorts/{yt}" target="_blank" rel="noopener" aria-label="Watch {e(p["title"])} on YouTube">▶ Watch</a>'
     else:
