@@ -956,6 +956,9 @@ button.holo-btn{border:0;cursor:default}
 .navbar-wrap+.storm-wrap.wrap{margin-top:clamp(24px,2.8vw,34px)}
 .navbar-wrap+main{padding-top:clamp(26px,3.6vw,46px)}
 @media (max-width:560px){.navbar-wrap .holo-nav{margin:0 7px}}
+/* top binder: fixed size on every page (the intro text always takes 3 lines, so shorter text can't shrink the binder) */
+@media (min-width:561px){body>header .cover .copy p{height:calc(3 * 1.2em);line-height:1.2;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
+  body>header .cover .row{flex-wrap:nowrap}body>header .cover .row .btn{white-space:nowrap;min-width:163px;justify-content:center;text-align:center}}
 </style>
 <style>
 /* news headlines page: card grid */
@@ -997,7 +1000,7 @@ button.holo-btn{border:0;cursor:default}
       <h1 class="foil">TCG <br>News</h1>
       <p>News Headlines. Every story from the 8 AM and 8 PM drops, newest first, in plain text.</p>
       <div class="row">
-        <a class="btn" href="index.html">Back to the binder</a>
+        <a class="btn" href="index.html">Back home</a>
         <div class="drop"><span class="mono">Next drop</span><b id="coverCount">--:--:--</b><span class="mono" id="coverWho">—</span></div>
       </div>
     </div>
@@ -1033,7 +1036,7 @@ button.holo-btn{border:0;cursor:default}
 <nav class="holo-nav" aria-label="Site sections">
     <a class="holo-btn" href="index.html">Home</a>
     <a class="holo-btn" href="news.html" aria-current="page">Headlines</a>
-    <a class="holo-btn" href="archive.html">Stories</a>
+    <a class="holo-btn" href="archive.html">Library</a>
     <a class="holo-btn" href="market.html">Market</a>
     <a class="holo-btn" href="#newsletter">Newsletter</a>
     <button class="holo-btn holo-soon" type="button" aria-disabled="true">Coming soon</button>

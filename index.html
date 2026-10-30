@@ -959,6 +959,9 @@ button.holo-btn{border:0;cursor:default}
 .navbar-wrap+.storm-wrap.wrap{margin-top:clamp(24px,2.8vw,34px)}
 .navbar-wrap+main{padding-top:clamp(26px,3.6vw,46px)}
 @media (max-width:560px){.navbar-wrap .holo-nav{margin:0 7px}}
+/* top binder: fixed size on every page (the intro text always takes 3 lines, so shorter text can't shrink the binder) */
+@media (min-width:561px){body>header .cover .copy p{height:calc(3 * 1.2em);line-height:1.2;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
+  body>header .cover .row{flex-wrap:nowrap}body>header .cover .row .btn{white-space:nowrap;min-width:163px;justify-content:center;text-align:center}}
 </style>
 </head>
 <body>
@@ -973,7 +976,7 @@ button.holo-btn{border:0;cursor:default}
     <div class="copy">
       <div class="label mono"><span>1Cardz.news</span><span>Collector's edition</span><span>101 Cards</span></div>
       <h1 class="foil">TCG <br>News</h1>
-      <p>The trading card game news channel. Two hosts, one arcade studio, two new stories each day.</p>
+      <p>The trading card game news channel, filed like a binder. Two hosts, one arcade-library studio and two new stories every day, each one sleeved and numbered.</p>
       <div class="row">
         <a class="btn" href="#set" id="seeLatest">See the latest</a>
         <div class="drop"><span class="mono">Next drop</span><b id="coverCount">--:--:--</b><span class="mono" id="coverWho">—</span></div>
@@ -1011,7 +1014,7 @@ button.holo-btn{border:0;cursor:default}
 <nav class="holo-nav" aria-label="Site sections">
     <a class="holo-btn" href="index.html" aria-current="page">Home</a>
     <a class="holo-btn" href="news.html">Headlines</a>
-    <a class="holo-btn" href="archive.html">Stories</a>
+    <a class="holo-btn" href="archive.html">Library</a>
     <a class="holo-btn" href="market.html">Market</a>
     <a class="holo-btn" href="#newsletter">Newsletter</a>
     <button class="holo-btn holo-soon" type="button" aria-disabled="true">Coming soon</button>
@@ -1084,7 +1087,7 @@ button.holo-btn{border:0;cursor:default}
     <div class="sheet-head">
       <div class="sheet-tools">
   <button class="btn" id="flipAll" type="button" aria-pressed="false">Flip all cards</button>
-        <a class="btn ghost" href="archive.html">Stories</a>
+        <a class="btn ghost" href="archive.html">Library</a>
       </div>
     </div>
     <div class="page">

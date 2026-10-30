@@ -13,7 +13,7 @@ posts = json.loads((root/'tools'/'posts.json').read_text())
 
 head_end = src.index('<style>')
 head = src[:head_end]
-head = re.sub(r'<title>.*?</title>', '<title>1 Cardz Stories</title>', head)
+head = re.sub(r'<title>.*?</title>', '<title>1 Cardz Library Archives</title>', head)
 head = re.sub(r'<link rel="preload"[^>]*>\n', '', head)
 head = head.replace('href="https://1cardz.news/"', 'href="https://1cardz.news/archive.html"')
 head = re.sub(r'<meta name="description"[^>]*>', '<meta name="description" content="Every 1Cardz.news clip from Zia and Luna, newest first.">', head)
@@ -37,8 +37,8 @@ span = f"{fd.strftime('%b')} {fd.day} – {ld.strftime('%b')} {ld.day}, {ld.year
 # top binder copy for the archive
 header = header.replace('<span>101 Cards</span>', f'<span>{n} posts</span>')
 header = re.sub(r'<p>The trading card game news channel.*?</p>',
-    '<p>The archive. Every clip Zia and Luna have posted, sleeved and numbered, newest first. Tap any card to flip it and play the story.</p>', header, flags=re.S)
-header = header.replace('<a class="btn" href="#set" id="seeLatest">See the latest</a>', '<a class="btn" href="index.html">Back to the binder</a>')
+    '<p>The Library Archives. Every clip Zia and Luna have posted, sleeved and numbered, newest first.</p>', header, flags=re.S)
+header = header.replace('<a class="btn" href="#set" id="seeLatest">See the latest</a>', '<a class="btn" href="index.html">Back home</a>')
 
 e = html.escape
 cards = []
@@ -105,7 +105,7 @@ body = f'''{header}
 <main>
   <section class="wrap arch" id="set" aria-labelledby="set-h">
     <div class="sheet-head">
-      <h2 id="set-h">Stories</h2>
+      <h2 id="set-h">Library Archives</h2>
       <p>Every news clip from the 8 AM and 8 PM drops, {n} so far ({span}). The rows fit your screen, so widen the window for more cards per row. Tap a card to flip it, then tap Sound to hear the story.</p>
       <div class="chips" role="group" aria-label="Filter posts">{"".join(chips)}</div>
       <div class="sheet-tools">

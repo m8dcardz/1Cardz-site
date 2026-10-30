@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>1 Cardz Stories</title>
+<title>1 Cardz Library Archives</title>
 <link rel="canonical" href="https://1cardz.news/archive.html">
 <meta name="description" content="Every 1Cardz.news clip from Zia and Luna, newest first.">
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -956,6 +956,9 @@ button.holo-btn{border:0;cursor:default}
 .navbar-wrap+.storm-wrap.wrap{margin-top:clamp(24px,2.8vw,34px)}
 .navbar-wrap+main{padding-top:clamp(26px,3.6vw,46px)}
 @media (max-width:560px){.navbar-wrap .holo-nav{margin:0 7px}}
+/* top binder: fixed size on every page (the intro text always takes 3 lines, so shorter text can't shrink the binder) */
+@media (min-width:561px){body>header .cover .copy p{height:calc(3 * 1.2em);line-height:1.2;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
+  body>header .cover .row{flex-wrap:nowrap}body>header .cover .row .btn{white-space:nowrap;min-width:163px;justify-content:center;text-align:center}}
 </style>
 <style>
 .snd.ytwatch{text-decoration:none;display:inline-flex;align-items:center;gap:4px}
@@ -985,9 +988,9 @@ button.holo-btn{border:0;cursor:default}
     <div class="copy">
       <div class="label mono"><span>1Cardz.news</span><span>Collector's edition</span><span>20 posts</span></div>
       <h1 class="foil">TCG <br>News</h1>
-      <p>The archive. Every clip Zia and Luna have posted, sleeved and numbered, newest first. Tap any card to flip it and play the story.</p>
+      <p>The Library Archives. Every clip Zia and Luna have posted, sleeved and numbered, newest first.</p>
       <div class="row">
-        <a class="btn" href="index.html">Back to the binder</a>
+        <a class="btn" href="index.html">Back home</a>
         <div class="drop"><span class="mono">Next drop</span><b id="coverCount">--:--:--</b><span class="mono" id="coverWho">—</span></div>
       </div>
     </div>
@@ -1023,7 +1026,7 @@ button.holo-btn{border:0;cursor:default}
 <nav class="holo-nav" aria-label="Site sections">
     <a class="holo-btn" href="index.html">Home</a>
     <a class="holo-btn" href="news.html">Headlines</a>
-    <a class="holo-btn" href="archive.html" aria-current="page">Stories</a>
+    <a class="holo-btn" href="archive.html" aria-current="page">Library</a>
     <a class="holo-btn" href="market.html">Market</a>
     <a class="holo-btn" href="#newsletter">Newsletter</a>
     <button class="holo-btn holo-soon" type="button" aria-disabled="true">Coming soon</button>
@@ -1033,7 +1036,7 @@ button.holo-btn{border:0;cursor:default}
 <main>
   <section class="wrap arch" id="set" aria-labelledby="set-h">
     <div class="sheet-head">
-      <h2 id="set-h">Stories</h2>
+      <h2 id="set-h">Library Archives</h2>
       <p>Every news clip from the 8 AM and 8 PM drops, 20 so far (Oct 21 – Oct 30, 2026). The rows fit your screen, so widen the window for more cards per row. Tap a card to flip it, then tap Sound to hear the story.</p>
       <div class="chips" role="group" aria-label="Filter posts"><button type="button" class="chip mono" data-f="all" aria-pressed="true">All</button><button type="button" class="chip mono" data-f="host:Zia" aria-pressed="false">Zia</button><button type="button" class="chip mono" data-f="host:Luna" aria-pressed="false">Luna</button><button type="button" class="chip mono" data-f="host:Zia &amp; Luna" aria-pressed="false">Zia &amp; Luna</button><span class="chip-sep" aria-hidden="true"></span><button type="button" class="chip mono" data-f="game:Dragon Ball" aria-pressed="false">Dragon Ball</button><button type="button" class="chip mono" data-f="game:FaB" aria-pressed="false">FaB</button><button type="button" class="chip mono" data-f="game:Lorcana" aria-pressed="false">Lorcana</button><button type="button" class="chip mono" data-f="game:Magic" aria-pressed="false">Magic</button><button type="button" class="chip mono" data-f="game:One Piece" aria-pressed="false">One Piece</button><button type="button" class="chip mono" data-f="game:Pokémon" aria-pressed="false">Pokémon</button><button type="button" class="chip mono" data-f="game:Riftbound" aria-pressed="false">Riftbound</button><button type="button" class="chip mono" data-f="game:TCG" aria-pressed="false">TCG</button><button type="button" class="chip mono" data-f="game:Yu-Gi-Oh!" aria-pressed="false">Yu-Gi-Oh!</button></div>
       <div class="sheet-tools">
