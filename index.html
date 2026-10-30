@@ -1606,11 +1606,9 @@ button.holo-btn{border:0;cursor:default}
     const upd=()=>{if(score)score.textContent=up()+' / '+pockets().length};
     /* daily collection (Hong Kong date), remembered in this browser */
     const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Hong_Kong'}).format(new Date()),KEY='1cz-holo-found';
-    let col={day:today,found:[]};try{const o=JSON.parse(localStorage.getItem(KEY)||'null');if(o&&o.day===today&&Array.isArray(o.found))col=o}catch(e){}
-    const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(col))}catch(e){}};
+    let col={day:today,found:[]};try{localStorage.removeItem(KEY)}catch(e){} /* every visit starts at 0 */
+    const save=()=>{};
     const SET_SIZE=8,setIdx=pockets().map((c,i)=>c.getAttribute('aria-pressed')!=='true'?i:-1).filter(i=>i>=0).slice(0,SET_SIZE); /* today's set: the first 8 cards that start face down */
-    col.found=col.found.filter(i=>setIdx.includes(i));
-    col.found.forEach(i=>{const f=pockets()[i];if(f)f.setAttribute('aria-pressed','true')});
     const fN=document.getElementById('stormFoundN'),pips=document.getElementById('stormPips'),fBox=document.getElementById('stormFound');
     if(pips)pips.replaceChildren(...setIdx.map(()=>document.createElement('span')));
     const updFound=()=>{if(fN)fN.textContent=col.found.length+'/'+setIdx.length;if(pips)[...pips.children].forEach((p,i)=>p.classList.toggle('on',i<col.found.length))};
