@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Build news.html (News Headlines page, text only, card grid) from index.html's styles and binders + tools/news.json.
 Run after build_archive.py (it reuses archive.html's binder script). Add new stories to tools/news.json."""
-import json, re, html, datetime, pathlib
+import json, sys
+sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
+import site_parts, re, html, datetime, pathlib
 root = pathlib.Path(__file__).resolve().parent.parent
 src = (root/'index.html').read_text()
 # index.html may be the standalone build (with its own doctype/head wrapper): strip it back to the fragment
@@ -24,7 +26,7 @@ scrolltop = src[src.index('<script>'):src.index('</script>')+len('</script>')]
 header = re.sub(r'<p>The trading card game news channel.*?</p>',
     '<p>News Headlines. Every story from the 8 AM and 8 PM drops, newest first, in plain text.</p>', header, flags=re.S)
 header = header.replace('<a class="btn" href="#set" id="seeLatest">See the latest</a>', '<a class="btn" href="index.html">Back to the binder</a>')
-a_js = arch[arch.rindex('<script>'):]
+_k = arch.index('  /* binder videos: top first, bottom last */'); a_js = arch[arch.rindex('<script>', 0, _k):arch.index('</script>', _k)]
 cover_js = a_js[a_js.index('  /* binder videos: top first, bottom last */'):a_js.rindex('})();')]
 
 GC = {"Pokémon":"#ffd23f","Magic":"#ff8a5c","One Piece":"#ff5c7a","Lorcana":"#9d8cff","Flesh and Blood":"#ff6b4a",
@@ -74,6 +76,8 @@ extra_css = '''<style>
 @media (max-width:560px){.news-grid{grid-template-columns:1fr;gap:10px;padding:12px}.news-tile .t-head{font-size:20px}}
 </style>'''
 
+header = header + '\n\n' + site_parts.navbar(src, 'news.html')
+footer = site_parts.newsletter_section(src) + '\n' + footer + '\n\n' + site_parts.newsletter_script(src)
 body = f'''{header}
 
 <main>
@@ -82,7 +86,6 @@ body = f'''{header}
       <h2 id="news-h">News Headlines</h2>
       <p>Every story from the 8 AM and 8 PM drops, newest first. Text only, with the source for each one.</p>
       <div class="chips" role="group" aria-label="Filter by game">{"".join(chips)}</div>
-      <div class="sheet-tools"><a class="btn ghost" href="index.html">Back to the binder</a><a class="btn ghost" href="archive.html">Stories</a><a class="btn ghost" href="market.html">Market</a></div>
     </div>
     <div class="gd">
       <div class="mw-top">

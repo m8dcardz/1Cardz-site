@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Build market.html (the Market page) from index.html's styles and binders + data/market.json.
 Run after build_archive.py (it reuses archive.html's binder script)."""
-import json, re, pathlib
+import json, sys
+sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
+import site_parts, re, pathlib
 root = pathlib.Path(__file__).resolve().parent.parent
 src = (root/'index.html').read_text()
 # index.html may be the standalone build (with its own doctype/head wrapper): strip it back to the fragment
@@ -25,7 +27,7 @@ header = re.sub(r'<p>The trading card game news channel.*?</p>',
 header = header.replace('<a class="btn" href="#set" id="seeLatest">See the latest</a>', '<a class="btn" href="index.html">Back to the binder</a>')
 
 # cover behaviour (videos, barcode, clock, fan + flip) reused from the archive page script
-a_js = arch[arch.rindex('<script>'):]
+_k = arch.index('  /* binder videos: top first, bottom last */'); a_js = arch[arch.rindex('<script>', 0, _k):arch.index('</script>', _k)]
 cover_js = a_js[a_js.index('  /* binder videos: top first, bottom last */'):a_js.rindex('})();')]
 
 pool = data.get('pool') or data['items']
@@ -70,6 +72,8 @@ chips = ['<button type="button" class="chip" data-k="all" aria-pressed="true">Al
          '<button type="button" class="chip" data-g="all" aria-pressed="true">Every game</button>']
 chips += [f'<button type="button" class="chip" data-g="{g}" aria-pressed="false">{g}</button>' for g in games]
 
+header = header + '\n\n' + site_parts.navbar(src, 'market.html')
+footer = site_parts.newsletter_section(src) + '\n' + footer + '\n\n' + site_parts.newsletter_script(src)
 body = f'''{header}
 
 <main>
@@ -78,7 +82,6 @@ body = f'''{header}
       <h2 id="mkt-h">Market Watch</h2>
       <p>Fifteen picks from the newest sets across seven games, sealed products and chase singles at today's market price (recent sold average, USD). Prices refresh every day and the picks rotate daily.</p>
       <div class="chips" role="group" aria-label="Filter the list">{"".join(chips)}</div>
-      <div class="sheet-tools"><a class="btn ghost" href="index.html">Back to the binder</a><a class="btn ghost" href="archive.html">Stories</a></div>
     </div>
     <div class="gd mw mkt-arcade">
       <div class="mkt-bg" aria-hidden="true"></div><div class="mkt-fx" aria-hidden="true"></div>

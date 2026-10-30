@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Build archive.html (all past posts) from index.html's styles/binders + tools/posts.json."""
-import json, re, html, datetime, pathlib
+import json, sys
+sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
+import site_parts, re, html, datetime, pathlib
 root = pathlib.Path(__file__).resolve().parent.parent
 src = (root/'index.html').read_text()
 # index.html may be the standalone build (with its own doctype/head wrapper): strip it back to the fragment
@@ -96,6 +98,8 @@ extra_css = '''<style>
 .arch-empty{grid-column:1/-1;text-align:center;color:#8c93ad;padding:40px 0}
 </style>'''
 
+header = header + '\n\n' + site_parts.navbar(src, 'archive.html')
+footer = site_parts.newsletter_section(src) + '\n' + footer + '\n\n' + site_parts.newsletter_script(src)
 body = f'''{header}
 
 <main>
@@ -105,7 +109,6 @@ body = f'''{header}
       <p>Every news clip from the 8 AM and 8 PM drops, {n} so far ({span}). The rows fit your screen, so widen the window for more cards per row. Tap a card to flip it, then tap Sound to hear the story.</p>
       <div class="chips" role="group" aria-label="Filter posts">{"".join(chips)}</div>
       <div class="sheet-tools">
-        <a class="btn ghost" href="index.html">Back to the binder</a>
         <button class="btn" id="flipAll" type="button" aria-pressed="false">Flip all cards</button>
       </div>
     </div>
