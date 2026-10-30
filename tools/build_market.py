@@ -4,6 +4,10 @@ Run after build_archive.py (it reuses archive.html's binder script)."""
 import json, re, pathlib
 root = pathlib.Path(__file__).resolve().parent.parent
 src = (root/'index.html').read_text()
+# index.html may be the standalone build (with its own doctype/head wrapper): strip it back to the fragment
+if src.lstrip().lower().startswith('<!doctype'):
+    vp = '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
+    src = src[src.index(vp)+len(vp):]
 arch = (root/'archive.html').read_text()
 data = json.loads((root/'data'/'market.json').read_text())
 
