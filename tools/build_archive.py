@@ -45,14 +45,21 @@ for k, p in enumerate(newest):
     cls = 'tcg holo secret flip clipcard' if k == 0 else 'tcg flip clipcard'
     sym, rt = ('✦', 'Secret rare') if k == 0 else ('◆', 'Uncommon')
     symc = 'sec' if k == 0 else 'unc'
-    c = p['clip']
+    c = p.get('clip')
+    yt = p.get('yt')
+    if yt:
+        art = f'<div class="art clip ytart" data-p="img/yt-{yt}.jpg"></div>'
+        btn = f'<a class="snd ytwatch" href="https://www.youtube.com/shorts/{yt}" target="_blank" rel="noopener" aria-label="Watch {e(p["title"])} on YouTube">▶ Watch</a>'
+    else:
+        art = f'<div class="art clip" data-p="img/{c}.jpg"><video src="img/{c}-s.mp4" data-full="img/{c}.mp4" data-poster="img/{c}.jpg" muted loop playsinline preload="none"></video></div>'
+        btn = '<button class="snd" type="button" aria-pressed="false" aria-label="Turn sound on">Sound off</button>'
     cards.append(f'''        <div class="pocket" data-host="{e(p['host'])}" data-game="{e(p['game'])}"><div class="{cls}" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: {e(p['title'])}, {e(p['game'])}, post {num}. Tap to flip and play">
           <div class="inner">
             <div class="face back"><em>{num}/{n:03d}</em><span>Tap to flip</span></div>
             <div class="face front">
               <header class="nm"><h3>{e(p['title'])}</h3><span class="cost">{e(p['game'])}</span></header>
-              <div class="art clip" data-p="img/{c}.jpg"><video src="img/{c}-s.mp4" data-full="img/{c}.mp4" data-poster="img/{c}.jpg" muted loop playsinline preload="none"></video></div>
-              <button class="snd" type="button" aria-pressed="false" aria-label="Turn sound on">Sound off</button>
+              {art}
+              {btn}
               <div class="typeline"><span>Clip · {e(p['host'])} · {when_label(p['when'])}</span><i class="setsym {symc}" aria-hidden="true">{sym}</i></div>
               <div class="txt">
                 <p>{e(p['blurb'])}</p>
@@ -73,6 +80,8 @@ chips.append('<span class="chip-sep" aria-hidden="true"></span>')
 chips += [f'<button type="button" class="chip mono" data-f="game:{e(g)}" aria-pressed="false">{e(g)}</button>' for g in games]
 
 extra_css = '''<style>
+.snd.ytwatch{text-decoration:none;display:inline-flex;align-items:center;gap:4px}
+.art.ytart::after{content:"";position:absolute;top:0;bottom:0;left:50%;width:calc(62cqw * 9 / 16);transform:translateX(-50%);background:var(--p) center/cover no-repeat;z-index:1}
 /* archive page */
 .arch .pockets{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
 @media (max-width:900px){.arch .pockets{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}}
@@ -153,7 +162,7 @@ js = r'''<script>
     const cand=flips.filter(c=>vis.has(c)&&!c.closest('.pocket').hidden&&c.getAttribute('aria-pressed')==='true'&&!reduce)
       .map(c=>{const r=c.getBoundingClientRect();return{c,d:Math.abs(r.top+r.height/2-mid)+(c.querySelector('.snd[aria-pressed="true"]')?-1e5:0)}})
       .sort((a,b)=>a.d-b.d).slice(0,MAXPLAY).map(o=>o.c);
-    flips.forEach(c=>{const v=c.querySelector('video');if(cand.includes(c)){if(v.paused){const pr=v.play();if(pr)pr.catch(()=>{})}}else if(!v.paused)v.pause()})}
+    flips.forEach(c=>{const v=c.querySelector('video');if(!v)return;if(cand.includes(c)){if(v.paused){const pr=v.play();if(pr)pr.catch(()=>{})}}else if(!v.paused)v.pause()})}
   const io=new IntersectionObserver(es=>{es.forEach(e=>e.isIntersecting?vis.add(e.target):vis.delete(e.target));schedule()},{threshold:.35});
   flips.forEach(c=>{io.observe(c);new MutationObserver(schedule).observe(c,{attributes:true,attributeFilter:['aria-pressed']})});
   addEventListener('scroll',schedule,{passive:true});addEventListener('resize',schedule);
@@ -161,8 +170,9 @@ js = r'''<script>
     if(on&&v.dataset.full&&!v.src.endsWith(v.dataset.full)){const t=v.currentTime;v.src=v.dataset.full;v.addEventListener('loadedmetadata',()=>{try{v.currentTime=t}catch(e){}},{once:true})}
     v.muted=!on;b.setAttribute('aria-pressed',String(on));b.textContent=on?'Sound on':'Sound off';b.setAttribute('aria-label',on?'Turn sound off':'Turn sound on')}
   flips.forEach(c=>{const b=c.querySelector('.snd');
+    if(!c.querySelector('video')){b.addEventListener('click',e=>e.stopPropagation());b.addEventListener('keydown',e=>e.stopPropagation());return}
     b.addEventListener('click',e=>{e.stopPropagation();const on=b.getAttribute('aria-pressed')!=='true';
-      flips.forEach(o=>{if(o!==c&&o.querySelector('.snd').getAttribute('aria-pressed')==='true')setSound(o,false)});
+      flips.forEach(o=>{if(o!==c&&o.querySelector('video')&&o.querySelector('.snd').getAttribute('aria-pressed')==='true')setSound(o,false)});
       setSound(c,on);if(on&&c.getAttribute('aria-pressed')!=='true')c.setAttribute('aria-pressed','true');schedule();
       if(on){const pr=c.querySelector('video').play();if(pr)pr.catch(()=>{})}});
     b.addEventListener('keydown',e=>e.stopPropagation())});

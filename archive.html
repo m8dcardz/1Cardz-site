@@ -952,6 +952,8 @@ button.holo-btn{border:0;cursor:default}
 @media (max-width:700px){.storm-hud{flex-wrap:wrap;row-gap:4px}.storm-found{font-size:9px}.sf-pips span{width:5px;height:8px}}
 </style>
 <style>
+.snd.ytwatch{text-decoration:none;display:inline-flex;align-items:center;gap:4px}
+.art.ytart::after{content:"";position:absolute;top:0;bottom:0;left:50%;width:calc(62cqw * 9 / 16);transform:translateX(-50%);background:var(--p) center/cover no-repeat;z-index:1}
 /* archive page */
 .arch .pockets{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
 @media (max-width:900px){.arch .pockets{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}}
@@ -975,7 +977,7 @@ button.holo-btn{border:0;cursor:default}
     <div class="stitch" aria-hidden="true"></div>
     <div class="spine" aria-hidden="true"></div>
     <div class="copy">
-      <div class="label mono"><span>1Cardz.news</span><span>Collector's edition</span><span>11 posts</span></div>
+      <div class="label mono"><span>1Cardz.news</span><span>Collector's edition</span><span>20 posts</span></div>
       <h1 class="foil">TCG <br>News</h1>
       <p>The archive. Every clip Zia and Luna have posted, sleeved and numbered, newest first. Tap any card to flip it and play the story.</p>
       <div class="row">
@@ -1015,8 +1017,8 @@ button.holo-btn{border:0;cursor:default}
   <section class="wrap arch" id="set" aria-labelledby="set-h">
     <div class="sheet-head">
       <h2 id="set-h">Stories</h2>
-      <p>Every news clip from the 8 AM and 8 PM drops, 11 so far (Oct 25 – Oct 30, 2026). The rows fit your screen, so widen the window for more cards per row. Tap a card to flip it, then tap Sound to hear the story.</p>
-      <div class="chips" role="group" aria-label="Filter posts"><button type="button" class="chip mono" data-f="all" aria-pressed="true">All</button><button type="button" class="chip mono" data-f="host:Zia" aria-pressed="false">Zia</button><button type="button" class="chip mono" data-f="host:Luna" aria-pressed="false">Luna</button><span class="chip-sep" aria-hidden="true"></span><button type="button" class="chip mono" data-f="game:FaB" aria-pressed="false">FaB</button><button type="button" class="chip mono" data-f="game:Lorcana" aria-pressed="false">Lorcana</button><button type="button" class="chip mono" data-f="game:Magic" aria-pressed="false">Magic</button><button type="button" class="chip mono" data-f="game:One Piece" aria-pressed="false">One Piece</button><button type="button" class="chip mono" data-f="game:Pokémon" aria-pressed="false">Pokémon</button></div>
+      <p>Every news clip from the 8 AM and 8 PM drops, 20 so far (Oct 21 – Oct 30, 2026). The rows fit your screen, so widen the window for more cards per row. Tap a card to flip it, then tap Sound to hear the story.</p>
+      <div class="chips" role="group" aria-label="Filter posts"><button type="button" class="chip mono" data-f="all" aria-pressed="true">All</button><button type="button" class="chip mono" data-f="host:Zia" aria-pressed="false">Zia</button><button type="button" class="chip mono" data-f="host:Luna" aria-pressed="false">Luna</button><button type="button" class="chip mono" data-f="host:Zia &amp; Luna" aria-pressed="false">Zia &amp; Luna</button><span class="chip-sep" aria-hidden="true"></span><button type="button" class="chip mono" data-f="game:Dragon Ball" aria-pressed="false">Dragon Ball</button><button type="button" class="chip mono" data-f="game:FaB" aria-pressed="false">FaB</button><button type="button" class="chip mono" data-f="game:Lorcana" aria-pressed="false">Lorcana</button><button type="button" class="chip mono" data-f="game:Magic" aria-pressed="false">Magic</button><button type="button" class="chip mono" data-f="game:One Piece" aria-pressed="false">One Piece</button><button type="button" class="chip mono" data-f="game:Pokémon" aria-pressed="false">Pokémon</button><button type="button" class="chip mono" data-f="game:Riftbound" aria-pressed="false">Riftbound</button><button type="button" class="chip mono" data-f="game:TCG" aria-pressed="false">TCG</button><button type="button" class="chip mono" data-f="game:Yu-Gi-Oh!" aria-pressed="false">Yu-Gi-Oh!</button></div>
       <div class="sheet-tools">
         <a class="btn ghost" href="index.html">Back to the binder</a>
         <button class="btn" id="flipAll" type="button" aria-pressed="false">Flip all cards</button>
@@ -1024,9 +1026,9 @@ button.holo-btn{border:0;cursor:default}
     </div>
     <div class="page">
       <div class="pockets" id="archGrid">
-        <div class="pocket" data-host="Zia" data-game="Pokémon"><div class="tcg holo secret flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: $4.88M Mudkip, Pokémon, post 011. Tap to flip and play">
+        <div class="pocket" data-host="Zia" data-game="Pokémon"><div class="tcg holo secret flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: $4.88M Mudkip, Pokémon, post 020. Tap to flip and play">
           <div class="inner">
-            <div class="face back"><em>011/011</em><span>Tap to flip</span></div>
+            <div class="face back"><em>020/020</em><span>Tap to flip</span></div>
             <div class="face front">
               <header class="nm"><h3>$4.88M Mudkip</h3><span class="cost">Pokémon</span></header>
               <div class="art clip" data-p="img/clip11.jpg"><video src="img/clip11-s.mp4" data-full="img/clip11.mp4" data-poster="img/clip11.jpg" muted loop playsinline preload="none"></video></div>
@@ -1037,14 +1039,14 @@ button.holo-btn{border:0;cursor:default}
                 <p class="flav">Mudkip just outbid your rent.</p>
                 <p class="src">Source: Confirmed</p>
               </div>
-              <footer class="foot"><span>1CZ · Post 011</span><span class="rar" title="Secret rare">✦</span></footer>
+              <footer class="foot"><span>1CZ · Post 020</span><span class="rar" title="Secret rare">✦</span></footer>
             </div>
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Luna" data-game="Magic"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Superdrop, Magic, post 010. Tap to flip and play">
+        <div class="pocket" data-host="Luna" data-game="Magic"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Superdrop, Magic, post 019. Tap to flip and play">
           <div class="inner">
-            <div class="face back"><em>010/011</em><span>Tap to flip</span></div>
+            <div class="face back"><em>019/020</em><span>Tap to flip</span></div>
             <div class="face front">
               <header class="nm"><h3>Superdrop</h3><span class="cost">Magic</span></header>
               <div class="art clip" data-p="img/clip10.jpg"><video src="img/clip10-s.mp4" data-full="img/clip10.mp4" data-poster="img/clip10.jpg" muted loop playsinline preload="none"></video></div>
@@ -1055,14 +1057,14 @@ button.holo-btn{border:0;cursor:default}
                 <p class="flav">Beam up your wallet.</p>
                 <p class="src">Source: Confirmed</p>
               </div>
-              <footer class="foot"><span>1CZ · Post 010</span><span class="rar" title="Uncommon">◆</span></footer>
+              <footer class="foot"><span>1CZ · Post 019</span><span class="rar" title="Uncommon">◆</span></footer>
             </div>
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Zia" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Dual Fusion, Pokémon, post 009. Tap to flip and play">
+        <div class="pocket" data-host="Zia" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Dual Fusion, Pokémon, post 018. Tap to flip and play">
           <div class="inner">
-            <div class="face back"><em>009/011</em><span>Tap to flip</span></div>
+            <div class="face back"><em>018/020</em><span>Tap to flip</span></div>
             <div class="face front">
               <header class="nm"><h3>Dual Fusion</h3><span class="cost">Pokémon</span></header>
               <div class="art clip" data-p="img/clip9.jpg"><video src="img/clip9-s.mp4" data-full="img/clip9.mp4" data-poster="img/clip9.jpg" muted loop playsinline preload="none"></video></div>
@@ -1073,14 +1075,14 @@ button.holo-btn{border:0;cursor:default}
                 <p class="flav">Two types, one pack, zero chill.</p>
                 <p class="src">Source: Confirmed</p>
               </div>
-              <footer class="foot"><span>1CZ · Post 009</span><span class="rar" title="Uncommon">◆</span></footer>
+              <footer class="foot"><span>1CZ · Post 018</span><span class="rar" title="Uncommon">◆</span></footer>
             </div>
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Luna" data-game="Magic"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Fracture Delayed, Magic, post 008. Tap to flip and play">
+        <div class="pocket" data-host="Luna" data-game="Magic"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Fracture Delayed, Magic, post 017. Tap to flip and play">
           <div class="inner">
-            <div class="face back"><em>008/011</em><span>Tap to flip</span></div>
+            <div class="face back"><em>017/020</em><span>Tap to flip</span></div>
             <div class="face front">
               <header class="nm"><h3>Fracture Delayed</h3><span class="cost">Magic</span></header>
               <div class="art clip" data-p="img/clip8.jpg"><video src="img/clip8-s.mp4" data-full="img/clip8.mp4" data-poster="img/clip8.jpg" muted loop playsinline preload="none"></video></div>
@@ -1091,14 +1093,14 @@ button.holo-btn{border:0;cursor:default}
                 <p class="flav">Good things come to those who refresh the tracking page.</p>
                 <p class="src">Source: ICv2, October 20</p>
               </div>
-              <footer class="foot"><span>1CZ · Post 008</span><span class="rar" title="Uncommon">◆</span></footer>
+              <footer class="foot"><span>1CZ · Post 017</span><span class="rar" title="Uncommon">◆</span></footer>
             </div>
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Zia" data-game="Lorcana"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Into the Inkdark, Lorcana, post 007. Tap to flip and play">
+        <div class="pocket" data-host="Zia" data-game="Lorcana"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Into the Inkdark, Lorcana, post 016. Tap to flip and play">
           <div class="inner">
-            <div class="face back"><em>007/011</em><span>Tap to flip</span></div>
+            <div class="face back"><em>016/020</em><span>Tap to flip</span></div>
             <div class="face front">
               <header class="nm"><h3>Into the Inkdark</h3><span class="cost">Lorcana</span></header>
               <div class="art clip" data-p="img/clip1.jpg"><video src="img/clip1-s.mp4" data-full="img/clip1.mp4" data-poster="img/clip1.jpg" muted loop playsinline preload="none"></video></div>
@@ -1109,14 +1111,14 @@ button.holo-btn{border:0;cursor:default}
                 <p class="flav">Ink now, brag in February.</p>
                 <p class="src">Source: ICv2</p>
               </div>
-              <footer class="foot"><span>1CZ · Post 007</span><span class="rar" title="Uncommon">◆</span></footer>
+              <footer class="foot"><span>1CZ · Post 016</span><span class="rar" title="Uncommon">◆</span></footer>
             </div>
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Luna" data-game="FaB"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Chorus of Steel, FaB, post 006. Tap to flip and play">
+        <div class="pocket" data-host="Luna" data-game="FaB"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Chorus of Steel, FaB, post 015. Tap to flip and play">
           <div class="inner">
-            <div class="face back"><em>006/011</em><span>Tap to flip</span></div>
+            <div class="face back"><em>015/020</em><span>Tap to flip</span></div>
             <div class="face front">
               <header class="nm"><h3>Chorus of Steel</h3><span class="cost">FaB</span></header>
               <div class="art clip" data-p="img/clip2.jpg"><video src="img/clip2-s.mp4" data-full="img/clip2.mp4" data-poster="img/clip2.jpg" muted loop playsinline preload="none"></video></div>
@@ -1127,14 +1129,14 @@ button.holo-btn{border:0;cursor:default}
                 <p class="flav">Bring a friend. Then flatten them, lovingly.</p>
                 <p class="src">Source: Flesh and Blood official site</p>
               </div>
-              <footer class="foot"><span>1CZ · Post 006</span><span class="rar" title="Uncommon">◆</span></footer>
+              <footer class="foot"><span>1CZ · Post 015</span><span class="rar" title="Uncommon">◆</span></footer>
             </div>
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Zia" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Doug&#x27;s Collection, Pokémon, post 005. Tap to flip and play">
+        <div class="pocket" data-host="Zia" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Doug&#x27;s Collection, Pokémon, post 014. Tap to flip and play">
           <div class="inner">
-            <div class="face back"><em>005/011</em><span>Tap to flip</span></div>
+            <div class="face back"><em>014/020</em><span>Tap to flip</span></div>
             <div class="face front">
               <header class="nm"><h3>Doug&#x27;s Collection</h3><span class="cost">Pokémon</span></header>
               <div class="art clip" data-p="img/clip3.jpg"><video src="img/clip3-s.mp4" data-full="img/clip3.mp4" data-poster="img/clip3.jpg" muted loop playsinline preload="none"></video></div>
@@ -1145,14 +1147,14 @@ button.holo-btn{border:0;cursor:default}
                 <p class="flav">Somebody&#x27;s grail is about to change addresses.</p>
                 <p class="src">Source: ICv2</p>
               </div>
-              <footer class="foot"><span>1CZ · Post 005</span><span class="rar" title="Uncommon">◆</span></footer>
+              <footer class="foot"><span>1CZ · Post 014</span><span class="rar" title="Uncommon">◆</span></footer>
             </div>
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Luna" data-game="One Piece"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Mihawk Banned, One Piece, post 004. Tap to flip and play">
+        <div class="pocket" data-host="Luna" data-game="One Piece"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Mihawk Banned, One Piece, post 013. Tap to flip and play">
           <div class="inner">
-            <div class="face back"><em>004/011</em><span>Tap to flip</span></div>
+            <div class="face back"><em>013/020</em><span>Tap to flip</span></div>
             <div class="face front">
               <header class="nm"><h3>Mihawk Banned</h3><span class="cost">One Piece</span></header>
               <div class="art clip" data-p="img/clip4.jpg"><video src="img/clip4-s.mp4" data-full="img/clip4.mp4" data-poster="img/clip4.jpg" muted loop playsinline preload="none"></video></div>
@@ -1163,14 +1165,14 @@ button.holo-btn{border:0;cursor:default}
                 <p class="flav">Sheathe the swords. Rebuild the deck.</p>
                 <p class="src">Source: Official One Piece Card Game site</p>
               </div>
-              <footer class="foot"><span>1CZ · Post 004</span><span class="rar" title="Uncommon">◆</span></footer>
+              <footer class="foot"><span>1CZ · Post 013</span><span class="rar" title="Uncommon">◆</span></footer>
             </div>
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Luna" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Deck Crafter&#x27;s, Pokémon, post 003. Tap to flip and play">
+        <div class="pocket" data-host="Luna" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Deck Crafter&#x27;s, Pokémon, post 012. Tap to flip and play">
           <div class="inner">
-            <div class="face back"><em>003/011</em><span>Tap to flip</span></div>
+            <div class="face back"><em>012/020</em><span>Tap to flip</span></div>
             <div class="face front">
               <header class="nm"><h3>Deck Crafter&#x27;s</h3><span class="cost">Pokémon</span></header>
               <div class="art clip" data-p="img/clip5.jpg"><video src="img/clip5-s.mp4" data-full="img/clip5.mp4" data-poster="img/clip5.jpg" muted loop playsinline preload="none"></video></div>
@@ -1181,14 +1183,14 @@ button.holo-btn{border:0;cursor:default}
                 <p class="flav">Staples in the box. Sea legs in 2027.</p>
                 <p class="src">Source: Official announcements</p>
               </div>
-              <footer class="foot"><span>1CZ · Post 003</span><span class="rar" title="Uncommon">◆</span></footer>
+              <footer class="foot"><span>1CZ · Post 012</span><span class="rar" title="Uncommon">◆</span></footer>
             </div>
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Luna" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Set Alert, Pokémon, post 002. Tap to flip and play">
+        <div class="pocket" data-host="Luna" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Set Alert, Pokémon, post 011. Tap to flip and play">
           <div class="inner">
-            <div class="face back"><em>002/011</em><span>Tap to flip</span></div>
+            <div class="face back"><em>011/020</em><span>Tap to flip</span></div>
             <div class="face front">
               <header class="nm"><h3>Set Alert</h3><span class="cost">Pokémon</span></header>
               <div class="art clip" data-p="img/clip7.jpg"><video src="img/clip7-s.mp4" data-full="img/clip7.mp4" data-poster="img/clip7.jpg" muted loop playsinline preload="none"></video></div>
@@ -1199,14 +1201,14 @@ button.holo-btn{border:0;cursor:default}
                 <p class="flav">New staples. Same old shuffle face.</p>
                 <p class="src">Source: Official announcements</p>
               </div>
-              <footer class="foot"><span>1CZ · Post 002</span><span class="rar" title="Uncommon">◆</span></footer>
+              <footer class="foot"><span>1CZ · Post 011</span><span class="rar" title="Uncommon">◆</span></footer>
             </div>
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Luna" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: $2M Sale, Pokémon, post 001. Tap to flip and play">
+        <div class="pocket" data-host="Luna" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: $2M Sale, Pokémon, post 010. Tap to flip and play">
           <div class="inner">
-            <div class="face back"><em>001/011</em><span>Tap to flip</span></div>
+            <div class="face back"><em>010/020</em><span>Tap to flip</span></div>
             <div class="face front">
               <header class="nm"><h3>$2M Sale</h3><span class="cost">Pokémon</span></header>
               <div class="art clip" data-p="img/clip6.jpg"><video src="img/clip6-s.mp4" data-full="img/clip6.mp4" data-poster="img/clip6.jpg" muted loop playsinline preload="none"></video></div>
@@ -1217,6 +1219,168 @@ button.holo-btn{border:0;cursor:default}
                 <p class="flav">Some binders are worth more than houses.</p>
                 <p class="src">Source: Reported</p>
               </div>
+              <footer class="foot"><span>1CZ · Post 010</span><span class="rar" title="Uncommon">◆</span></footer>
+            </div>
+          </div>
+          <div class="shine"></div><div class="glare"></div>
+        </div></div>
+        <div class="pocket" data-host="Zia &amp; Luna" data-game="Dragon Ball"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Face Scan Check-in, Dragon Ball, post 009. Tap to flip and play">
+          <div class="inner">
+            <div class="face back"><em>009/020</em><span>Tap to flip</span></div>
+            <div class="face front">
+              <header class="nm"><h3>Face Scan Check-in</h3><span class="cost">Dragon Ball</span></header>
+              <div class="art clip ytart" data-p="img/yt-p2N-TYfk47A.jpg"></div>
+              <a class="snd ytwatch" href="https://www.youtube.com/shorts/p2N-TYfk47A" target="_blank" rel="noopener" aria-label="Watch Face Scan Check-in on YouTube">▶ Watch</a>
+              <div class="typeline"><span>Clip · Zia &amp; Luna · Oct 25 · 3 AM</span><i class="setsym unc" aria-hidden="true">◆</i></div>
+              <div class="txt">
+                <p>Bandai says face recognition check-in is coming to the TCG Plus app, plus Fusion World&#x27;s Brightness of Hope and Union Arena&#x27;s Arknights drop.</p>
+                <p class="flav">Smile, you&#x27;re registered for the tournament.</p>
+                <p class="src">Source: 1Cardz on YouTube</p>
+              </div>
+              <footer class="foot"><span>1CZ · Post 009</span><span class="rar" title="Uncommon">◆</span></footer>
+            </div>
+          </div>
+          <div class="shine"></div><div class="glare"></div>
+        </div></div>
+        <div class="pocket" data-host="Zia &amp; Luna" data-game="One Piece"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Robin Manga Rare, One Piece, post 008. Tap to flip and play">
+          <div class="inner">
+            <div class="face back"><em>008/020</em><span>Tap to flip</span></div>
+            <div class="face front">
+              <header class="nm"><h3>Robin Manga Rare</h3><span class="cost">One Piece</span></header>
+              <div class="art clip ytart" data-p="img/yt-ARg47_zwl34.jpg"></div>
+              <a class="snd ytwatch" href="https://www.youtube.com/shorts/ARg47_zwl34" target="_blank" rel="noopener" aria-label="Watch Robin Manga Rare on YouTube">▶ Watch</a>
+              <div class="typeline"><span>Clip · Zia &amp; Luna · Oct 24 · 1 PM</span><i class="setsym unc" aria-hidden="true">◆</i></div>
+              <div class="txt">
+                <p>One Piece OP-18 brings Nico Robin&#x27;s first Manga Rare and Yoshitaka Amano Secret Rares, plus Star Wars: Unlimited HomeWorld and Pokémon&#x27;s ex Star tease.</p>
+                <p class="flav">Art collectors, hide your wallets.</p>
+                <p class="src">Source: 1Cardz on YouTube</p>
+              </div>
+              <footer class="foot"><span>1CZ · Post 008</span><span class="rar" title="Uncommon">◆</span></footer>
+            </div>
+          </div>
+          <div class="shine"></div><div class="glare"></div>
+        </div></div>
+        <div class="pocket" data-host="Zia &amp; Luna" data-game="Lorcana"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: 2.8 Billion Cards, Lorcana, post 007. Tap to flip and play">
+          <div class="inner">
+            <div class="face back"><em>007/020</em><span>Tap to flip</span></div>
+            <div class="face front">
+              <header class="nm"><h3>2.8 Billion Cards</h3><span class="cost">Lorcana</span></header>
+              <div class="art clip ytart" data-p="img/yt-5s4wHML8Xuc.jpg"></div>
+              <a class="snd ytwatch" href="https://www.youtube.com/shorts/5s4wHML8Xuc" target="_blank" rel="noopener" aria-label="Watch 2.8 Billion Cards on YouTube">▶ Watch</a>
+              <div class="typeline"><span>Clip · Zia &amp; Luna · Oct 24 · 8 AM</span><i class="setsym unc" aria-hidden="true">◆</i></div>
+              <div class="txt">
+                <p>Disney Lorcana marks 3 years and 2.8 billion cards sold with a Beauty and the Beast collection, plus Mega Mewtwo X EX in TCG Pocket.</p>
+                <p class="flav">Tale as old as time, print run as big as ever.</p>
+                <p class="src">Source: 1Cardz on YouTube</p>
+              </div>
+              <footer class="foot"><span>1CZ · Post 007</span><span class="rar" title="Uncommon">◆</span></footer>
+            </div>
+          </div>
+          <div class="shine"></div><div class="glare"></div>
+        </div></div>
+        <div class="pocket" data-host="Zia" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Delta Reign, Pokémon, post 006. Tap to flip and play">
+          <div class="inner">
+            <div class="face back"><em>006/020</em><span>Tap to flip</span></div>
+            <div class="face front">
+              <header class="nm"><h3>Delta Reign</h3><span class="cost">Pokémon</span></header>
+              <div class="art clip ytart" data-p="img/yt-4bDFPcSR0JQ.jpg"></div>
+              <a class="snd ytwatch" href="https://www.youtube.com/shorts/4bDFPcSR0JQ" target="_blank" rel="noopener" aria-label="Watch Delta Reign on YouTube">▶ Watch</a>
+              <div class="typeline"><span>Clip · Zia · Oct 23 · 10 PM</span><i class="setsym unc" aria-hidden="true">◆</i></div>
+              <div class="txt">
+                <p>Delta Reign is headlined by Mega Rayquaza EX, with prereleases from Oct 24 and full release on Nov 6.</p>
+                <p class="flav">Zia held the desk solo. Rayquaza held the spotlight.</p>
+                <p class="src">Source: 1Cardz on YouTube</p>
+              </div>
+              <footer class="foot"><span>1CZ · Post 006</span><span class="rar" title="Uncommon">◆</span></footer>
+            </div>
+          </div>
+          <div class="shine"></div><div class="glare"></div>
+        </div></div>
+        <div class="pocket" data-host="Zia" data-game="Yu-Gi-Oh!"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Banlist Shock, Yu-Gi-Oh!, post 005. Tap to flip and play">
+          <div class="inner">
+            <div class="face back"><em>005/020</em><span>Tap to flip</span></div>
+            <div class="face front">
+              <header class="nm"><h3>Banlist Shock</h3><span class="cost">Yu-Gi-Oh!</span></header>
+              <div class="art clip ytart" data-p="img/yt-3AvtDYx5ui8.jpg"></div>
+              <a class="snd ytwatch" href="https://www.youtube.com/shorts/3AvtDYx5ui8" target="_blank" rel="noopener" aria-label="Watch Banlist Shock on YouTube">▶ Watch</a>
+              <div class="typeline"><span>Clip · Zia · Oct 23 · 6 PM</span><i class="setsym unc" aria-hidden="true">◆</i></div>
+              <div class="txt">
+                <p>After YCS Houston, Konami&#x27;s new list hits 34 Forbidden and 8 Limited, with Called by the Grave leading the charge.</p>
+                <p class="flav">Deckboxes were opened. Tears were shed.</p>
+                <p class="src">Source: 1Cardz on YouTube</p>
+              </div>
+              <footer class="foot"><span>1CZ · Post 005</span><span class="rar" title="Uncommon">◆</span></footer>
+            </div>
+          </div>
+          <div class="shine"></div><div class="glare"></div>
+        </div></div>
+        <div class="pocket" data-host="Zia" data-game="Riftbound"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Launch Day, Riftbound, post 004. Tap to flip and play">
+          <div class="inner">
+            <div class="face back"><em>004/020</em><span>Tap to flip</span></div>
+            <div class="face front">
+              <header class="nm"><h3>Launch Day</h3><span class="cost">Riftbound</span></header>
+              <div class="art clip ytart" data-p="img/yt-MFhlRNh00_o.jpg"></div>
+              <a class="snd ytwatch" href="https://www.youtube.com/shorts/MFhlRNh00_o" target="_blank" rel="noopener" aria-label="Watch Launch Day on YouTube">▶ Watch</a>
+              <div class="typeline"><span>Clip · Zia · Oct 23 · 3 PM</span><i class="setsym unc" aria-hidden="true">◆</i></div>
+              <div class="txt">
+                <p>Riftbound&#x27;s 5th set Radiance, with 9 new Legends, and Lorcana&#x27;s Hyperia City (feat. Coco) both drop this Friday.</p>
+                <p class="flav">So many shiny new cards. So few dollars.</p>
+                <p class="src">Source: 1Cardz on YouTube</p>
+              </div>
+              <footer class="foot"><span>1CZ · Post 004</span><span class="rar" title="Uncommon">◆</span></footer>
+            </div>
+          </div>
+          <div class="shine"></div><div class="glare"></div>
+        </div></div>
+        <div class="pocket" data-host="Luna" data-game="Magic"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: $600M Quarter, Magic, post 003. Tap to flip and play">
+          <div class="inner">
+            <div class="face back"><em>003/020</em><span>Tap to flip</span></div>
+            <div class="face front">
+              <header class="nm"><h3>$600M Quarter</h3><span class="cost">Magic</span></header>
+              <div class="art clip ytart" data-p="img/yt-TW6SFr16000.jpg"></div>
+              <a class="snd ytwatch" href="https://www.youtube.com/shorts/TW6SFr16000" target="_blank" rel="noopener" aria-label="Watch $600M Quarter on YouTube">▶ Watch</a>
+              <div class="typeline"><span>Clip · Luna · Oct 22 · 8 PM</span><i class="setsym unc" aria-hidden="true">◆</i></div>
+              <div class="txt">
+                <p>Magic crossed $600 million in one quarter for Hasbro, while the Reality Fracture Secret Lair bundle slipped past Oct 23.</p>
+                <p class="flav">Big numbers, late bundles.</p>
+                <p class="src">Source: 1Cardz on YouTube</p>
+              </div>
+              <footer class="foot"><span>1CZ · Post 003</span><span class="rar" title="Uncommon">◆</span></footer>
+            </div>
+          </div>
+          <div class="shine"></div><div class="glare"></div>
+        </div></div>
+        <div class="pocket" data-host="Zia &amp; Luna" data-game="Magic"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Star Trek Timeline, Magic, post 002. Tap to flip and play">
+          <div class="inner">
+            <div class="face back"><em>002/020</em><span>Tap to flip</span></div>
+            <div class="face front">
+              <header class="nm"><h3>Star Trek Timeline</h3><span class="cost">Magic</span></header>
+              <div class="art clip ytart" data-p="img/yt-mq25LSnIPzU.jpg"></div>
+              <a class="snd ytwatch" href="https://www.youtube.com/shorts/mq25LSnIPzU" target="_blank" rel="noopener" aria-label="Watch Star Trek Timeline on YouTube">▶ Watch</a>
+              <div class="typeline"><span>Clip · Zia &amp; Luna · Oct 22 · 1 PM</span><i class="setsym unc" aria-hidden="true">◆</i></div>
+              <div class="txt">
+                <p>The complete Magic x Star Trek timeline, with every date you need for the release.</p>
+                <p class="flav">Boldly going where your budget hasn&#x27;t.</p>
+                <p class="src">Source: 1Cardz on YouTube</p>
+              </div>
+              <footer class="foot"><span>1CZ · Post 002</span><span class="rar" title="Uncommon">◆</span></footer>
+            </div>
+          </div>
+          <div class="shine"></div><div class="glare"></div>
+        </div></div>
+        <div class="pocket" data-host="Zia &amp; Luna" data-game="TCG"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Release Radar, TCG, post 001. Tap to flip and play">
+          <div class="inner">
+            <div class="face back"><em>001/020</em><span>Tap to flip</span></div>
+            <div class="face front">
+              <header class="nm"><h3>Release Radar</h3><span class="cost">TCG</span></header>
+              <div class="art clip ytart" data-p="img/yt-PCNvaeUHiX8.jpg"></div>
+              <a class="snd ytwatch" href="https://www.youtube.com/shorts/PCNvaeUHiX8" target="_blank" rel="noopener" aria-label="Watch Release Radar on YouTube">▶ Watch</a>
+              <div class="typeline"><span>Clip · Zia &amp; Luna · Oct 21 · 2 AM</span><i class="setsym unc" aria-hidden="true">◆</i></div>
+              <div class="txt">
+                <p>A packed release radar: Magic&#x27;s Star Trek set on Nov 13, One Piece Heroines Edition Vol. 2 and OP-18, and more dates for your wallet.</p>
+                <p class="flav">Save this. Your wallet already did.</p>
+                <p class="src">Source: 1Cardz on YouTube</p>
+              </div>
               <footer class="foot"><span>1CZ · Post 001</span><span class="rar" title="Uncommon">◆</span></footer>
             </div>
           </div>
@@ -1224,7 +1388,7 @@ button.holo-btn{border:0;cursor:default}
         </div></div>
         <p class="arch-empty mono" id="archEmpty" hidden>No posts match this filter yet.</p>
       </div>
-      <div class="sheet-foot mono"><span>Archive · newest first</span><span id="archCount">Set 1CZ · posts 001–011</span></div>
+      <div class="sheet-foot mono"><span>Archive · newest first</span><span id="archCount">Set 1CZ · posts 001–020</span></div>
     </div>
   </section>
 </main>
@@ -1296,7 +1460,7 @@ button.holo-btn{border:0;cursor:default}
     const cand=flips.filter(c=>vis.has(c)&&!c.closest('.pocket').hidden&&c.getAttribute('aria-pressed')==='true'&&!reduce)
       .map(c=>{const r=c.getBoundingClientRect();return{c,d:Math.abs(r.top+r.height/2-mid)+(c.querySelector('.snd[aria-pressed="true"]')?-1e5:0)}})
       .sort((a,b)=>a.d-b.d).slice(0,MAXPLAY).map(o=>o.c);
-    flips.forEach(c=>{const v=c.querySelector('video');if(cand.includes(c)){if(v.paused){const pr=v.play();if(pr)pr.catch(()=>{})}}else if(!v.paused)v.pause()})}
+    flips.forEach(c=>{const v=c.querySelector('video');if(!v)return;if(cand.includes(c)){if(v.paused){const pr=v.play();if(pr)pr.catch(()=>{})}}else if(!v.paused)v.pause()})}
   const io=new IntersectionObserver(es=>{es.forEach(e=>e.isIntersecting?vis.add(e.target):vis.delete(e.target));schedule()},{threshold:.35});
   flips.forEach(c=>{io.observe(c);new MutationObserver(schedule).observe(c,{attributes:true,attributeFilter:['aria-pressed']})});
   addEventListener('scroll',schedule,{passive:true});addEventListener('resize',schedule);
@@ -1304,8 +1468,9 @@ button.holo-btn{border:0;cursor:default}
     if(on&&v.dataset.full&&!v.src.endsWith(v.dataset.full)){const t=v.currentTime;v.src=v.dataset.full;v.addEventListener('loadedmetadata',()=>{try{v.currentTime=t}catch(e){}},{once:true})}
     v.muted=!on;b.setAttribute('aria-pressed',String(on));b.textContent=on?'Sound on':'Sound off';b.setAttribute('aria-label',on?'Turn sound off':'Turn sound on')}
   flips.forEach(c=>{const b=c.querySelector('.snd');
+    if(!c.querySelector('video')){b.addEventListener('click',e=>e.stopPropagation());b.addEventListener('keydown',e=>e.stopPropagation());return}
     b.addEventListener('click',e=>{e.stopPropagation();const on=b.getAttribute('aria-pressed')!=='true';
-      flips.forEach(o=>{if(o!==c&&o.querySelector('.snd').getAttribute('aria-pressed')==='true')setSound(o,false)});
+      flips.forEach(o=>{if(o!==c&&o.querySelector('video')&&o.querySelector('.snd').getAttribute('aria-pressed')==='true')setSound(o,false)});
       setSound(c,on);if(on&&c.getAttribute('aria-pressed')!=='true')c.setAttribute('aria-pressed','true');schedule();
       if(on){const pr=c.querySelector('video').play();if(pr)pr.catch(()=>{})}});
     b.addEventListener('keydown',e=>e.stopPropagation())});
