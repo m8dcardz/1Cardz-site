@@ -1619,7 +1619,7 @@ button.holo-btn{border:0;cursor:default}
       if(box.classList.contains('style-hyper')){if(!stars.length)stars=Array.from({length:90},()=>({x:Math.random()*2-1,y:Math.random()*2-1,z:Math.random()}));ctx.strokeStyle='rgba(180,220,255,.7)';for(const s of stars){s.z-=dt*.5;if(s.z<=.02){s.z=1;s.x=Math.random()*2-1;s.y=Math.random()*2-1}const px=W/2+s.x/s.z*W*.25,py=H/2+s.y/s.z*H*.4,qx=W/2+s.x/(s.z+.06)*W*.25,qy=H/2+s.y/(s.z+.06)*H*.4;ctx.lineWidth=(1-s.z)*2;ctx.beginPath();ctx.moveTo(qx,qy);ctx.lineTo(px,py);ctx.stroke()}}
       for(const c of [...cards.filter(x=>!(x.peek>0)),...cards.filter(x=>x.peek>0)]){
         if(c.peek>0){c.peek+=dt;const tr=Math.round(c.r/6.2832)*6.2832;c.r+=(tr-c.r)*Math.min(1,dt*9);if(c.peek>=1.9)c.peek=0}
-        const mv=c.peek>0?.12:1;if(c.peek>0){const hh=c.h*.8;c.y+=(Math.max(hh,Math.min(H-hh,c.y))-c.y)*Math.min(1,dt*6)}
+        const mv=c.peek>0?.12:1;if(c.peek>0){const hh=c.h*.82,hw=c.w*.82;c.y+=(Math.max(hh,Math.min(H-hh,c.y))-c.y)*Math.min(1,dt*14);c.x+=(Math.max(hw,Math.min(W-hw,c.x))-c.x)*Math.min(1,dt*14)}
         if(c.flip>0){c.flip+=dt*2.2;c.vx*=.9;c.vy*=.9;if(c.flip>=1){spawn(c)}}
         c.zp+=c.zs*dt;if(Math.random()<dt*.3)c.zs=.6+Math.random()*1.4;const k=1+.15*Math.sin(c.zp);c.w=c.bw*k;c.h=c.bh*k;
         if(c.flip===0){c.a=Math.min(1,c.a+dt*2);c.x+=c.vx*dt*mv;c.y+=c.vy*dt*mv;c.r+=c.vr*dt*mv;
@@ -1641,7 +1641,7 @@ button.holo-btn{border:0;cursor:default}
           ctx.globalCompositeOperation='overlay';ctx.fillStyle=g;ctx.fillRect(-c.w/2,-c.h/2,c.w,c.h);ctx.globalCompositeOperation='soft-light';ctx.fillRect(-c.w/2,-c.h/2,c.w,c.h);
           ctx.globalCompositeOperation='screen';const sh=ctx.createLinearGradient(-c.w/2,0,c.w/2,0),q=(Math.sin(c.hp*1.3)+1)/2;sh.addColorStop(Math.max(0,q-.15),'rgba(255,255,255,0)');sh.addColorStop(q,'rgba(255,255,255,.45)');sh.addColorStop(Math.min(1,q+.15),'rgba(255,255,255,0)');ctx.fillStyle=sh;ctx.fillRect(-c.w/2,-c.h/2,c.w,c.h);ctx.globalCompositeOperation='source-over'}
         ctx.restore();
-        ctx.lineWidth=Math.max(1.5,c.w*.035);ctx.strokeStyle=faceUp?'#ffd23f':(c.flip>0&&!c.holo)?'#ffd23f':'#3e5fbf';ctx.stroke();ctx.restore()}
+        if(!faceUp){ctx.lineWidth=Math.max(1.5,c.w*.035);ctx.strokeStyle=(c.flip>0&&!c.holo)?'#ffd23f':'#3e5fbf';ctx.stroke()}ctx.restore()}
       for(const b of bursts){b.t+=dt;for(const p of b.p){const k=b.t;ctx.globalAlpha=Math.max(0,1-k*1.4);ctx.fillStyle=p.c;ctx.beginPath();ctx.arc(b.x+p.vx*k,b.y+p.vy*k+60*k*k,p.s,0,6.28);ctx.fill()}}
       /* pack burst: a ring flash and 5 mini cards spinning out */
       for(const g of rings){g.t+=dt;const k=g.t/.55;ctx.globalAlpha=Math.max(0,1-k);ctx.strokeStyle='#fff';ctx.lineWidth=6*(1-k)+1;ctx.shadowColor='#ffd23f';ctx.shadowBlur=20;ctx.beginPath();ctx.arc(g.x,g.y,g.r0+k*g.r1,0,6.28);ctx.stroke();ctx.shadowBlur=0}
