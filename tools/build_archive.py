@@ -55,7 +55,7 @@ for k, p in enumerate(newest):
     else:
         art = f'<div class="art clip" data-p="img/{c}.jpg"><video src="img/{c}-s.mp4" data-full="img/{c}.mp4" data-poster="img/{c}.jpg" muted loop playsinline preload="none"></video></div>'
         btn = '<button class="snd" type="button" aria-pressed="false" aria-label="Turn sound on">Sound off</button>'
-    cards.append(f'''        <div class="pocket" data-host="{e(p['host'])}" data-game="{e(p['game'])}"><div class="{cls}" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: {e(p['title'])}, {e(p['game'])}, post {num}. Tap to flip and play">
+    cards.append(f'''        <div class="pocket" data-host="{e(p['host'])}" data-game="{e(p['game'])}"><div class="{cls}" role="button" tabindex="0" aria-pressed="true" aria-label="Clip: {e(p['title'])}, {e(p['game'])}, post {num}. Tap to flip and play">
           <div class="inner">
             <div class="face back"><em>{num}/{n:03d}</em><span>Tap to flip</span></div>
             <div class="face front">
@@ -106,10 +106,10 @@ body = f'''{header}
   <section class="wrap arch" id="set" aria-labelledby="set-h">
     <div class="sheet-head">
       <h2 id="set-h">Library Archives</h2>
-      <p>Every news clip from the 8 AM and 8 PM drops, {n} so far ({span}). The rows fit your screen, so widen the window for more cards per row. Tap a card to flip it, then tap Sound to hear the story.</p>
+      <p>Every clip from the 8 AM and 8 PM drops, {n} so far ({span}). Tap a clip to watch it big, or tap Sound to hear it here.</p>
       <div class="chips" role="group" aria-label="Filter posts">{"".join(chips)}</div>
       <div class="sheet-tools">
-        <button class="btn" id="flipAll" type="button" aria-pressed="false">Flip all cards</button>
+        <button class="btn" id="flipAll" type="button" aria-pressed="true">Turn all face down</button>
       </div>
     </div>
     <div class="page">
@@ -182,6 +182,7 @@ js = r'''<script>
   function hydrate(c){const v=c.querySelector('video[data-poster]');if(v&&!v.poster)v.poster=v.dataset.poster;
     const a=c.querySelector('.art[data-p]');if(a&&!a.style.getPropertyValue('--p'))a.style.setProperty('--p','url('+a.dataset.p+')')}
   flips.forEach(c=>new MutationObserver(()=>{if(c.getAttribute('aria-pressed')==='true')hydrate(c)}).observe(c,{attributes:true,attributeFilter:['aria-pressed']}));
+  flips.filter(c=>c.getAttribute('aria-pressed')==='true').forEach(hydrate);
 
   /* binder videos: top first, bottom last */
   (function(){const v=document.querySelector('video.top-cover');if(!v)return;v.src=v.dataset.src;if(!reduce){v.autoplay=true;const pr=v.play();if(pr)pr.catch(()=>{})}})();

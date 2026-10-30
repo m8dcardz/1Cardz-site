@@ -9,7 +9,9 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500;12..96,75..100,700;12..96,75..100,800&family=Atkinson+Hyperlegible:wght@400;700&family=DM+Mono:wght@400;500&family=VT323&family=Russo+One&family=Oxanium:wght@700&family=Press+Start+2P&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500;12..96,75..100,700;12..96,75..100,800&family=Atkinson+Hyperlegible:wght@400;700&display=block">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=VT323&family=Russo+One&family=Oxanium:wght@700&family=Press+Start+2P&display=swap">
+<script>document.documentElement.classList.add('fl');(document.fonts&&document.fonts.load?document.fonts.load('800 40px "Bricolage Grotesque"'):Promise.resolve()).then(()=>document.documentElement.classList.remove('fl'),()=>document.documentElement.classList.remove('fl'));setTimeout(()=>document.documentElement.classList.remove('fl'),3000)</script>
 <style>
 /* Layout: the site is a collector's binder on a playmat. Cover first, then nine-pocket pages of sleeved cards, a rarity key, and the back cover. One committed look (a physical object), colors set explicitly. */
 :root{
@@ -951,7 +953,7 @@ button.holo-btn{border:0;cursor:default}
 @keyframes stormLand{0%{filter:brightness(2.2) drop-shadow(0 0 30px #ffd23f)}100%{filter:none}}
 @media (max-width:700px){.storm-hud{flex-wrap:wrap;row-gap:4px}.storm-found{font-size:9px}.sf-pips span{width:5px;height:8px}}
 /* site nav bar: directly under the top binder on every page */
-.navbar-wrap.wrap{max-width:1400px;padding-left:max(4vw, env(safe-area-inset-left, 0px));padding-right:max(4vw, env(safe-area-inset-right, 0px));margin-top:calc(-1 * clamp(12px,3.6vw,52px) - 18px);margin-bottom:18px;position:relative;z-index:5}
+.navbar-wrap.wrap{max-width:1400px;padding-left:max(4vw, env(safe-area-inset-left, 0px));padding-right:max(4vw, env(safe-area-inset-right, 0px));margin-top:calc(-1 * clamp(12px,3.6vw,52px) - 16px);margin-bottom:16px;position:relative;z-index:5}
 .navbar-wrap .holo-nav{margin:0 10px}
 .navbar-wrap+.storm-wrap.wrap{margin-top:clamp(24px,2.8vw,34px)}
 .navbar-wrap+main{padding-top:clamp(26px,3.6vw,46px)}
@@ -959,6 +961,12 @@ button.holo-btn{border:0;cursor:default}
 /* top binder: fixed size on every page (the intro text always takes 3 lines, so shorter text can't shrink the binder) */
 @media (min-width:561px){body>header .cover .copy p{height:calc(3 * 1.2em);line-height:1.2;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
   body>header .cover .row{flex-wrap:nowrap}body>header .cover .row .btn{white-space:nowrap;min-width:163px;justify-content:center;text-align:center}}
+/* inner pages: title + intro side by side in a fixed grid, so nothing jumps when the fonts load */
+@media (min-width:800px){.arch .sheet-head,.news .sheet-head,.mkt .sheet-head,.nlp .sheet-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,62ch);align-items:end;column-gap:clamp(18px,3vw,48px)}
+  :is(.arch,.news,.mkt,.nlp) .sheet-head>h2{grid-column:1}:is(.arch,.news,.mkt,.nlp) .sheet-head>p{grid-column:2}
+  :is(.arch,.news,.mkt,.nlp) .sheet-head>:not(h2):not(p){grid-column:1/-1}}
+/* while the fonts load, keep page titles on one line so the page doesn't jump */
+.fl .sheet-head h2{white-space:nowrap}
 </style>
 <style>
 .snd.ytwatch{text-decoration:none;display:inline-flex;align-items:center;gap:4px}
@@ -1028,7 +1036,7 @@ button.holo-btn{border:0;cursor:default}
     <a class="holo-btn" href="news.html">Headlines</a>
     <a class="holo-btn" href="archive.html" aria-current="page">Library</a>
     <a class="holo-btn" href="market.html">Market</a>
-    <a class="holo-btn" href="#newsletter">Newsletter</a>
+    <a class="holo-btn" href="newsletter.html">Newsletter</a>
     <button class="holo-btn holo-soon" type="button" aria-disabled="true">Coming soon</button>
 </nav>
 </div>
@@ -1037,15 +1045,15 @@ button.holo-btn{border:0;cursor:default}
   <section class="wrap arch" id="set" aria-labelledby="set-h">
     <div class="sheet-head">
       <h2 id="set-h">Library Archives</h2>
-      <p>Every news clip from the 8 AM and 8 PM drops, 21 so far (Oct 21 – Oct 30, 2026). The rows fit your screen, so widen the window for more cards per row. Tap a card to flip it, then tap Sound to hear the story.</p>
+      <p>Every clip from the 8 AM and 8 PM drops, 21 so far (Oct 21 – Oct 30, 2026). Tap a clip to watch it big, or tap Sound to hear it here.</p>
       <div class="chips" role="group" aria-label="Filter posts"><button type="button" class="chip mono" data-f="all" aria-pressed="true">All</button><button type="button" class="chip mono" data-f="host:Zia" aria-pressed="false">Zia</button><button type="button" class="chip mono" data-f="host:Luna" aria-pressed="false">Luna</button><button type="button" class="chip mono" data-f="host:Zia &amp; Luna" aria-pressed="false">Zia &amp; Luna</button><span class="chip-sep" aria-hidden="true"></span><button type="button" class="chip mono" data-f="game:Dragon Ball" aria-pressed="false">Dragon Ball</button><button type="button" class="chip mono" data-f="game:FaB" aria-pressed="false">FaB</button><button type="button" class="chip mono" data-f="game:Lorcana" aria-pressed="false">Lorcana</button><button type="button" class="chip mono" data-f="game:Magic" aria-pressed="false">Magic</button><button type="button" class="chip mono" data-f="game:One Piece" aria-pressed="false">One Piece</button><button type="button" class="chip mono" data-f="game:Pokémon" aria-pressed="false">Pokémon</button><button type="button" class="chip mono" data-f="game:Riftbound" aria-pressed="false">Riftbound</button><button type="button" class="chip mono" data-f="game:TCG" aria-pressed="false">TCG</button><button type="button" class="chip mono" data-f="game:Yu-Gi-Oh!" aria-pressed="false">Yu-Gi-Oh!</button></div>
       <div class="sheet-tools">
-        <button class="btn" id="flipAll" type="button" aria-pressed="false">Flip all cards</button>
+        <button class="btn" id="flipAll" type="button" aria-pressed="true">Turn all face down</button>
       </div>
     </div>
     <div class="page">
       <div class="pockets" id="archGrid">
-        <div class="pocket" data-host="Luna" data-game="Yu-Gi-Oh!"><div class="tcg holo secret flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Maze of Machines, Yu-Gi-Oh!, post 021. Tap to flip and play">
+        <div class="pocket" data-host="Luna" data-game="Yu-Gi-Oh!"><div class="tcg holo secret flip clipcard" role="button" tabindex="0" aria-pressed="true" aria-label="Clip: Maze of Machines, Yu-Gi-Oh!, post 021. Tap to flip and play">
           <div class="inner">
             <div class="face back"><em>021/021</em><span>Tap to flip</span></div>
             <div class="face front">
@@ -1063,7 +1071,7 @@ button.holo-btn{border:0;cursor:default}
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Zia" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: $4.88M Mudkip, Pokémon, post 020. Tap to flip and play">
+        <div class="pocket" data-host="Zia" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="true" aria-label="Clip: $4.88M Mudkip, Pokémon, post 020. Tap to flip and play">
           <div class="inner">
             <div class="face back"><em>020/021</em><span>Tap to flip</span></div>
             <div class="face front">
@@ -1081,7 +1089,7 @@ button.holo-btn{border:0;cursor:default}
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Luna" data-game="Magic"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Superdrop, Magic, post 019. Tap to flip and play">
+        <div class="pocket" data-host="Luna" data-game="Magic"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="true" aria-label="Clip: Superdrop, Magic, post 019. Tap to flip and play">
           <div class="inner">
             <div class="face back"><em>019/021</em><span>Tap to flip</span></div>
             <div class="face front">
@@ -1099,7 +1107,7 @@ button.holo-btn{border:0;cursor:default}
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Zia" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Dual Fusion, Pokémon, post 018. Tap to flip and play">
+        <div class="pocket" data-host="Zia" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="true" aria-label="Clip: Dual Fusion, Pokémon, post 018. Tap to flip and play">
           <div class="inner">
             <div class="face back"><em>018/021</em><span>Tap to flip</span></div>
             <div class="face front">
@@ -1117,7 +1125,7 @@ button.holo-btn{border:0;cursor:default}
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Luna" data-game="Magic"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Fracture Delayed, Magic, post 017. Tap to flip and play">
+        <div class="pocket" data-host="Luna" data-game="Magic"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="true" aria-label="Clip: Fracture Delayed, Magic, post 017. Tap to flip and play">
           <div class="inner">
             <div class="face back"><em>017/021</em><span>Tap to flip</span></div>
             <div class="face front">
@@ -1135,7 +1143,7 @@ button.holo-btn{border:0;cursor:default}
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Zia" data-game="Lorcana"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Into the Inkdark, Lorcana, post 016. Tap to flip and play">
+        <div class="pocket" data-host="Zia" data-game="Lorcana"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="true" aria-label="Clip: Into the Inkdark, Lorcana, post 016. Tap to flip and play">
           <div class="inner">
             <div class="face back"><em>016/021</em><span>Tap to flip</span></div>
             <div class="face front">
@@ -1153,7 +1161,7 @@ button.holo-btn{border:0;cursor:default}
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Luna" data-game="FaB"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Chorus of Steel, FaB, post 015. Tap to flip and play">
+        <div class="pocket" data-host="Luna" data-game="FaB"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="true" aria-label="Clip: Chorus of Steel, FaB, post 015. Tap to flip and play">
           <div class="inner">
             <div class="face back"><em>015/021</em><span>Tap to flip</span></div>
             <div class="face front">
@@ -1171,7 +1179,7 @@ button.holo-btn{border:0;cursor:default}
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Zia" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Doug&#x27;s Collection, Pokémon, post 014. Tap to flip and play">
+        <div class="pocket" data-host="Zia" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="true" aria-label="Clip: Doug&#x27;s Collection, Pokémon, post 014. Tap to flip and play">
           <div class="inner">
             <div class="face back"><em>014/021</em><span>Tap to flip</span></div>
             <div class="face front">
@@ -1189,7 +1197,7 @@ button.holo-btn{border:0;cursor:default}
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Luna" data-game="One Piece"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Mihawk Banned, One Piece, post 013. Tap to flip and play">
+        <div class="pocket" data-host="Luna" data-game="One Piece"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="true" aria-label="Clip: Mihawk Banned, One Piece, post 013. Tap to flip and play">
           <div class="inner">
             <div class="face back"><em>013/021</em><span>Tap to flip</span></div>
             <div class="face front">
@@ -1207,7 +1215,7 @@ button.holo-btn{border:0;cursor:default}
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Luna" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Deck Crafter&#x27;s, Pokémon, post 012. Tap to flip and play">
+        <div class="pocket" data-host="Luna" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="true" aria-label="Clip: Deck Crafter&#x27;s, Pokémon, post 012. Tap to flip and play">
           <div class="inner">
             <div class="face back"><em>012/021</em><span>Tap to flip</span></div>
             <div class="face front">
@@ -1225,7 +1233,7 @@ button.holo-btn{border:0;cursor:default}
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Luna" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Set Alert, Pokémon, post 011. Tap to flip and play">
+        <div class="pocket" data-host="Luna" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="true" aria-label="Clip: Set Alert, Pokémon, post 011. Tap to flip and play">
           <div class="inner">
             <div class="face back"><em>011/021</em><span>Tap to flip</span></div>
             <div class="face front">
@@ -1243,7 +1251,7 @@ button.holo-btn{border:0;cursor:default}
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Luna" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: $2M Sale, Pokémon, post 010. Tap to flip and play">
+        <div class="pocket" data-host="Luna" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="true" aria-label="Clip: $2M Sale, Pokémon, post 010. Tap to flip and play">
           <div class="inner">
             <div class="face back"><em>010/021</em><span>Tap to flip</span></div>
             <div class="face front">
@@ -1261,7 +1269,7 @@ button.holo-btn{border:0;cursor:default}
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Zia &amp; Luna" data-game="Dragon Ball"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Face Scan Check-in, Dragon Ball, post 009. Tap to flip and play">
+        <div class="pocket" data-host="Zia &amp; Luna" data-game="Dragon Ball"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="true" aria-label="Clip: Face Scan Check-in, Dragon Ball, post 009. Tap to flip and play">
           <div class="inner">
             <div class="face back"><em>009/021</em><span>Tap to flip</span></div>
             <div class="face front">
@@ -1279,7 +1287,7 @@ button.holo-btn{border:0;cursor:default}
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Zia &amp; Luna" data-game="One Piece"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Robin Manga Rare, One Piece, post 008. Tap to flip and play">
+        <div class="pocket" data-host="Zia &amp; Luna" data-game="One Piece"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="true" aria-label="Clip: Robin Manga Rare, One Piece, post 008. Tap to flip and play">
           <div class="inner">
             <div class="face back"><em>008/021</em><span>Tap to flip</span></div>
             <div class="face front">
@@ -1297,7 +1305,7 @@ button.holo-btn{border:0;cursor:default}
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Zia &amp; Luna" data-game="Lorcana"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: 2.8 Billion Cards, Lorcana, post 007. Tap to flip and play">
+        <div class="pocket" data-host="Zia &amp; Luna" data-game="Lorcana"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="true" aria-label="Clip: 2.8 Billion Cards, Lorcana, post 007. Tap to flip and play">
           <div class="inner">
             <div class="face back"><em>007/021</em><span>Tap to flip</span></div>
             <div class="face front">
@@ -1315,7 +1323,7 @@ button.holo-btn{border:0;cursor:default}
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Zia" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Delta Reign, Pokémon, post 006. Tap to flip and play">
+        <div class="pocket" data-host="Zia" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="true" aria-label="Clip: Delta Reign, Pokémon, post 006. Tap to flip and play">
           <div class="inner">
             <div class="face back"><em>006/021</em><span>Tap to flip</span></div>
             <div class="face front">
@@ -1333,7 +1341,7 @@ button.holo-btn{border:0;cursor:default}
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Zia" data-game="Yu-Gi-Oh!"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Banlist Shock, Yu-Gi-Oh!, post 005. Tap to flip and play">
+        <div class="pocket" data-host="Zia" data-game="Yu-Gi-Oh!"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="true" aria-label="Clip: Banlist Shock, Yu-Gi-Oh!, post 005. Tap to flip and play">
           <div class="inner">
             <div class="face back"><em>005/021</em><span>Tap to flip</span></div>
             <div class="face front">
@@ -1351,7 +1359,7 @@ button.holo-btn{border:0;cursor:default}
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Zia" data-game="Riftbound"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Launch Day, Riftbound, post 004. Tap to flip and play">
+        <div class="pocket" data-host="Zia" data-game="Riftbound"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="true" aria-label="Clip: Launch Day, Riftbound, post 004. Tap to flip and play">
           <div class="inner">
             <div class="face back"><em>004/021</em><span>Tap to flip</span></div>
             <div class="face front">
@@ -1369,7 +1377,7 @@ button.holo-btn{border:0;cursor:default}
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Luna" data-game="Magic"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: $600M Quarter, Magic, post 003. Tap to flip and play">
+        <div class="pocket" data-host="Luna" data-game="Magic"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="true" aria-label="Clip: $600M Quarter, Magic, post 003. Tap to flip and play">
           <div class="inner">
             <div class="face back"><em>003/021</em><span>Tap to flip</span></div>
             <div class="face front">
@@ -1387,7 +1395,7 @@ button.holo-btn{border:0;cursor:default}
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Zia &amp; Luna" data-game="Magic"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Star Trek Timeline, Magic, post 002. Tap to flip and play">
+        <div class="pocket" data-host="Zia &amp; Luna" data-game="Magic"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="true" aria-label="Clip: Star Trek Timeline, Magic, post 002. Tap to flip and play">
           <div class="inner">
             <div class="face back"><em>002/021</em><span>Tap to flip</span></div>
             <div class="face front">
@@ -1405,7 +1413,7 @@ button.holo-btn{border:0;cursor:default}
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
-        <div class="pocket" data-host="Zia &amp; Luna" data-game="TCG"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Release Radar, TCG, post 001. Tap to flip and play">
+        <div class="pocket" data-host="Zia &amp; Luna" data-game="TCG"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="true" aria-label="Clip: Release Radar, TCG, post 001. Tap to flip and play">
           <div class="inner">
             <div class="face back"><em>001/021</em><span>Tap to flip</span></div>
             <div class="face front">
@@ -1481,15 +1489,7 @@ button.holo-btn{border:0;cursor:default}
           .catch(()=>{msg.textContent='Something went wrong. Please try again in a minute.';msg.classList.add('err')}).finally(()=>{btn.disabled=false})})})})();
 </script>
 
-<script>
-/* always open at the top: no restored scroll position, no leftover #section in the address */
-(function(){try{history.scrollRestoration='manual'}catch(e){}
-  if(location.hash){try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}}
-  const top=()=>window.scrollTo(0,0);top();addEventListener('load',()=>setTimeout(top,0),{once:true});addEventListener('pageshow',e=>{if(e.persisted)top()});
-  document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const t=document.getElementById(a.getAttribute('href').slice(1));if(!t)return;
-    e.preventDefault();t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'})});
-})();
-</script>
+<script>document.documentElement.classList.add('fl');(document.fonts&&document.fonts.load?document.fonts.load('800 40px "Bricolage Grotesque"'):Promise.resolve()).then(()=>document.documentElement.classList.remove('fl'),()=>document.documentElement.classList.remove('fl'));setTimeout(()=>document.documentElement.classList.remove('fl'),3000)</script>
 <script>
 (function(){
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1547,6 +1547,7 @@ button.holo-btn{border:0;cursor:default}
   function hydrate(c){const v=c.querySelector('video[data-poster]');if(v&&!v.poster)v.poster=v.dataset.poster;
     const a=c.querySelector('.art[data-p]');if(a&&!a.style.getPropertyValue('--p'))a.style.setProperty('--p','url('+a.dataset.p+')')}
   flips.forEach(c=>new MutationObserver(()=>{if(c.getAttribute('aria-pressed')==='true')hydrate(c)}).observe(c,{attributes:true,attributeFilter:['aria-pressed']}));
+  flips.filter(c=>c.getAttribute('aria-pressed')==='true').forEach(hydrate);
 
   /* binder videos: top first, bottom last */
   (function(){const v=document.querySelector('video.top-cover');if(!v)return;v.src=v.dataset.src;if(!reduce){v.autoplay=true;const pr=v.play();if(pr)pr.catch(()=>{})}})();
