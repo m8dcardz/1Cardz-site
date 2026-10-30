@@ -229,5 +229,17 @@
   "source": "1Cardz on YouTube",
   "quip": "Smile, you're registered for the tournament.",
   "clip": "clip20"
+ },
+ {
+  "clip": "clip21",
+  "title": "Maze of Machines",
+  "game": "Yu-Gi-Oh!",
+  "host": "Luna",
+  "when": "2026-10-30T20:00",
+  "blurb": "Konami's 153-card Maze of Machines booster set releases March 19, 2027, with Rampant Barrel Dragon and 10 new GX cards.",
+  "source": "Confirmed",
+  "quip": "Barrel Dragon called. It wants its six-shooter back.",
+  "media": "https://d2zf8b1xpl1udp.cloudfront.net/xcet8xl8tsgveq3bglpj1l2emeba.mp4",
+  "post_id": 1126654
  }
 ]
