@@ -670,14 +670,14 @@ a.soc.sm:hover{transform:translateY(-2px) scale(1.06)}
 /* tighter top binder (about 15% shorter) */
 body>header .cover{padding-top:calc(var(--vt) + 14px);padding-bottom:clamp(14px,1.8vw,26px)}
 body>header .cover .copy{gap:12px}
-@media (min-width:901px){body>header .cover .window{width:min(100%,258px)}}
+@media (min-width:901px){body>header .cover .window{width:min(100%,219px)}}
 @media (min-width:561px) and (max-width:900px){
-  body>header .cover .window{width:min(62%,196px);margin-bottom:16px}
+  body>header .cover .window{width:min(53%,167px);margin-bottom:16px}
   body>header .cover{row-gap:14px}
   body>header .cover .copy{padding-top:0}
 }
 @media (max-width:560px){
-  html body>header .cover .window{width:min(80%,232px);margin-bottom:4px}
+  html body>header .cover .window{width:min(68%,197px);margin-bottom:4px}
   body>header .cover .label span:nth-child(2){display:none}
   body>header .cover .label{flex-wrap:nowrap}
   body>header .cover .copy{gap:8px;padding-top:0}
@@ -712,7 +712,7 @@ body>header .cover .drop .mono{letter-spacing:-.07em;word-spacing:-.3em}
   html body>header .cover{grid-template-columns:20px minmax(0,1fr) auto;column-gap:10px;row-gap:0;padding-top:calc(var(--vt) + 8px);padding-bottom:10px;align-items:center}
   html body>header .cover .spine{grid-row:1}
   html body>header .cover .copy{grid-column:2;grid-row:1;gap:6px;padding:0 0 0 14px}
-  html body>header .cover .window{grid-column:3;grid-row:1;justify-self:end;width:138px;margin:0}
+  html body>header .cover .window{grid-column:3;grid-row:1;justify-self:end;width:117px;margin:0}
   html body>header .cover h1{font-size:44px;white-space:normal;line-height:.86}
   html body>header .cover h1 br{display:inline}
   body>header .cover .label{font-size:9px;letter-spacing:.08em;flex-wrap:nowrap;white-space:nowrap}
@@ -805,11 +805,10 @@ body>footer .cover .copy>.mono{color:#fff !important;text-shadow:0 1px 3px rgba(
 .pockets>.pocket:nth-child(-n+3) .holo .shine,.pockets>.pocket:nth-child(-n+3) .tcg.holo>.shine{opacity:calc(.051 + var(--o) * .425)}
 /* no caption line under the card pages */
 .sheet-foot{display:none !important}
-/* Hit The Holo game box (5:1, under the top binder) */
-.storm-wrap.wrap{max-width:1400px;padding-left:max(4vw, env(safe-area-inset-left, 0px));padding-right:max(4vw, env(safe-area-inset-right, 0px));margin-top:calc(-1 * clamp(29px,calc(5.86vw - 12px),67px))}
-@media (max-width:560px){.storm-wrap.wrap{margin-top:-31px}}
+/* Shuffle Machine (was Hit The Holo) game box (5:1, under the top binder) */
+.storm-wrap.wrap{max-width:1400px;padding-left:max(4vw, env(safe-area-inset-left, 0px));padding-right:max(4vw, env(safe-area-inset-right, 0px));margin-top:calc(-1 * clamp(12px,3.6vw,52px))}
 .storm{width:100%}
-.storm-wrap+.glassdeck{margin-top:clamp(16px,2.4vw,28px) !important}
+.storm-wrap+.glassdeck{margin-top:clamp(10px,1.6vw,18px) !important}
 .storm{aspect-ratio:5/1;min-height:120px;padding:0 !important;cursor:crosshair;user-select:none;-webkit-user-select:none;touch-action:manipulation}
 .storm canvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:4}
 .storm-hud{position:absolute;left:0;right:0;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px clamp(12px,2vw,20px);pointer-events:none}
@@ -828,8 +827,8 @@ body>footer .cover .copy>.mono{color:#fff !important;text-shadow:0 1px 3px rgba(
 .storm .storm-bg{z-index:0}.storm .storm-fx{z-index:5}
 .storm-plate{display:none}
 .storm.style-arcade{border:0 !important;border-radius:20px !important;overflow:hidden;
-  box-shadow:0 0 0 10px #12204a,0 0 0 13px #2b3f80,0 0 24px 13px var(--rgb) !important;backdrop-filter:none;-webkit-backdrop-filter:none;background:#0b1029;
-  width:auto;margin-inline:13px;animation:rgbFlash 3s linear infinite}
+  box-shadow:0 0 0 8px #12204a,0 0 0 10px #2b3f80,0 0 22px 10px var(--rgb) !important;backdrop-filter:none;-webkit-backdrop-filter:none;background:#0b1029;
+  width:auto;margin-inline:10px;animation:rgbFlash 3s linear infinite}
 .storm.style-arcade::before,.storm.style-arcade::after{display:none}
 .storm.style-arcade .storm-bg{background:url(img/cover-poster.jpg) center/cover;filter:blur(8px) saturate(1.3) brightness(.55);transform:scale(1.1)}
 .storm.style-arcade .storm-fx{box-shadow:inset 0 0 0 2px var(--rgb),inset 0 0 18px var(--rgb);
@@ -847,12 +846,11 @@ body>footer .cover .copy>.mono{color:#fff !important;text-shadow:0 1px 3px rgba(
 @keyframes hyperSpin{to{--ha:360deg}}
 .storm.style-hyper .storm-bg{background:radial-gradient(ellipse at center,#16224d,#04050c 70%)}
 .storm.style-hyper .storm-label{color:#fff}.storm.style-hyper .storm-label i{background:#fff;box-shadow:0 0 10px #fff}
-@media (max-width:560px){.storm.style-arcade{box-shadow:0 0 0 7px #12204a,0 0 0 9px #2b3f80,0 0 18px 9px var(--rgb) !important;margin-inline:9px}}
+@media (max-width:560px){.storm.style-arcade{box-shadow:0 0 0 5.5px #12204a,0 0 0 7px #2b3f80,0 0 16px 7px var(--rgb) !important;margin-inline:7px}}
 @property --rgb{syntax:'<color>';inherits:true;initial-value:#ff2e4d}
 @keyframes rgbFlash{0%{--rgb:#ff2e4d}16%{--rgb:#ffd23f}33%{--rgb:#3ee07a}50%{--rgb:#2de2e6}66%{--rgb:#3a6bff}83%{--rgb:#c04dff}100%{--rgb:#ff2e4d}}
 @media (prefers-reduced-motion: reduce){.storm.style-arcade{animation-duration:12s}}
 /* newsletter box: compact strip sitting on top of the bottom binder; holo game box square corners */
-.storm.style-arcade{border-radius:0 !important}
 section.signup-deck.wrap{max-width:1400px;margin:clamp(40px,6vw,80px) auto 0 !important;padding-block:0 !important;padding-left:max(4vw, env(safe-area-inset-left, 0px));padding-right:max(4vw, env(safe-area-inset-right, 0px))}
 section.signup-deck+footer{padding-top:0 !important}
 .signup.gd{border-radius:18px 18px 0 0 !important;border-bottom:0 !important}
@@ -890,6 +888,68 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
   .cover-video{display:none}
   *,*::before,*::after{animation:none!important;transition:none!important}
 }
+/* headline rotation: slide/fade transition, green glow on watch arrow, newsletter button matches input */
+.gd-stage>.hl{transition:opacity .6s ease,visibility 0s linear 0s;transform:none !important;filter:none !important;will-change:opacity}
+.gd-stage>.hl[hidden]{opacity:0;transition:opacity .6s ease,visibility 0s linear .6s}
+.gd-stage>.hl.on{opacity:1;animation:none !important}
+@media (prefers-reduced-motion:reduce){.gd-stage>.hl,.gd-stage>.hl[hidden]{transition:none}}
+.hl-play{color:#19e35c;text-shadow:0 0 4px #3ee07a,0 0 10px #3ee07a,0 0 18px rgba(62,224,122,.9);animation:playGlow 1.6s ease-in-out infinite}
+@keyframes playGlow{50%{text-shadow:0 0 3px #3ee07a,0 0 7px rgba(62,224,122,.6)}}
+.su-row{align-items:stretch}
+.su-btn{padding-top:0 !important;padding-bottom:0 !important;display:inline-flex;align-items:center;justify-content:center;line-height:1}
+/* newsletter: form along the bottom, metallic grey button; card back holo -15% */
+.signup .su-body{grid-template-columns:1fr !important;gap:10px !important;align-items:stretch}
+.signup .su-form{width:100%}
+.su-btn{background:linear-gradient(180deg,#f4f6f9 0%,#d3d8df 38%,#9ea5b1 52%,#c4c9d2 70%,#e6e9ee 100%) !important;color:#1a1f2e !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9),inset 0 -1px 0 rgba(0,0,0,.18),0 2px 0 #6b717c,0 4px 12px rgba(0,0,0,.3) !important;border:1px solid #8a919c !important;text-shadow:0 1px 0 rgba(255,255,255,.6)}
+.su-btn:hover{filter:brightness(1.06)}
+.window.holo:not(:has(.coverflip[aria-pressed="true"]))>.shine{opacity:calc(.051 + var(--o) * .425)}
+.window .back::after{background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.2975) 50%,transparent 60%)}
+/* holo foil nav buttons under the Shuffle Machine: dark blue text, yellow when active */
+.holo-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin:calc(10px + clamp(14px,2vw,22px)) 10px 0}
+.holo-btn{font-family:"Press Start 2P",ui-monospace,monospace;font-size:11px;line-height:1.4;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;
+  padding:13px 20px;border-radius:10px;color:#16224d;text-shadow:0 1px 0 rgba(255,255,255,.55);
+  background:linear-gradient(115deg,#fbe7a6,#9ff3ff 25%,#ffb3e6 50%,#c3b3ff 75%,#fbe7a6);background-size:220% 100%;
+  box-shadow:inset 0 1px 0 #fff,0 4px 0 #6b5a2a,0 0 14px rgba(255,255,255,.3);transition:transform .08s,box-shadow .08s,color .12s}
+@media (prefers-reduced-motion:no-preference){.holo-btn{animation:holoFoil 4s linear infinite}}
+@keyframes holoFoil{to{background-position:220% 0}}
+.holo-btn:hover,.holo-btn:focus-visible,.holo-btn:active,.holo-btn[aria-current="page"]{color:#ffd23f;
+  text-shadow:0 0 6px #ffd23f,0 0 12px #ffb800,0 0 20px rgba(255,184,0,.8)}
+.holo-btn:active{transform:translateY(3px);box-shadow:inset 0 1px 0 #fff,0 1px 0 #6b5a2a}
+button.holo-btn{border:0;cursor:default}
+.holo-soon:hover,.holo-soon:active{color:#16224d;text-shadow:0 1px 0 rgba(255,255,255,.55);transform:none}
+.holo-btn:focus-visible{outline:2px solid #fff;outline-offset:3px}
+@media (max-width:560px){.holo-nav{gap:10px;margin-inline:9px}.holo-btn{font-size:9px;padding:11px 12px}}
+/* email box 55% narrower; holo buttons shine on their own timing */
+@media (min-width:901px){
+.signup .su-body{grid-template-columns:minmax(0,1fr) auto !important;align-items:end !important;gap:clamp(16px,3vw,40px) !important}
+.signup .su-copy{align-self:end;text-align:left}
+.signup .su-form{width:auto;justify-self:end;align-self:center}
+.signup .su-row{justify-content:flex-end}
+.su-row input{flex:0 0 clamp(260px,34vw,495px)}}
+@media (prefers-reduced-motion:no-preference){
+.holo-btn:nth-child(1){animation-duration:4s;animation-delay:0s}
+.holo-btn:nth-child(2){animation-duration:4.8s;animation-delay:-1.3s}
+.holo-btn:nth-child(3){animation-duration:3.6s;animation-delay:-2.4s}
+.holo-btn:nth-child(4){animation-duration:5.2s;animation-delay:-0.7s}
+.holo-btn:nth-child(5){animation-duration:4.4s;animation-delay:-3.1s}
+.holo-btn:nth-child(6){animation-duration:3.9s;animation-delay:-1.9s}}
+/* Shuffle Machine (was Hit The Holo): daily collection counter + caught card flying into the binder */
+.storm-found{display:inline-flex;align-items:center;gap:8px;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#ffd23f;text-shadow:0 0 8px rgba(255,210,63,.6);white-space:nowrap}
+.storm-found b{font-family:"Press Start 2P",ui-monospace,monospace;font-size:10px;font-weight:400;color:#fff;text-shadow:0 0 8px rgba(255,210,63,.8)}
+.sf-pips{display:inline-flex;gap:3px}
+.sf-pips span{width:7px;height:10px;border-radius:2px;background:rgba(255,255,255,.12);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+.sf-pips span.on{background:linear-gradient(135deg,#ff8ad8,#ffd23f 40%,#7cf3ff 75%,#c58cff);box-shadow:0 0 6px rgba(255,210,63,.7)}
+.storm-found.done{animation:sfDone 1.2s ease-out 2}
+@keyframes sfDone{40%{transform:scale(1.12);filter:brightness(1.5)}}
+.storm-flyer{position:fixed;left:0;top:0;z-index:9999;pointer-events:none;border-radius:7%;background:#16224d url(img/card.webp) center/cover;
+  box-shadow:0 0 0 2px #7cf3ff,0 0 26px 6px rgba(124,243,255,.65),0 18px 40px rgba(0,0,0,.5);transform-origin:center;will-change:transform,width,height}
+.storm-flyer::after{content:"";position:absolute;inset:0;border-radius:inherit;mix-blend-mode:overlay;opacity:.85;
+  background:linear-gradient(115deg,#ff5ac8,#ffe65a 25%,#5affc8 50%,#5aaaff 75%,#c86eff);background-size:200% 200%;animation:flyHolo 1s linear infinite}
+@keyframes flyHolo{to{background-position:200% 0}}
+.pocket.storm-land{animation:stormLand .7s ease-out}
+@keyframes stormLand{0%{filter:brightness(2.2) drop-shadow(0 0 30px #ffd23f)}100%{filter:none}}
+@media (max-width:700px){.storm-hud{flex-wrap:wrap;row-gap:4px}.storm-found{font-size:9px}.sf-pips span{width:5px;height:8px}}
 </style>
 <style>
 /* archive page */
@@ -915,7 +975,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
     <div class="stitch" aria-hidden="true"></div>
     <div class="spine" aria-hidden="true"></div>
     <div class="copy">
-      <div class="label mono"><span>1Cardz.news</span><span>Collector's edition</span><span>8 posts</span></div>
+      <div class="label mono"><span>1Cardz.news</span><span>Collector's edition</span><span>11 posts</span></div>
       <h1 class="foil">TCG <br>News</h1>
       <p>The archive. Every clip Zia and Luna have posted, sleeved and numbered, newest first. Tap any card to flip it and play the story.</p>
       <div class="row">
@@ -955,7 +1015,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
   <section class="wrap arch" id="set" aria-labelledby="set-h">
     <div class="sheet-head">
       <h2 id="set-h">Stories</h2>
-      <p>Every news clip from the 8 AM and 8 PM drops, 8 so far (Oct 25 – Oct 28, 2026). The rows fit your screen, so widen the window for more cards per row. Tap a card to flip it, then tap Sound to hear the story.</p>
+      <p>Every news clip from the 8 AM and 8 PM drops, 11 so far (Oct 25 – Oct 30, 2026). The rows fit your screen, so widen the window for more cards per row. Tap a card to flip it, then tap Sound to hear the story.</p>
       <div class="chips" role="group" aria-label="Filter posts"><button type="button" class="chip mono" data-f="all" aria-pressed="true">All</button><button type="button" class="chip mono" data-f="host:Zia" aria-pressed="false">Zia</button><button type="button" class="chip mono" data-f="host:Luna" aria-pressed="false">Luna</button><span class="chip-sep" aria-hidden="true"></span><button type="button" class="chip mono" data-f="game:FaB" aria-pressed="false">FaB</button><button type="button" class="chip mono" data-f="game:Lorcana" aria-pressed="false">Lorcana</button><button type="button" class="chip mono" data-f="game:Magic" aria-pressed="false">Magic</button><button type="button" class="chip mono" data-f="game:One Piece" aria-pressed="false">One Piece</button><button type="button" class="chip mono" data-f="game:Pokémon" aria-pressed="false">Pokémon</button></div>
       <div class="sheet-tools">
         <a class="btn ghost" href="index.html">Back to the binder</a>
@@ -964,27 +1024,81 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
     </div>
     <div class="page">
       <div class="pockets" id="archGrid">
-        <div class="pocket" data-host="Luna" data-game="Magic"><div class="tcg holo secret flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Fracture Delayed, Magic, post 008. Tap to flip and play">
+        <div class="pocket" data-host="Zia" data-game="Pokémon"><div class="tcg holo secret flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: $4.88M Mudkip, Pokémon, post 011. Tap to flip and play">
           <div class="inner">
-            <div class="face back"><em>008/008</em><span>Tap to flip</span></div>
+            <div class="face back"><em>011/011</em><span>Tap to flip</span></div>
+            <div class="face front">
+              <header class="nm"><h3>$4.88M Mudkip</h3><span class="cost">Pokémon</span></header>
+              <div class="art clip" data-p="img/clip11.jpg"><video src="img/clip11-s.mp4" data-full="img/clip11.mp4" data-poster="img/clip11.jpg" muted loop playsinline preload="none"></video></div>
+              <button class="snd" type="button" aria-pressed="false" aria-label="Turn sound on">Sound off</button>
+              <div class="typeline"><span>Clip · Zia · Oct 30 · 8 AM</span><i class="setsym sec" aria-hidden="true">✦</i></div>
+              <div class="txt">
+                <p>Goldin&#x27;s Pokémon 30th Anniversary auction passed $28 million, led by a PSA 10 Art Academy Mudkip promo at $4.88 million.</p>
+                <p class="flav">Mudkip just outbid your rent.</p>
+                <p class="src">Source: Confirmed</p>
+              </div>
+              <footer class="foot"><span>1CZ · Post 011</span><span class="rar" title="Secret rare">✦</span></footer>
+            </div>
+          </div>
+          <div class="shine"></div><div class="glare"></div>
+        </div></div>
+        <div class="pocket" data-host="Luna" data-game="Magic"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Superdrop, Magic, post 010. Tap to flip and play">
+          <div class="inner">
+            <div class="face back"><em>010/011</em><span>Tap to flip</span></div>
+            <div class="face front">
+              <header class="nm"><h3>Superdrop</h3><span class="cost">Magic</span></header>
+              <div class="art clip" data-p="img/clip10.jpg"><video src="img/clip10-s.mp4" data-full="img/clip10.mp4" data-poster="img/clip10.jpg" muted loop playsinline preload="none"></video></div>
+              <button class="snd" type="button" aria-pressed="false" aria-label="Turn sound on">Sound off</button>
+              <div class="typeline"><span>Clip · Luna · Oct 29 · 8 PM</span><i class="setsym unc" aria-hidden="true">◆</i></div>
+              <div class="txt">
+                <p>Set Phasers to Superdrop brings five Star Trek Secret Lair drops, with preorders opening November 9.</p>
+                <p class="flav">Beam up your wallet.</p>
+                <p class="src">Source: Confirmed</p>
+              </div>
+              <footer class="foot"><span>1CZ · Post 010</span><span class="rar" title="Uncommon">◆</span></footer>
+            </div>
+          </div>
+          <div class="shine"></div><div class="glare"></div>
+        </div></div>
+        <div class="pocket" data-host="Zia" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Dual Fusion, Pokémon, post 009. Tap to flip and play">
+          <div class="inner">
+            <div class="face back"><em>009/011</em><span>Tap to flip</span></div>
+            <div class="face front">
+              <header class="nm"><h3>Dual Fusion</h3><span class="cost">Pokémon</span></header>
+              <div class="art clip" data-p="img/clip9.jpg"><video src="img/clip9-s.mp4" data-full="img/clip9.mp4" data-poster="img/clip9.jpg" muted loop playsinline preload="none"></video></div>
+              <button class="snd" type="button" aria-pressed="false" aria-label="Turn sound on">Sound off</button>
+              <div class="typeline"><span>Clip · Zia · Oct 29 · 8 AM</span><i class="setsym unc" aria-hidden="true">◆</i></div>
+              <div class="txt">
+                <p>Dual Fusion is out in Pokémon TCG Pocket, debuting dual-type cards led by Mega Mewtwo X ex and Mega Greninja ex.</p>
+                <p class="flav">Two types, one pack, zero chill.</p>
+                <p class="src">Source: Confirmed</p>
+              </div>
+              <footer class="foot"><span>1CZ · Post 009</span><span class="rar" title="Uncommon">◆</span></footer>
+            </div>
+          </div>
+          <div class="shine"></div><div class="glare"></div>
+        </div></div>
+        <div class="pocket" data-host="Luna" data-game="Magic"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Fracture Delayed, Magic, post 008. Tap to flip and play">
+          <div class="inner">
+            <div class="face back"><em>008/011</em><span>Tap to flip</span></div>
             <div class="face front">
               <header class="nm"><h3>Fracture Delayed</h3><span class="cost">Magic</span></header>
               <div class="art clip" data-p="img/clip8.jpg"><video src="img/clip8-s.mp4" data-full="img/clip8.mp4" data-poster="img/clip8.jpg" muted loop playsinline preload="none"></video></div>
               <button class="snd" type="button" aria-pressed="false" aria-label="Turn sound on">Sound off</button>
-              <div class="typeline"><span>Clip · Luna · Oct 28 · 8 PM</span><i class="setsym sec" aria-hidden="true">✦</i></div>
+              <div class="typeline"><span>Clip · Luna · Oct 28 · 8 PM</span><i class="setsym unc" aria-hidden="true">◆</i></div>
               <div class="txt">
                 <p>The Reality Fracture Secret Lair Bundle is delayed by shipping and production issues, after the Star Trek Commander Decks slipped first.</p>
                 <p class="flav">Good things come to those who refresh the tracking page.</p>
                 <p class="src">Source: ICv2, October 20</p>
               </div>
-              <footer class="foot"><span>1CZ · Post 008</span><span class="rar" title="Secret rare">✦</span></footer>
+              <footer class="foot"><span>1CZ · Post 008</span><span class="rar" title="Uncommon">◆</span></footer>
             </div>
           </div>
           <div class="shine"></div><div class="glare"></div>
         </div></div>
         <div class="pocket" data-host="Zia" data-game="Lorcana"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Into the Inkdark, Lorcana, post 007. Tap to flip and play">
           <div class="inner">
-            <div class="face back"><em>007/008</em><span>Tap to flip</span></div>
+            <div class="face back"><em>007/011</em><span>Tap to flip</span></div>
             <div class="face front">
               <header class="nm"><h3>Into the Inkdark</h3><span class="cost">Lorcana</span></header>
               <div class="art clip" data-p="img/clip1.jpg"><video src="img/clip1-s.mp4" data-full="img/clip1.mp4" data-poster="img/clip1.jpg" muted loop playsinline preload="none"></video></div>
@@ -1002,7 +1116,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
         </div></div>
         <div class="pocket" data-host="Luna" data-game="FaB"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Chorus of Steel, FaB, post 006. Tap to flip and play">
           <div class="inner">
-            <div class="face back"><em>006/008</em><span>Tap to flip</span></div>
+            <div class="face back"><em>006/011</em><span>Tap to flip</span></div>
             <div class="face front">
               <header class="nm"><h3>Chorus of Steel</h3><span class="cost">FaB</span></header>
               <div class="art clip" data-p="img/clip2.jpg"><video src="img/clip2-s.mp4" data-full="img/clip2.mp4" data-poster="img/clip2.jpg" muted loop playsinline preload="none"></video></div>
@@ -1020,7 +1134,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
         </div></div>
         <div class="pocket" data-host="Zia" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Doug&#x27;s Collection, Pokémon, post 005. Tap to flip and play">
           <div class="inner">
-            <div class="face back"><em>005/008</em><span>Tap to flip</span></div>
+            <div class="face back"><em>005/011</em><span>Tap to flip</span></div>
             <div class="face front">
               <header class="nm"><h3>Doug&#x27;s Collection</h3><span class="cost">Pokémon</span></header>
               <div class="art clip" data-p="img/clip3.jpg"><video src="img/clip3-s.mp4" data-full="img/clip3.mp4" data-poster="img/clip3.jpg" muted loop playsinline preload="none"></video></div>
@@ -1038,7 +1152,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
         </div></div>
         <div class="pocket" data-host="Luna" data-game="One Piece"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Mihawk Banned, One Piece, post 004. Tap to flip and play">
           <div class="inner">
-            <div class="face back"><em>004/008</em><span>Tap to flip</span></div>
+            <div class="face back"><em>004/011</em><span>Tap to flip</span></div>
             <div class="face front">
               <header class="nm"><h3>Mihawk Banned</h3><span class="cost">One Piece</span></header>
               <div class="art clip" data-p="img/clip4.jpg"><video src="img/clip4-s.mp4" data-full="img/clip4.mp4" data-poster="img/clip4.jpg" muted loop playsinline preload="none"></video></div>
@@ -1056,7 +1170,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
         </div></div>
         <div class="pocket" data-host="Luna" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Deck Crafter&#x27;s, Pokémon, post 003. Tap to flip and play">
           <div class="inner">
-            <div class="face back"><em>003/008</em><span>Tap to flip</span></div>
+            <div class="face back"><em>003/011</em><span>Tap to flip</span></div>
             <div class="face front">
               <header class="nm"><h3>Deck Crafter&#x27;s</h3><span class="cost">Pokémon</span></header>
               <div class="art clip" data-p="img/clip5.jpg"><video src="img/clip5-s.mp4" data-full="img/clip5.mp4" data-poster="img/clip5.jpg" muted loop playsinline preload="none"></video></div>
@@ -1074,7 +1188,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
         </div></div>
         <div class="pocket" data-host="Luna" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: Set Alert, Pokémon, post 002. Tap to flip and play">
           <div class="inner">
-            <div class="face back"><em>002/008</em><span>Tap to flip</span></div>
+            <div class="face back"><em>002/011</em><span>Tap to flip</span></div>
             <div class="face front">
               <header class="nm"><h3>Set Alert</h3><span class="cost">Pokémon</span></header>
               <div class="art clip" data-p="img/clip7.jpg"><video src="img/clip7-s.mp4" data-full="img/clip7.mp4" data-poster="img/clip7.jpg" muted loop playsinline preload="none"></video></div>
@@ -1092,7 +1206,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
         </div></div>
         <div class="pocket" data-host="Luna" data-game="Pokémon"><div class="tcg flip clipcard" role="button" tabindex="0" aria-pressed="false" aria-label="Clip: $2M Sale, Pokémon, post 001. Tap to flip and play">
           <div class="inner">
-            <div class="face back"><em>001/008</em><span>Tap to flip</span></div>
+            <div class="face back"><em>001/011</em><span>Tap to flip</span></div>
             <div class="face front">
               <header class="nm"><h3>$2M Sale</h3><span class="cost">Pokémon</span></header>
               <div class="art clip" data-p="img/clip6.jpg"><video src="img/clip6-s.mp4" data-full="img/clip6.mp4" data-poster="img/clip6.jpg" muted loop playsinline preload="none"></video></div>
@@ -1110,7 +1224,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
         </div></div>
         <p class="arch-empty mono" id="archEmpty" hidden>No posts match this filter yet.</p>
       </div>
-      <div class="sheet-foot mono"><span>Archive · newest first</span><span id="archCount">Set 1CZ · posts 001–008</span></div>
+      <div class="sheet-foot mono"><span>Archive · newest first</span><span id="archCount">Set 1CZ · posts 001–011</span></div>
     </div>
   </section>
 </main>
