@@ -235,5 +235,7 @@ js = r'''<script>
 out = ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
        '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
        + head + style + '\n' + extra_css + '\n</head>\n<body>\n' + body + '\n' + scrolltop + '\n' + js + '\n</body>\n</html>\n')
+popup = (root/'tools'/'clip_popup.html').read_text()
+out = out.replace('\n</body>', '\n' + popup + '</body>', 1)
 (root/'archive.html').write_text(out)
 print('archive.html', len(out), 'bytes,', n, 'posts')
