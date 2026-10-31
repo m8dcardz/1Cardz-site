@@ -1082,7 +1082,7 @@ button.holo-btn{border:0;cursor:default}
     let fh=Math.round(fs*(phone?3:3.33));box.style.setProperty('--fh',fh+'px');box.style.setProperty('--fs0',fs+'px');
     const fits=()=>{const rr=Math.max(...[...drop.children].filter(e=>!e.classList.contains('cz-sr')).map(e=>e.getBoundingClientRect().right));if(rr>rightEdge()+0.5)return false;if(!row)return true;return spread(drop)<=s0+fh*.6};
     while(!fits()&&fh>fs*.6){fh-=1;box.style.setProperty('--fh',fh+'px')}
-    if(phone){fh=Math.round(fh*.85);box.style.setProperty('--fh',fh+'px')}};
+    fh=Math.round(fh*(phone?.85:.8));box.style.setProperty('--fh',fh+'px')};
   size();addEventListener('resize',size);(document.fonts&&document.fonts.ready||Promise.resolve()).then(size);
   let first=true;
   function draw(){const ds=(b.textContent||'').replace(/\D/g,'');if(ds.length!==6)return;
