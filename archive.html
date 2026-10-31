@@ -969,6 +969,8 @@ button.holo-btn{border:0;cursor:default}
 .fl .sheet-head h2{white-space:nowrap}
 /* home binder sheet: cards stop growing at 300px wide on big screens */
 #set:not(.arch) .pockets{grid-template-columns:repeat(3,minmax(0,300px));justify-content:center}
+/* phones: no "Watch the clip" button (tap the clip preview instead) */
+@media (max-width:560px){.hl-watch{display:none !important}}
 </style>
 <style>
 .snd.ytwatch{text-decoration:none;display:inline-flex;align-items:center;gap:4px}
