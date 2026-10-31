@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500;12..96,75..100,700;12..96,75..100,800&family=Atkinson+Hyperlegible:wght@400;700&display=block">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=VT323&family=Russo+One&family=Oxanium:wght@700&family=Press+Start+2P&display=swap">
-<script>document.documentElement.classList.add('fl');(document.fonts&&document.fonts.load?document.fonts.load('800 40px "Bricolage Grotesque"'):Promise.resolve()).then(()=>document.documentElement.classList.remove('fl'),()=>document.documentElement.classList.remove('fl'));setTimeout(()=>document.documentElement.classList.remove('fl'),3000)</script>
+<script id="fl-boot">document.documentElement.classList.add('fl');(document.fonts&&document.fonts.load?document.fonts.load('800 40px "Bricolage Grotesque"'):Promise.resolve()).then(()=>document.documentElement.classList.remove('fl'),()=>document.documentElement.classList.remove('fl'));setTimeout(()=>document.documentElement.classList.remove('fl'),3000)</script>
 <style>
 /* Layout: the site is a collector's binder on a playmat. Cover first, then nine-pocket pages of sleeved cards, a rarity key, and the back cover. One committed look (a physical object), colors set explicitly. */
 :root{
@@ -1020,6 +1020,47 @@ button.holo-btn{border:0;cursor:default}
     </div>
     <div class="strap" aria-hidden="true"></div>
   </div>
+<style id="flap-css">
+/* top binder countdown: split-flap tiles (style A, Oct 31) */
+.drop .flapclock{display:inline-flex;align-items:center;gap:calc(var(--fh) * .1);height:var(--fh);--fh:36px}
+.drop .flapclock .grp{display:flex;gap:calc(var(--fh) * .08)}
+.drop .flapclock .colon{font-family:"Oxanium",var(--f-display),sans-serif;font-weight:800;font-size:calc(var(--fh) * .7);line-height:1;color:#fff;opacity:.85;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.fd{position:relative;width:calc(var(--fh) * .7);height:var(--fh);perspective:300px;font-family:"Oxanium",var(--f-display),sans-serif;font-weight:800;font-size:calc(var(--fh) * .78);color:#fff;border-radius:calc(var(--fh) * .13);box-shadow:0 4px 12px rgba(0,0,0,.55)}
+.fd .half,.fd .flip{position:absolute;left:0;right:0;height:50%;overflow:hidden}
+.fd .half span,.fd .flip span{position:absolute;left:0;right:0;height:200%;display:grid;place-items:center;line-height:1}
+.fd .top,.fd .flip{top:0;background:linear-gradient(#1d2654,#141b40);border-radius:calc(var(--fh) * .13) calc(var(--fh) * .13) 0 0}
+.fd .top span,.fd .flip span{top:0}
+.fd .bot{bottom:0;background:linear-gradient(#121838,#0c112c);border-radius:0 0 calc(var(--fh) * .13) calc(var(--fh) * .13)}
+.fd .bot span{bottom:0}
+.fd::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(0,0,0,.65);z-index:3}
+.fd .flip{z-index:2;transform-origin:bottom;backface-visibility:hidden}
+.fd .flip.go{animation:flapdown .3s ease-in forwards}
+@keyframes flapdown{to{transform:rotateX(-90deg)}}
+.cz-sr{position:absolute !important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (prefers-reduced-motion:reduce){.fd .flip{display:none}}
+</style>
+<script id="flap-js">
+(function(){const b=document.getElementById('coverCount');if(!b||b.dataset.flap)return;b.dataset.flap='1';
+  const box=document.createElement('span');box.className='flapclock';box.setAttribute('aria-hidden','true');b.after(box);b.classList.add('cz-sr');
+  const fds=[];[0,1,2].forEach(g=>{const grp=document.createElement('span');grp.className='grp';
+    for(let i=0;i<2;i++){const d=document.createElement('span');d.className='fd';d.innerHTML='<span class="half top"><span>0</span></span><span class="half bot"><span>0</span></span>';grp.append(d);fds.push({el:d,v:'0'})}
+    box.append(grp);if(g<2){const c=document.createElement('span');c.className='colon';c.textContent=':';box.append(c)}});
+  const spread=d=>{const ts=[...d.children].filter(e=>!e.classList.contains('cz-sr')&&e.style.display!=='none').map(e=>e.getBoundingClientRect().bottom);return Math.max(...ts)-Math.min(...ts)};
+  const size=()=>{b.classList.remove('cz-sr');box.style.display='none';const fs=parseFloat(getComputedStyle(b).fontSize)||36,s0=spread(b.closest('.drop'));box.style.display='';b.classList.add('cz-sr');
+    const drop=b.closest('.drop'),col=drop.parentElement.closest('.copy')||drop.parentElement,row=getComputedStyle(drop).flexDirection==='row';
+    let fh=fs;box.style.setProperty('--fh',fh+'px');
+    const fits=()=>{const r=box.getBoundingClientRect(),c=col.getBoundingClientRect();if(r.right>c.right+0.5)return false;if(!row)return true;return spread(drop)<=s0+fh*.6};
+    while(!fits()&&fh>fs*.6){fh-=1;box.style.setProperty('--fh',fh+'px')}};
+  size();addEventListener('resize',size);(document.fonts&&document.fonts.ready||Promise.resolve()).then(size);
+  let first=true;
+  function draw(){const ds=(b.textContent||'').replace(/\D/g,'');if(ds.length!==6)return;
+    ds.split('').forEach((ch,i)=>{const f=fds[i];if(f.v===ch)return;const old=f.v;f.v=ch;const top=f.el.querySelector('.top span'),bot=f.el.querySelector('.bot span');top.textContent=ch;
+      if(first){bot.textContent=ch;return}
+      const fl=document.createElement('span');fl.className='flip';fl.innerHTML='<span>'+old+'</span>';f.el.append(fl);requestAnimationFrame(()=>fl.classList.add('go'));
+      setTimeout(()=>{bot.textContent=ch;fl.remove()},300)});first=false}
+  new MutationObserver(draw).observe(b,{childList:true,characterData:true,subtree:true});draw();
+})();
+</script>
 </header>
 
 <div class="wrap navbar-wrap">
