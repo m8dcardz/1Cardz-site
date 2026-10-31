@@ -10,20 +10,25 @@
 .cz-pop.on .cz-pop-box{transform:none}
 .cz-pop video{display:block;height:min(72vh,calc((96vw) * 16 / 9));max-height:72vh;aspect-ratio:9/16;max-width:96vw;border-radius:16px;background:#000;
   box-shadow:0 0 0 2px rgba(124,243,255,.55),0 0 34px rgba(124,243,255,.35),0 30px 70px rgba(0,0,0,.65),0 0 0 9999px rgba(0,0,0,0)}
-.cz-pop-meta{text-align:center;color:#e8ecf8;max-width:52ch;display:grid;gap:4px;padding:10px 16px;border-radius:14px;background:rgba(10,15,38,.62);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),0 10px 30px rgba(0,0,0,.35)}
+.cz-pop-meta{position:relative;overflow:hidden;text-align:center;color:#e8ecf8;max-width:52ch;display:grid;gap:4px;padding:10px 16px;border-radius:14px;
+  background:linear-gradient(180deg,rgba(255,255,255,.16) 0%,rgba(255,255,255,.05) 48%,rgba(255,255,255,.02) 52%,rgba(255,255,255,.07) 100%),rgba(20,28,64,.38);
+  -webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.45),inset 0 0 0 1px rgba(255,255,255,.18),inset 0 -10px 20px rgba(124,243,255,.06),0 12px 32px rgba(0,0,0,.35)}
+.cz-pop-meta::before{content:"";position:absolute;inset:0 0 auto 0;height:48%;background:linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,0));border-radius:14px 14px 50% 50%/14px 14px 18px 18px;pointer-events:none}
+.cz-pop-meta::after{content:"";position:absolute;top:-40%;left:-30%;width:40%;height:180%;transform:rotate(20deg);background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.12),rgba(255,255,255,0));pointer-events:none}
+.cz-pop-meta>*{position:relative}
 .cz-pop-meta h3{margin:0;font-family:"Oxanium","Bricolage Grotesque",system-ui,sans-serif;font-weight:700;font-size:clamp(18px,2.4vw,24px);color:#fff}
 .cz-pop-meta .m{font-family:"DM Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#7cf3ff}
 .cz-pop-meta p{margin:0;font-size:14px;line-height:1.45;color:#c9cfe4}
-.cz-pop-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.cz-pop-row{display:flex;flex-wrap:nowrap;gap:10px;justify-content:center;align-items:center}
 .cz-pop-row .holo-btn{font-size:9px;padding:10px 14px}
 .cz-pop-x,.cz-pop-nav{position:fixed;z-index:2;border:0;cursor:pointer;color:#fff;background:rgba(10,15,38,.7);border:1px solid rgba(255,255,255,.25);border-radius:50%;width:44px;height:44px;font-size:20px;line-height:1;display:grid;place-items:center}
 .cz-pop-x{top:max(14px,env(safe-area-inset-top));right:max(14px,env(safe-area-inset-right))}
-.cz-pop-nav{top:50%;transform:translateY(-50%)}
-.cz-pop-nav.prev{left:max(10px,env(safe-area-inset-left))}
-.cz-pop-nav.next{right:max(10px,env(safe-area-inset-right))}
+.cz-pop-row .cz-pop-nav{position:static;flex:0 0 auto;width:40px;height:40px;font-size:22px}
+.cz-pop-nav[hidden]{display:none}
 .cz-pop-x:hover,.cz-pop-nav:hover{border-color:#ffd23f;color:#ffd23f}
 .cz-pop-x:focus-visible,.cz-pop-nav:focus-visible{outline:2px solid #fff;outline-offset:2px}
-@media (max-width:560px){.cz-pop video{height:auto;width:92vw;max-height:70vh}.cz-pop-nav{top:auto;bottom:max(14px,env(safe-area-inset-bottom));transform:none}.cz-pop-meta p{font-size:13px}}
+@media (max-width:560px){.cz-pop-row{gap:6px}.cz-pop-row .holo-btn{font-size:8px;padding:9px 9px}.cz-pop-row .cz-pop-nav{width:34px;height:34px;font-size:19px}.cz-pop video{height:auto;width:92vw;max-height:70vh}.cz-pop-meta p{font-size:13px}}
 @media (prefers-reduced-motion:reduce){.cz-pop,.cz-pop-box{transition:none}}
 .cz-pop-vwrap{position:relative;line-height:0}
 .cz-pop video{cursor:pointer}
@@ -42,9 +47,9 @@
   const clips=()=>[...document.querySelectorAll('.flip')].filter(c=>c.querySelector('.art.clip video')&&!(c.closest('.pocket')||{}).hidden);
   function build(){if(pop)return;
     pop=document.createElement('div');pop.className='cz-pop';pop.hidden=true;pop.setAttribute('role','dialog');pop.setAttribute('aria-modal','true');pop.setAttribute('aria-label','Clip player');
-    pop.innerHTML='<button class="cz-pop-x" type="button" aria-label="Close">✕</button><button class="cz-pop-nav prev" type="button" aria-label="Previous clip">‹</button><button class="cz-pop-nav next" type="button" aria-label="Next clip">›</button>'+
+    pop.innerHTML='<button class="cz-pop-x" type="button" aria-label="Close">✕</button>'+
       '<div class="cz-pop-box"><div class="cz-pop-vwrap"><video playsinline loop preload="auto"></video><button class="cz-pop-snd" type="button" aria-pressed="true">Sound on</button><span class="cz-pop-paused" aria-hidden="true">▶</span><div class="cz-pop-bar" aria-hidden="true"><i></i></div></div><div class="cz-pop-meta"><span class="m"></span><h3></h3><p></p></div>'+
-      '<div class="cz-pop-row"><a class="holo-btn" href="https://www.instagram.com/1cardz_news/" target="_blank" rel="noopener">Instagram</a><a class="holo-btn" href="https://www.youtube.com/@1Cardzcom" target="_blank" rel="noopener">YouTube</a><a class="holo-btn" href="https://www.tiktok.com/@1cardz.com" target="_blank" rel="noopener">TikTok</a></div></div>';
+      '<div class="cz-pop-row"><button class="cz-pop-nav prev" type="button" aria-label="Previous clip">‹</button><a class="holo-btn" href="https://www.instagram.com/1cardz_news/" target="_blank" rel="noopener">Instagram</a><a class="holo-btn" href="https://www.youtube.com/@1Cardzcom" target="_blank" rel="noopener">YouTube</a><a class="holo-btn" href="https://www.tiktok.com/@1cardz.com" target="_blank" rel="noopener">TikTok</a><button class="cz-pop-nav next" type="button" aria-label="Next clip">›</button></div></div>';
     document.body.append(pop);vid=pop.querySelector('video');snd=pop.querySelector('.cz-pop-snd');
     const setSnd=()=>{const on=!vid.muted;snd.textContent=on?'Sound on':'Sound off';snd.setAttribute('aria-pressed',String(on));snd.setAttribute('aria-label',on?'Turn sound off':'Turn sound on')};
     snd.addEventListener('click',e=>{e.stopPropagation();vid.muted=!vid.muted;if(vid.paused)vid.play().catch(()=>{});setSnd()});
