@@ -56,7 +56,7 @@ extra_css = '''<style>
   box-shadow:0 0 0 10px #0d0b16,0 0 0 13px #2a2340,0 0 24px 13px rgba(255,62,165,.35) !important;margin-top:22px}
 .mkt-arcade::before,.mkt-arcade::after{display:none !important}
 .mkt-arcade .mkt-bg,.mkt-arcade .mkt-fx{position:absolute;inset:0;pointer-events:none;border-radius:inherit}
-.mkt-arcade .mkt-bg{z-index:0;background:url(img/cover-poster.jpg) center/cover;filter:blur(10px) saturate(1.3) brightness(.38);transform:scale(1.1)}
+.mkt-arcade .mkt-bg{z-index:0;background:url(img/cover-blur.jpg) center/cover} /* pre-blurred image: a live blur on this tall box made phones show it blank for a long time */
 .mkt-arcade .mkt-fx{z-index:5;box-shadow:inset 0 0 0 2px #ff3ea5,inset 0 0 22px rgba(255,62,165,.55);background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 1px,transparent 1px 3px)}
 .mkt-arcade>*:not(.mkt-bg):not(.mkt-fx){position:relative;z-index:4}
 .mkt-arcade .mw-label{font-family:"Press Start 2P",var(--f-mono);font-size:9px;letter-spacing:.06em;color:#ff8ad8;text-shadow:0 0 8px #ff3ea5}
