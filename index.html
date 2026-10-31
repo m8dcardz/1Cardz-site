@@ -914,13 +914,14 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
 .holo-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin:calc(10px + clamp(14px,2vw,22px)) 10px 0}
 .holo-btn{font-family:"Press Start 2P",ui-monospace,monospace;font-size:11px;line-height:1.4;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;
   padding:13px 20px;border-radius:10px;color:#16224d;text-shadow:0 1px 0 rgba(255,255,255,.55);
-  background:linear-gradient(115deg,#fbe7a6,#9ff3ff 25%,#ffb3e6 50%,#c3b3ff 75%,#fbe7a6);background-size:220% 100%;
-  box-shadow:inset 0 1px 0 #fff,0 4px 0 #6b5a2a,0 0 14px rgba(255,255,255,.3);transition:transform .08s,box-shadow .08s,color .12s}
+  background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.12) 48%,rgba(0,0,0,0) 52%,rgba(40,20,90,.14)),linear-gradient(115deg,#fbe7a6,#9ff3ff 25%,#ffb3e6 50%,#c3b3ff 75%,#fbe7a6);background-size:100% 100%,220% 100%;
+  /* 3D bevel, no drop shadow under the bar (Nov 1) */
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.95),inset 0 -4px 0 rgba(70,45,130,.38),inset 2px 0 0 rgba(255,255,255,.45),inset -2px 0 0 rgba(70,45,130,.22);transition:transform .08s,box-shadow .08s,color .12s}
 @media (prefers-reduced-motion:no-preference){.holo-btn{animation:holoFoil 4s linear infinite}}
 @keyframes holoFoil{to{background-position:220% 0}}
 .holo-btn:hover,.holo-btn:focus-visible,.holo-btn:active,.holo-btn[aria-current="page"]{color:#ffd23f;
   text-shadow:0 0 6px #ffd23f,0 0 12px #ffb800,0 0 20px rgba(255,184,0,.8)}
-.holo-btn:active{transform:translateY(3px);box-shadow:inset 0 1px 0 #fff,0 1px 0 #6b5a2a}
+.holo-btn:active{transform:translateY(2px);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),inset 0 -1px 0 rgba(70,45,130,.38),inset 0 3px 8px rgba(70,45,130,.3)}
 button.holo-btn{border:0;cursor:default}
 .holo-soon:hover,.holo-soon:active{color:#16224d;text-shadow:0 1px 0 rgba(255,255,255,.55);transform:none}
 .holo-btn:focus-visible{outline:2px solid #fff;outline-offset:3px}
@@ -979,7 +980,7 @@ button.holo-btn{border:0;cursor:default}
 .cv-glow{z-index:0;box-shadow:0 0 18px rgba(124,243,255,.45),0 0 4px rgba(124,243,255,.6)}
 .cv-edge{position:absolute;inset:-3px;border-radius:13px 13px 0 0;overflow:hidden}
 .cv-edge i{position:absolute;left:50%;top:50%;width:115%;aspect-ratio:1;translate:-50% -50%;background:conic-gradient(#063a4a,#0aa6c8,#7cf3ff,#e6feff,#7cf3ff,#18c8ee,#0b5f7a,#063a4a);animation:rimspin 4s linear infinite}
-.cv-in{z-index:1;box-shadow:inset 0 0 26px rgba(124,243,255,.5),inset 0 0 3px rgba(210,252,255,.85)}
+.cv-in{z-index:1;box-shadow:inset 0 0 60px rgba(124,243,255,.6),inset 0 0 22px rgba(124,243,255,.75),inset 0 0 5px rgba(225,253,255,.95)}
 body>header .cover .top-cover{z-index:0}
 @media (prefers-reduced-motion:reduce){.cv-edge i{animation:none}}
 </style>
@@ -1066,7 +1067,7 @@ body>header .cover .top-cover{z-index:0}
     let fh=Math.round(fs*(phone?3:3.33));box.style.setProperty('--fh',fh+'px');box.style.setProperty('--fs0',fs+'px');
     const fits=()=>{const rr=Math.max(...[...drop.children].filter(e=>!e.classList.contains('cz-sr')).map(e=>e.getBoundingClientRect().right));if(rr>rightEdge()+0.5)return false;if(!row)return true;return spread(drop)<=s0+fh*.6};
     while(!fits()&&fh>fs*.6){fh-=1;box.style.setProperty('--fh',fh+'px')}
-    fh=Math.round(fh*(phone?.85:.8));box.style.setProperty('--fh',fh+'px')};
+    fh=Math.round(fh*(phone?.85:.8)*.85);box.style.setProperty('--fh',fh+'px')};
   size();addEventListener('resize',size);(document.fonts&&document.fonts.ready||Promise.resolve()).then(size);
   function draw(){const ds=(b.textContent||'').replace(/\D/g,'');if(ds.length!==6)return;
     ds.split('').forEach((ch,i)=>{const c=chs[i];if(c.v===ch)return;c.v=ch;const m=F[ch];[...c.el.children].forEach((d,j)=>d.classList.toggle('on',m[j]==='1'))})}
