@@ -967,6 +967,8 @@ button.holo-btn{border:0;cursor:default}
   :is(.arch,.news,.mkt,.nlp) .sheet-head>:not(h2):not(p){grid-column:1/-1}}
 /* while the fonts load, keep page titles on one line so the page doesn't jump */
 .fl .sheet-head h2{white-space:nowrap}
+/* home binder sheet: cards stop growing at 300px wide on big screens */
+#set:not(.arch) .pockets{grid-template-columns:repeat(3,minmax(0,300px));justify-content:center}
 </style>
 <style>
 /* newsletter page */
