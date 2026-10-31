@@ -1017,7 +1017,6 @@ button.holo-btn{border:0;cursor:default}
       <h1 class="foil">TCG <br>News</h1>
       <p>Market Watch. Daily market prices for sealed product and chase singles from the newest sets across seven games.</p>
       <div class="row">
-        <a class="btn" href="index.html">Back home</a>
         <div class="drop"><span class="mono">Next drop</span><b id="coverCount">--:--:--</b><span class="mono" id="coverWho">—</span></div>
       </div>
     </div>
@@ -1076,10 +1075,14 @@ button.holo-btn{border:0;cursor:default}
     box.append(grp);if(g<2){const c=document.createElement('span');c.className='colon';c.textContent=':';box.append(c)}});
   const spread=d=>{const ts=[...d.children].filter(e=>!e.classList.contains('cz-sr')&&e.style.display!=='none').map(e=>e.getBoundingClientRect().bottom);return Math.max(...ts)-Math.min(...ts)};
   const size=()=>{b.classList.remove('cz-sr');box.style.display='none';const fs=parseFloat(getComputedStyle(b).fontSize)||36,s0=spread(b.closest('.drop'));box.style.display='';b.classList.add('cz-sr');
-    const drop=b.closest('.drop'),col=drop.parentElement.closest('.copy')||drop.parentElement,row=getComputedStyle(drop).flexDirection==='row';
-    let fh=Math.round(fs*3);box.style.setProperty('--fh',fh+'px');box.style.setProperty('--fs0',fs+'px');
-    const fits=()=>{const r=box.getBoundingClientRect(),c=col.getBoundingClientRect();if(r.right>c.right+0.5)return false;if(!row)return true;return spread(drop)<=s0+fh*.6};
-    while(!fits()&&fh>fs*.6){fh-=1;box.style.setProperty('--fh',fh+'px')}};
+    const drop=b.closest('.drop'),copy=drop.parentElement.closest('.copy')||drop.parentElement,row=getComputedStyle(drop).flexDirection==='row';
+    const phone=matchMedia('(max-width:560px)').matches,win=drop.closest('.cover')&&drop.closest('.cover').querySelector('.window');
+    /* on wider screens the countdown line may run under the flip card when it sits below it */
+    const rightEdge=()=>{let r=copy.getBoundingClientRect().right;if(!phone&&win){const w=win.getBoundingClientRect();if(drop.getBoundingClientRect().top>=w.bottom-2)r=Math.max(r,w.right)}return r};
+    let fh=Math.round(fs*(phone?3:3.33));box.style.setProperty('--fh',fh+'px');box.style.setProperty('--fs0',fs+'px');
+    const fits=()=>{const rr=Math.max(...[...drop.children].filter(e=>!e.classList.contains('cz-sr')).map(e=>e.getBoundingClientRect().right));if(rr>rightEdge()+0.5)return false;if(!row)return true;return spread(drop)<=s0+fh*.6};
+    while(!fits()&&fh>fs*.6){fh-=1;box.style.setProperty('--fh',fh+'px')}
+    if(phone){fh=Math.round(fh*.85);box.style.setProperty('--fh',fh+'px')}};
   size();addEventListener('resize',size);(document.fonts&&document.fonts.ready||Promise.resolve()).then(size);
   let first=true;
   function draw(){const ds=(b.textContent||'').replace(/\D/g,'');if(ds.length!==6)return;
