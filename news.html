@@ -1182,7 +1182,7 @@ button.holo-btn{border:0;cursor:default}
 
 <script>
   /* sign-up boxes: send to the list's endpoint once a service is connected */
-  (function(){const SIGNUP_ENDPOINTS={newsletter:''};
+  (function(){const SIGNUP_ENDPOINTS={newsletter:'https://1cardz-signup.m8dcardz.workers.dev'};
     document.querySelectorAll('.signup').forEach(box=>{const f=box.querySelector('form'),inp=f.querySelector('input[type=email]'),msg=f.querySelector('.su-msg'),btn=f.querySelector('button');
       f.addEventListener('submit',e=>{e.preventDefault();msg.classList.remove('err');const v=inp.value.trim();
         if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)){msg.textContent='That email doesn\'t look right. Mind checking it?';msg.classList.add('err');inp.focus();return}
