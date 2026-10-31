@@ -62,7 +62,9 @@ extra_css = '''<style>
 .mkt-arcade .mw-label{font-family:"Press Start 2P",var(--f-mono);font-size:9px;letter-spacing:.06em;color:#ff8ad8;text-shadow:0 0 8px #ff3ea5}
 .mkt-arcade .mw-label i{background:#ff3ea5;box-shadow:0 0 10px #ff3ea5}
 .mkt-arcade .mw-row{border-top-color:rgba(255,62,165,.12)}
-@media (max-width:560px){.mkt .gd.mw.mkt-arcade{box-shadow:0 0 0 7px #0d0b16,0 0 0 9px #2a2340,0 0 18px 9px rgba(255,62,165,.35) !important}}
+@media (max-width:560px){.mkt .gd.mw.mkt-arcade{box-shadow:0 0 0 7px #0d0b16,0 0 0 9px #ff3ea5 !important}
+  /* phones: no full-height scanline/glow overlay on this tall box (it made phones show the box blank for a long time) */
+  .mkt-arcade .mkt-fx{background:none;box-shadow:inset 0 0 0 2px #ff3ea5}.mkt-arcade .mkt-bg{display:none}.mkt .gd.mw.mkt-arcade{background:linear-gradient(180deg,#1a1030,#0b0912 40%,#120a22)}.mw-label i{animation:none}}
 </style>'''
 
 chips = ['<button type="button" class="chip" data-k="all" aria-pressed="true">All</button>',

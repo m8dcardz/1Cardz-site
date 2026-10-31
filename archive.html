@@ -9,8 +9,8 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500;12..96,75..100,700;12..96,75..100,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=VT323&family=Russo+One&family=Oxanium:wght@700&family=Press+Start+2P&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500;12..96,75..100,700;12..96,75..100,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500;12..96,75..100,700;12..96,75..100,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap"></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=VT323&family=Russo+One&family=Oxanium:wght@700&family=Press+Start+2P&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=VT323&family=Russo+One&family=Oxanium:wght@700&family=Press+Start+2P&display=swap"></noscript>
 <script id="fl-boot">document.documentElement.classList.add('fl');(document.fonts&&document.fonts.load?document.fonts.load('800 40px "Bricolage Grotesque"'):Promise.resolve()).then(()=>document.documentElement.classList.remove('fl'),()=>document.documentElement.classList.remove('fl'));setTimeout(()=>document.documentElement.classList.remove('fl'),3000)</script>
 <style>
 /* Layout: the site is a collector's binder on a playmat. Cover first, then nine-pocket pages of sleeved cards, a rarity key, and the back cover. One committed look (a physical object), colors set explicitly. */
@@ -876,7 +876,7 @@ body>header .cover .cover-video,body>header .cover .cover-holo,body>header .cove
 body>footer .cover{--vt:-14px !important;border-top-left-radius:0;border-top-right-radius:0}
 body>footer .cover .stitch{border-top:0;top:-4px;border-top-left-radius:0;border-top-right-radius:0}
 body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cover .cover-gloss{border-top-left-radius:0;border-top-right-radius:0}
-.cover:not(.cover-back) .cover-video{opacity:.82;filter:saturate(1.17) contrast(1.04) brightness(.95)}
+.cover:not(.cover-back) .cover-video{opacity:.82}
 .cover:not(.cover-back) .cover-holo{opacity:.36}
 .cover:not(.cover-back).hover .cover-holo{opacity:.45}
 .cover:not(.cover-back) .cover-holo::after{background:radial-gradient(circle at var(--hx) var(--hy),rgba(255,255,255,.6),transparent 48%)}
@@ -1077,6 +1077,17 @@ button.holo-btn{border:0;cursor:default}
       setTimeout(()=>{bot.textContent=ch;fl.remove()},300)});first=false}
   new MutationObserver(draw).observe(b,{childList:true,characterData:true,subtree:true});draw();
 })();
+</script>
+<style id="perf-css">
+/* pause looping effects in any section that's off screen (Safari slowed down running them all at once) */
+[data-off],[data-off] *,[data-off]::before,[data-off]::after,[data-off] *::before,[data-off] *::after{animation-play-state:paused !important}
+</style>
+<script id="perf-js">
+(function(){const go=()=>{if(!('IntersectionObserver' in window))return;
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.removeAttribute('data-off');else e.target.setAttribute('data-off','')}),{rootMargin:'150px 0px'});
+  document.querySelectorAll('body>header,body>footer,.navbar-wrap,main>section,body>section,.signup-deck,.gd,.storm').forEach(el=>io.observe(el));
+  document.querySelectorAll('video[loop]').forEach(v=>new IntersectionObserver(es=>es.forEach(e=>{if(!v.src&&!v.currentSrc)return;if(e.isIntersecting){if(v.paused&&v.autoplay)v.play().catch(()=>{})}else if(!v.paused)v.pause()}),{rootMargin:'100px 0px'}).observe(v))};
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})();
 </script>
 </header>
 
