@@ -1832,7 +1832,7 @@ button.holo-btn{border:0;cursor:default}
 .cz-pop-box{position:relative;display:grid;grid-template-columns:auto;gap:20px;justify-items:center;max-width:min(96vw,560px);transform:scale(.94);transition:transform .25s cubic-bezier(.2,.7,.1,1)}
 .cz-pop.on .cz-pop-box{transform:none}
 .cz-pop video{display:block;height:min(72vh,calc((96vw) * 16 / 9));max-height:72vh;aspect-ratio:9/16;max-width:96vw;border-radius:16px;background:#000;
-  box-shadow:0 0 0 2px rgba(124,243,255,.55),0 0 34px rgba(124,243,255,.35),0 30px 70px rgba(0,0,0,.65),0 0 0 9999px rgba(0,0,0,0)}
+  box-shadow:0 30px 70px rgba(0,0,0,.65)}
 .cz-pop-meta{position:relative;overflow:hidden;isolation:isolate;text-align:center;color:#e8ecf8;max-width:52ch;display:grid;gap:4px;padding:12px 18px;border-radius:14px;background:#0b0912;
   box-shadow:0 0 0 3px #0d0b16,0 0 0 5px #2a2340,0 0 18px 5px rgba(124,243,255,.3)}
 .cz-pop-meta::before{content:"";position:absolute;inset:-10px;z-index:-2;background:url(img/cover-poster.jpg) center/cover;filter:blur(10px) saturate(1.3) brightness(.38)}
@@ -1850,13 +1850,21 @@ button.holo-btn{border:0;cursor:default}
 .cz-pop-x:focus-visible,.cz-pop-nav:focus-visible{outline:2px solid #fff;outline-offset:2px}
 @media (max-width:560px){.cz-pop-row{gap:6px}.cz-pop-row .holo-btn{font-size:8px;padding:9px 9px}.cz-pop-row .cz-pop-nav{width:34px;height:34px;font-size:19px}.cz-pop video{height:auto;width:92vw;max-height:70vh}.cz-pop-meta p{font-size:13px}}
 @media (prefers-reduced-motion:reduce){.cz-pop,.cz-pop-box{transition:none}}
-.cz-pop-vwrap{position:relative;line-height:0}
+.cz-pop-vwrap{position:relative;line-height:0;padding:3px;border-radius:19px;isolation:isolate}
+/* cyan gradient light running around the video rim (same treatment as the countdown clock), plus an inner glow */
+.cz-pop-vwrap .vhalo,.cz-pop-vwrap .vedge{position:absolute;border-radius:inherit;overflow:hidden;pointer-events:none}
+.cz-pop-vwrap .vhalo{inset:-6px;z-index:-2;filter:blur(14px) saturate(1.3);opacity:.9}
+.cz-pop-vwrap .vedge{inset:0;z-index:-1}
+.cz-pop-vwrap .vrim{position:absolute;left:50%;top:50%;width:300%;aspect-ratio:1;translate:-50% -50%;background:conic-gradient(#063a4a,#0aa6c8,#7cf3ff,#e6feff,#7cf3ff,#18c8ee,#0b5f7a,#063a4a);animation:vrimspin 3.5s linear infinite}
+@keyframes vrimspin{to{rotate:1turn}}
+.cz-pop-vwrap::after{content:"";position:absolute;inset:3px;border-radius:16px;pointer-events:none;z-index:1;box-shadow:inset 0 0 22px rgba(124,243,255,.5),inset 0 0 3px rgba(210,252,255,.85)}
+@media (prefers-reduced-motion:reduce){.cz-pop-vwrap .vrim{animation:none}}
 .cz-pop video{cursor:pointer}
 .cz-pop-snd{position:absolute;right:10px;bottom:10px;z-index:2;font-family:"DM Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;line-height:1;color:#fff;background:rgba(10,15,38,.6);border:1px solid rgba(124,243,255,.5);border-radius:999px;padding:7px 11px;cursor:pointer}
 .cz-pop-snd[aria-pressed="false"]{color:#ffd23f;border-color:rgba(255,210,63,.6)}
 .cz-pop-paused{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;display:none;place-items:center;font-size:26px;line-height:1;color:#fff;background:rgba(10,15,38,.55);pointer-events:none}
 .cz-pop.paused .cz-pop-paused{display:grid}
-.cz-pop-bar{position:absolute;left:0;right:0;bottom:0;height:16px;z-index:2;cursor:pointer;display:flex;align-items:flex-end}
+.cz-pop-bar{position:absolute;left:3px;right:3px;bottom:3px;height:16px;z-index:2;cursor:pointer;display:flex;align-items:flex-end}
 .cz-pop-bar::before{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:rgba(255,255,255,.18);border-radius:0 0 16px 16px}
 .cz-pop-bar i{position:relative;display:block;height:4px;width:0;background:linear-gradient(90deg,#7cf3ff,#ffd23f);border-radius:0 0 0 16px;box-shadow:0 0 8px rgba(124,243,255,.7)}
 .cz-pop-snd{bottom:14px}
@@ -1868,7 +1876,7 @@ button.holo-btn{border:0;cursor:default}
   function build(){if(pop)return;
     pop=document.createElement('div');pop.className='cz-pop';pop.hidden=true;pop.setAttribute('role','dialog');pop.setAttribute('aria-modal','true');pop.setAttribute('aria-label','Clip player');
     pop.innerHTML='<button class="cz-pop-x" type="button" aria-label="Close">✕</button>'+
-      '<div class="cz-pop-box"><div class="cz-pop-vwrap"><video playsinline loop preload="auto"></video><button class="cz-pop-snd" type="button" aria-pressed="true">Sound on</button><span class="cz-pop-paused" aria-hidden="true">▶</span><div class="cz-pop-bar" aria-hidden="true"><i></i></div></div><div class="cz-pop-meta"><span class="m"></span><h3></h3><p></p></div>'+
+      '<div class="cz-pop-box"><div class="cz-pop-vwrap"><span class="vhalo"><span class="vrim"></span></span><span class="vedge"><span class="vrim"></span></span><video playsinline loop preload="auto"></video><button class="cz-pop-snd" type="button" aria-pressed="true">Sound on</button><span class="cz-pop-paused" aria-hidden="true">▶</span><div class="cz-pop-bar" aria-hidden="true"><i></i></div></div><div class="cz-pop-meta"><span class="m"></span><h3></h3><p></p></div>'+
       '<div class="cz-pop-row"><button class="cz-pop-nav prev" type="button" aria-label="Previous clip">‹</button><a class="holo-btn" href="https://www.instagram.com/1cardz_news/" target="_blank" rel="noopener">Instagram</a><a class="holo-btn" href="https://www.youtube.com/@1Cardzcom" target="_blank" rel="noopener">YouTube</a><a class="holo-btn" href="https://www.tiktok.com/@1cardz.com" target="_blank" rel="noopener">TikTok</a><button class="cz-pop-nav next" type="button" aria-label="Next clip">›</button></div></div>';
     document.body.append(pop);vid=pop.querySelector('video');snd=pop.querySelector('.cz-pop-snd');
     const setSnd=()=>{const on=!vid.muted;snd.textContent=on?'Sound on':'Sound off';snd.setAttribute('aria-pressed',String(on));snd.setAttribute('aria-label',on?'Turn sound off':'Turn sound on')};
