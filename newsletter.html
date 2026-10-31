@@ -971,6 +971,14 @@ button.holo-btn{border:0;cursor:default}
 #set:not(.arch) .pockets{grid-template-columns:repeat(3,minmax(0,300px));justify-content:center}
 /* phones: no "Watch the clip" button (tap the clip preview instead) */
 @media (max-width:560px){.hl-watch{display:none !important}}
+/* top binder clip: cyan gradient light running around its rim, plus an inner glow (Nov 1) */
+.cv-glow,.cv-in{position:absolute;inset:var(--vi);pointer-events:none;border-radius:10px 10px 0 0}
+.cv-glow{z-index:0;box-shadow:0 0 18px rgba(124,243,255,.45),0 0 4px rgba(124,243,255,.6)}
+.cv-edge{position:absolute;inset:-3px;border-radius:13px 13px 0 0;overflow:hidden}
+.cv-edge i{position:absolute;left:50%;top:50%;width:115%;aspect-ratio:1;translate:-50% -50%;background:conic-gradient(#063a4a,#0aa6c8,#7cf3ff,#e6feff,#7cf3ff,#18c8ee,#0b5f7a,#063a4a);animation:rimspin 4s linear infinite}
+.cv-in{z-index:1;box-shadow:inset 0 0 26px rgba(124,243,255,.5),inset 0 0 3px rgba(210,252,255,.85)}
+body>header .cover .top-cover{z-index:0}
+@media (prefers-reduced-motion:reduce){.cv-edge i{animation:none}}
 </style>
 <style>
 /* newsletter page */
@@ -988,7 +996,9 @@ button.holo-btn{border:0;cursor:default}
 <body>
 <header class="wrap cover-zone">
   <div class="cover">
+    <span class="cv-glow" aria-hidden="true"><span class="cv-edge"><i></i></span></span>
     <video class="cover-video top-cover" data-src="img/cover-loop.mp4" poster="img/cover-poster.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
+    <span class="cv-in" aria-hidden="true"></span>
     <div class="cover-holo" aria-hidden="true"></div>
     <div class="cover-gloss" aria-hidden="true"></div>
     <div class="stitch" aria-hidden="true"></div>
