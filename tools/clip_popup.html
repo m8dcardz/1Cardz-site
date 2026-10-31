@@ -31,6 +31,11 @@
 .cz-pop-snd[aria-pressed="false"]{color:#ffd23f;border-color:rgba(255,210,63,.6)}
 .cz-pop-paused{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;display:none;place-items:center;font-size:26px;line-height:1;color:#fff;background:rgba(10,15,38,.55);pointer-events:none}
 .cz-pop.paused .cz-pop-paused{display:grid}
+.cz-pop-time{position:absolute;left:10px;bottom:14px;z-index:2;font-family:"DM Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.08em;line-height:1;color:#fff;background:rgba(10,15,38,.6);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:7px 10px;pointer-events:none;font-variant-numeric:tabular-nums}
+.cz-pop-bar{position:absolute;left:0;right:0;bottom:0;height:16px;z-index:2;cursor:pointer;display:flex;align-items:flex-end}
+.cz-pop-bar::before{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:rgba(255,255,255,.18);border-radius:0 0 16px 16px}
+.cz-pop-bar i{position:relative;display:block;height:4px;width:0;background:linear-gradient(90deg,#7cf3ff,#ffd23f);border-radius:0 0 0 16px;box-shadow:0 0 8px rgba(124,243,255,.7)}
+.cz-pop-snd{bottom:14px}
 </style>
 <script>
 (function(){
@@ -39,13 +44,18 @@
   function build(){if(pop)return;
     pop=document.createElement('div');pop.className='cz-pop';pop.hidden=true;pop.setAttribute('role','dialog');pop.setAttribute('aria-modal','true');pop.setAttribute('aria-label','Clip player');
     pop.innerHTML='<button class="cz-pop-x" type="button" aria-label="Close">✕</button><button class="cz-pop-nav prev" type="button" aria-label="Previous clip">‹</button><button class="cz-pop-nav next" type="button" aria-label="Next clip">›</button>'+
-      '<div class="cz-pop-box"><div class="cz-pop-vwrap"><video playsinline loop preload="auto"></video><button class="cz-pop-snd" type="button" aria-pressed="true">Sound on</button><span class="cz-pop-paused" aria-hidden="true">▶</span></div><div class="cz-pop-meta"><span class="m"></span><h3></h3><p></p></div>'+
+      '<div class="cz-pop-box"><div class="cz-pop-vwrap"><video playsinline loop preload="auto"></video><button class="cz-pop-snd" type="button" aria-pressed="true">Sound on</button><span class="cz-pop-paused" aria-hidden="true">▶</span><span class="cz-pop-time" aria-hidden="true">0:00 / 0:00</span><div class="cz-pop-bar" aria-hidden="true"><i></i></div></div><div class="cz-pop-meta"><span class="m"></span><h3></h3><p></p></div>'+
       '<div class="cz-pop-row"><a class="holo-btn" href="https://www.instagram.com/1cardz_news/" target="_blank" rel="noopener">Instagram</a><a class="holo-btn" href="https://www.youtube.com/@1Cardzcom" target="_blank" rel="noopener">YouTube</a><a class="holo-btn" href="https://www.tiktok.com/@1cardz.com" target="_blank" rel="noopener">TikTok</a></div></div>';
     document.body.append(pop);vid=pop.querySelector('video');snd=pop.querySelector('.cz-pop-snd');
     const setSnd=()=>{const on=!vid.muted;snd.textContent=on?'Sound on':'Sound off';snd.setAttribute('aria-pressed',String(on));snd.setAttribute('aria-label',on?'Turn sound off':'Turn sound on')};
     snd.addEventListener('click',e=>{e.stopPropagation();vid.muted=!vid.muted;if(vid.paused)vid.play().catch(()=>{});setSnd()});
     vid.addEventListener('click',()=>{if(vid.paused)vid.play().catch(()=>{});else vid.pause()});
-    vid.addEventListener('play',()=>pop.classList.remove('paused'));vid.addEventListener('pause',()=>pop.classList.add('paused'));vid.addEventListener('volumechange',setSnd);ttl=pop.querySelector('h3');meta=pop.querySelector('.m');blurb=pop.querySelector('.cz-pop-meta p');
+    vid.addEventListener('play',()=>pop.classList.remove('paused'));vid.addEventListener('pause',()=>pop.classList.add('paused'));vid.addEventListener('volumechange',setSnd);
+    const tm=pop.querySelector('.cz-pop-time'),bar=pop.querySelector('.cz-pop-bar i'),fmt=t=>{t=Math.max(0,Math.floor(t||0));return Math.floor(t/60)+':'+String(t%60).padStart(2,'0')};
+    const tick=()=>{const d=vid.duration||0,c=vid.currentTime||0;tm.textContent=fmt(c)+' / '+fmt(d);bar.style.width=(d?Math.min(100,c/d*100):0)+'%'};
+    ['timeupdate','loadedmetadata','seeked','emptied'].forEach(ev=>vid.addEventListener(ev,tick));
+    (function loop(){if(!pop.hidden&&!vid.paused)tick();requestAnimationFrame(loop)})();
+    pop.querySelector('.cz-pop-bar').addEventListener('click',e=>{e.stopPropagation();const r=e.currentTarget.getBoundingClientRect();if(vid.duration)vid.currentTime=(e.clientX-r.left)/r.width*vid.duration});ttl=pop.querySelector('h3');meta=pop.querySelector('.m');blurb=pop.querySelector('.cz-pop-meta p');
     pop.querySelector('.cz-pop-x').addEventListener('click',close);
     pop.querySelector('.prev').addEventListener('click',()=>go(-1));pop.querySelector('.next').addEventListener('click',()=>go(1));
     pop.addEventListener('click',e=>{if(e.target===pop)close()});
