@@ -1048,24 +1048,24 @@ button.holo-btn{border:0;cursor:default}
     <div class="strap" aria-hidden="true"></div>
   </div>
 <style id="flap-css">
-/* top binder countdown: split-flap tiles (style A, Oct 31) */
+/* top binder countdown: split-flap tiles (style A, Oct 31): yellow tiles, white digits in the site's display face */
 .drop .flapclock{display:inline-flex;align-items:center;gap:calc(var(--fh) * .1);height:var(--fh);--fh:36px}
-.drop .flapclock .grp{display:flex;gap:calc(var(--fh) * .08)}
-.drop .flapclock .colon{font-family:"Oxanium",var(--f-display),sans-serif;font-weight:800;font-size:calc(var(--fh) * .8);line-height:1;color:#c4e07a;opacity:.85;text-shadow:0 1px 8px rgba(0,0,0,.6)}
-.fd{position:relative;width:calc(var(--fh) * .74);height:var(--fh);perspective:300px;font-family:"Oxanium",var(--f-display),sans-serif;font-weight:800;font-size:calc(var(--fh) * .98);color:#16260c;text-shadow:0 1px 0 rgba(255,255,255,.18);border-radius:calc(var(--fh) * .13);box-shadow:0 4px 12px rgba(0,0,0,.55)}
+.drop .flapclock .grp{display:flex;gap:calc(var(--fh) * .07)}
+.drop .flapclock .colon{font-family:var(--f-display);font-weight:700;font-stretch:80%;font-size:calc(var(--fh) * .8);line-height:1;color:#ffd23f;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.fd{position:relative;width:calc(var(--fh) * .64);height:var(--fh);perspective:400px;font-family:var(--f-display);font-weight:700;font-stretch:80%;font-variant-numeric:tabular-nums;font-size:calc(var(--fh) * .92);color:#fff;text-shadow:0 2px 6px rgba(120,70,0,.55),0 0 2px rgba(120,70,0,.6);border-radius:calc(var(--fh) * .12);box-shadow:0 4px 14px rgba(0,0,0,.55)}
 .fd .half,.fd .flip{position:absolute;left:0;right:0;height:50%;overflow:hidden}
-.fd .half span,.fd .flip span{position:absolute;left:0;right:0;height:200%;display:grid;place-items:center;line-height:1}
-.fd .top,.fd .flip{top:0;background:linear-gradient(#c4e07a,#a9c95a);border-radius:calc(var(--fh) * .13) calc(var(--fh) * .13) 0 0}
+.fd .half span,.fd .flip span{position:absolute;left:0;right:0;height:200%;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1}
+.fd .top,.fd .flip{top:0;background:linear-gradient(#ffe066,#ffcc1f);border-radius:calc(var(--fh) * .12) calc(var(--fh) * .12) 0 0}
 .fd .top span,.fd .flip span{top:0}
-.fd .bot{bottom:0;background:linear-gradient(#9fbf50,#88a83f);border-radius:0 0 calc(var(--fh) * .13) calc(var(--fh) * .13)}
+.fd .bot{bottom:0;background:linear-gradient(#f5bd00,#e0a800);border-radius:0 0 calc(var(--fh) * .12) calc(var(--fh) * .12)}
 .fd .bot span{bottom:0}
-.fd::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(22,38,12,.55);z-index:3}
-.fd::before{content:"";position:absolute;inset:0;border-radius:inherit;z-index:4;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(22,38,12,.35),inset 0 0 10px rgba(80,120,20,.35)}
+.fd::after{content:"";position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;background:rgba(110,70,0,.55);z-index:3}
+.fd::before{content:"";position:absolute;inset:0;border-radius:inherit;z-index:4;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(120,80,0,.35),inset 0 1px 0 rgba(255,255,255,.5)}
 .fd .flip{z-index:2;transform-origin:bottom;backface-visibility:hidden}
 .fd .flip.go{animation:flapdown .3s ease-in forwards}
 @keyframes flapdown{to{transform:rotateX(-90deg)}}
 .cz-sr{position:absolute !important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-@media (min-width:561px){.drop:has(.flapclock){align-items:center}.drop .flapclock{margin-block:calc((var(--fs0,36px) - var(--fh)) / 2)}}
+@media (min-width:561px){.drop:has(.flapclock){align-items:center}}
 @media (prefers-reduced-motion:reduce){.fd .flip{display:none}}
 </style>
 <script id="flap-js">
@@ -1077,7 +1077,7 @@ button.holo-btn{border:0;cursor:default}
   const spread=d=>{const ts=[...d.children].filter(e=>!e.classList.contains('cz-sr')&&e.style.display!=='none').map(e=>e.getBoundingClientRect().bottom);return Math.max(...ts)-Math.min(...ts)};
   const size=()=>{b.classList.remove('cz-sr');box.style.display='none';const fs=parseFloat(getComputedStyle(b).fontSize)||36,s0=spread(b.closest('.drop'));box.style.display='';b.classList.add('cz-sr');
     const drop=b.closest('.drop'),col=drop.parentElement.closest('.copy')||drop.parentElement,row=getComputedStyle(drop).flexDirection==='row';
-    let fh=Math.round(fs*1.5);box.style.setProperty('--fh',fh+'px');box.style.setProperty('--fs0',fs+'px');
+    let fh=Math.round(fs*3);box.style.setProperty('--fh',fh+'px');box.style.setProperty('--fs0',fs+'px');
     const fits=()=>{const r=box.getBoundingClientRect(),c=col.getBoundingClientRect();if(r.right>c.right+0.5)return false;if(!row)return true;return spread(drop)<=s0+fh*.6};
     while(!fits()&&fh>fs*.6){fh-=1;box.style.setProperty('--fh',fh+'px')}};
   size();addEventListener('resize',size);(document.fonts&&document.fonts.ready||Promise.resolve()).then(size);
