@@ -1028,13 +1028,13 @@ button.holo-btn{border:0;cursor:default}
     <div class="strap" aria-hidden="true"></div>
   </div>
 <style id="flap-css">
-/* top binder countdown: cyan LED dots under glass (style 15, Nov 1) with a bright RGB rainbow light running around the rim */
+/* top binder countdown: cyan LED dots under glass (style 15, Nov 1) with a cyan gradient light running around the rim */
 .drop .flapclock{--fh:36px;--d:calc(var(--fh) / 11.6);position:relative;display:inline-flex;flex:0 0 auto;isolation:isolate}
 .flapclock .halo,.flapclock .edge{position:absolute;border-radius:calc(var(--d) * 1.6);overflow:hidden;pointer-events:none}
 .flapclock .halo{inset:calc(var(--d) * -.6);z-index:-2;filter:blur(calc(var(--d) * 1.3)) saturate(1.4);opacity:.95}
 .flapclock .edge{inset:0;z-index:-1}
 .flapclock .rim{position:absolute;left:50%;top:50%;width:300%;aspect-ratio:1;translate:-50% -50%;
-  background:conic-gradient(#ff2d55,#ff9500,#ffe600,#00ff6a,#00e5ff,#2f6bff,#b84dff,#ff2dd4,#ff2d55);animation:rimspin 3s linear infinite}
+  background:conic-gradient(#063a4a,#0aa6c8,#7cf3ff,#e6feff,#7cf3ff,#18c8ee,#0b5f7a,#063a4a);animation:rimspin 3s linear infinite}
 @keyframes rimspin{to{rotate:1turn}}
 .flapclock .panel{position:relative;display:inline-flex;align-items:center;gap:calc(var(--d) * 1.1);margin:max(3px,calc(var(--d) * .55));padding:calc(var(--d) * 1.6) calc(var(--d) * 1.8);background:#041219;border-radius:calc(var(--d) * 1.15);overflow:hidden}
 .flapclock .panel::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(rgba(255,255,255,.14),rgba(255,255,255,0) 45%),repeating-linear-gradient(0deg,rgba(0,0,0,.25) 0 1px,transparent 1px 3px)}
