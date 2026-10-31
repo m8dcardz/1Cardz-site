@@ -1049,17 +1049,20 @@ button.holo-btn{border:0;cursor:default}
     <div class="strap" aria-hidden="true"></div>
   </div>
 <style id="flap-css">
-/* top binder countdown: yellow LED dot display (style 13, Nov 1) with an RGB rainbow light running around the rim */
-.drop .flapclock{--fh:36px;--d:calc(var(--fh) / 11.6);position:relative;display:inline-flex;border-radius:calc(var(--d) * 1.5);padding:max(2px,calc(var(--d) * .38));overflow:hidden;isolation:isolate;flex:0 0 auto}
-.flapclock .rim{position:absolute;left:50%;top:50%;width:300%;aspect-ratio:1;translate:-50% -50%;z-index:-1;
-  background:conic-gradient(#ff3b3b,#ff9f1c,#ffe14d,#3dff7a,#2de2ff,#4d6bff,#c85cff,#ff3bc8,#ff3b3b);animation:rimspin 3s linear infinite}
+/* top binder countdown: cyan LED dots under glass (style 15, Nov 1) with a bright RGB rainbow light running around the rim */
+.drop .flapclock{--fh:36px;--d:calc(var(--fh) / 11.6);position:relative;display:inline-flex;flex:0 0 auto;isolation:isolate}
+.flapclock .halo,.flapclock .edge{position:absolute;border-radius:calc(var(--d) * 1.6);overflow:hidden;pointer-events:none}
+.flapclock .halo{inset:calc(var(--d) * -.6);z-index:-2;filter:blur(calc(var(--d) * 1.3)) saturate(1.4);opacity:.95}
+.flapclock .edge{inset:0;z-index:-1}
+.flapclock .rim{position:absolute;left:50%;top:50%;width:300%;aspect-ratio:1;translate:-50% -50%;
+  background:conic-gradient(#ff2d55,#ff9500,#ffe600,#00ff6a,#00e5ff,#2f6bff,#b84dff,#ff2dd4,#ff2d55);animation:rimspin 3s linear infinite}
 @keyframes rimspin{to{rotate:1turn}}
-.flapclock::after{content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;box-shadow:0 0 calc(var(--d) * 2) rgba(255,255,255,.18)}
-.flapclock .panel{display:inline-flex;align-items:center;gap:calc(var(--d) * 1.1);padding:calc(var(--d) * 1.6) calc(var(--d) * 1.8);background:#07080f;border-radius:calc(var(--d) * 1.15)}
+.flapclock .panel{position:relative;display:inline-flex;align-items:center;gap:calc(var(--d) * 1.1);margin:max(3px,calc(var(--d) * .55));padding:calc(var(--d) * 1.6) calc(var(--d) * 1.8);background:#041219;border-radius:calc(var(--d) * 1.15);overflow:hidden}
+.flapclock .panel::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(rgba(255,255,255,.14),rgba(255,255,255,0) 45%),repeating-linear-gradient(0deg,rgba(0,0,0,.25) 0 1px,transparent 1px 3px)}
 .flapclock .ch{display:grid;grid-template-columns:repeat(5,var(--d));grid-auto-rows:var(--d);gap:calc(var(--d) * .25)}
 .flapclock .ch.narrow{grid-template-columns:var(--d)}
-.flapclock .ch i{border-radius:50%;background:rgba(255,210,63,.07)}
-.flapclock .ch i.on{background:#ffd23f;box-shadow:0 0 calc(var(--d) * .75) rgba(255,200,40,.9)}
+.flapclock .ch i{border-radius:50%;background:rgba(124,243,255,.08)}
+.flapclock .ch i.on{background:#7cf3ff;box-shadow:0 0 calc(var(--d) * .7) rgba(124,243,255,.9)}
 .cz-sr{position:absolute !important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media (min-width:561px){.drop:has(.flapclock){align-items:center}}
 @media (prefers-reduced-motion:reduce){.flapclock .rim{animation:none}}
@@ -1069,7 +1072,7 @@ button.holo-btn{border:0;cursor:default}
   const box=document.createElement('span');box.className='flapclock';box.setAttribute('aria-hidden','true');b.after(box);b.classList.add('cz-sr');
   const F={0:'01110100011001110101110011000101110',1:'00100011000010000100001000010001110',2:'01110100010000100010001000100011111',3:'11110000010000101110000010000111110',4:'00010001100101010010111110001000010',
     5:'11111100001111000001000011000101110',6:'00110010001000011110100011000101110',7:'11111000010001000100010000100001000',8:'01110100011000101110100011000101110',9:'01110100011000101111000010001001100'};
-  const rim=document.createElement('span');rim.className='rim';box.append(rim);const panel=document.createElement('span');panel.className='panel';box.append(panel);
+  ['halo','edge'].forEach(k=>{const w=document.createElement('span');w.className=k;const r=document.createElement('span');r.className='rim';w.append(r);box.append(w)});const panel=document.createElement('span');panel.className='panel';box.append(panel);
   const chs=[];for(let i=0;i<8;i++){const c=document.createElement('span');
     if(i===2||i===5){c.className='ch narrow';for(let r=0;r<7;r++){const d=document.createElement('i');if(r===2||r===4)d.className='on';c.append(d)}}
     else{c.className='ch';for(let r=0;r<35;r++)c.append(document.createElement('i'));chs.push({el:c,v:''})}panel.append(c)}
