@@ -17,13 +17,13 @@ head = src[:src.index('<style>')]
 head = re.sub(r'<title>.*?</title>', '<title>1 Cardz Newsletter</title>', head)
 head = re.sub(r'<link rel="preload"[^>]*>\n', '', head)
 head = head.replace('href="https://1cardz.news/"', 'href="https://1cardz.news/newsletter.html"')
-head = re.sub(r'<meta name="description"[^>]*>', '<meta name="description" content="The 1 Cardz newsletter: the week in trading card game news, in one email. Free, sign up on 1cardz.news.">', head)
+head = re.sub(r'<meta name="description"[^>]*>', '<meta name="description" content="The 1 Cardz newsletter: the week in trading card game news, in one email every Sunday. Free, sign up on 1cardz.news.">', head)
 style = src[src.index('<style>'):src.index('</style>')+len('</style>')]
 hs = src.index('<header class="wrap cover-zone">'); header = src[hs:src.index('\n</header>', hs)+len('\n</header>')]
 fs = src.index('<footer class="wrap">'); footer = src[fs:src.index('\n</footer>', fs)+len('\n</footer>')]
 scrolltop = src[src.index('<script>'):src.index('</script>')+len('</script>')]
 header = re.sub(r'<p>The trading card game news channel.*?</p>',
-    '<p>The Newsletter. The week in trading card game news, in one email. Free, no spam.</p>', header, flags=re.S)
+    '<p>The Newsletter. The week in trading card game news, in one email every Sunday. Free, no spam.</p>', header, flags=re.S)
 header = header.replace('<a class="btn" href="#set" id="seeLatest">See the latest</a>', '<a class="btn" href="index.html">Back home</a>')
 _k = arch.index('  /* binder videos: top first, bottom last */'); a_js = arch[arch.rindex('<script>', 0, _k):arch.index('</script>', _k)]
 cover_js = a_js[a_js.index('  /* binder videos: top first, bottom last */'):a_js.rindex('})();')]
@@ -50,12 +50,12 @@ body = f"""{header}
   <section class="wrap nlp" aria-labelledby="nl-h">
     <div class="sheet-head">
       <h2 id="nl-h">Newsletter</h2>
-      <p>One email a week with everything worth knowing in cards. Free, no spam, unsubscribe any time.</p>
+      <p>One email every Sunday with everything worth knowing in cards. Free, no spam, unsubscribe any time.</p>
     </div>
     <div class="gd">
       <div class="mw-top">
         <span class="mono mw-label" style="color:#ffd23f"><i style="background:#ffd23f;box-shadow:0 0 10px #ffd23f"></i><span>Newsletter</span></span>
-        <span class="mono mw-upd">Free · weekly</span>
+        <span class="mono mw-upd">Free · every Sunday</span>
       </div>
       <div class="nl-soon">
         <p class="nl-big">Sign up free</p>
