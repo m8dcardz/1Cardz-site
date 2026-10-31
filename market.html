@@ -1065,7 +1065,8 @@ button.holo-btn{border:0;cursor:default}
 .fd .flip.go{animation:flapdown .3s ease-in forwards}
 @keyframes flapdown{to{transform:rotateX(-90deg)}}
 .cz-sr{position:absolute !important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-@media (min-width:561px){.drop:has(.flapclock){align-items:center}}
+@media (min-width:561px){.drop:has(.flapclock){align-items:center}body>header .cover>.drop.drop-wide{grid-column:2/-1;flex-wrap:nowrap;gap:clamp(12px,1.6vw,22px);margin:clamp(6px,1vw,14px) 0 clamp(4px,.8vw,10px);position:relative;z-index:3}.drop-wide .mono{font-size:clamp(16px,1.6vw,22px) !important;white-space:nowrap}body>header .cover:has(>.drop-wide) .spine{grid-row:1 / span 2}}
+@media (min-width:561px) and (max-width:900px){body>header .cover:has(>.drop-wide) .spine{grid-row:1 / span 3}}
 @media (prefers-reduced-motion:reduce){.fd .flip{display:none}}
 </style>
 <script id="flap-js">
@@ -1075,11 +1076,17 @@ button.holo-btn{border:0;cursor:default}
     for(let i=0;i<2;i++){const d=document.createElement('span');d.className='fd';d.innerHTML='<span class="half top"><span>0</span></span><span class="half bot"><span>0</span></span>';grp.append(d);fds.push({el:d,v:'0'})}
     box.append(grp);if(g<2){const c=document.createElement('span');c.className='colon';c.textContent=':';box.append(c)}});
   const spread=d=>{const ts=[...d.children].filter(e=>!e.classList.contains('cz-sr')&&e.style.display!=='none').map(e=>e.getBoundingClientRect().bottom);return Math.max(...ts)-Math.min(...ts)};
-  const size=()=>{b.classList.remove('cz-sr');box.style.display='none';const fs=parseFloat(getComputedStyle(b).fontSize)||36,s0=spread(b.closest('.drop'));box.style.display='';b.classList.add('cz-sr');
-    const drop=b.closest('.drop'),col=drop.parentElement.closest('.copy')||drop.parentElement,row=getComputedStyle(drop).flexDirection==='row';
-    let fh=Math.round(fs*3);box.style.setProperty('--fh',fh+'px');box.style.setProperty('--fs0',fs+'px');
-    const fits=()=>{const r=box.getBoundingClientRect(),c=col.getBoundingClientRect();if(r.right>c.right+0.5)return false;if(!row)return true;return spread(drop)<=s0+fh*.6};
-    while(!fits()&&fh>fs*.6){fh-=1;box.style.setProperty('--fh',fh+'px')}};
+  const drop0=b.closest('.drop'),homeRow=drop0.parentElement,cover=drop0.closest('.cover');
+  const size=()=>{const drop=drop0,wide=matchMedia('(min-width:561px)').matches&&cover;
+    /* desktop: the countdown gets its own full-width line under the binder copy */
+    if(wide&&drop.parentElement!==cover){cover.append(drop);drop.classList.add('drop-wide')}
+    if(!wide&&drop.parentElement!==homeRow){homeRow.append(drop);drop.classList.remove('drop-wide')}
+    b.classList.remove('cz-sr');box.style.display='none';const fs=parseFloat(getComputedStyle(b).fontSize)||36,s0=spread(drop);box.style.display='';b.classList.add('cz-sr');
+    const win=cover&&cover.querySelector('.window'),cp=cover&&cover.querySelector('.copy');
+    const col=wide?((win&&cp&&win.getBoundingClientRect().right>cp.getBoundingClientRect().right)?win:(cp||cover)):(drop.parentElement.closest('.copy')||drop.parentElement),row=getComputedStyle(drop).flexDirection==='row';
+    let fh=Math.round(fs*(wide?6.7:3));box.style.setProperty('--fh',fh+'px');box.style.setProperty('--fs0',fs+'px');
+    const fits=()=>{const c=col.getBoundingClientRect(),rr=wide?Math.max(...[...drop.children].filter(e=>!e.classList.contains('cz-sr')).map(e=>e.getBoundingClientRect().right)):box.getBoundingClientRect().right;if(rr>c.right+0.5)return false;if(!row)return true;return spread(drop)<=(wide?0:s0)+fh*.6};
+    while(!fits()&&fh>fs*.6){fh-=2;box.style.setProperty('--fh',fh+'px')}};
   size();addEventListener('resize',size);(document.fonts&&document.fonts.ready||Promise.resolve()).then(size);
   let first=true;
   function draw(){const ds=(b.textContent||'').replace(/\D/g,'');if(ds.length!==6)return;
