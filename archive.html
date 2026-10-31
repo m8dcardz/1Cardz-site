@@ -1050,7 +1050,7 @@ button.holo-btn{border:0;cursor:default}
 .fd .flip.go{animation:flapdown .3s ease-in forwards}
 @keyframes flapdown{to{transform:rotateX(-90deg)}}
 .cz-sr{position:absolute !important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-@media (min-width:561px){.drop .flapclock{margin-block:calc(var(--fh) * -.18)}}
+@media (min-width:561px){.drop:has(.flapclock){align-items:center}.drop .flapclock{margin-block:calc((var(--fs0,36px) - var(--fh)) / 2)}}
 @media (prefers-reduced-motion:reduce){.fd .flip{display:none}}
 </style>
 <script id="flap-js">
@@ -1062,7 +1062,7 @@ button.holo-btn{border:0;cursor:default}
   const spread=d=>{const ts=[...d.children].filter(e=>!e.classList.contains('cz-sr')&&e.style.display!=='none').map(e=>e.getBoundingClientRect().bottom);return Math.max(...ts)-Math.min(...ts)};
   const size=()=>{b.classList.remove('cz-sr');box.style.display='none';const fs=parseFloat(getComputedStyle(b).fontSize)||36,s0=spread(b.closest('.drop'));box.style.display='';b.classList.add('cz-sr');
     const drop=b.closest('.drop'),col=drop.parentElement.closest('.copy')||drop.parentElement,row=getComputedStyle(drop).flexDirection==='row';
-    let fh=Math.round(fs*1.2);box.style.setProperty('--fh',fh+'px');
+    let fh=Math.round(fs*1.5);box.style.setProperty('--fh',fh+'px');box.style.setProperty('--fs0',fs+'px');
     const fits=()=>{const r=box.getBoundingClientRect(),c=col.getBoundingClientRect();if(r.right>c.right+0.5)return false;if(!row)return true;return spread(drop)<=s0+fh*.6};
     while(!fits()&&fh>fs*.6){fh-=1;box.style.setProperty('--fh',fh+'px')}};
   size();addEventListener('resize',size);(document.fonts&&document.fonts.ready||Promise.resolve()).then(size);
