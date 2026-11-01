@@ -93,9 +93,9 @@ main,body>footer,body>header{overflow-x:clip}
 .drop b{font-family:var(--f-display);font-weight:700;font-stretch:80%;font-size:clamp(30px,3vw,36px);line-height:1;text-shadow:0 1px 10px rgba(0,0,0,.6);color:#fff;font-variant-numeric:tabular-nums;letter-spacing:.02em}
 /* die-cut window showing a sleeved card */
 .window{position:relative;z-index:3;justify-self:center;width:min(100%,280px);aspect-ratio:63/88;border-radius:14px;padding:0;
-  background:none;box-shadow:0 0 0 2px rgba(233,196,106,.7),0 16px 34px rgba(0,0,0,.35)}
+  background:none;box-shadow:0 16px 34px rgba(0,0,0,.35)}
 .window .back{width:100%;height:100%;border-radius:14px;background:url(img/card.webp) center/cover;position:relative;overflow:hidden;
-  box-shadow:0 0 0 3px #3e5fbf inset}
+  box-shadow:none}
 .window .back::after{content:"";position:absolute;inset:-50%;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.35) 50%,transparent 60%);animation:glint 5s ease-in-out infinite}
 @keyframes glint{0%,60%{transform:translateX(-60%)}100%{transform:translateX(60%)}}
 .window .globe{aspect-ratio:1;object-fit:cover;-webkit-mask-image:radial-gradient(circle,#000 58%,transparent 71%);mask-image:radial-gradient(circle,#000 58%,transparent 71%);position:absolute;width:56%;left:50%;top:50%;translate:-50% -50%;filter:drop-shadow(0 4px 12px rgba(0,0,0,.5))}
@@ -1046,7 +1046,7 @@ body>header .cover .top-cover{z-index:0}
 /* top binder countdown: cyan LED dots under glass (style 15, Nov 1) with a cyan gradient light running around the rim */
 .drop .flapclock{--fh:36px;--d:calc(var(--fh) / 11.6);position:relative;display:inline-flex;flex:0 0 auto;isolation:isolate}
 .flapclock .halo,.flapclock .edge{position:absolute;border-radius:calc(var(--d) * 1.6);overflow:hidden;pointer-events:none}
-.flapclock .halo{inset:calc(var(--d) * -.6);z-index:-2;filter:blur(calc(var(--d) * 1.3)) saturate(1.4);opacity:.95}
+.flapclock .halo{inset:calc(var(--d) * -.6);z-index:-2;filter:blur(calc(var(--d) * 1.3)) saturate(1.4);opacity:.71}
 .flapclock .edge{inset:0;z-index:-1}
 .flapclock .rim{position:absolute;left:50%;top:50%;width:300%;aspect-ratio:1;translate:-50% -50%;
   background:conic-gradient(#063a4a,#0aa6c8,#7cf3ff,#e6feff,#7cf3ff,#18c8ee,#0b5f7a,#063a4a);animation:rimspin 3s linear infinite}
@@ -1056,7 +1056,7 @@ body>header .cover .top-cover{z-index:0}
 .flapclock .ch{display:grid;grid-template-columns:repeat(5,var(--d));grid-auto-rows:var(--d);gap:calc(var(--d) * .25)}
 .flapclock .ch.narrow{grid-template-columns:var(--d)}
 .flapclock .ch i{border-radius:50%;background:rgba(124,243,255,.08)}
-.flapclock .ch i.on{background:#7cf3ff;box-shadow:0 0 calc(var(--d) * .7) rgba(124,243,255,.9)}
+.flapclock .ch i.on{background:#7cf3ff;box-shadow:0 0 calc(var(--d) * .53) rgba(124,243,255,.68)}
 .cz-sr{position:absolute !important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media (min-width:561px){.drop:has(.flapclock){align-items:center}}
 @media (prefers-reduced-motion:reduce){.flapclock .rim{animation:none}}
