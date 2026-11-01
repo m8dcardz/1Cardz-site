@@ -96,7 +96,7 @@ main,body>footer,body>header{overflow-x:clip}
 .drop b{font-family:var(--f-display);font-weight:700;font-stretch:80%;font-size:clamp(30px,3vw,36px);line-height:1;text-shadow:0 1px 10px rgba(0,0,0,.6);color:#fff;font-variant-numeric:tabular-nums;letter-spacing:.02em}
 /* die-cut window showing a sleeved card */
 .window{position:relative;z-index:3;justify-self:center;width:min(100%,280px);aspect-ratio:63/88;border-radius:14px;padding:0;
-  background:none;box-shadow:0 16px 34px rgba(0,0,0,.35)}
+  background:none;box-shadow:0 0 0 2px rgba(233,196,106,.7),0 16px 34px rgba(0,0,0,.35)}
 .window .back{width:100%;height:100%;border-radius:14px;background:url(img/card.webp) center/cover;position:relative;overflow:hidden;
   box-shadow:none}
 .window .back::after{content:"";position:absolute;inset:-50%;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.35) 50%,transparent 60%);animation:glint 5s ease-in-out infinite}
@@ -771,7 +771,7 @@ body>header .cover .drop .mono{letter-spacing:-.07em;word-spacing:-.3em}
 .window.fanned{--tz:4.3deg}
 .window>.coverflip{z-index:2}
 .window>.fan{position:absolute;inset:0;z-index:0;border-radius:14px;background:url(img/card.webp) center/cover;
-  box-shadow:0 12px 26px rgba(0,0,0,.5);
+  box-shadow:0 0 0 2px rgba(233,196,106,.7),0 12px 26px rgba(0,0,0,.5);
   transform-origin:50% 100%;opacity:0;transform:rotate(0deg);transition:transform .45s cubic-bezier(.3,.8,.2,1),opacity .25s;pointer-events:none}
 .window.fanned>.fan{opacity:1}
 .window.fanned>.fan1{transform:translateX(-7.2%) rotate(-7.6deg)}
@@ -785,8 +785,8 @@ body>header .cover .drop .mono{letter-spacing:-.07em;word-spacing:-.3em}
 /* sign-up box (headline-box glass design; reusable: set data-list and the text) */
 .signup-deck{margin-top:calc(-1 * clamp(24px,4vw,56px))}
 .signup .su-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:12px clamp(14px,2.4vw,22px);border-bottom:1px solid rgba(255,255,255,.1);position:relative;z-index:4}
-.signup .su-label{display:inline-flex;align-items:center;gap:6px;color:#ff8ad8;font-size:10.5px;letter-spacing:.14em}
-.signup .su-label i{width:6px;height:6px;border-radius:50%;background:#ff8ad8;box-shadow:0 0 10px #ff8ad8;animation:pulse 1.2s ease-in-out infinite}
+.signup .su-label{display:inline-flex;align-items:center;gap:6px;color:#7cf3ff;font-size:10.5px;letter-spacing:.14em}
+.signup .su-label i{width:6px;height:6px;border-radius:50%;background:#7cf3ff;box-shadow:0 0 10px #7cf3ff;animation:pulse 1.2s ease-in-out infinite}
 .signup .su-tag{color:#8c93ad;font-size:10.5px}
 .signup .su-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(18px,3vw,40px);align-items:center;padding:clamp(20px,3vw,32px) clamp(18px,3vw,30px);position:relative;z-index:4}
 .signup h3{font-family:var(--f-display);font-weight:800;font-stretch:82%;font-size:clamp(26px,3.2vw,38px);color:#fff;margin:0 0 8px;text-transform:none}
