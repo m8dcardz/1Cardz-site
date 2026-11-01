@@ -687,7 +687,7 @@ body>header .cover .copy{gap:12px}
   html body>header .cover{row-gap:10px}
 }
 /* tighter "Next drop" and host/time labels */
-body>header .cover .drop .mono{letter-spacing:-.07em;word-spacing:-.3em}
+body>header .cover .drop .mono{letter-spacing:.08em;word-spacing:.1em}
 /* bottom binder: tighter, matches the top binder on wide screens */
 @media (min-width:1100px){
   body>footer .cover{padding-top:clamp(10px,1.4vw,20px)}
@@ -997,6 +997,26 @@ body>header .cover .top-cover{z-index:0}
 .nl-soon ul{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
 .nl-soon li{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#e8ecf8;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:8px 14px}
 @media (prefers-reduced-motion:reduce){.nl-soon .nl-big{animation:none}}
+/* this week's issue */
+.nli .gd{padding-bottom:clamp(18px,3vw,30px)}
+.nli-mail{position:relative;z-index:4;max-width:680px;margin:clamp(14px,2.4vw,26px) auto 0;background:#fbf8f0;color:#1d2240;border-radius:14px;padding:clamp(20px,4vw,40px);
+  box-shadow:0 0 0 1px rgba(124,243,255,.55),0 0 22px rgba(124,243,255,.25),0 18px 40px rgba(0,0,0,.45);font-size:16px;line-height:1.6;text-align:left}
+.nli-mail p{margin:0 0 14px;color:#2a2f4d;max-width:none}
+.nli-mail .nli-kick{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#6a6f8c;margin-bottom:6px}
+.nli-mail .nli-title{font-family:var(--f-display);font-weight:800;font-stretch:80%;font-size:clamp(26px,3.6vw,38px);line-height:1.05;margin:0 0 6px;color:#12162b}
+.nli-mail .nli-by{font-size:13px;color:#6a6f8c;margin-bottom:20px}
+.nli-mail h3{font-family:var(--f-display);font-weight:800;font-stretch:85%;font-size:22px;margin:26px 0 10px;color:#12162b}
+.nli-mail ul{margin:0 0 10px;padding-left:20px}.nli-mail li{margin:0 0 10px;color:#2a2f4d}
+.nli-mail em{color:#6a6f8c}
+.nli-mail a{color:#1a5fd0}
+.nli-mail hr{border:0;border-top:1px solid #e2ddcf;margin:26px 0 0}
+.nli-img{display:block;width:min(70%,240px);margin:18px auto 6px;text-decoration:none;text-align:center}
+.nli-img img{display:block;width:100%;border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,.2)}
+.nli-img span{display:block;font-size:13px;color:#6a6f8c;margin-top:8px}
+.nli-sign{margin-top:20px !important;font-weight:700;color:#12162b !important}
+.nli-cta{position:relative;z-index:4;display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center;justify-content:center;margin-top:clamp(16px,2.4vw,24px);color:#e8ecf8;font-size:15px}
+.nli+.nlp{margin-top:clamp(24px,4vw,44px)}
+@media (max-width:560px){.nli-mail{font-size:15px;border-radius:12px}.nli-mail h3{font-size:19px}}
 </style>
 </head>
 <body>
@@ -1057,7 +1077,7 @@ body>header .cover .top-cover{z-index:0}
 .flapclock .ch{display:grid;grid-template-columns:repeat(5,var(--d));grid-auto-rows:var(--d);gap:calc(var(--d) * .25)}
 .flapclock .ch.narrow{grid-template-columns:var(--d)}
 .flapclock .ch i{border-radius:50%;background:rgba(124,243,255,.08)}
-.flapclock .ch i.on{background:#7cf3ff;box-shadow:0 0 calc(var(--d) * .7) rgba(124,243,255,.9)}
+.flapclock .ch i.on{background:#fff;box-shadow:0 0 calc(var(--d) * .7) rgba(124,243,255,.9)}
 .cz-sr{position:absolute !important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media (min-width:561px){.drop:has(.flapclock){align-items:center}}
 @media (prefers-reduced-motion:reduce){.flapclock .rim{animation:none}}
@@ -1112,6 +1132,33 @@ body>header .cover .top-cover{z-index:0}
 </div>
 
 <main>
+  <section class="wrap nli" aria-labelledby="nli-h">
+    <div class="sheet-head">
+      <h2 id="nli-h">This week's issue</h2>
+      <p>Every Sunday, Zia and Luna round up the week in trading cards in one email. Here&#x27;s today&#x27;s issue, the same one landing in inboxes. Like it? Sign up free below and get next Sunday&#x27;s first.</p>
+    </div>
+    <div class="gd">
+      <div class="mw-top">
+        <span class="mono mw-label" style="color:#7cf3ff"><i style="background:#7cf3ff;box-shadow:0 0 10px #7cf3ff"></i><span>Today's newsletter</span></span>
+        <span class="mono mw-upd">Sunday, November 1, 2026</span>
+      </div>
+      <article class="nli-mail">
+        <p class="nli-kick">1Cardz.news Weekly · Sunday, November 1, 2026</p>
+        <h3 class="nli-title">Mudkip outbid your rent: the week in cards</h3>
+        <p class="nli-by">By Zia &amp; Luna</p>
+        <p>Hey there,</p>
+        <p>Zia and Luna here with the week in trading cards, sleeved and numbered. Grab a coffee (Zia) or a late-night tea (Luna) and let&#x27;s flip.</p>
+        <a class="nli-img" href="archive.html"><img src="img/clip11.jpg" alt="Zia reporting on Goldin&#x27;s Pokémon 30th auction" loading="lazy"><span>Watch every clip from the week in the Library Archives.</span></a>
+        <h3>The big one</h3><p><strong>Goldin&#x27;s Pokémon 30th auction passed $28 million.</strong> The October 25 sale set 18 records, led by a PSA 10 Art Academy Mudkip promo at $4.88 million and a Trophy Pikachu over $3 million. Mudkip just outbid your rent. <em>(ICv2)</em></p><h3>Top stories this week</h3><ul><li><strong>One Piece: Dracule Mihawk OP14-020 is banned.</strong> Alternate arts included, and it&#x27;s in effect now. Sheathe the swords, rebuild the deck. <em>(One Piece Card Game, official)</em></li><li><strong>Pokémon TCG Pocket: Dual Fusion is out.</strong> Dual-type cards debut, led by Mega Mewtwo X ex and Mega Greninja ex. <em>(Pokémon, official)</em></li><li><strong>Lorcana: Into the Inkdark opens for preorder.</strong> Expected February 12, 2027, with the first serialized Illustrious cards. <em>(ICv2)</em></li><li><strong>Magic: Star Trek gets a Secret Lair Superdrop.</strong> &quot;Set Phasers to Superdrop&quot; brings five Star Trek drops, with preorders opening November 9. Meanwhile the Reality Fracture Secret Lair Bundle is delayed. <em>(ICv2)</em></li><li><strong>Yu-Gi-Oh!: Maze of Machines lands March 19, 2027.</strong> A 153-card booster set with Rampant Barrel Dragon, Slot Machine 777 and 10 new GX cards. <em>(ICv2)</em></li><li><strong>Pokémon: Mega Rayquaza ex Premium Tournament Collection.</strong> Out February 12, 2027, with four foil promos, eight booster packs and Dragon Shield sleeves. <em>(ICv2)</em></li><li><strong>Flesh and Blood: Smash Palace: Chorus of Steel is out.</strong> Ultimate Pit Fight multiplayer is back, with new heroes Zane and Killjoy. <em>(Flesh and Blood, official)</em></li></ul><h3>Coming up this week</h3><ul><li><strong>Tue, Nov 3:</strong> Doug Ferguson&#x27;s Pokémon collection goes to auction, led by a jumbo graded card of Doug himself. <em>(Reported)</em></li><li><strong>Fri, Nov 6:</strong> Pokémon Mega Evolution: Delta Reign releases. <em>(Confirmed)</em></li><li><strong>Fri, Nov 6 to Thu, Nov 12:</strong> Magic | Star Trek prerelease weekend at your local store. <em>(Confirmed)</em></li><li><strong>Mon, Nov 9:</strong> &quot;Set Phasers to Superdrop&quot; Secret Lair preorders open. <em>(Confirmed)</em></li></ul>
+        <hr>
+        <h3>Watch, browse, follow</h3>
+        <p>New clips drop every day at 8 AM (Zia) and 8 PM (Luna), Hong Kong time. Every headline is on <a href="news.html">Headlines</a> and the week's prices are on <a href="market.html">Market Watch</a>.</p>
+        <p class="nli-sign">Shuffle up,<br>Zia &amp; Luna<br>1Cardz.news</p>
+      </article>
+      <div class="nli-cta"><span>Want next Sunday's issue in your inbox?</span><a class="btn" href="#newsletter">Sign up free</a></div>
+    </div>
+  </section>
+
   <section class="wrap nlp" aria-labelledby="nl-h">
     <div class="sheet-head">
       <h2 id="nl-h">Newsletter</h2>

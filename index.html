@@ -690,7 +690,7 @@ body>header .cover .copy{gap:12px}
   html body>header .cover{row-gap:10px}
 }
 /* tighter "Next drop" and host/time labels */
-body>header .cover .drop .mono{letter-spacing:-.07em;word-spacing:-.3em}
+body>header .cover .drop .mono{letter-spacing:.08em;word-spacing:.1em}
 /* bottom binder: tighter, matches the top binder on wide screens */
 @media (min-width:1100px){
   body>footer .cover{padding-top:clamp(10px,1.4vw,20px)}
@@ -1049,7 +1049,7 @@ body>header .cover .top-cover{z-index:0}
 .flapclock .ch{display:grid;grid-template-columns:repeat(5,var(--d));grid-auto-rows:var(--d);gap:calc(var(--d) * .25)}
 .flapclock .ch.narrow{grid-template-columns:var(--d)}
 .flapclock .ch i{border-radius:50%;background:rgba(124,243,255,.08)}
-.flapclock .ch i.on{background:#7cf3ff;box-shadow:0 0 calc(var(--d) * .7) rgba(124,243,255,.9)}
+.flapclock .ch i.on{background:#fff;box-shadow:0 0 calc(var(--d) * .7) rgba(124,243,255,.9)}
 .cz-sr{position:absolute !important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media (min-width:561px){.drop:has(.flapclock){align-items:center}}
 @media (prefers-reduced-motion:reduce){.flapclock .rim{animation:none}}

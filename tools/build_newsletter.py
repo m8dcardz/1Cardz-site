@@ -29,6 +29,44 @@ _k = arch.index('  /* binder videos: top first, bottom last */'); a_js = arch[ar
 cover_js = a_js[a_js.index('  /* binder videos: top first, bottom last */'):a_js.rindex('})();')]
 
 
+# this week's issue (tools/newsletter_latest.json), shown at the top of the page
+iss = json.loads((root/'tools'/'newsletter_latest.json').read_text())
+def _item(t):
+    b, txt, src_ = t
+    return f'<strong>{e(b)}</strong> {e(txt)} <em>({e(src_)})</em>'
+_secs = ''
+for sec in iss['sections']:
+    _secs += f'<h3>{e(sec["h"])}</h3>'
+    for t in sec.get('p', []): _secs += f'<p>{_item(t)}</p>'
+    if sec.get('li'): _secs += '<ul>' + ''.join(f'<li>{_item(t)}</li>' for t in sec['li']) + '</ul>'
+issue_html = f"""  <section class="wrap nli" aria-labelledby="nli-h">
+    <div class="sheet-head">
+      <h2 id="nli-h">This week's issue</h2>
+      <p>{e(iss['intro'])}</p>
+    </div>
+    <div class="gd">
+      <div class="mw-top">
+        <span class="mono mw-label" style="color:#7cf3ff"><i style="background:#7cf3ff;box-shadow:0 0 10px #7cf3ff"></i><span>Today's newsletter</span></span>
+        <span class="mono mw-upd">{e(iss['date'])}</span>
+      </div>
+      <article class="nli-mail">
+        <p class="nli-kick">1Cardz.news Weekly · {e(iss['date'])}</p>
+        <h3 class="nli-title">{e(iss['title'])}</h3>
+        <p class="nli-by">By Zia &amp; Luna</p>
+        <p>{e(iss['greeting'])}</p>
+        <p>{e(iss['opening'])}</p>
+        <a class="nli-img" href="archive.html"><img src="{e(iss['image'])}" alt="{e(iss['image_alt'])}" loading="lazy"><span>Watch every clip from the week in the Library Archives.</span></a>
+        {_secs}
+        <hr>
+        <h3>Watch, browse, follow</h3>
+        <p>New clips drop every day at 8 AM (Zia) and 8 PM (Luna), Hong Kong time. Every headline is on <a href="news.html">Headlines</a> and the week's prices are on <a href="market.html">Market Watch</a>.</p>
+        <p class="nli-sign">{'<br>'.join(e(x) for x in iss['signoff'])}</p>
+      </article>
+      <div class="nli-cta"><span>Want next Sunday's issue in your inbox?</span><a class="btn" href="#newsletter">Sign up free</a></div>
+    </div>
+  </section>
+"""
+
 extra_css = """<style>
 /* newsletter page */
 .nl-soon{position:relative;text-align:center;padding:clamp(34px,6vw,80px) clamp(18px,4vw,60px);display:grid;justify-items:center;gap:16px;z-index:4}
@@ -40,6 +78,26 @@ extra_css = """<style>
 .nl-soon ul{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
 .nl-soon li{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#e8ecf8;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:8px 14px}
 @media (prefers-reduced-motion:reduce){.nl-soon .nl-big{animation:none}}
+/* this week's issue */
+.nli .gd{padding-bottom:clamp(18px,3vw,30px)}
+.nli-mail{position:relative;z-index:4;max-width:680px;margin:clamp(14px,2.4vw,26px) auto 0;background:#fbf8f0;color:#1d2240;border-radius:14px;padding:clamp(20px,4vw,40px);
+  box-shadow:0 0 0 1px rgba(124,243,255,.55),0 0 22px rgba(124,243,255,.25),0 18px 40px rgba(0,0,0,.45);font-size:16px;line-height:1.6;text-align:left}
+.nli-mail p{margin:0 0 14px;color:#2a2f4d;max-width:none}
+.nli-mail .nli-kick{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#6a6f8c;margin-bottom:6px}
+.nli-mail .nli-title{font-family:var(--f-display);font-weight:800;font-stretch:80%;font-size:clamp(26px,3.6vw,38px);line-height:1.05;margin:0 0 6px;color:#12162b}
+.nli-mail .nli-by{font-size:13px;color:#6a6f8c;margin-bottom:20px}
+.nli-mail h3{font-family:var(--f-display);font-weight:800;font-stretch:85%;font-size:22px;margin:26px 0 10px;color:#12162b}
+.nli-mail ul{margin:0 0 10px;padding-left:20px}.nli-mail li{margin:0 0 10px;color:#2a2f4d}
+.nli-mail em{color:#6a6f8c}
+.nli-mail a{color:#1a5fd0}
+.nli-mail hr{border:0;border-top:1px solid #e2ddcf;margin:26px 0 0}
+.nli-img{display:block;width:min(70%,240px);margin:18px auto 6px;text-decoration:none;text-align:center}
+.nli-img img{display:block;width:100%;border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,.2)}
+.nli-img span{display:block;font-size:13px;color:#6a6f8c;margin-top:8px}
+.nli-sign{margin-top:20px !important;font-weight:700;color:#12162b !important}
+.nli-cta{position:relative;z-index:4;display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center;justify-content:center;margin-top:clamp(16px,2.4vw,24px);color:#e8ecf8;font-size:15px}
+.nli+.nlp{margin-top:clamp(24px,4vw,44px)}
+@media (max-width:560px){.nli-mail{font-size:15px;border-radius:12px}.nli-mail h3{font-size:19px}}
 </style>"""
 
 header = header + '\n\n' + site_parts.navbar(src, 'newsletter.html')
@@ -47,6 +105,7 @@ footer = site_parts.newsletter_section(src) + '\n' + footer + '\n\n' + site_part
 body = f"""{header}
 
 <main>
+{issue_html}
   <section class="wrap nlp" aria-labelledby="nl-h">
     <div class="sheet-head">
       <h2 id="nl-h">Newsletter</h2>
