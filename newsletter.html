@@ -93,7 +93,8 @@ main,body>footer,body>header{overflow-x:clip}
 .drop b{font-family:var(--f-display);font-weight:700;font-stretch:80%;font-size:clamp(30px,3vw,36px);line-height:1;text-shadow:0 1px 10px rgba(0,0,0,.6);color:#fff;font-variant-numeric:tabular-nums;letter-spacing:.02em}
 /* die-cut window showing a sleeved card */
 .window{position:relative;z-index:3;justify-self:center;width:min(100%,280px);aspect-ratio:63/88;border-radius:14px;padding:0;
-  background:none;box-shadow:0 0 0 2px rgba(233,196,106,.7),0 16px 34px rgba(0,0,0,.35)}
+  background:none;box-shadow:0 16px 34px rgba(0,0,0,.35)}
+.window::after{content:"";position:absolute;inset:0;border-radius:14px;box-shadow:0 0 0 1px rgba(233,196,106,.7);z-index:5;pointer-events:none}
 .window .back{width:100%;height:100%;border-radius:14px;background:url(img/card.webp) center/cover;position:relative;overflow:hidden;
   box-shadow:none}
 .window .back::after{content:"";position:absolute;inset:-50%;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.35) 50%,transparent 60%);animation:glint 5s ease-in-out infinite}
@@ -768,7 +769,7 @@ body>header .cover .drop .mono{letter-spacing:-.07em;word-spacing:-.3em}
 .window.fanned{--tz:4.3deg}
 .window>.coverflip{z-index:2}
 .window>.fan{position:absolute;inset:0;z-index:0;border-radius:14px;background:url(img/card.webp) center/cover;
-  box-shadow:0 0 0 2px rgba(233,196,106,.7),0 12px 26px rgba(0,0,0,.5);
+  box-shadow:0 0 0 1px rgba(233,196,106,.7),0 12px 26px rgba(0,0,0,.5);
   transform-origin:50% 100%;opacity:0;transform:rotate(0deg);transition:transform .45s cubic-bezier(.3,.8,.2,1),opacity .25s;pointer-events:none}
 .window.fanned>.fan{opacity:1}
 .window.fanned>.fan1{transform:translateX(-7.2%) rotate(-7.6deg)}
