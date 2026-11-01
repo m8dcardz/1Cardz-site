@@ -277,5 +277,17 @@
   "quip": "Roses are red, packs are sealed.",
   "media": "https://d2zf8b1xpl1udp.cloudfront.net/ko1zi217ecmmn3vf707qvcz35jfh.mp4",
   "post_id": 1131011
+ },
+ {
+  "clip": "clip25",
+  "title": "Wager Rules Fix",
+  "game": "Flesh and Blood",
+  "host": "Luna",
+  "when": "2026-11-01T20:00",
+  "blurb": "Flesh and Blood's October 30 rules update moves Wager to the damage step, restoring Zane's combo, and errata's Trained Saurian.",
+  "source": "Confirmed",
+  "quip": "Place your bets... a little earlier now.",
+  "media": "https://d2zf8b1xpl1udp.cloudfront.net/cocupoes3yv3et6bsz5gshscvn78.mp4",
+  "post_id": 1132156
  }
 ]
