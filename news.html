@@ -81,7 +81,7 @@ main,body>footer,body>header{overflow-x:clip}
 .cover .label{color:var(--foil);display:flex;gap:12px;flex-wrap:wrap;align-items:center}
 .cover .label span+span::before{content:"◆";margin-right:12px;opacity:.6}
 .cover h1.foil{filter:none}
-.cover:not(.cover-back) .copy p{text-shadow:0 1px 3px rgba(0,0,0,.45)}
+.cover:not(.cover-back) .copy p{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.45)}
 .cover h1{line-height:.72;font-size:clamp(56px,9vw,128px);font-weight:800;font-stretch:78%;letter-spacing:-.01em;text-transform:uppercase}
 .cover p{margin:0;max-width:44ch;color:#c9cfe4;font-size:clamp(16px,1.6vw,19px);letter-spacing:-.025em;line-height:1.2}
 .cover .row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:6px}
@@ -1061,7 +1061,7 @@ body>header .cover .top-cover{z-index:0}
 /* top binder countdown: cyan LED dots under glass (style 15, Nov 1) with a cyan gradient light running around the rim */
 .drop .flapclock{--fh:36px;--d:calc(var(--fh) / 11.6);position:relative;display:inline-flex;flex:0 0 auto;isolation:isolate}
 .flapclock .halo,.flapclock .edge{position:absolute;border-radius:calc(var(--d) * 1.6);overflow:hidden;pointer-events:none}
-.flapclock .halo{inset:calc(var(--d) * -.6);z-index:-2;filter:blur(calc(var(--d) * 1.3)) saturate(1.4);opacity:.71}
+.flapclock .halo{inset:calc(var(--d) * -.6);z-index:-2;filter:blur(calc(var(--d) * 1.6)) saturate(1.5);opacity:1}
 .flapclock .edge{inset:0;z-index:-1}
 .flapclock .rim{position:absolute;left:50%;top:50%;width:300%;aspect-ratio:1;translate:-50% -50%;
   background:conic-gradient(#063a4a,#0aa6c8,#7cf3ff,#e6feff,#7cf3ff,#18c8ee,#0b5f7a,#063a4a);animation:rimspin 3s linear infinite}
@@ -1071,7 +1071,7 @@ body>header .cover .top-cover{z-index:0}
 .flapclock .ch{display:grid;grid-template-columns:repeat(5,var(--d));grid-auto-rows:var(--d);gap:calc(var(--d) * .25)}
 .flapclock .ch.narrow{grid-template-columns:var(--d)}
 .flapclock .ch i{border-radius:50%;background:rgba(124,243,255,.08)}
-.flapclock .ch i.on{background:#fff;box-shadow:0 0 calc(var(--d) * .7) rgba(124,243,255,.9)}
+.flapclock .ch i.on{background:#7cf3ff;box-shadow:0 0 calc(var(--d) * 1.1) rgba(124,243,255,1),0 0 calc(var(--d) * 2.2) rgba(124,243,255,.55)}
 .cz-sr{position:absolute !important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media (min-width:561px){.drop:has(.flapclock){align-items:center}}
 @media (prefers-reduced-motion:reduce){.flapclock .rim{animation:none}}

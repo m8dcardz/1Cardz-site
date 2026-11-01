@@ -70,7 +70,7 @@ issue_html = f"""  <section class="wrap nli" aria-labelledby="nli-h">
 extra_css = """<style>
 /* newsletter page */
 .nl-soon{position:relative;text-align:center;padding:clamp(34px,6vw,80px) clamp(18px,4vw,60px);display:grid;justify-items:center;gap:16px;z-index:4}
-.nl-soon .nl-big{font-family:"Press Start 2P",ui-monospace,monospace;font-size:clamp(20px,4vw,44px);line-height:1.25;letter-spacing:.04em;margin:0;
+.nl-soon .nl-big{font-family:"Press Start 2P",ui-monospace,monospace;font-size:clamp(17px,3.4vw,37.4px);line-height:1.25;letter-spacing:.04em;margin:0;
   background:linear-gradient(100deg,#ff8ad8,#ffd23f,#7cf3ff,#c58cff,#ff8ad8);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:nlfoil 6s linear infinite;
   filter:drop-shadow(0 0 14px rgba(255,210,63,.35))}
 @keyframes nlfoil{to{background-position:300% 0}}
@@ -96,7 +96,7 @@ extra_css = """<style>
 .nli-img span{display:block;font-size:13px;color:#6a6f8c;margin-top:8px}
 .nli-sign{margin-top:20px !important;font-weight:700;color:#12162b !important}
 .nli-cta{position:relative;z-index:4;display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center;justify-content:center;margin-top:clamp(16px,2.4vw,24px);color:#e8ecf8;font-size:15px}
-.nli+.nlp{margin-top:clamp(24px,4vw,44px)}
+.nlp+.nli{margin-top:clamp(24px,4vw,44px)}
 @media (max-width:560px){.nli-mail{font-size:15px;border-radius:12px}.nli-mail h3{font-size:19px}}
 </style>"""
 
@@ -105,7 +105,6 @@ footer = site_parts.newsletter_section(src) + '\n' + footer + '\n\n' + site_part
 body = f"""{header}
 
 <main>
-{issue_html}
   <section class="wrap nlp" aria-labelledby="nl-h">
     <div class="sheet-head">
       <h2 id="nl-h">Newsletter</h2>
@@ -119,11 +118,11 @@ body = f"""{header}
       <div class="nl-soon">
         <p class="nl-big">Sign up free</p>
         <p>The week in trading card game news: the biggest stories from Zia and Luna, release dates to watch and the Market Watch picks. Pop your email in the box below.</p>
-        <a class="btn" href="#newsletter">Sign me up</a>
         <ul aria-label="What's in it"><li>Top stories</li><li>Release dates</li><li>Market Watch</li><li>Free</li></ul>
       </div>
     </div>
   </section>
+{issue_html}
 </main>
 
 {footer}
