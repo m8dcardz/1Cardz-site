@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500;12..96,75..100,700;12..96,75..100,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500;12..96,75..100,700;12..96,75..100,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap"></noscript>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=VT323&family=Russo+One&family=Oxanium:wght@700&family=Press+Start+2P&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=VT323&family=Russo+One&family=Oxanium:wght@700&family=Press+Start+2P&display=swap"></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=VT323&family=Russo+One&family=Oxanium:wght@700&family=Space+Mono:wght@700&family=Press+Start+2P&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=VT323&family=Russo+One&family=Oxanium:wght@700&family=Space+Mono:wght@700&family=Press+Start+2P&display=swap"></noscript>
 <script id="fl-boot">document.documentElement.classList.add('fl');(document.fonts&&document.fonts.load?document.fonts.load('800 40px "Bricolage Grotesque"'):Promise.resolve()).then(()=>document.documentElement.classList.remove('fl'),()=>document.documentElement.classList.remove('fl'));setTimeout(()=>document.documentElement.classList.remove('fl'),3000)</script>
 <style>
 /* Layout: the site is a collector's binder on a playmat. Cover first, then nine-pocket pages of sleeved cards, a rarity key, and the back cover. One committed look (a physical object), colors set explicitly. */
@@ -927,6 +927,11 @@ button.holo-btn{border:0;cursor:default}
 .holo-soon:hover,.holo-soon:active{color:#16224d;text-shadow:0 1px 0 rgba(255,255,255,.55);transform:none}
 .holo-btn:focus-visible{outline:2px solid #fff;outline-offset:3px}
 @media (max-width:560px){.holo-nav{gap:10px;margin-inline:9px}.holo-btn{font-size:9px;padding:11px 12px}}
+/* nav font: Space Mono bold (option 12, Nov 1); active/hover yellow text gets a white stroke */
+.holo-nav .holo-btn{font-family:"Space Mono",ui-monospace,monospace;font-weight:700;font-size:12.5px;letter-spacing:.1em}
+.holo-btn:hover,.holo-btn:focus-visible,.holo-btn:active,.holo-btn[aria-current="page"]{-webkit-text-stroke:1.2px #fff;paint-order:stroke fill}
+.holo-soon:hover,.holo-soon:active{-webkit-text-stroke:0}
+@media (max-width:560px){.holo-nav .holo-btn{font-size:11px;letter-spacing:.06em}}
 /* email box 55% narrower; holo buttons shine on their own timing */
 @media (min-width:901px){
 .signup .su-body{grid-template-columns:minmax(0,1fr) auto !important;align-items:end !important;gap:clamp(16px,3vw,40px) !important}
