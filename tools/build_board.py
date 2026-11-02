@@ -31,7 +31,7 @@ cover_js = a_js[a_js.index('  /* binder videos: top first, bottom last */'):a_js
 
 
 BOARD_API = 'https://1cardz-signup.m8dcardz.workers.dev/board'
-TURNSTILE_SITEKEY = ''  # public site key of the Turnstile widget; empty = no bot-check widget
+TURNSTILE_SITEKEY = '0x4AAAAAAFwjplUT3YnqOho7'  # public site key of the Turnstile widget; empty = no bot-check widget
 
 rows = [("1ST","ZIA","WELCOME TO THE HALL!","999,999"),
         ("2ND","LUNA","SHHH... POST LOUDLY.","888,888"),
