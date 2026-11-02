@@ -143,3 +143,9 @@ out = ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
        + head + style + '\n' + extra_css + '\n</head>\n<body>\n' + body + '\n' + scrolltop + '\n' + js + '\n</body>\n</html>\n')
 (root/'newsletter.html').write_text(out)
 print('newsletter.html', len(out), 'bytes')
+# SEO pass (titles, share previews, structured data, sitemap.xml, robots.txt); safe to repeat
+try:
+    import subprocess
+    subprocess.run([sys.executable, str(root/'tools'/'seo.py')], timeout=120)
+except Exception as _e:
+    print('seo skipped:', _e)

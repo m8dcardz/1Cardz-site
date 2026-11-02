@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>1 Cardz Binder</title>
+<title>1Cardz.news: Daily TCG News for Pokémon, Magic, One Piece &amp; More</title>
 <link rel="preload" as="image" href="img/clip1.jpg" fetchpriority="high">
 <link rel="preload" as="image" href="img/clip2.jpg">
 <link rel="preload" as="image" href="img/clip4.jpg">
 <link rel="canonical" href="https://1cardz.news/">
-<meta name="description" content="1Cardz.news: daily trading card game news from Zia and Luna, filed in a collector's binder.">
+<meta name="description" content="Daily trading card game news in two short clips a day from hosts Zia and Luna: Pokémon, Magic: The Gathering, One Piece, Yu-Gi-Oh!, Lorcana, Flesh and Blood and more. Headlines, market prices and a free weekly newsletter.">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,7 +39,7 @@ img{max-width:100%;display:block}
 :focus-visible{outline:3px solid var(--foil);outline-offset:4px}
 .wrap{max-width:1160px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
 .mono{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
-h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance;line-height:.95}
+h1,h2,h3,.h1x{font-family:var(--f-display);margin:0;text-wrap:balance;line-height:.95}
 main,body>footer,body>header{overflow-x:clip}
 
 /* ================= COVER ================= */
@@ -83,9 +83,9 @@ main,body>footer,body>header{overflow-x:clip}
 .cover .copy{position:relative;z-index:3;display:grid;gap:18px;min-width:0}
 .cover .label{color:var(--foil);display:flex;gap:12px;flex-wrap:wrap;align-items:center}
 .cover .label span+span::before{content:"◆";margin-right:12px;opacity:.6}
-.cover h1.foil{filter:none}
+.cover :is(h1,.h1x).foil{filter:none}
 .cover:not(.cover-back) .copy p{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.45)}
-.cover h1{line-height:.72;font-size:clamp(56px,9vw,128px);font-weight:800;font-stretch:78%;letter-spacing:-.01em;text-transform:uppercase}
+.cover :is(h1,.h1x){line-height:.72;font-size:clamp(56px,9vw,128px);font-weight:800;font-stretch:78%;letter-spacing:-.01em;text-transform:uppercase}
 .cover p{margin:0;max-width:44ch;color:#c9cfe4;font-size:clamp(16px,1.6vw,19px);letter-spacing:-.025em;line-height:1.2}
 .cover .row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:6px}
 .btn{border:0;cursor:pointer;font-family:var(--f-mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--cover);
@@ -127,7 +127,7 @@ main,body>footer,body>header{overflow-x:clip}
 
 /* ================= BINDER PAGE ================= */
 .sheet-head{display:flex;justify-content:space-between;align-items:end;gap:18px;flex-wrap:wrap;margin-bottom:22px}
-.sheet-head h2{font-size:clamp(40px,6vw,76px);font-weight:800;font-stretch:78%;text-transform:uppercase;color:#fff}
+.sheet-head :is(h1,h2){font-size:clamp(40px,6vw,76px);font-weight:800;font-stretch:78%;text-transform:uppercase;color:#fff}
 .sheet-head p{margin:0;color:#aab1c9;max-width:52ch}
 .page{position:relative;background:var(--page);border-radius:10px;padding:clamp(16px,2.6vw,32px) clamp(16px,2.6vw,32px) clamp(16px,2.6vw,32px) clamp(56px,7vw,92px);
   box-shadow:0 30px 70px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.4) inset;color:var(--ink)}
@@ -412,8 +412,8 @@ a.lcd{display:block;text-decoration:none;cursor:pointer}
   body>header .cover{row-gap:16px}
   body>header .cover .copy{gap:12px;padding-top:16px}
   html body>header .cover .window{width:min(78%,240px);margin-bottom:22px}
-  html body>header .cover h1{font-size:clamp(44px,15vw,64px);white-space:nowrap;line-height:.9}
-  html body>header .cover h1 br{display:none}
+  html body>header .cover :is(h1,.h1x){font-size:clamp(44px,15vw,64px);white-space:nowrap;line-height:.9}
+  html body>header .cover :is(h1,.h1x) br{display:none}
   html body>header .cover .drop{flex-direction:column;align-items:flex-start;gap:2px}
   html body>header .cover .drop b{font-size:40px}
   html body>header .cover{row-gap:14px}
@@ -459,7 +459,7 @@ body>footer .cover{--vb:42px}
   body>header .cover .window{grid-column:2;justify-self:center;width:min(70%,220px);margin-bottom:30px}
   body>header .cover .label{gap:4px 8px;font-size:10.5px;letter-spacing:.1em}
   body>header .cover .label span+span::before{margin-right:8px}
-  body>header .cover h1{font-size:clamp(64px,19vw,96px)}
+  body>header .cover :is(h1,.h1x){font-size:clamp(64px,19vw,96px)}
   body>header .cover .row{gap:14px}
   body>header .cover .drop{gap:4px 10px}
   body>header .cover .drop .mono{font-size:15px}
@@ -719,8 +719,8 @@ body>header .cover .drop .mono{letter-spacing:.08em;word-spacing:.1em}
   html body>header .cover .spine{grid-row:1}
   html body>header .cover .copy{grid-column:2;grid-row:1;gap:6px;padding:0 0 0 14px}
   html body>header .cover .window{grid-column:3;grid-row:1;justify-self:end;width:117px;margin:0}
-  html body>header .cover h1{font-size:44px;white-space:normal;line-height:.86}
-  html body>header .cover h1 br{display:inline}
+  html body>header .cover :is(h1,.h1x){font-size:44px;white-space:normal;line-height:.86}
+  html body>header .cover :is(h1,.h1x) br{display:inline}
   body>header .cover .label{font-size:9px;letter-spacing:.08em;flex-wrap:nowrap;white-space:nowrap}
   body>header .cover .label span:nth-child(3){display:none}
   body>header .coverflip .face .txt p.flav{display:none}
@@ -978,12 +978,12 @@ button.holo-btn{border:0;cursor:default}
    4. Anything else in the heading (filters, tools) goes on its own row underneath.
    5. Intro text: 3 lines or fewer on wide screens. */
 .sheet-head{display:grid;grid-template-columns:minmax(0,1fr);align-items:end;row-gap:10px;column-gap:clamp(24px,4vw,64px);margin-bottom:22px}
-.sheet-head>h2{grid-column:1;white-space:nowrap;margin:0}
+.sheet-head>:is(h1,h2){grid-column:1;white-space:nowrap;margin:0}
 .sheet-head>p{grid-column:1;max-width:60ch;margin:0}
-.sheet-head>:not(h2):not(p){grid-column:1/-1;contain:inline-size}
+.sheet-head>:not(h1):not(h2):not(p){grid-column:1/-1;contain:inline-size}
 @media (min-width:1000px){.sheet-head{grid-template-columns:max-content minmax(0,58ch);justify-content:space-between}.sheet-head>p{grid-column:2;width:58ch;max-width:100%}}
 /* while the fonts load, keep page titles on one line so the page doesn't jump */
-.fl .sheet-head h2{white-space:nowrap}
+.fl .sheet-head :is(h1,h2){white-space:nowrap}
 /* home binder sheet: cards stop growing at 300px wide on big screens */
 #set:not(.arch) .pockets{grid-template-columns:repeat(3,minmax(0,300px));justify-content:center}
 /* phones: no "Watch the clip" button (tap the clip preview instead) */
@@ -997,6 +997,27 @@ button.holo-btn{border:0;cursor:default}
 body>header .cover .top-cover{z-index:0}
 @media (prefers-reduced-motion:reduce){.cv-edge i{animation:none}}
 </style>
+<!--seo-->
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="theme-color" content="#0b1030">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="img/icon-192.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="1Cardz.news">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="1Cardz.news: Daily TCG News for Pokémon, Magic, One Piece &amp; More">
+<meta property="og:description" content="Daily trading card game news in two short clips a day from hosts Zia and Luna: Pokémon, Magic: The Gathering, One Piece, Yu-Gi-Oh!, Lorcana, Flesh and Blood and more. Headlines, market prices and a free weekly newsletter.">
+<meta property="og:url" content="https://1cardz.news/">
+<meta property="og:image" content="https://1cardz.news/img/og-1cardz.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Hosts Zia and Luna in the 1Cardz.news arcade-library studio">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="1Cardz.news: Daily TCG News for Pokémon, Magic, One Piece &amp; More">
+<meta name="twitter:description" content="Daily trading card game news in two short clips a day from hosts Zia and Luna: Pokémon, Magic: The Gathering, One Piece, Yu-Gi-Oh!, Lorcana, Flesh and Blood and more. Headlines, market prices and a free weekly newsletter.">
+<meta name="twitter:image" content="https://1cardz.news/img/og-1cardz.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "NewsMediaOrganization", "@id": "https://1cardz.news/#org", "name": "1Cardz.news", "url": "https://1cardz.news/", "logo": {"@type": "ImageObject", "url": "https://1cardz.news/img/icon-512.png", "width": 512, "height": 512}, "sameAs": ["https://www.instagram.com/1cardz_news/", "https://www.youtube.com/@1Cardzcom", "https://www.tiktok.com/@1cardz.com"]}, {"@type": "WebSite", "@id": "https://1cardz.news/#site", "name": "1Cardz.news", "url": "https://1cardz.news/", "publisher": {"@id": "https://1cardz.news/#org"}, "inLanguage": "en"}]}</script>
+<!--/seo-->
 </head>
 <body>
 

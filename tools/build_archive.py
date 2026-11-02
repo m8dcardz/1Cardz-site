@@ -245,3 +245,9 @@ popup = (root/'tools'/'clip_popup.html').read_text()
 out = out.replace('\n</body>', '\n' + popup + '</body>', 1)
 (root/'archive.html').write_text(out)
 print('archive.html', len(out), 'bytes,', n, 'posts')
+# SEO pass (titles, share previews, structured data, sitemap.xml, robots.txt); safe to repeat
+try:
+    import subprocess
+    subprocess.run([sys.executable, str(root/'tools'/'seo.py')], timeout=120)
+except Exception as _e:
+    print('seo skipped:', _e)

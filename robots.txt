@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /tools/*.py
+
+Sitemap: https://1cardz.news/sitemap.xml
