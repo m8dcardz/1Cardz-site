@@ -1024,6 +1024,44 @@ body>header .cover .top-cover{z-index:0}
 @keyframes hblink{50%{opacity:.15}}
 .hall-cta{position:relative;z-index:2;margin:clamp(20px,3vw,30px) auto 0;display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center;justify-content:center;color:#e8ecf8;font-size:15px;text-align:center}
 @media (max-width:760px){.hall-row{grid-template-columns:1fr}.cab{display:none}.board li{grid-template-columns:4.3em 4.3em minmax(0,1fr);gap:.6em;font-size:clamp(8px,2.3vw,10px)}.board .sc{display:none}}
+/* live board (Nov 2) */
+.board-tabs{display:flex;justify-content:center;gap:10px;margin:-6px 0 14px}
+.board-tabs button{font:inherit;font-family:"Press Start 2P",ui-monospace,monospace;font-size:9px;letter-spacing:.1em;color:#8a90b8;background:none;border:1px solid #2b3f80;border-radius:6px;padding:7px 10px;cursor:pointer}
+.board-tabs button[aria-pressed="true"]{color:#05040b;background:#7cf3ff;border-color:#7cf3ff;box-shadow:0 0 10px rgba(124,243,255,.6)}
+.board li{grid-template-columns:4.4em 4.4em minmax(0,1fr) 7.6em 2.2em}
+.board .lk{font:inherit;color:inherit;background:none;border:1px solid currentColor;border-radius:5px;padding:2px 0;cursor:pointer;opacity:.75;line-height:1.4}
+.board .lk:hover,.board .lk.on{opacity:1;box-shadow:0 0 8px currentColor}
+.board .lk.on{background:rgba(255,255,255,.12)}
+.board .msg{white-space:normal;overflow-wrap:anywhere}
+.board li.r8{color:#ff8ad8;text-shadow:0 0 8px rgba(255,138,216,.6)}.board li.r9{color:#fff;text-shadow:0 0 8px rgba(255,255,255,.5)}.board li.r10{color:#ffd23f;text-shadow:0 0 8px rgba(255,210,63,.5)}
+.board.live .board-foot .soon,.board.live .board-foot .ins,.board.live .board-foot .ini{display:none}
+.coin{display:none;justify-self:center;font:inherit;font-family:"Press Start 2P",ui-monospace,monospace;font-size:clamp(10px,1.3vw,13px);letter-spacing:.1em;color:#05040b;background:#ffd23f;border:0;border-radius:8px;padding:12px 16px;cursor:pointer;box-shadow:inset 0 -3px 0 rgba(0,0,0,.25),0 0 14px rgba(255,210,63,.55)}
+.board.live .coin{display:inline-block}
+.coin:active{transform:translateY(2px)}
+.mb-form{display:none;margin-top:14px;text-align:left;font-family:"Press Start 2P",ui-monospace,monospace;font-size:clamp(9px,1.2vw,11px);color:#cfd4e6;gap:12px}
+.mb-form.open{display:grid}
+.mb-form label{display:grid;gap:8px;letter-spacing:.08em}
+.mb-ini{display:flex;gap:8px}
+.mb-ini input,.mb-form .mb-msg{font:inherit;font-family:"Press Start 2P",ui-monospace,monospace;text-transform:uppercase;color:#7cf3ff;background:#0a0f1c;border:1px solid #2b3f80;border-radius:6px;outline:none}
+.mb-ini input{width:2.6em;height:2.6em;text-align:center;font-size:14px;padding:0}
+.mb-form .mb-msg{width:100%;padding:12px 10px;font-size:11px}
+.mb-ini input:focus,.mb-form .mb-msg:focus{border-color:#7cf3ff;box-shadow:0 0 10px rgba(124,243,255,.5)}
+.mb-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.mb-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.mb-row .coin{display:inline-block}
+.mb-cancel{font:inherit;font-family:"Press Start 2P",ui-monospace,monospace;font-size:10px;color:#8a90b8;background:none;border:0;cursor:pointer;padding:10px 6px}
+.mb-note{font-size:.85em;color:#8a90b8;line-height:1.7;margin:0}
+.mb-stat{min-height:1.4em;margin:0;color:#ffd23f;line-height:1.6}
+.mb-admin{display:none;position:relative;z-index:2;max-width:760px;margin:22px auto 0;padding:16px;border-radius:12px;background:#05040b;border:1px dashed #ff8ad8;color:#e8ecf8;font-size:14px}
+.mb-admin.on{display:block}
+.mb-admin h4{margin:0 0 10px;font-family:"Press Start 2P",ui-monospace,monospace;font-size:11px;color:#ff8ad8}
+.mb-admin input{font:inherit;padding:8px 10px;border-radius:6px;border:1px solid #2b3f80;background:#0a0f1c;color:#fff}
+.mb-admin ul{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:8px}
+.mb-admin li{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px;border-radius:8px;background:rgba(255,255,255,.05)}
+.mb-admin li span{flex:1 1 200px}
+.mb-admin button{font:inherit;font-size:13px;padding:6px 10px;border-radius:6px;border:0;cursor:pointer;background:#58f08a;color:#05040b}
+.mb-admin button.hide{background:#ff3b5c;color:#fff}
+@media (max-width:760px){.board li{grid-template-columns:4.3em 4.3em minmax(0,1fr) 2.4em}}
 </style>
 </head>
 <body>
@@ -1142,27 +1180,41 @@ body>header .cover .top-cover{z-index:0}
   <section class="wrap mbp" aria-labelledby="mb-h">
     <div class="sheet-head">
       <h2 id="mb-h">Message Board</h2>
-      <p>Coming soon: an arcade hall of fame where you can post your best pulls, hot takes and shout-outs to Zia and Luna.</p>
+      <p>The arcade hall of fame. Post your best pulls, hot takes and shout-outs to Zia and Luna, and give your favourite posts a point.</p>
     </div>
     <div class="hall">
       <p class="hall-marquee">1CARDZ HALL OF FAME<small>MESSAGE BOARD</small></p>
       <div class="hall-row">
         <span class="cab" aria-hidden="true"></span>
-        <div class="board" role="img" aria-label="Arcade high score board. The Message Board is coming soon.">
+        <div class="board" id="mbBoard" data-api="https://1cardz-signup.m8dcardz.workers.dev/board" data-sitekey="">
           <h3>HIGH SCORES</h3>
-          <ol aria-hidden="true">
+          <div class="board-tabs" hidden><button type="button" data-sort="top" aria-pressed="true">TOP</button><button type="button" data-sort="new" aria-pressed="false">NEW</button></div>
+          <ol id="mbList">
             <li class="hd2"><span>RANK</span><span>NAME</span><span>MESSAGE</span><span class="sc">SCORE</span></li>
             <li class="r1"><span class="rk">1ST</span><span class="nm2">ZIA</span><span class="msg">WELCOME TO THE HALL!</span><span class="sc">999,999</span></li><li class="r2"><span class="rk">2ND</span><span class="nm2">LUNA</span><span class="msg">SHHH... POST LOUDLY.</span><span class="sc">888,888</span></li><li class="r3"><span class="rk">3RD</span><span class="nm2">MIC</span><span class="msg">IS THIS THING ON?</span><span class="sc">777,777</span></li><li class="r4"><span class="rk">4TH</span><span class="nm2">1CZ</span><span class="msg">MUDKIP OUTBID MY RENT</span><span class="sc">480,000</span></li><li class="r5"><span class="rk">5TH</span><span class="nm2">???</span><span class="msg">YOUR MESSAGE HERE</span><span class="sc">000,000</span></li><li class="r6"><span class="rk">6TH</span><span class="nm2">???</span><span class="msg">YOUR PULL HERE</span><span class="sc">000,000</span></li><li class="r7"><span class="rk">7TH</span><span class="nm2">???</span><span class="msg">YOUR HOT TAKE HERE</span><span class="sc">000,000</span></li>
           </ol>
-          <div class="board-foot" aria-hidden="true">
+          <div class="board-foot">
             <span class="soon blink">COMING SOON</span>
             <span class="ins">INSERT COIN TO POST</span>
             <span class="ini">ENTER YOUR INITIALS: <b class="blink">A</b> _ _</span>
+            <button type="button" class="coin blink" id="mbCoin">INSERT COIN TO POST</button>
           </div>
+          <form class="mb-form" id="mbForm" novalidate>
+            <label><span>ENTER YOUR INITIALS</span><span class="mb-ini"><input maxlength="1" aria-label="Initial 1" autocomplete="off"><input maxlength="1" aria-label="Initial 2" autocomplete="off"><input maxlength="1" aria-label="Initial 3" autocomplete="off"></span></label>
+            <label><span>MESSAGE (60 MAX)</span><input class="mb-msg" maxlength="60" placeholder="YOUR PULL, TAKE OR SHOUT-OUT" autocomplete="off"></label>
+            <input class="mb-hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <div class="mb-ts"></div>
+            <div class="mb-row"><button type="submit" class="coin">POST</button><button type="button" class="mb-cancel">CANCEL</button></div>
+            <p class="mb-note">NO LINKS. KEEP IT FRIENDLY. POSTS SHOW AFTER A QUICK CHECK.</p>
+            <p class="mb-stat" role="status" aria-live="polite"></p>
+          </form>
         </div>
         <span class="cab r" aria-hidden="true"></span>
       </div>
-      <div class="hall-cta"><span>Want to know when the hall opens?</span><a class="btn" href="#newsletter">Get the newsletter</a></div>
+      <div class="mb-admin" id="mbAdmin"><h4>ADMIN · WAITING FOR APPROVAL</h4>
+        <form id="mbAdminForm"><input type="password" placeholder="Admin key" autocomplete="current-password" aria-label="Admin key"> <button type="submit">Load</button></form>
+        <ul id="mbPending"></ul></div>
+      <div class="hall-cta"><span>Get the week's best posts in Sunday's email.</span><a class="btn" href="#newsletter">Get the newsletter</a></div>
     </div>
   </section>
 </main>
@@ -1275,6 +1327,58 @@ body>header .cover .top-cover{z-index:0}
     else{doFlip(false,()=>{if(!hov)cw.classList.remove('fanned');setTimeout(()=>{ccBusy=false;if(!hov)cw.classList.remove('fanned')},reduce?0:FAN)})}});
   cc.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();cc.click()}});
   clock();setInterval(clock,1000);
+})();
+</script>
+
+<script id="board-js">
+(function(){
+  const bd=document.getElementById('mbBoard');if(!bd)return;
+  const API=bd.dataset.api,SK=bd.dataset.sitekey,list=document.getElementById('mbList'),tabs=bd.querySelector('.board-tabs');
+  const form=document.getElementById('mbForm'),coin=document.getElementById('mbCoin'),stat=form.querySelector('.mb-stat');
+  const ini=[...form.querySelectorAll('.mb-ini input')],msg=form.querySelector('.mb-msg');
+  const RK=['1ST','2ND','3RD','4TH','5TH','6TH','7TH','8TH','9TH','10TH'];
+  let sort='top',liked={};try{liked=JSON.parse(localStorage.getItem('czLiked')||'{}')}catch(e){}
+  const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const score=p=>(p*1000).toString().padStart(6,'0').replace(/\B(?=(\d{3})+(?!\d))/g,',');
+  function render(posts){
+    const head=list.querySelector('.hd2').outerHTML.replace('</li>','<span></span></li>');
+    list.innerHTML=head+posts.map((p,i)=>`<li class="r${i+1}"><span class="rk">${RK[i]}</span><span class="nm2">${esc(p.initials)}</span><span class="msg">${esc(p.msg)}</span><span class="sc">${score(p.points)}</span><button type="button" class="lk${liked[p.id]?' on':''}" data-id="${p.id}" aria-label="Give ${esc(p.initials)} a point">&#9650;</button></li>`).join('');
+  }
+  function load(){return fetch(API+'?sort='+sort,{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject()).then(d=>{if(!d.ok)throw 0;bd.classList.add('live');tabs.hidden=false;render(d.posts)})}
+  load().catch(()=>{});
+  tabs.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;sort=b.dataset.sort;tabs.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));load().catch(()=>{})});
+  list.addEventListener('click',e=>{const b=e.target.closest('.lk');if(!b||b.disabled)return;b.disabled=true;
+    fetch(API+'/like',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:+b.dataset.id})}).then(r=>r.json()).then(d=>{
+      if(d.ok){liked[b.dataset.id]=1;try{localStorage.setItem('czLiked',JSON.stringify(liked))}catch(e){}b.classList.add('on');b.previousElementSibling.textContent=score(d.points)}}).catch(()=>{}).finally(()=>{b.disabled=false})});
+  let tsReady=false,tsId=null;
+  function turnstile(){if(!SK||tsReady)return;tsReady=true;
+    window.czTsLoad=()=>{tsId=window.turnstile.render(form.querySelector('.mb-ts'),{sitekey:SK,theme:'dark'})};
+    const s=document.createElement('script');s.src='https://challenges.cloudflare.com/turnstile/v0/api.js?onload=czTsLoad&render=explicit';s.async=true;document.head.appendChild(s)}
+  coin.addEventListener('click',()=>{form.classList.add('open');coin.style.display='none';turnstile();ini[0].focus()});
+  form.querySelector('.mb-cancel').addEventListener('click',()=>{form.classList.remove('open');coin.style.display='';stat.textContent=''});
+  ini.forEach((inp,i)=>{inp.addEventListener('input',()=>{inp.value=inp.value.toUpperCase().replace(/[^A-Z0-9?!]/g,'');if(inp.value&&ini[i+1])ini[i+1].focus()});
+    inp.addEventListener('keydown',e=>{if(e.key==='Backspace'&&!inp.value&&ini[i-1])ini[i-1].focus()})});
+  form.addEventListener('submit',e=>{e.preventDefault();const btn=form.querySelector('button[type=submit]');
+    const body={initials:ini.map(x=>x.value).join(''),msg:msg.value,website:form.querySelector('.mb-hp').value};
+    if(!body.initials){stat.textContent='ENTER YOUR INITIALS';return}
+    if(msg.value.trim().length<2){stat.textContent='WRITE A MESSAGE';return}
+    if(SK){body.token=window.turnstile&&tsId!==null?window.turnstile.getResponse(tsId):'';if(!body.token){stat.textContent='TICK THE BOT CHECK FIRST';return}}
+    btn.disabled=true;stat.textContent='SENDING...';
+    fetch(API+'/post',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}).then(r=>r.json()).then(d=>{
+      if(d.ok){stat.textContent='THANKS! YOUR POST SHOWS AFTER A QUICK CHECK.';msg.value='';ini.forEach(x=>x.value='')}
+      else stat.textContent=String(d.error||'SOMETHING WENT WRONG').toUpperCase()}).catch(()=>{stat.textContent='BOARD OFFLINE. TRY AGAIN LATER.'})
+      .finally(()=>{btn.disabled=false;if(SK&&window.turnstile&&tsId!==null)window.turnstile.reset(tsId)})});
+  /* admin: board.html#admin */
+  const adm=document.getElementById('mbAdmin');
+  function admin(){if(location.hash!=='#admin')return;adm.classList.add('on')}
+  admin();addEventListener('hashchange',admin);
+  const af=document.getElementById('mbAdminForm'),pend=document.getElementById('mbPending');let KEY='';
+  function loadPending(){pend.innerHTML='<li>Loading…</li>';fetch(API+'/admin',{headers:{'X-Admin-Key':KEY},cache:'no-store'}).then(r=>r.json()).then(d=>{
+    if(!d.ok){pend.innerHTML='<li>'+esc(d.error||'Error')+'</li>';return}
+    pend.innerHTML=d.posts.length?d.posts.map(p=>`<li><span><b>${esc(p.initials)}</b> · ${esc(p.msg)}</span><button data-a="approve" data-id="${p.id}">Approve</button><button class="hide" data-a="hide" data-id="${p.id}">Hide</button></li>`).join(''):'<li>Nothing waiting.</li>'}).catch(()=>{pend.innerHTML='<li>Board offline.</li>'})}
+  af.addEventListener('submit',e=>{e.preventDefault();KEY=af.querySelector('input').value;loadPending()});
+  pend.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;b.disabled=true;
+    fetch(API+'/admin',{method:'POST',headers:{'Content-Type':'application/json','X-Admin-Key':KEY},body:JSON.stringify({id:+b.dataset.id,action:b.dataset.a})}).then(r=>r.json()).then(()=>{loadPending();load().catch(()=>{})}).catch(()=>{b.disabled=false})});
 })();
 </script>
 </body>
