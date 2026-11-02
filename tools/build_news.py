@@ -91,8 +91,10 @@ body = f'''{header}
 <main>
   <section class="wrap news" aria-labelledby="news-h">
     <div class="sheet-head">
-      <h2 id="news-h">News Headlines</h2>
-      <p>Every story from the 8 AM and 8 PM drops, newest first. Text only, with the source for each one.</p>
+      <div class="sheet-title">
+  <h2 id="news-h">News Headlines</h2>
+  <p>Every story from the 8 AM and 8 PM drops, newest first. Text only, with the source for each one.</p>
+      </div>
       <div class="chips" role="group" aria-label="Filter by game">{"".join(chips)}</div>
     </div>
     <div class="gd">

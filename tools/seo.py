@@ -124,8 +124,8 @@ def fix_page(page, posts, news):
     if page != 'index.html':
         # one <h1> per page = that page's own title; the binder's "TCG News" becomes a styled <div class="h1x">
         s = re.sub(r'<h1 class="foil">(.*?)</h1>', r'<div class="foil h1x">\1</div>', s, count=1, flags=re.S)
-        if not re.search(r'<div class="sheet-head">\s*<h1', s):
-            s = re.sub(r'(<div class="sheet-head">\s*)<h2([^>]*)>(.*?)</h2>', r'\1<h1\2>\3</h1>', s, count=1, flags=re.S)
+        if not re.search(r'<div class="sheet-head">\s*(<div class="sheet-title">\s*)?<h1', s):
+            s = re.sub(r'(<div class="sheet-head">\s*(?:<div class="sheet-title">\s*)?)<h2([^>]*)>(.*?)</h2>', r'\1<h1\2>\3</h1>', s, count=1, flags=re.S)
     p.write_text(s)
 
 def main():

@@ -968,18 +968,22 @@ button.holo-btn{border:0;cursor:default}
 /* top binder: fixed size on every page (the intro text always takes 3 lines, so shorter text can't shrink the binder) */
 @media (min-width:561px){body>header .cover .copy p{height:calc(3 * 1.2em);line-height:1.2;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
   body>header .cover .row{flex-wrap:nowrap}body>header .cover .row .btn{white-space:nowrap;min-width:163px;justify-content:center;text-align:center}}
-/* PAGE HEADING RULES (Nov 2) - every page's title + intro block (.sheet-head) follows these:
+/* PAGE HEADING RULES (Nov 3) - every page's title + intro sit in the same fixed box (.sheet-title inside .sheet-head):
    1. Title: one line, never wraps (uppercase display font, 40-76px).
-   2. Wide screens (1000px and up): title on the left, intro on the right (max 58ch), bottoms lined up.
-   3. Tablets and phones: title on top, intro underneath (max 60ch). They never overlap.
-   4. Anything else in the heading (filters, tools) goes on its own row underneath.
-   5. Intro text: 3 lines or fewer on wide screens.
-   6. 20px of space under every title, to whatever comes next (intro, filters or the box below). */
-.sheet-head{display:grid;grid-template-columns:minmax(0,1fr);align-items:end;row-gap:20px;column-gap:clamp(24px,4vw,64px);margin-bottom:20px}
-.sheet-head>:is(h1,h2){grid-column:1;white-space:nowrap;margin:0}
-.sheet-head>p{grid-column:1;max-width:60ch;margin:0}
-.sheet-head>:not(h1):not(h2):not(p){grid-column:1/-1;contain:inline-size}
-@media (min-width:1000px){.sheet-head{grid-template-columns:max-content minmax(0,58ch);justify-content:space-between}.sheet-head>p{grid-column:2;width:58ch;max-width:100%}}
+   2. The box is the same size on every page: wide screens (1000px+) title left + intro right (58ch), bottoms lined up,
+      fixed 3-line intro area; tablets and phones title on top + intro underneath, fixed 4-line intro area.
+   3. 30px of space under every title: title to intro (stacked), and the box to whatever comes next.
+   4. Filters/tools sit outside the box, on their own row underneath.
+   5. Intro text: at most 3 lines wide / 4 lines on phones (longer text is cut off, so keep intros short). */
+.sheet-head{display:grid;grid-template-columns:minmax(0,1fr);row-gap:30px;margin-bottom:30px}
+.sheet-head>:not(.sheet-title){contain:inline-size}
+.sheet-title{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto calc(1.65em * 4);row-gap:30px;align-items:end;
+  padding:clamp(20px,2.6vw,30px) clamp(20px,3vw,36px);border-radius:18px;
+  background:linear-gradient(160deg,rgba(255,255,255,.075),rgba(255,255,255,.02));box-shadow:inset 0 0 0 1px rgba(255,255,255,.13),0 14px 30px rgba(0,0,0,.28)}
+.sheet-title>:is(h1,h2){white-space:nowrap;margin:0;align-self:end}
+.sheet-title>p{margin:0;max-width:60ch;line-height:1.65;align-self:start;overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4}
+@media (min-width:1000px){.sheet-title{grid-template-columns:max-content minmax(0,58ch);grid-template-rows:calc(1.65em * 3);column-gap:clamp(24px,4vw,64px);justify-content:space-between}
+  .sheet-title>p{width:58ch;max-width:100%;align-self:end;-webkit-line-clamp:3}}
 /* while the fonts load, keep page titles on one line so the page doesn't jump */
 .fl .sheet-head :is(h1,h2){white-space:nowrap}
 /* home binder sheet: cards stop growing at 300px wide on big screens */

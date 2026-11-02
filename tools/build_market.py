@@ -81,8 +81,10 @@ body = f'''{header}
 <main>
   <section class="wrap mkt" aria-labelledby="mkt-h">
     <div class="sheet-head">
-      <h2 id="mkt-h">Market Watch</h2>
-      <p>Fifteen picks from the newest sets across seven games, sealed products and chase singles at today's market price (recent sold average, USD). Prices refresh every day and the picks rotate daily.</p>
+      <div class="sheet-title">
+  <h2 id="mkt-h">Market Watch</h2>
+  <p>Fifteen picks from the newest sets across seven games: sealed product and chase singles at today's market price (recent sold average, USD), refreshed daily.</p>
+      </div>
       <div class="chips" role="group" aria-label="Filter the list">{"".join(chips)}</div>
     </div>
     <div class="gd mw mkt-arcade">

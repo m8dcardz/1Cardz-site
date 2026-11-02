@@ -1,26 +1,91 @@
 {
  "date": "Sunday, November 1, 2026",
  "title": "Mudkip outbid your rent: the week in cards",
- "intro": "Every Sunday, Zia and Luna round up the week in trading cards in one email. Here's today's issue, the same one landing in inboxes. Like it? Sign up free in the box above and get next Sunday's first.",
+ "intro": "Every Sunday, Zia and Luna round up the week in cards in one email. Here's the latest issue. Like it? Sign up free in the box above.",
  "greeting": "Hey there,",
  "opening": "Zia and Luna here with the week in trading cards, sleeved and numbered. Grab a coffee (Zia) or a late-night tea (Luna) and let's flip.",
  "image": "img/clip11.jpg",
  "image_alt": "Zia reporting on Goldin's Pokémon 30th auction",
  "sections": [
-  {"h": "The big one", "p": [["Goldin's Pokémon 30th auction passed $28 million.", "The October 25 sale set 18 records, led by a PSA 10 Art Academy Mudkip promo at $4.88 million and a Trophy Pikachu over $3 million. Mudkip just outbid your rent.", "ICv2"]]},
-  {"h": "Top stories this week", "li": [
-   ["One Piece: Dracule Mihawk OP14-020 is banned.", "Alternate arts included, and it's in effect now. Sheathe the swords, rebuild the deck.", "One Piece Card Game, official"],
-   ["Pokémon TCG Pocket: Dual Fusion is out.", "Dual-type cards debut, led by Mega Mewtwo X ex and Mega Greninja ex.", "Pokémon, official"],
-   ["Lorcana: Into the Inkdark opens for preorder.", "Expected February 12, 2027, with the first serialized Illustrious cards.", "ICv2"],
-   ["Magic: Star Trek gets a Secret Lair Superdrop.", "\"Set Phasers to Superdrop\" brings five Star Trek drops, with preorders opening November 9. Meanwhile the Reality Fracture Secret Lair Bundle is delayed.", "ICv2"],
-   ["Yu-Gi-Oh!: Maze of Machines lands March 19, 2027.", "A 153-card booster set with Rampant Barrel Dragon, Slot Machine 777 and 10 new GX cards.", "ICv2"],
-   ["Pokémon: Mega Rayquaza ex Premium Tournament Collection.", "Out February 12, 2027, with four foil promos, eight booster packs and Dragon Shield sleeves.", "ICv2"],
-   ["Flesh and Blood: Smash Palace: Chorus of Steel is out.", "Ultimate Pit Fight multiplayer is back, with new heroes Zane and Killjoy.", "Flesh and Blood, official"]]},
-  {"h": "Coming up this week", "li": [
-   ["Tue, Nov 3:", "Doug Ferguson's Pokémon collection goes to auction, led by a jumbo graded card of Doug himself.", "Reported"],
-   ["Fri, Nov 6:", "Pokémon Mega Evolution: Delta Reign releases.", "Confirmed"],
-   ["Fri, Nov 6 to Thu, Nov 12:", "Magic | Star Trek prerelease weekend at your local store.", "Confirmed"],
-   ["Mon, Nov 9:", "\"Set Phasers to Superdrop\" Secret Lair preorders open.", "Confirmed"]]}
+  {
+   "h": "The big one",
+   "p": [
+    [
+     "Goldin's Pokémon 30th auction passed $28 million.",
+     "The October 25 sale set 18 records, led by a PSA 10 Art Academy Mudkip promo at $4.88 million and a Trophy Pikachu over $3 million. Mudkip just outbid your rent.",
+     "ICv2"
+    ]
+   ]
+  },
+  {
+   "h": "Top stories this week",
+   "li": [
+    [
+     "One Piece: Dracule Mihawk OP14-020 is banned.",
+     "Alternate arts included, and it's in effect now. Sheathe the swords, rebuild the deck.",
+     "One Piece Card Game, official"
+    ],
+    [
+     "Pokémon TCG Pocket: Dual Fusion is out.",
+     "Dual-type cards debut, led by Mega Mewtwo X ex and Mega Greninja ex.",
+     "Pokémon, official"
+    ],
+    [
+     "Lorcana: Into the Inkdark opens for preorder.",
+     "Expected February 12, 2027, with the first serialized Illustrious cards.",
+     "ICv2"
+    ],
+    [
+     "Magic: Star Trek gets a Secret Lair Superdrop.",
+     "\"Set Phasers to Superdrop\" brings five Star Trek drops, with preorders opening November 9. Meanwhile the Reality Fracture Secret Lair Bundle is delayed.",
+     "ICv2"
+    ],
+    [
+     "Yu-Gi-Oh!: Maze of Machines lands March 19, 2027.",
+     "A 153-card booster set with Rampant Barrel Dragon, Slot Machine 777 and 10 new GX cards.",
+     "ICv2"
+    ],
+    [
+     "Pokémon: Mega Rayquaza ex Premium Tournament Collection.",
+     "Out February 12, 2027, with four foil promos, eight booster packs and Dragon Shield sleeves.",
+     "ICv2"
+    ],
+    [
+     "Flesh and Blood: Smash Palace: Chorus of Steel is out.",
+     "Ultimate Pit Fight multiplayer is back, with new heroes Zane and Killjoy.",
+     "Flesh and Blood, official"
+    ]
+   ]
+  },
+  {
+   "h": "Coming up this week",
+   "li": [
+    [
+     "Tue, Nov 3:",
+     "Doug Ferguson's Pokémon collection goes to auction, led by a jumbo graded card of Doug himself.",
+     "Reported"
+    ],
+    [
+     "Fri, Nov 6:",
+     "Pokémon Mega Evolution: Delta Reign releases.",
+     "Confirmed"
+    ],
+    [
+     "Fri, Nov 6 to Thu, Nov 12:",
+     "Magic | Star Trek prerelease weekend at your local store.",
+     "Confirmed"
+    ],
+    [
+     "Mon, Nov 9:",
+     "\"Set Phasers to Superdrop\" Secret Lair preorders open.",
+     "Confirmed"
+    ]
+   ]
+  }
  ],
- "signoff": ["Shuffle up,", "Zia & Luna", "1Cardz.news"]
+ "signoff": [
+  "Shuffle up,",
+  "Zia & Luna",
+  "1Cardz.news"
+ ]
 }

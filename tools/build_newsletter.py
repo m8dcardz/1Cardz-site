@@ -41,8 +41,10 @@ for sec in iss['sections']:
     if sec.get('li'): _secs += '<ul>' + ''.join(f'<li>{_item(t)}</li>' for t in sec['li']) + '</ul>'
 issue_html = f"""  <section class="wrap nli" aria-labelledby="nli-h">
     <div class="sheet-head">
-      <h2 id="nli-h">This week's issue</h2>
-      <p>{e(iss['intro'])}</p>
+      <div class="sheet-title">
+  <h2 id="nli-h">This week's issue</h2>
+  <p>{e(iss['intro'])}</p>
+      </div>
     </div>
     <div class="gd">
       <div class="mw-top">
@@ -107,8 +109,10 @@ body = f"""{header}
 <main>
   <section class="wrap nlp" aria-labelledby="nl-h">
     <div class="sheet-head">
-      <h2 id="nl-h">Newsletter</h2>
-      <p>One email every Sunday with everything worth knowing in cards. Free, no spam, unsubscribe any time.</p>
+      <div class="sheet-title">
+  <h2 id="nl-h">Newsletter</h2>
+  <p>One email every Sunday with everything worth knowing in cards. Free, no spam, unsubscribe any time.</p>
+      </div>
     </div>
     <div class="gd">
       <div class="mw-top">

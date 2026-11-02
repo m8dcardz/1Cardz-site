@@ -127,8 +127,10 @@ body = f"""{header}
 <main>
   <section class="wrap mbp" aria-labelledby="mb-h">
     <div class="sheet-head">
-      <h2 id="mb-h">Message Board</h2>
-      <p>The arcade hall of fame. Post your best pulls, hot takes and shout-outs to Zia and Luna, and give your favourite posts a point.</p>
+      <div class="sheet-title">
+  <h2 id="mb-h">Message Board</h2>
+  <p>The arcade hall of fame. Post your best pulls, hot takes and shout-outs to Zia and Luna, and give your favourite posts a point.</p>
+      </div>
     </div>
     <div class="hall">
       <p class="hall-marquee">1CARDZ HALL OF FAME<small>MESSAGE BOARD</small></p>

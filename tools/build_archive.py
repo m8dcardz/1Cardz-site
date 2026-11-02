@@ -110,8 +110,10 @@ body = f'''{header}
 <main>
   <section class="wrap arch" id="set" aria-labelledby="set-h">
     <div class="sheet-head">
-      <h2 id="set-h">Library Archives</h2>
-      <p>Every clip from the 8 AM and 8 PM drops, {n} so far ({span}). Tap a clip to watch it big, or tap Sound to hear it here.</p>
+      <div class="sheet-title">
+  <h2 id="set-h">Library Archives</h2>
+  <p>Every clip from the 8 AM and 8 PM drops, {n} so far ({span}). Tap a clip to watch it big, or tap Sound to hear it here.</p>
+      </div>
       <div class="chips" role="group" aria-label="Filter posts">{"".join(chips)}</div>
     </div>
     <div class="page">
