@@ -1370,9 +1370,9 @@ body>header .cover .top-cover{z-index:0}
               <div class="art mic"><video class="loopv" src="img/loop-mic.mp4" data-poster="img/loop-mic.jpg" muted loop playsinline preload="none" aria-label="Close-up of the royal-blue news mic in use"></video></div>
               <div class="typeline"><span>Item · Mythic</span><i class="setsym unc" aria-hidden="true">◆</i></div>
               <div class="txt">
-                <p><b>Hot mic.</b> Mythic rarity: only one exists, and it has never been switched off. Not once. Not even for lunch.</p>
-                <p><b>Passive.</b> Hears every headline first. Keeps every spoiler. Will not be bribed with snacks.</p>
-                <p class="flav">Legend says it was pulled from a booster in 1999 and has been talking ever since.</p>
+                <p><b>Hot mic.</b> Can't be muted, paused or turned off. It goes live before the hosts do.</p>
+                <p><b>Mic check.</b> When a card drops, it says "one, two" twice. Once for each host.</p>
+                <p class="flav">Pulled once, never put down. Its only weakness: feedback.</p>
               </div>
               <footer class="foot"><span>1CZ · 011/101</span><span class="rar" title="Uncommon">◆</span></footer>
             </div>
@@ -1520,16 +1520,16 @@ body>header .cover .top-cover{z-index:0}
     });
   });
 
-  /* Next Drop card: the hover shine runs on its own all the time (Nov 2) */
-  (function(){const card=document.querySelector('.tcg[aria-label^="Next Drop"]');if(!card||reduce)return;
-    let hov=false,vis=true,t0=performance.now();
+  /* top 3 cards + Next Drop card: the hover shine runs on its own all the time (Nov 2) */
+  [...document.querySelectorAll('.pockets>.pocket:nth-child(-n+3) .tcg'),document.querySelector('.tcg[aria-label^="Next Drop"]')].forEach((card,ci)=>{if(!card||reduce)return;
+    let hov=false,vis=true,t0=performance.now()-ci*2700;
     card.addEventListener('pointerenter',()=>{hov=true});card.addEventListener('pointerleave',()=>{hov=false});
     if('IntersectionObserver' in window)new IntersectionObserver(es=>{vis=es[0].isIntersecting;if(vis)requestAnimationFrame(tick)}).observe(card);
     function tick(now){if(!vis)return;if(!hov){const t=(now-t0)/1000,px=.5+.38*Math.sin(t*.9),py=.5+.32*Math.sin(t*1.3+1.2);
       card.style.setProperty('--mx',(px*100).toFixed(1)+'%');card.style.setProperty('--my',(py*100).toFixed(1)+'%');
-      card.style.setProperty('--rx',((.5-py)*16).toFixed(2)+'deg');card.style.setProperty('--ry',((px-.5)*20).toFixed(2)+'deg');card.style.setProperty('--o','1')}
+      card.style.setProperty('--rx',((.5-py)*16).toFixed(2)+'deg');card.style.setProperty('--ry',((px-.5)*20).toFixed(2)+'deg');card.style.setProperty('--o',ci<3?'.6':'1')}
       requestAnimationFrame(tick)}
-    requestAnimationFrame(tick)})();
+    requestAnimationFrame(tick)});
 
   /* cover holo follows the pointer */
   document.querySelectorAll('.cover').forEach(cov=>{const ch=cov.querySelector('.cover-holo');
