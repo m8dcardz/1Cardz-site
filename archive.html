@@ -973,8 +973,9 @@ button.holo-btn{border:0;cursor:default}
    2. Wide screens (1000px and up): title on the left, intro on the right (max 58ch), bottoms lined up.
    3. Tablets and phones: title on top, intro underneath (max 60ch). They never overlap.
    4. Anything else in the heading (filters, tools) goes on its own row underneath.
-   5. Intro text: 3 lines or fewer on wide screens. */
-.sheet-head{display:grid;grid-template-columns:minmax(0,1fr);align-items:end;row-gap:10px;column-gap:clamp(24px,4vw,64px);margin-bottom:22px}
+   5. Intro text: 3 lines or fewer on wide screens.
+   6. 20px of space under every title, to whatever comes next (intro, filters or the box below). */
+.sheet-head{display:grid;grid-template-columns:minmax(0,1fr);align-items:end;row-gap:20px;column-gap:clamp(24px,4vw,64px);margin-bottom:20px}
 .sheet-head>:is(h1,h2){grid-column:1;white-space:nowrap;margin:0}
 .sheet-head>p{grid-column:1;max-width:60ch;margin:0}
 .sheet-head>:not(h1):not(h2):not(p){grid-column:1/-1;contain:inline-size}
