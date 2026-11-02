@@ -15,6 +15,7 @@ import html, json, pathlib, re, datetime
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE = 'https://1cardz.news/'
 OG_IMG = SITE + 'img/og-1cardz.jpg'
+GOOGLE_VERIFY = 'Qn2aus3288fPHtNy3uGq67lvfgMzjwkNacnNeF72rlY'  # Google Search Console (HTML tag method, Nov 3, 2026)
 SOCIAL = ['https://www.instagram.com/1cardz_news/', 'https://www.youtube.com/@1Cardzcom', 'https://www.tiktok.com/@1cardz.com']
 GAMES = 'Pokémon, Magic: The Gathering, One Piece, Yu-Gi-Oh!, Lorcana, Flesh and Blood and more'
 
@@ -87,6 +88,7 @@ def head_block(page, posts, news):
         '<!--seo-->',
         '<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">',
         '<meta name="theme-color" content="#0b1030">',
+        f'<meta name="google-site-verification" content="{GOOGLE_VERIFY}">',
         '<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">',
         '<link rel="icon" type="image/png" sizes="192x192" href="img/icon-192.png">',
         '<link rel="apple-touch-icon" href="img/apple-touch-icon.png">',
