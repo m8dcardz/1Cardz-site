@@ -42,7 +42,7 @@ span = f"{fd.strftime('%b')} {fd.day} – {ld.strftime('%b')} {ld.day}, {ld.year
 
 # top binder copy for the archive
 header = header.replace('<span>101 Cards</span>', f'<span>{n} posts</span>')
-header = re.sub(r'<p>The trading card game news channel.*?</p>',
+header = re.sub(r'<p class="home-intro">.*?</p>|<p>The trading card game news channel.*?</p>',
     '<p>The Library Archives. Every clip Zia and Luna have posted, sleeved and numbered, newest first.</p>', header, flags=re.S)
 header = header.replace('<a class="btn" href="#set" id="seeLatest">See the latest</a>', '<a class="btn" href="index.html">Back home</a>')
 

@@ -23,7 +23,7 @@ style = src[src.index('<style>'):src.index('</style>')+len('</style>')]
 hs = src.index('<header class="wrap cover-zone">'); header = src[hs:src.index('\n</header>', hs)+len('\n</header>')]
 fs = src.index('<footer class="wrap">'); footer = src[fs:src.index('\n</footer>', fs)+len('\n</footer>')]
 scrolltop = src[src.index('<script>'):src.index('</script>')+len('</script>')]
-header = re.sub(r'<p>The trading card game news channel.*?</p>',
+header = re.sub(r'<p class="home-intro">.*?</p>|<p>The trading card game news channel.*?</p>',
     '<p>News Headlines. Every story from the 8 AM and 8 PM drops, newest first, in plain text.</p>', header, flags=re.S)
 header = header.replace('<a class="btn" href="#set" id="seeLatest">See the latest</a>', '<a class="btn" href="index.html">Back home</a>')
 _k = arch.index('  /* binder videos: top first, bottom last */'); a_js = arch[arch.rindex('<script>', 0, _k):arch.index('</script>', _k)]
