@@ -47,10 +47,10 @@ def videos(only_clips=False):
     p = IMG / 'globe.mp4'                               # card-back globe: shown about 125x125
     if p.exists():
         w, _ = probe(p)
-        if w and w > 260: encode(p, 240, 30)
+        if w and w > 210: encode(p, 200, 33)
     for p in sorted(IMG.glob('cover-loop-v*.mp4')):     # top binder clip
         w, br = probe(p)
-        if w and br and br > 800_000: encode(p, w, 28)
+        if w and br and br > 650_000: encode(p, w, 30)
 
 def images(only_clips=False):
     from PIL import Image
@@ -76,6 +76,7 @@ def images(only_clips=False):
         else: tmp.unlink()
     webp(IMG / 'studio-card.webp', 78, 600, 120_000)                    # shown about 286 wide
     for name in ('zia.webp', 'luna.webp'): webp(IMG / name, 78, 640, 60_000)
+    for p in sorted((IMG / 'faces').glob('f*.webp')): webp(p, 62, 300, 15_000)   # Shuffle Machine faces
 
 def main():
     only = '--clips' in sys.argv
