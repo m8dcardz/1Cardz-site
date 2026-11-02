@@ -1980,7 +1980,9 @@ body>header .cover .top-cover{z-index:0}
     top.forEach((p,i)=>{const n=byWhen[p.when]||{},title=n.title||p.title,sum=n.summary||p.blurb,src=n.source||p.source,el=panels[i],tb=tabs[i];
       const key='hl-'+p.clip;
       el.querySelector('.hl-meta').innerHTML='<span class="hl-game">'+esc(p.game)+'</span><span>'+esc(fmt(p.when))+'</span><span>With '+esc(p.host)+'</span>';
-      el.querySelector('h3').textContent=title;
+      const h3=el.querySelector('h3');
+      if(n.title&&n.when){const sl=String(n.title).normalize('NFKD').replace(/[^\x00-\x7F]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,70).replace(/-+$/,'');
+        h3.innerHTML='<a href="news-'+esc(n.when.slice(0,10))+'-'+esc(sl)+'.html" style="color:inherit;text-decoration:none">'+esc(title)+'</a>'}else h3.textContent=title;
       el.querySelector('.hl-copy > p').textContent=sum;
       el.querySelector('.hl-src').textContent='Source · '+src;
       const w=el.querySelector('.hl-watch');w.dataset.card=key;

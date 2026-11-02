@@ -137,6 +137,8 @@ def main():
     pri = {'index.html': '1.0', 'news.html': '0.9', 'archive.html': '0.9', 'market.html': '0.8', 'newsletter.html': '0.6', 'board.html': '0.5'}
     urls = ''.join(f'  <url><loc>{SITE}{"" if pg == "index.html" else pg}</loc><lastmod>{last[pg]}</lastmod><changefreq>daily</changefreq><priority>{pri[pg]}</priority></url>\n'
                    for pg in PAGES if (ROOT / pg).exists())
+    for f in sorted(ROOT.glob('news-2*.html'), reverse=True):    # one page per story (built by build_news.py)
+        urls += f'  <url><loc>{SITE}{f.name}</loc><lastmod>{f.name[5:15]}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n'
     (ROOT / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + '</urlset>\n')
     (ROOT / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nDisallow: /tools/*.py\n\nSitemap: {SITE}sitemap.xml\n')
     print('seo: pages, sitemap.xml and robots.txt updated')
