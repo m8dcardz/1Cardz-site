@@ -148,14 +148,14 @@ story_css = """<style>
 .story-card.noclip{grid-template-columns:minmax(0,1fr)}
 .story-kicker{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#8c93ad;margin:0 0 12px}
 .story-kicker .mw-game{background:var(--c);color:#12162b}
-.story h1{font-family:var(--f-display);font-weight:800;font-stretch:80%;font-size:clamp(32px,4.6vw,58px);line-height:1;color:#fff;margin:0 0 20px;text-wrap:balance}
+.story h1{font-family:var(--f-display);font-weight:800;font-stretch:80%;font-size:clamp(32px,4.6vw,58px);line-height:1;color:#fff;margin:0 0 30px;text-wrap:balance}
 .story .lead{font-size:clamp(17px,1.7vw,21px);line-height:1.55;color:#dfe3f2;margin:0 0 14px;max-width:62ch}
 .story .quip{font-style:italic;color:#c9cfe4;margin:0 0 14px}
 .story .src{color:#8c93ad;font-size:14px;margin:0 0 18px}
 .story .actions{display:flex;flex-wrap:wrap;gap:10px}
 .story-video{width:100%;aspect-ratio:9/16;border-radius:14px;background:#05040b;box-shadow:0 0 0 1px rgba(124,243,255,.5),0 0 22px rgba(124,243,255,.25),0 18px 40px rgba(0,0,0,.45);object-fit:cover}
 .more{margin-top:clamp(22px,3vw,34px)}
-.more h2{font-family:var(--f-display);font-weight:800;font-stretch:80%;text-transform:uppercase;font-size:clamp(26px,3vw,36px);color:#fff;margin:0 0 20px}
+.more h2{font-family:var(--f-display);font-weight:800;font-stretch:80%;text-transform:uppercase;font-size:clamp(26px,3vw,36px);color:#fff;margin:0 0 30px}
 .more ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
 .more li a{display:block;height:100%;border-radius:12px;padding:14px 16px;text-decoration:none;color:#fff;background:linear-gradient(160deg,rgba(255,255,255,.09),rgba(255,255,255,.025));box-shadow:inset 0 0 0 1px rgba(255,255,255,.13)}
 .more li a:hover{box-shadow:inset 0 0 0 1px rgba(255,255,255,.3)}
