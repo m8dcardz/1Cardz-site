@@ -1934,5 +1934,45 @@ body>header .cover .top-cover{z-index:0}
 })();
 </script>
 
+<script id="hl-live">
+/* Headline box: always show the 3 newest clips + newest headlines (Nov 2). Reads the same files the daily runs update. */
+(function(){
+  const panels=[...document.querySelectorAll('.gd-stage .hl')],tabs=[...document.querySelectorAll('.hl-tab')];if(panels.length<3)return;
+  const esc=t=>String(t==null?'':t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const fmt=w=>{const m=/^(\d{4})-(\d\d)-(\d\d)T(\d\d):(\d\d)/.exec(w||'');if(!m)return'';let h=+m[4];const ap=h>=12?'PM':'AM';h=h%12||12;return M[+m[2]-1]+' '+(+m[3])+' · '+h+':'+m[5]+' '+ap+' HKT'};
+  const get=u=>fetch(u+'?v='+Math.floor(Date.now()/600000),{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject());
+  Promise.all([get('tools/posts.json'),get('tools/news.json').catch(()=>[])]).then(([posts,news])=>{
+    if(!Array.isArray(posts)||posts.length<3)return;
+    const byWhen={};(Array.isArray(news)?news:[]).forEach(n=>{if(n&&n.when)byWhen[n.when]=n});
+    const top=posts.slice().sort((a,b)=>String(b.when).localeCompare(String(a.when))).slice(0,3);
+    let box=document.getElementById('hlCards');if(!box){box=document.createElement('div');box.id='hlCards';box.hidden=true;document.body.appendChild(box)}
+    box.innerHTML='';
+    top.forEach((p,i)=>{const n=byWhen[p.when]||{},title=n.title||p.title,sum=n.summary||p.blurb,src=n.source||p.source,el=panels[i],tb=tabs[i];
+      const key='hl-'+p.clip;
+      el.querySelector('.hl-meta').innerHTML='<span class="hl-game">'+esc(p.game)+'</span><span>'+esc(fmt(p.when))+'</span><span>With '+esc(p.host)+'</span>';
+      el.querySelector('h3').textContent=title;
+      el.querySelector('.hl-copy > p').textContent=sum;
+      el.querySelector('.hl-src').textContent='Source · '+src;
+      const w=el.querySelector('.hl-watch');w.dataset.card=key;
+      const img=el.querySelector('.hl-shot img');img.src='img/'+p.clip+'.jpg';img.alt='Still from the '+p.game+' news clip with '+p.host;
+      const sh=el.querySelector('.hl-shot');if(sh)sh.setAttribute('aria-label','Play the clip: '+title);
+      if(tb){const sp=tb.querySelector('span');if(sp)sp.textContent=p.game}
+      /* a hidden clip card so "Watch the clip" opens this clip in the pop-up player */
+      const c=document.createElement('div');c.className='flip clipcard hl-live-card';c.setAttribute('aria-pressed','true');
+      c.dataset.key=key;c.innerHTML='<h3>'+esc(title)+'</h3><div class="art clip"><video data-full="img/'+esc(p.clip)+'.mp4" data-poster="img/'+esc(p.clip)+'.jpg" src="img/'+esc(p.clip)+'-s.mp4" preload="none" muted playsinline></video></div><div class="typeline"><span>'+esc(p.game)+' · '+esc(p.host)+'</span></div><div class="txt"><p>'+esc(p.quip||sum)+'</p></div>';
+      box.appendChild(c);
+    });
+    document.querySelectorAll('.hl-watch').forEach(b=>{if(b.dataset.live)return;b.dataset.live=1;b.addEventListener('click',e=>{
+      const k=b.dataset.card;if(!k||k.indexOf('hl-')!==0)return;const card=[...box.querySelectorAll('.flip')].find(c=>c.dataset.key===k);
+      if(!card||!window.czClipPop)return;e.stopImmediatePropagation();window.czClipPop(card)},true)});
+    const items=(Array.isArray(news)?news:[]).slice().sort((a,b)=>String(b.when).localeCompare(String(a.when))).slice(0,8);
+    const tr=document.getElementById('lcdTrack');
+    if(tr&&items.length){const run=items.map(n=>'<span class="lcd-item"><b>'+esc(String(n.game||'').toUpperCase())+'</b> '+esc(n.title)+'</span><span class="lcd-sep" aria-hidden="true">◆</span>').join('');
+      tr.innerHTML='<div class="lcd-run">'+run+'</div><div class="lcd-run" aria-hidden="true">'+run+'</div>'}
+  }).catch(()=>{});
+})();
+</script>
+
 </body>
 </html>
