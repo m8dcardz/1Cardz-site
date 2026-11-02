@@ -889,6 +889,7 @@ body>footer .cover .cover-video,body>footer .cover .cover-holo,body>footer .cove
 #set-h{font-weight:500;letter-spacing:.01em}
 @media (prefers-reduced-motion:reduce){
   .cover-video{display:none}
+  .cover-video.cover-still{display:block}
   *,*::before,*::after{animation:none!important;transition:none!important}
 }
 /* headline rotation: slide/fade transition, green glow on watch arrow, newsletter button matches input */
@@ -1200,7 +1201,7 @@ body>header .cover .top-cover{z-index:0}
 </section>
 <footer class="wrap">
   <div class="cover cover-back">
-    <video class="cover-video lazy-cover" data-src="img/cover-holo-loop.mp4" data-poster="img/cover-holo-poster.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
+    <img class="cover-video cover-still" src="img/footer-tap.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true">
     <div class="cover-holo" aria-hidden="true"></div>
     <div class="cover-gloss" aria-hidden="true"></div>
     <div class="stitch" aria-hidden="true"></div>
