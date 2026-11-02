@@ -968,10 +968,17 @@ button.holo-btn{border:0;cursor:default}
 /* top binder: fixed size on every page (the intro text always takes 3 lines, so shorter text can't shrink the binder) */
 @media (min-width:561px){body>header .cover .copy p{height:calc(3 * 1.2em);line-height:1.2;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
   body>header .cover .row{flex-wrap:nowrap}body>header .cover .row .btn{white-space:nowrap;min-width:163px;justify-content:center;text-align:center}}
-/* inner pages: title + intro side by side in a fixed grid, so nothing jumps when the fonts load */
-@media (min-width:800px){.arch .sheet-head,.news .sheet-head,.mkt .sheet-head,.nlp .sheet-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,62ch);align-items:end;column-gap:clamp(18px,3vw,48px)}
-  :is(.arch,.news,.mkt,.nlp) .sheet-head>h2{grid-column:1}:is(.arch,.news,.mkt,.nlp) .sheet-head>p{grid-column:2}
-  :is(.arch,.news,.mkt,.nlp) .sheet-head>:not(h2):not(p){grid-column:1/-1}}
+/* PAGE HEADING RULES (Nov 2) - every page's title + intro block (.sheet-head) follows these:
+   1. Title: one line, never wraps (uppercase display font, 40-76px).
+   2. Wide screens (1000px and up): title on the left, intro on the right (max 58ch), bottoms lined up.
+   3. Tablets and phones: title on top, intro underneath (max 60ch). They never overlap.
+   4. Anything else in the heading (filters, tools) goes on its own row underneath.
+   5. Intro text: 3 lines or fewer on wide screens. */
+.sheet-head{display:grid;grid-template-columns:minmax(0,1fr);align-items:end;row-gap:10px;column-gap:clamp(24px,4vw,64px);margin-bottom:22px}
+.sheet-head>h2{grid-column:1;white-space:nowrap;margin:0}
+.sheet-head>p{grid-column:1;max-width:60ch;margin:0}
+.sheet-head>:not(h2):not(p){grid-column:1/-1;contain:inline-size}
+@media (min-width:1000px){.sheet-head{grid-template-columns:max-content minmax(0,58ch);justify-content:space-between}.sheet-head>p{grid-column:2;width:58ch;max-width:100%}}
 /* while the fonts load, keep page titles on one line so the page doesn't jump */
 .fl .sheet-head h2{white-space:nowrap}
 /* home binder sheet: cards stop growing at 300px wide on big screens */
@@ -991,9 +998,8 @@ body>header .cover .top-cover{z-index:0}
 .snd.ytwatch{text-decoration:none;display:inline-flex;align-items:center;gap:4px}
 .art.ytart::after{content:"";position:absolute;top:0;bottom:0;left:50%;width:calc(62cqw * 9 / 16);transform:translateX(-50%);background:var(--p) center/cover no-repeat;z-index:1}
 /* archive page */
-.arch .pockets{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
-@media (max-width:900px){.arch .pockets{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}}
-@media (max-width:560px){.arch .pockets{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}}
+/* Library: 3 cards across on every screen, each at most 300px wide (Nov 2) */
+.arch .pockets{grid-template-columns:repeat(3,minmax(0,300px));justify-content:center}
 .arch .pocket[hidden]{display:none}
 .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;flex-basis:100%}
 .chip{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#c9cfe4;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:8px 14px;cursor:pointer}
@@ -1122,9 +1128,6 @@ body>header .cover .top-cover{z-index:0}
       <h2 id="set-h">Library Archives</h2>
       <p>Every clip from the 8 AM and 8 PM drops, 27 so far (Oct 21 – Nov 2, 2026). Tap a clip to watch it big, or tap Sound to hear it here.</p>
       <div class="chips" role="group" aria-label="Filter posts"><button type="button" class="chip mono" data-f="all" aria-pressed="true">All</button><button type="button" class="chip mono" data-f="host:Zia" aria-pressed="false">Zia</button><button type="button" class="chip mono" data-f="host:Luna" aria-pressed="false">Luna</button><button type="button" class="chip mono" data-f="host:Zia &amp; Luna" aria-pressed="false">Zia &amp; Luna</button><span class="chip-sep" aria-hidden="true"></span><button type="button" class="chip mono" data-f="game:Dragon Ball" aria-pressed="false">Dragon Ball</button><button type="button" class="chip mono" data-f="game:FaB" aria-pressed="false">FaB</button><button type="button" class="chip mono" data-f="game:Flesh and Blood" aria-pressed="false">Flesh and Blood</button><button type="button" class="chip mono" data-f="game:Gundam" aria-pressed="false">Gundam</button><button type="button" class="chip mono" data-f="game:Lorcana" aria-pressed="false">Lorcana</button><button type="button" class="chip mono" data-f="game:Magic" aria-pressed="false">Magic</button><button type="button" class="chip mono" data-f="game:One Piece" aria-pressed="false">One Piece</button><button type="button" class="chip mono" data-f="game:Pokémon" aria-pressed="false">Pokémon</button><button type="button" class="chip mono" data-f="game:Riftbound" aria-pressed="false">Riftbound</button><button type="button" class="chip mono" data-f="game:TCG" aria-pressed="false">TCG</button><button type="button" class="chip mono" data-f="game:Yu-Gi-Oh!" aria-pressed="false">Yu-Gi-Oh!</button></div>
-      <div class="sheet-tools">
-        <button class="btn" id="flipAll" type="button" aria-pressed="true">Turn all face down</button>
-      </div>
     </div>
     <div class="page">
       <div class="pockets" id="archGrid">
@@ -1693,10 +1696,10 @@ body>header .cover .top-cover{z-index:0}
   const flips=[...document.querySelectorAll('.pockets .flip')],all=document.getElementById('flipAll');
   const shownFlips=()=>flips.filter(f=>!f.closest('.pocket').hidden);
   const setF=(el,on)=>el.setAttribute('aria-pressed',on?'true':'false');
-  const sync=()=>{const s=shownFlips(),up=s.length&&s.every(f=>f.getAttribute('aria-pressed')==='true');all.textContent=up?'Turn all face down':'Flip all cards';all.setAttribute('aria-pressed',up?'true':'false')};
+  const sync=()=>{if(!all)return;const s=shownFlips(),up=s.length&&s.every(f=>f.getAttribute('aria-pressed')==='true');all.textContent=up?'Turn all face down':'Flip all cards';all.setAttribute('aria-pressed',up?'true':'false')};
   flips.forEach(f=>{f.addEventListener('click',()=>{setF(f,f.getAttribute('aria-pressed')!=='true');sync()});
     f.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();f.click()}})});
-  all.addEventListener('click',()=>{const on=all.getAttribute('aria-pressed')!=='true',s=shownFlips();
+  if(all)all.addEventListener('click',()=>{const on=all.getAttribute('aria-pressed')!=='true',s=shownFlips();
     s.forEach((f,i)=>setTimeout(()=>{setF(f,on);if(i===s.length-1)sync()},reduce?0:i*90))});
 
   /* filters */
@@ -1787,6 +1790,7 @@ body>header .cover .top-cover{z-index:0}
 <style>
 .flip[aria-pressed="true"] .art.clip{cursor:zoom-in}
 .flip[aria-pressed="true"] .art.clip::after{content:"⤢ Tap to watch";position:absolute;left:50%;bottom:8px;transform:translateX(-50%);z-index:3;font-family:"DM Mono",ui-monospace,monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:rgba(10,15,38,.72);border:1px solid rgba(124,243,255,.45);border-radius:999px;padding:4px 10px;white-space:nowrap;pointer-events:none;box-shadow:0 0 10px rgba(124,243,255,.35)}
+@media (max-width:560px){.arch .flip[aria-pressed="true"] .art.clip::after{display:none}}
 .cz-pop{position:fixed;inset:0;z-index:10000;display:grid;place-items:center;padding:max(14px,env(safe-area-inset-top)) max(14px,env(safe-area-inset-right)) max(14px,env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left));
   background:radial-gradient(60% 50% at 50% 40%,rgba(43,63,128,.27),rgba(5,8,20,.46));-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);opacity:0;transition:opacity .2s}
 .cz-pop.on{opacity:1}

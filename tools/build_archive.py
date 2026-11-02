@@ -91,9 +91,8 @@ extra_css = '''<style>
 .snd.ytwatch{text-decoration:none;display:inline-flex;align-items:center;gap:4px}
 .art.ytart::after{content:"";position:absolute;top:0;bottom:0;left:50%;width:calc(62cqw * 9 / 16);transform:translateX(-50%);background:var(--p) center/cover no-repeat;z-index:1}
 /* archive page */
-.arch .pockets{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
-@media (max-width:900px){.arch .pockets{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}}
-@media (max-width:560px){.arch .pockets{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}}
+/* Library: 3 cards across on every screen, each at most 300px wide (Nov 2) */
+.arch .pockets{grid-template-columns:repeat(3,minmax(0,300px));justify-content:center}
 .arch .pocket[hidden]{display:none}
 .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;flex-basis:100%}
 .chip{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#c9cfe4;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:8px 14px;cursor:pointer}
@@ -114,9 +113,6 @@ body = f'''{header}
       <h2 id="set-h">Library Archives</h2>
       <p>Every clip from the 8 AM and 8 PM drops, {n} so far ({span}). Tap a clip to watch it big, or tap Sound to hear it here.</p>
       <div class="chips" role="group" aria-label="Filter posts">{"".join(chips)}</div>
-      <div class="sheet-tools">
-        <button class="btn" id="flipAll" type="button" aria-pressed="true">Turn all face down</button>
-      </div>
     </div>
     <div class="page">
       <div class="pockets" id="archGrid">
@@ -151,10 +147,10 @@ js = r'''<script>
   const flips=[...document.querySelectorAll('.pockets .flip')],all=document.getElementById('flipAll');
   const shownFlips=()=>flips.filter(f=>!f.closest('.pocket').hidden);
   const setF=(el,on)=>el.setAttribute('aria-pressed',on?'true':'false');
-  const sync=()=>{const s=shownFlips(),up=s.length&&s.every(f=>f.getAttribute('aria-pressed')==='true');all.textContent=up?'Turn all face down':'Flip all cards';all.setAttribute('aria-pressed',up?'true':'false')};
+  const sync=()=>{if(!all)return;const s=shownFlips(),up=s.length&&s.every(f=>f.getAttribute('aria-pressed')==='true');all.textContent=up?'Turn all face down':'Flip all cards';all.setAttribute('aria-pressed',up?'true':'false')};
   flips.forEach(f=>{f.addEventListener('click',()=>{setF(f,f.getAttribute('aria-pressed')!=='true');sync()});
     f.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();f.click()}})});
-  all.addEventListener('click',()=>{const on=all.getAttribute('aria-pressed')!=='true',s=shownFlips();
+  if(all)all.addEventListener('click',()=>{const on=all.getAttribute('aria-pressed')!=='true',s=shownFlips();
     s.forEach((f,i)=>setTimeout(()=>{setF(f,on);if(i===s.length-1)sync()},reduce?0:i*90))});
 
   /* filters */

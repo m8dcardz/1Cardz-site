@@ -2,6 +2,7 @@
 <style>
 .flip[aria-pressed="true"] .art.clip{cursor:zoom-in}
 .flip[aria-pressed="true"] .art.clip::after{content:"⤢ Tap to watch";position:absolute;left:50%;bottom:8px;transform:translateX(-50%);z-index:3;font-family:"DM Mono",ui-monospace,monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:rgba(10,15,38,.72);border:1px solid rgba(124,243,255,.45);border-radius:999px;padding:4px 10px;white-space:nowrap;pointer-events:none;box-shadow:0 0 10px rgba(124,243,255,.35)}
+@media (max-width:560px){.arch .flip[aria-pressed="true"] .art.clip::after{display:none}}
 .cz-pop{position:fixed;inset:0;z-index:10000;display:grid;place-items:center;padding:max(14px,env(safe-area-inset-top)) max(14px,env(safe-area-inset-right)) max(14px,env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left));
   background:radial-gradient(60% 50% at 50% 40%,rgba(43,63,128,.27),rgba(5,8,20,.46));-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);opacity:0;transition:opacity .2s}
 .cz-pop.on{opacity:1}
