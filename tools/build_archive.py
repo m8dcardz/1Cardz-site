@@ -4,6 +4,12 @@ import json, sys
 sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
 import site_parts, re, html, datetime, pathlib
 root = pathlib.Path(__file__).resolve().parent.parent
+# shrink any new Library clip previews/posters first (skips files already optimised; no-op without ffmpeg)
+try:
+    import subprocess
+    subprocess.run([sys.executable, str(root/'tools'/'optimize_media.py'), '--clips'], timeout=900)
+except Exception as _e:
+    print('optimize_media skipped:', _e)
 src = (root/'index.html').read_text()
 # index.html may be the standalone build (with its own doctype/head wrapper): strip it back to the fragment
 if src.lstrip().lower().startswith('<!doctype'):
