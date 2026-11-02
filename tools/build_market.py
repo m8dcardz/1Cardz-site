@@ -35,7 +35,7 @@ games = sorted({i['game'] for i in pool})
 
 extra_css = '''<style>
 /* market page */
-.mkt .sheet-head p{max-width:60ch}
+/* intro width comes from the page heading rules in index.html */
 .mkt .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;flex-basis:100%}
 .chip{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#c9cfe4;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:8px 14px;cursor:pointer}
 .chip:hover{border-color:rgba(233,196,106,.6)}
