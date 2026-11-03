@@ -982,10 +982,11 @@ button.holo-btn{border:0;cursor:default}
   background:transparent;box-shadow:none}
 .sheet-title>:is(h1,h2){white-space:nowrap;margin:0;align-self:end}
 .sheet-title>p{margin:0;max-width:60ch;line-height:1.65;align-self:start;overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4}
-/* phones (Nov 3): tighter - no box padding, 10px title to intro, natural intro height, 16px between box, filters and content */
+/* phones (Nov 3): tighter, but the same invisible fixed box on every page - no padding, 10px title to intro, fixed 3-line intro area, 16px between box, filters and content */
 @media (max-width:560px){.navbar-wrap+main{padding-top:0}
   .sheet-head{row-gap:16px;margin-bottom:16px}
-  .sheet-title{padding:0;row-gap:10px;grid-template-rows:auto auto}}
+  .sheet-title{padding:0;row-gap:10px;grid-template-rows:auto calc(1.65em * 3)}
+  .sheet-title>p{-webkit-line-clamp:3}}
 @media (min-width:1000px){.sheet-title{grid-template-columns:max-content minmax(0,58ch);grid-template-rows:calc(1.65em * 3);column-gap:clamp(24px,4vw,64px);justify-content:space-between}
   .sheet-title>p{width:58ch;max-width:100%;align-self:end;-webkit-line-clamp:3}}
 /* while the fonts load, keep page titles on one line so the page doesn't jump */

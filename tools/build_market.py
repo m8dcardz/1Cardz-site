@@ -83,7 +83,7 @@ body = f'''{header}
     <div class="sheet-head">
       <div class="sheet-title">
   <h2 id="mkt-h">Market Watch</h2>
-  <p>Fifteen picks from the newest sets across seven games: sealed product and chase singles at today's market price (recent sold average, USD), refreshed daily.</p>
+  <p>Fifteen picks from the newest sets across seven games: sealed boxes and chase singles at today's price, refreshed daily.</p>
       </div>
       <div class="chips" role="group" aria-label="Filter the list">{"".join(chips)}</div>
     </div>
