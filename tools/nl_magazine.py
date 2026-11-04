@@ -185,6 +185,8 @@ CSS = r'''
 .mz{position:relative;z-index:4;padding:clamp(16px,3vw,32px) 0 0}
 .mz-book{display:grid;grid-template-columns:minmax(0,1fr);max-width:440px;margin:0 auto;border-radius:6px;overflow:hidden;box-shadow:0 26px 54px rgba(0,0,0,.55)}
 .mz-book.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr);max-width:880px}
+.mz-book.mini .mz-page{cursor:zoom-in}.mz-book.zoom .mz-page{cursor:zoom-out}
+@media (max-width:759px){.mz{padding-left:22px;padding-right:22px}}
 .mz-ctl{display:flex;justify-content:center;align-items:center;gap:14px;margin-top:16px}
 .mz-ctl button{font:inherit;font-size:22px;width:44px;height:44px;border-radius:50%;border:0;background:var(--foil,#e9c46a);color:#12162b;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.35)}
 .mz-ctl button:disabled{opacity:.3;cursor:default}
@@ -284,15 +286,20 @@ JS = r'''<script id="mz-js">
   const total=pgs.length+1+(back?1:0);
   const two=()=>matchMedia('(min-width:760px)').matches;
   /* views: cover alone, inside pages in spreads (or singles on phones), back page alone */
-  function views(){const v=[{h:cover,first:1,n:1,cov:1}],st=two()?2:1;for(let i=0;i<pgs.length;i+=st)v.push({h:pgs.slice(i,i+st).join(''),first:i+2,n:Math.min(st,pgs.length-i)});
+  function views(){const v=[{h:cover,first:1,n:1,cov:1}],st=2;for(let i=0;i<pgs.length;i+=st)v.push({h:pgs.slice(i,i+st).join(''),first:i+2,n:Math.min(st,pgs.length-i)});
     if(back)v.push({h:back,first:pgs.length+2,n:1});return v}
-  let idx=0,firstShown=1;
+  let idx=0,firstShown=1,zoom=null;   /* phones: spreads shown small; tap a page to open it full size (zoom = 0 left, 1 right) */
   function view(){const v=views();idx=Math.max(0,Math.min(idx,v.length-1));const c=v[idx];firstShown=c.first;
-    book.classList.toggle('two',c.n===2);book.innerHTML=c.h;
-    no.textContent=c.cov?'Cover · tap to open':(c.n===2?`Pages ${c.first}–${c.first+1} of ${total}`:(idx===v.length-1&&back?'Back cover':`Page ${c.first} of ${total}`));
-    prev.disabled=idx===0;next.disabled=idx===v.length-1;
+    if(two()||c.n!==2)zoom=null;
+    const z=zoom!==null,h=z?pgs[c.first-2+zoom]:c.h,n=z?1:c.n;
+    book.classList.toggle('two',n===2);book.classList.toggle('mini',n===2&&!two());book.classList.toggle('zoom',z);book.innerHTML=h;
+    no.textContent=c.cov?'Cover · tap to open':z?`Page ${c.first+zoom} · tap to close`:(c.n===2?(two()?`Pages ${c.first}–${c.first+1} of ${total}`:`Pages ${c.first}–${c.first+1} · tap a page`):(idx===v.length-1&&back?'Back cover':`Page ${c.first} of ${total}`));
+    prev.disabled=idx===0&&!z;next.disabled=idx===v.length-1&&!z;
     if(c.cov){const el=book.querySelector('.mz-cover');if(el)el.addEventListener('click',()=>go(1))}}
-  function go(d){idx+=d>0?1:-1;view()}
+  function go(d){if(zoom!==null){zoom+=d>0?1:-1;if(zoom>1){idx++;zoom=0}else if(zoom<0){idx--;zoom=1}}else idx+=d>0?1:-1;view()}
+  book.addEventListener('click',e=>{if(two())return;const c=views()[idx];const pg=e.target.closest('.mz-page');if(!pg||c.cov||c.n!==2)return;
+    if(zoom===null){e.preventDefault();zoom=[...book.children].indexOf(pg);if(zoom<0)zoom=null;view();book.scrollIntoView({block:'nearest'})}
+    else if(!e.target.closest('a')){zoom=null;view()}});
   addEventListener('resize',()=>{const v=views();idx=v.findIndex(x=>x.first<=firstShown&&firstShown<x.first+x.n);if(idx<0)idx=0;view()});
   prev.addEventListener('click',()=>go(-1));next.addEventListener('click',()=>go(1));
   addEventListener('keydown',e=>{const r=book.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1)});
