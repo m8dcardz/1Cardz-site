@@ -257,7 +257,7 @@ CSS = r'''
 .mz-cover .mast{position:absolute;left:4cqw;right:4cqw;top:4cqw;z-index:2;display:grid;justify-items:center;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:22cqw;line-height:.9;letter-spacing:-.02em;text-align:center}
 .mz-cover .mast>span{grid-area:1/1}
 .mz-cover .mast .sh{color:transparent;text-shadow:0 .5cqw 1.4cqw rgba(0,0,0,.55)}
-.mz-cover .mast .sv{background:linear-gradient(180deg,#ffffff 0%,#e4e8ee 22%,#9aa3b2 46%,#f4f6f9 54%,#b9c0cb 72%,#6e7686 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#d9dde4}
+.mz-cover .mast .sv{background:linear-gradient(180deg,#ffffff 0%,#f1f3f6 22%,#c9ced8 46%,#ffffff 54%,#dde1e8 72%,#aeb5c1 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#d9dde4}
 .mz-cover .mast .ho{background:linear-gradient(105deg,transparent 0 30%,rgba(255,92,200,.85) 36%,rgba(255,226,92,.85) 41%,rgba(92,255,170,.85) 46%,rgba(92,200,255,.85) 51%,rgba(170,120,255,.85) 56%,transparent 62% 100%);
   background-size:300% 100%;background-repeat:no-repeat;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
   will-change:background-position;transform:translateZ(0);animation:mzholo 3.2s linear infinite}
