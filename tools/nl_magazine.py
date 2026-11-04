@@ -53,40 +53,95 @@ def render(iss, root):
   <div class="bar"><i></i>1CZ-{e(no)}</div>
 </div>'''
 
-    pages = []
-    toc = [f'<li><div><b>{e(big[0].rstrip("."))}</b><span>The big one · p.3</span></div></li>']
-    per = 4
-    for k, t in enumerate(tops):
-        g, ti = game_title(t[0])
-        toc.append(f'<li><div><b>{e(ti)}</b><span>{e(g)} · p.{5 + k // per}</span></div></li>')
-    last = 5 + max(0, (len(tops) - 1) // per) + 1
-    if cal:
-        toc.append(f'<li><div><b>The week ahead</b><span>p.{last}</span></div></li>')
+    import datetime, re as _re
+    try:
+        idate = datetime.datetime.strptime(iss.get('date', ''), '%A, %B %d, %Y').date()
+    except Exception:
+        idate = datetime.date.today()
+    wk0 = (idate - datetime.timedelta(days=6)).isoformat(); wk1 = idate.isoformat()
+    try:
+        posts = [x for x in json.loads((root / 'tools' / 'posts.json').read_text()) if wk0 <= x.get('when', '')[:10] <= wk1]
+    except Exception:
+        posts = []
+    try:
+        market = json.loads((root / 'data' / 'market.json').read_text()).get('items', [])
+    except Exception:
+        market = []
+
     run = lambda a, b: f'<div class="run"><span>{e(a)}</span><span>{e(b)}</span></div>'
-    pages.append(f'<div class="mz-page">{run("1Cardz Weekly", "No. " + no)}<p class="kick">In this issue</p><h3>Contents</h3><ol class="toc">{"".join(toc)}</ol><div class="folio">2</div></div>')
+    body = []          # (key, toc title, toc sub, html-without-folio)
+    big_t = big[0].rstrip('.')
+    note = iss.get('editors_note') or []
+    if note:
+        body.append(('note', 'A letter from Zia & Luna', 'From the hosts', f"""{run('From the hosts', 'Issue ' + no)}<p class="kick">Welcome</p><h3>A letter from Zia &amp; Luna</h3>
+<div class="hosts"><img src="img/zia.webp" alt="Zia" loading="lazy"><img src="img/luna.webp" alt="Luna" loading="lazy"></div>
+{''.join(f'<p{" class=first" if k == 0 else ""}>{e(t)}</p>' for k, t in enumerate(note))}<p class="sig">Zia &amp; Luna</p>""" + (f'<div class="strip"><div><b>{len(posts)}</b><span>clips this week</span></div><div><b>{len({x["game"] for x in posts})}</b><span>games covered</span></div><div><b>2</b><span>drops a day</span></div></div>' if posts else '')))
     pull = f'<div class="pull">"{e(iss["pull"])}"</div>' if iss.get('pull') else ''
-    pages.append(f'''<div class="mz-page">{run("The big one", big[2])}<p class="kick">Cover story</p><h3>{e(big[0].rstrip("."))}</h3>
-<p class="first">{e(iss.get("opening", ""))}</p><p>{e(big[1])}</p>{pull}<div class="folio">3</div></div>''')
+    body.append(('big', big_t, 'Cover story', f"""{run('Cover story', big[2])}<p class="kick">The big one</p><h3>{e(big_t)}</h3>
+<p class="first">{e(iss.get('opening', ''))}</p><p>{e(big[1])}</p>{pull}<p class="src">Source: {e(big[2])}</p>""" + (f'<a class="watch" href="archive.html"><img src="{e(_img(root, iss.get("cover_clip")))}" alt="" loading="lazy"><span><b>Watch the report</b>The 1Cardz clip on this story is in the Library. ▶</span></a>' if _img(root, iss.get('cover_clip')) else '')))
     f = iss.get('feature') or {}
-    fimg = _img(root, f.get('clip'))
-    if fimg:
-        pages.append(f'<div class="mz-page mz-full"><img src="{e(fimg)}" alt="" loading="lazy"><div class="cap"><b>{e(f.get("title", ""))}</b>{e(f.get("text", ""))}</div><div class="folio light">4</div></div>')
-    else:
-        pages.append(f'<div class="mz-page mz-full"><img src="{e(cover_img)}" alt="" loading="lazy"><div class="folio light">4</div></div>')
+    fimg = _img(root, f.get('clip')) or cover_img
+    body.append(('feat', f.get('title') or 'Photo feature', 'Feature', f'<img class="bg" src="{e(fimg)}" alt="" loading="lazy"><div class="cap"><span class="kick">Feature</span><b>{e(f.get("title", ""))}</b>{e(f.get("text", ""))}</div>'))
+    per = 2
+    npages = (len(tops) + per - 1) // per
     for k in range(0, len(tops), per):
         cards = ''
-        for j, t in enumerate(tops[k:k + per]):
+        for jx, t in enumerate(tops[k:k + per]):
             g, ti = game_title(t[0])
-            im = _img(root, tclips[k + j]) if k + j < len(tclips) else ''
-            cards += (f'<div class="st">{f"<img src={chr(34)}{e(im)}{chr(34)} alt={chr(34)}{chr(34)} loading={chr(34)}lazy{chr(34)}>" if im else ""}'
-                      f'<span class="g">{e(g)}</span><b>{e(ti)}</b><p>{e(t[1])}</p><small>{e(t[2])}</small></div>')
-        n = k // per
-        pages.append(f'<div class="mz-page">{run("Top stories", f"{n + 1} of {(len(tops) + per - 1) // per}")}<div class="stories">{cards}</div><div class="folio">{5 + n}</div></div>')
+            im = _img(root, tclips[k + jx]) if k + jx < len(tclips) else ''
+            cards += (f'<div class="st">' + (f'<img src="{e(im)}" alt="" loading="lazy">' if im else '') +
+                      f'<span class="g">{e(g)}</span><b>{e(ti)}</b><p>{e(t[1])}</p><small>Source: {e(t[2])}</small></div>')
+        firsts = ' & '.join(game_title(t[0])[1] for t in tops[k:k + per])
+        if len(firsts) > 46: firsts = ' · '.join(dict.fromkeys(game_title(t[0])[0] or game_title(t[0])[1] for t in tops[k:k + per]))
+        body.append(('top', firsts, 'Top stories', f'{run("Top stories", f"{k // per + 1} of {npages}")}<div class="stories">{cards}</div>'))
+    nums = iss.get('numbers') or []
+    if posts:
+        games = sorted({x['game'] for x in posts})
+        nums = nums + [[str(len(posts)), 'news clips from Zia & Luna this week'], [str(len(games)), 'games covered on the channel']]
+    if nums:
+        body.append(('nums', 'By the numbers', 'The week in stats', f"""{run('By the numbers', short)}<p class="kick">The week in stats</p><h3>By the numbers</h3>
+<div class="nums">{''.join(f'<div><b>{e(a)}</b><span>{e(b)}</span></div>' for a, b in nums[:8])}</div>"""))
+    def chg(it):
+        h = [x for x in it.get('history', []) if x[0] <= wk1]
+        if len(h) < 2 or not h[0][1]:
+            return None
+        return h[-1][1], (h[-1][1] - h[0][1]) / h[0][1] * 100
+    mv = [(it, chg(it)) for it in market if it.get('price') is not None]
+    mv = sorted([x for x in mv if x[1]], key=lambda x: -abs(x[1][1]))[:5]
+    if mv:
+        rows = ''.join(f'<div><span class="g">{e(it["game"])}</span><b>{e(it["name"])}</b><em>${c[0]:,.2f}</em><i class="{"up" if c[1] > 0 else "down"}">{"▲" if c[1] > 0 else "▼"} {abs(c[1]):.1f}%</i></div>' for it, c in mv)
+        body.append(('mkt', 'Market Watch: the movers', 'Prices', f"""{run('Market Watch', 'Week to ' + short)}<p class="kick">Prices</p><h3>The week's movers</h3>
+<div class="mv">{rows}</div><p class="note">Recent sold averages in USD, change over the week. Daily prices on the <a href="market.html">Market</a> page.</p>"""))
+    q = [x for x in posts if x.get('quip')]
+    if q:
+        quips = ''.join(f'<blockquote><p>"{e(x["quip"])}"</p><cite>{e(x["host"])} on {e(x["title"])}</cite></blockquote>' for x in q[-6:])
+        body.append(('quips', 'Overheard in the studio', 'The best lines', f"""{run('Overheard in the studio', 'The best lines')}<p class="kick">Said on air</p><h3>Overheard in the studio</h3><div class="quips">{quips}</div>"""))
     if cal:
         rows = ''.join(f'<div><b>{e(c[0].rstrip(":"))}</b><span>{e(c[1])}<i>{e(c[2])}</i></span></div>' for c in cal)
-        sign = '<br>'.join(e(x) for x in iss.get('signoff', [])[:2])
-        pages.append(f'<div class="mz-page">{run("The week ahead", short)}<p class="kick">Mark your calendar</p><h3>The week ahead</h3><div class="cal">{rows}</div>'
-                     f'<div class="sign">{sign}</div><a class="cta" href="#newsletter">Get it every Sunday · free</a><div class="folio">{last}</div></div>')
+        body.append(('cal', 'The week ahead', 'Calendar', f"""{run('The week ahead', 'Next 7 days')}<p class="kick">Mark your calendar</p><h3>The week ahead</h3><div class="cal">{rows}</div>"""))
+    sign = '<br>'.join(e(x) for x in iss.get('signoff', [])[:2])
+    body.append(('back', 'Never miss an issue', 'Back page', f"""<p class="kick">See you next Sunday</p><h3>Never miss an issue</h3>
+<p>One free email every Sunday with the week in cards, the market movers and what's coming up. New clips every day at 8 AM (Zia) and 8 PM (Luna), Hong Kong time.</p>
+<div class="links"><a href="#newsletter">Sign up free</a><a href="archive.html">Watch the clips</a><a href="news.html">All headlines</a></div>
+<div class="sign">{sign}</div><p class="small">1Cardz.news · Instagram @1cardz_news · YouTube @1Cardzcom · TikTok @1cardz.com</p>"""))
+
+    # contents (page 2), then the body pages from page 3
+    toc = ''; seen_top = False
+    tpages = [3 + n for n, b in enumerate(body) if b[0] == 'top']
+    games_l = ', '.join(dict.fromkeys(game_title(t[0])[0] for t in tops if game_title(t[0])[0]))
+    for n, (key, t, sub, _) in enumerate(body):
+        if key in ('feat', 'back'): continue
+        if key == 'top':
+            if seen_top: continue
+            seen_top = True
+            t, sub, pg = 'Top stories of the week', games_l or 'Top stories', f'{tpages[0]}–{tpages[-1]}' if len(tpages) > 1 else str(tpages[0])
+        else:
+            pg = str(3 + n)
+        toc += f'<li><div><span>{e(sub)}</span><b>{e(t)}</b></div><em>{pg}</em></li>'
+    pages = [f'<div class="mz-page">{run("1Cardz Weekly", "No. " + no)}<p class="kick">In this issue</p><h3>Contents</h3><ol class="toc">{toc}</ol><div class="folio">2</div></div>']
+    for n, (key, _, _, h) in enumerate(body):
+        cls = ' mz-full' if key == 'feat' else (' mz-back' if key == 'back' else '')
+        pages.append(f'<div class="mz-page mz-{key}{cls}">{h}<div class="folio">{3 + n}</div></div>')
 
     html_ = f'''<div class="mz" id="mz" data-pages="{len(pages) + 1}">
   <div class="mz-book" id="mzBook" aria-live="polite"></div>
@@ -105,38 +160,64 @@ CSS = r'''
 .mz-ctl button{font:inherit;font-size:22px;width:44px;height:44px;border-radius:50%;border:0;background:var(--foil,#e9c46a);color:#12162b;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.35)}
 .mz-ctl button:disabled{opacity:.3;cursor:default}
 .mz-no{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#aab1c9;min-width:130px;text-align:center}
-.mz-page{position:relative;aspect-ratio:3/4;overflow:hidden;container-type:inline-size;background:#fbf8f1;color:#1b1a22;padding:6cqw;font-family:var(--f-body)}
+.mz-page{position:relative;aspect-ratio:3/4;overflow:hidden;container-type:inline-size;background:#fbf8f1;color:#1b1a22;padding:5.5% 6.5% 4.5%;font-family:var(--f-body);display:flex;flex-direction:column}
+.mz-page .folio{margin-top:auto;padding-top:2cqw}
 .mz-page+.mz-page{box-shadow:inset 1.4cqw 0 2cqw -1cqw rgba(0,0,0,.35)}
-.mz-page .run{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:2.3cqw;letter-spacing:.14em;text-transform:uppercase;color:#6a6878;border-bottom:.3cqw solid #d8d1c3;padding-bottom:2cqw;margin-bottom:5cqw}
+.mz-page .run{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:2.3cqw;letter-spacing:.14em;text-transform:uppercase;color:#6a6878;border-bottom:.3cqw solid #d8d1c3;padding-bottom:2cqw;margin-bottom:4cqw;flex:none}
 .mz-page .kick{font-family:var(--f-mono);font-size:2.6cqw;letter-spacing:.2em;text-transform:uppercase;color:#c8102e;margin:0 0 2cqw}
 .mz-page h3{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:8.6cqw;line-height:.98;margin:0 0 4cqw;color:#1b1a22;text-transform:none;letter-spacing:0}
 .mz-page p{font-size:3.3cqw;line-height:1.6;margin:0 0 3cqw;color:#2a2833;max-width:none}
 .mz-page p.first::first-letter{float:left;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:12cqw;line-height:.8;padding:1cqw 1.6cqw 0 0;color:#c8102e}
-.mz-page .pull{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:6cqw;line-height:1.08;border-top:.6cqw solid #1b1a22;border-bottom:.6cqw solid #1b1a22;padding:3cqw 0;margin:5cqw 0}
+.mz-page .pull{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:6cqw;line-height:1.08;border-top:.6cqw solid #1b1a22;border-bottom:.6cqw solid #1b1a22;padding:2.6cqw 0;margin:3.5cqw 0}
 .mz-page .toc{list-style:none;margin:0;padding:0;counter-reset:t}
-.mz-page .toc li{display:grid;grid-template-columns:9cqw 1fr;gap:3cqw;padding:2.4cqw 0;border-bottom:.25cqw solid #d8d1c3;counter-increment:t}
-.mz-page .toc li::before{content:counter(t,decimal-leading-zero);font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:6cqw;color:#c8102e;line-height:1}
-.mz-page .toc b{display:block;font-size:3.3cqw;line-height:1.25}.mz-page .toc span{font-size:2.6cqw;color:#6a6878}
-.mz-page .stories{display:grid;grid-template-columns:1fr 1fr;gap:4cqw}
-.mz-page .st img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;object-position:50% 15%;border-radius:1.2cqw;margin-bottom:2cqw}
-.mz-page .st .g{font-family:var(--f-mono);font-size:2.2cqw;letter-spacing:.14em;text-transform:uppercase;color:#c8102e}
-.mz-page .st b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:4cqw;line-height:1.08;margin:1cqw 0 1.4cqw}
-.mz-page .st p{font-size:2.7cqw;line-height:1.45;margin:0}
-.mz-page .st small{display:block;font-size:2.2cqw;color:#8a8796;font-style:italic;margin-top:1cqw}
+.mz-page .toc li{display:grid;grid-template-columns:8cqw 1fr auto;align-items:baseline;gap:3cqw;padding:1.3cqw 0;border-bottom:.25cqw solid #d8d1c3;counter-increment:t}
+.mz-page .toc li::before{content:counter(t,decimal-leading-zero);font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:5cqw;color:#c8102e;line-height:1}
+.mz-page .toc b{display:block;font-size:3.1cqw;line-height:1.25}.mz-page .toc span{display:block;font-family:var(--f-mono);font-size:2cqw;letter-spacing:.12em;text-transform:uppercase;color:#6a6878}.mz-page .toc em{font-style:normal;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:3.6cqw;color:#1b1a22}
+.mz-page .stories{display:grid;grid-template-rows:1fr 1fr;gap:4cqw;flex:1;min-height:0}
+.mz-page .st{display:grid;grid-template-columns:44% 1fr;grid-template-rows:auto auto auto 1fr;column-gap:4cqw;align-content:start;align-items:start;border-bottom:.25cqw solid #d8d1c3;padding-bottom:4cqw}.mz-page .st:last-child{border-bottom:0}
+.mz-page .st img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;object-position:50% 12%;border-radius:1.2cqw;grid-row:span 4}
+.mz-page .st .g{font-family:var(--f-mono);font-size:2.5cqw;letter-spacing:.14em;text-transform:uppercase;color:#c8102e}
+.mz-page .st b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:5.6cqw;line-height:1.05;margin:1cqw 0 2cqw}
+.mz-page .st p{font-size:3.3cqw;line-height:1.5;margin:0}
+.mz-page .st small{display:block;font-size:2.5cqw;color:#8a8796;font-style:italic;margin-top:1cqw}
 .mz-page .cal div{display:grid;grid-template-columns:24cqw 1fr;gap:3cqw;padding:3cqw 0;border-top:.25cqw solid #d8d1c3;font-size:3.2cqw;line-height:1.4}
 .mz-page .cal b{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:4.2cqw;color:#c8102e;line-height:1.05}
 .mz-page .cal i{display:block;font-size:2.5cqw;color:#6a6878;margin-top:.6cqw}
 .mz-page .sign{margin-top:6cqw;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:6cqw;line-height:1.05}
 .mz-page .cta{display:inline-block;margin-top:4cqw;font-family:var(--f-mono);font-size:2.8cqw;letter-spacing:.12em;text-transform:uppercase;background:#c8102e;color:#fff;padding:2.4cqw 4cqw;border-radius:1.2cqw;text-decoration:none}
-.mz-page .folio{position:absolute;bottom:3cqw;left:0;right:0;text-align:center;font-family:var(--f-mono);font-size:2.2cqw;color:#6a6878}
+.mz-page .folio{text-align:center;font-family:var(--f-mono);font-size:2.2cqw;color:#6a6878;flex:none}
 .mz-page .folio.light{color:#fff}
-.mz-full{padding:0}.mz-full img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 10%}
-.mz-full::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(10,8,20,.8))}
-.mz-full .cap{position:absolute;left:5cqw;right:5cqw;bottom:8cqw;z-index:2;color:#fff;font-size:3cqw;line-height:1.45;text-shadow:0 .3cqw 1cqw rgba(0,0,0,.8)}
-.mz-full .cap b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:8cqw;line-height:.95;margin-bottom:2cqw}
-.mz-full .folio{z-index:2}
+.mz-full{padding:0;color:#fff}.mz-full .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 10%}
+.mz-full::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(10,8,20,.85))}
+.mz-full .cap{position:absolute;left:6.5cqw;right:6.5cqw;bottom:10cqw;z-index:2;font-size:3.3cqw;line-height:1.45;text-shadow:0 .3cqw 1cqw rgba(0,0,0,.8)}
+.mz-full .cap .kick{color:#fde8c2}
+.mz-full .cap b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:9cqw;line-height:.95;margin-bottom:2cqw}
+.mz-full .folio{position:absolute;left:0;right:0;bottom:4cqw;z-index:2;color:#fff}
+.mz-page .src{font-size:2.6cqw;color:#6a6878;font-style:italic}
+.mz-page .hosts{display:flex;gap:3cqw;margin:0 0 4cqw}.mz-page .hosts img{width:20cqw;height:20cqw;border-radius:50%;object-fit:cover;object-position:50% 15%;box-shadow:0 0 0 .5cqw #fff,0 1cqw 2cqw rgba(0,0,0,.2)}
+.mz-page .strip{margin-top:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:3cqw;border-top:.6cqw solid #1b1a22;padding-top:3cqw}.mz-page .strip b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:8cqw;line-height:1;color:#c8102e}.mz-page .strip span{font-family:var(--f-mono);font-size:2.2cqw;letter-spacing:.12em;text-transform:uppercase;color:#6a6878}
+.mz-page .sig{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:700;font-size:5cqw;color:#c8102e}
+.mz-page .nums{display:grid;grid-template-columns:1fr 1fr;gap:6cqw 5cqw;flex:1;align-content:space-evenly}
+.mz-page .nums b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:11cqw;line-height:1;color:#c8102e}
+.mz-page .nums span{display:block;font-size:3cqw;line-height:1.35;margin-top:1cqw}
+.mz-page .mv div{display:grid;grid-template-columns:1fr auto;gap:.4cqw 3cqw;padding:2cqw 0;border-top:.25cqw solid #d8d1c3}
+.mz-page .mv .g{grid-column:1/-1;font-family:var(--f-mono);font-size:2.3cqw;letter-spacing:.14em;text-transform:uppercase;color:#c8102e}
+.mz-page .mv b{font-size:3cqw;line-height:1.3}.mz-page .mv em{font-style:normal;font-family:var(--f-mono);font-size:3.2cqw;text-align:right}
+.mz-page .mv i{grid-column:2;font-style:normal;font-family:var(--f-mono);font-size:3cqw;text-align:right}.mz-page .mv i.up{color:#1a8f4a}.mz-page .mv i.down{color:#c8102e}
+.mz-page .mv em{grid-row:2;grid-column:2}.mz-page .mv i{grid-row:3}
+.mz-page .note{font-size:2.6cqw;color:#6a6878;margin-top:3cqw}.mz-page .note a{color:#c8102e}
+.mz-page .quips{display:grid;grid-template-columns:1fr 1fr;gap:4cqw;flex:1;align-content:start}
+.mz-page blockquote{margin:0;padding:3cqw;border-left:1cqw solid #c8102e;background:#f2ecdf}
+.mz-page blockquote p{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:700;font-size:3.8cqw;line-height:1.25;margin:0 0 1.5cqw;color:#1b1a22}
+.mz-page blockquote cite{font-style:normal;font-family:var(--f-mono);font-size:2.2cqw;letter-spacing:.1em;text-transform:uppercase;color:#6a6878}
+.mz-back{background:#c8102e;color:#fff;justify-content:center}.mz-back .folio{position:absolute;left:0;right:0;bottom:4%}
+.mz-page .watch{margin-top:auto;display:grid;grid-template-columns:26% 1fr;gap:4cqw;align-items:center;text-decoration:none;color:#1b1a22;background:#f2ecdf;border-radius:1.4cqw;padding:2.4cqw}.mz-page .watch img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:50% 15%;border-radius:1cqw}.mz-page .watch span{font-size:2.9cqw;line-height:1.4}.mz-page .watch b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:5cqw;color:#c8102e}.mz-back .kick{color:#fde8c2}.mz-back h3{color:#fff;font-size:11cqw}.mz-back p{color:#fff}
+.mz-back .links{display:flex;flex-direction:column;gap:3cqw;margin:4cqw 0}
+.mz-back .links a{font-family:var(--f-mono);font-size:3.2cqw;letter-spacing:.12em;text-transform:uppercase;color:#c8102e;background:#fff;padding:3cqw 4cqw;border-radius:1.2cqw;text-decoration:none;text-align:center}
+.mz-back .sign{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:6cqw;line-height:1.05;margin:2cqw 0}
+.mz-back .small{font-size:2.5cqw;opacity:.85}.mz-back .folio{color:#fde8c2}
 /* cover */
-.mz-cover{padding:0;background:#f4efe4;cursor:pointer;isolation:isolate}
+.mz-cover{display:block;padding:0;background:#f4efe4;cursor:pointer;isolation:isolate}
 .mz-cover .ph{position:absolute;inset:0;z-index:0}.mz-cover .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 0}
 .mz-cover .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,16,30,.35) 0%,transparent 22%,transparent 58%,rgba(20,16,30,.75) 100%)}
 .mz-cover .ed{position:absolute;left:0;right:0;top:3cqw;z-index:2;text-align:center;font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:700;font-size:5.4cqw;letter-spacing:.04em;color:#fff;text-shadow:0 .3cqw 1cqw rgba(0,0,0,.6)}
