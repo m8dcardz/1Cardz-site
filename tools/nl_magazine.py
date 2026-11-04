@@ -255,7 +255,7 @@ CSS = r'''
 .mz-cover .ph{position:absolute;inset:0;z-index:0}.mz-cover .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 0}
 .mz-cover .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,16,30,.35) 0%,transparent 22%,transparent 58%,rgba(20,16,30,.75) 100%)}
 .mz-cover .mhd{position:absolute;left:0;right:0;top:4cqw;z-index:2;display:grid;justify-content:center}
-.mz-cover .vol{position:absolute;right:4cqw;top:50.8cqw;z-index:2;font-family:"Playfair Display",Georgia,serif;font-style:normal;font-weight:900;font-size:8.05cqw;line-height:1;color:#fff;text-shadow:0 .4cqw 1.2cqw rgba(0,0,0,.7)}
+.mz-cover .vol{position:absolute;right:4cqw;top:55.35cqw;z-index:2;font-family:"Playfair Display",Georgia,serif;font-style:normal;font-weight:900;font-size:7cqw;line-height:1;color:#fff;text-shadow:0 .4cqw 1.2cqw rgba(0,0,0,.7)}
 .mz-cover .wm{text-align:center;margin-top:.7cqw;font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:700;font-size:5.6cqw;letter-spacing:.06em;color:#ffd23f;text-shadow:0 .3cqw 1cqw rgba(0,0,0,.65)}
 .mz-cover .mast{position:relative;display:grid;justify-items:center;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:22cqw;line-height:.9;letter-spacing:-.02em;text-align:center}
 .mz-cover .mast>span{grid-area:1/1}
