@@ -119,11 +119,6 @@
   "title": "Pokémon's big week",
   "text": "From the Goldin record to Mega Rayquaza ex, Pokémon owned the headlines."
  },
- "editors_note": [
-  "Week one of the magazine, and the cards did not take it easy on us. A Mudkip sold for more than most houses, Mihawk got benched, and Pocket went dual-type.",
-  "Zia read every auction result twice to make sure the zeros were real. Luna kept the late-night desk warm with bans, boosters and a Star Trek prerelease.",
-  "Flip through, catch up, and tell a friend who still keeps their binder in a shoebox."
- ],
  "numbers": [
   [
    "$28M+",
@@ -149,5 +144,35 @@
    "10",
    "new GX cards in that set"
   ]
+ ],
+ "spreads": [
+  {
+   "story": "One Piece: Dracule Mihawk OP14-020 is banned.",
+   "clip": "clip4",
+   "kick": "One Piece",
+   "title": "Mihawk is banned",
+   "text": [
+    "Bandai has banned OP14-020 Dracule Mihawk, and the ban covers the alternate arts too. It is in effect now.",
+    "Luna broke the news on the channel. If Mihawk was in your list, it's time to sheathe the swords and rebuild the deck."
+   ],
+   "pull": "Sheathe the swords. Rebuild the deck.",
+   "src": "One Piece Card Game, official",
+   "photo_title": "Swords down",
+   "photo_text": "Mihawk OP14-020 is off the table, alternate arts included."
+  },
+  {
+   "story": "Pokémon TCG Pocket: Dual Fusion is out.",
+   "clip": "clip9",
+   "kick": "Pokémon TCG Pocket",
+   "title": "Dual Fusion is out",
+   "text": [
+    "Pokémon TCG Pocket's Dual Fusion set is out, bringing the game's first dual-type cards.",
+    "The headliners are Mega Mewtwo X ex and Mega Greninja ex. Zia covered it on the 8 AM drop."
+   ],
+   "pull": "Two types, one pack, zero chill.",
+   "src": "Pokémon, official",
+   "photo_title": "Two types, one pack",
+   "photo_text": "Pocket's first dual-type cards, led by Mega Mewtwo X ex and Mega Greninja ex."
+  }
  ]
 }

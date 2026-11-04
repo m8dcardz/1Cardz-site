@@ -45,9 +45,9 @@ def render(iss, root):
     lines = ''.join(f'<div><b>{e(a)}</b><span>{e(b)}</span></div>' for a, b in cv.get('lines', [])[:2])
     cover = f'''<div class="mz-page mz-cover" role="img" aria-label="Magazine cover: {e(cv.get('main') or iss.get('title'))}">
   <div class="ph"><img src="{e(cover_img)}" alt="" loading="lazy"></div>
-  <div class="ed">Magazine Edition</div>
   <div class="mast">1Cardz</div>
-  <div class="tag">The Weekly · Issue {e(no)} · {e(short)}</div>
+  <div class="wm">Weekly Magazine</div>
+  <div class="tag">Issue {e(no)} · {e(short)}</div>
   <div class="side">{lines}</div>
   <div class="big"><b>{e(cv.get('main') or iss.get('title'))}</b><span>{e(cv.get('sub', ''))}</span></div>
   <div class="bar"><i></i>1CZ-{e(no)}</div>
@@ -71,17 +71,36 @@ def render(iss, root):
     run = lambda a, b: f'<div class="run"><span>{e(a)}</span><span>{e(b)}</span></div>'
     body = []          # (key, toc title, toc sub, html-without-folio)
     big_t = big[0].rstrip('.')
-    note = iss.get('editors_note') or []
-    if note:
-        body.append(('note', 'A letter from Zia & Luna', 'From the hosts', f"""{run('From the hosts', 'Issue ' + no)}<p class="kick">Welcome</p><h3>A letter from Zia &amp; Luna</h3>
-<div class="hosts"><img src="img/zia.webp" alt="Zia" loading="lazy"><img src="img/luna.webp" alt="Luna" loading="lazy"></div>
-{''.join(f'<p{" class=first" if k == 0 else ""}>{e(t)}</p>' for k, t in enumerate(note))}<p class="sig">Zia &amp; Luna</p>""" + (f'<div class="strip"><div><b>{len(posts)}</b><span>clips this week</span></div><div><b>{len({x["game"] for x in posts})}</b><span>games covered</span></div><div><b>2</b><span>drops a day</span></div></div>' if posts else '')))
+    strip = (f'<div class="strip"><div><b>{len(posts)}</b><span>clips this week</span></div><div><b>{len({x["game"] for x in posts})}</b><span>games covered</span></div><div><b>2</b><span>drops a day</span></div></div>' if posts else '')
+    about = ''.join(f'<div><a href="{h}"><b>{t}</b></a><span>{d}</span></div>' for h, t, d in [
+        ('index.html', 'Home', 'The binder: the Shuffle Machine game, the headline box and every host card.'),
+        ('news.html', 'Headlines', 'Every story from the daily drops, newest first, each with its own page.'),
+        ('market.html', 'Market', 'Daily prices for sealed boxes and chase singles across seven games.'),
+        ('archive.html', 'Library', 'Every clip from Zia and Luna, playable right on the page.'),
+        ('board.html', 'Message Board', 'The arcade hall of fame: post your pulls and hot takes.'),
+        ('newsletter.html', 'Newsletter', 'This magazine, free in your inbox every Sunday.')])
+    body.append(('about', 'Inside 1Cardz.news', 'About the site', f"""{run('About the site', 'Issue ' + no)}<p class="kick">Welcome to</p><h3>Inside 1Cardz.news</h3>
+<div class="hosts"><img src="img/zia.webp" alt="Zia" loading="lazy"><img src="img/luna.webp" alt="Luna" loading="lazy"><p>Trading card game news in two short clips a day: <b>Zia at 8 AM</b> and <b>Luna at 8 PM</b>, Hong Kong time, on Instagram, YouTube and TikTok.</p></div>
+<div class="about">{about}</div>""" + strip))
     pull = f'<div class="pull">"{e(iss["pull"])}"</div>' if iss.get('pull') else ''
     body.append(('big', big_t, 'Cover story', f"""{run('Cover story', big[2])}<p class="kick">The big one</p><h3>{e(big_t)}</h3>
 <p class="first">{e(iss.get('opening', ''))}</p><p>{e(big[1])}</p>{pull}<p class="src">Source: {e(big[2])}</p>""" + (f'<a class="watch" href="archive.html"><img src="{e(_img(root, iss.get("cover_clip")))}" alt="" loading="lazy"><span><b>Watch the report</b>The 1Cardz clip on this story is in the Library. ▶</span></a>' if _img(root, iss.get('cover_clip')) else '')))
     f = iss.get('feature') or {}
     fimg = _img(root, f.get('clip')) or cover_img
     body.append(('feat', f.get('title') or 'Photo feature', 'Feature', f'<img class="bg" src="{e(fimg)}" alt="" loading="lazy"><div class="cap"><span class="kick">Feature</span><b>{e(f.get("title", ""))}</b>{e(f.get("text", ""))}</div>'))
+    sp_stories = set()
+    for sp in iss.get('spreads', []):
+        sp_stories.add(sp.get('story'))
+        im = _img(root, sp.get('clip'))
+        paras = ''.join(f'<p{" class=first" if k == 0 else ""}>{e(t)}</p>' for k, t in enumerate(sp.get('text', [])))
+        pq = f'<div class="pull">"{e(sp["pull"])}"</div>' if sp.get('pull') else ''
+        watch = f'<a class="watch" href="archive.html"><img src="{e(im)}" alt="" loading="lazy"><span><b>Watch the report</b>The 1Cardz clip on this story is in the Library. ▶</span></a>' if im else ''
+        body.append(('story', sp.get('title', ''), sp.get('kick', 'Feature'), f"""{run(sp.get('kick', 'Feature'), sp.get('src', ''))}<p class="kick">{e(sp.get('kick', ''))}</p><h3>{e(sp.get('title', ''))}</h3>
+{paras}{pq}<p class="src">Source: {e(sp.get('src', ''))}</p>{watch}"""))
+        if im:
+            body.append(('feat', sp.get('photo_title', ''), 'Feature', f'<img class="bg" src="{e(im)}" alt="" loading="lazy"><div class="cap"><span class="kick">{e(sp.get("kick", ""))}</span><b>{e(sp.get("photo_title", ""))}</b>{e(sp.get("photo_text", ""))}</div>'))
+    keep = [n for n, t in enumerate(tops) if t[0] not in sp_stories]
+    tops = [tops[n] for n in keep]; tclips = [tclips[n] for n in keep if n < len(tclips)]
     per = 2
     npages = (len(tops) + per - 1) // per
     for k in range(0, len(tops), per):
@@ -122,7 +141,7 @@ def render(iss, root):
     sign = '<br>'.join(e(x) for x in iss.get('signoff', [])[:2])
     body.append(('back', 'Never miss an issue', 'Back page', f"""<p class="kick">See you next Sunday</p><h3>Never miss an issue</h3>
 <p>One free email every Sunday with the week in cards, the market movers and what's coming up. New clips every day at 8 AM (Zia) and 8 PM (Luna), Hong Kong time.</p>
-<div class="links"><a href="#newsletter">Sign up free</a><a href="archive.html">Watch the clips</a><a href="news.html">All headlines</a></div>
+<div class="links"><a href="archive.html">Watch the clips</a><a href="news.html">All headlines</a></div>
 <div class="sign">{sign}</div><p class="small">1Cardz.news · Instagram @1cardz_news · YouTube @1Cardzcom · TikTok @1cardz.com</p>"""))
 
     # contents (page 2), then the body pages from page 3
@@ -170,7 +189,7 @@ CSS = r'''
 .mz-page p.first::first-letter{float:left;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:12cqw;line-height:.8;padding:1cqw 1.6cqw 0 0;color:#c8102e}
 .mz-page .pull{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:6cqw;line-height:1.08;border-top:.6cqw solid #1b1a22;border-bottom:.6cqw solid #1b1a22;padding:2.6cqw 0;margin:3.5cqw 0}
 .mz-page .toc{list-style:none;margin:0;padding:0;counter-reset:t}
-.mz-page .toc li{display:grid;grid-template-columns:8cqw 1fr auto;align-items:baseline;gap:3cqw;padding:1.3cqw 0;border-bottom:.25cqw solid #d8d1c3;counter-increment:t}
+.mz-page .toc li{display:grid;grid-template-columns:8cqw 1fr auto;align-items:baseline;gap:3cqw;padding:1cqw 0;border-bottom:.25cqw solid #d8d1c3;counter-increment:t}
 .mz-page .toc li::before{content:counter(t,decimal-leading-zero);font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:5cqw;color:#c8102e;line-height:1}
 .mz-page .toc b{display:block;font-size:3.1cqw;line-height:1.25}.mz-page .toc span{display:block;font-family:var(--f-mono);font-size:2cqw;letter-spacing:.12em;text-transform:uppercase;color:#6a6878}.mz-page .toc em{font-style:normal;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:3.6cqw;color:#1b1a22}
 .mz-page .stories{display:grid;grid-template-rows:1fr 1fr;gap:4cqw;flex:1;min-height:0}
@@ -194,8 +213,12 @@ CSS = r'''
 .mz-full .cap b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:9cqw;line-height:.95;margin-bottom:2cqw}
 .mz-full .folio{position:absolute;left:0;right:0;bottom:4cqw;z-index:2;color:#fff}
 .mz-page .src{font-size:2.6cqw;color:#6a6878;font-style:italic}
-.mz-page .hosts{display:flex;gap:3cqw;margin:0 0 4cqw}.mz-page .hosts img{width:20cqw;height:20cqw;border-radius:50%;object-fit:cover;object-position:50% 15%;box-shadow:0 0 0 .5cqw #fff,0 1cqw 2cqw rgba(0,0,0,.2)}
+.mz-page .hosts{display:flex;gap:3cqw;margin:0 0 4cqw;align-items:center}.mz-page .hosts img{flex:none;width:20cqw;height:20cqw;border-radius:50%;object-fit:cover;object-position:50% 15%;box-shadow:0 0 0 .5cqw #fff,0 1cqw 2cqw rgba(0,0,0,.2)}
 .mz-page .strip{margin-top:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:3cqw;border-top:.6cqw solid #1b1a22;padding-top:3cqw}.mz-page .strip b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:8cqw;line-height:1;color:#c8102e}.mz-page .strip span{font-family:var(--f-mono);font-size:2.2cqw;letter-spacing:.12em;text-transform:uppercase;color:#6a6878}
+.mz-page .hosts p{margin:0;font-size:3.3cqw;line-height:1.5}
+.mz-page .about{display:grid;grid-template-columns:1fr 1fr;gap:3cqw 4cqw;margin-top:1cqw}
+.mz-page .about a{text-decoration:none}.mz-page .about b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:4.6cqw;color:#c8102e;line-height:1.1}
+.mz-page .about span{display:block;font-size:2.8cqw;line-height:1.4;margin-top:.6cqw;color:#2a2833}
 .mz-page .sig{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:700;font-size:5cqw;color:#c8102e}
 .mz-page .nums{display:grid;grid-template-columns:1fr 1fr;gap:6cqw 5cqw;flex:1;align-content:space-evenly}
 .mz-page .nums b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:11cqw;line-height:1;color:#c8102e}
@@ -210,19 +233,23 @@ CSS = r'''
 .mz-page blockquote{margin:0;padding:3cqw;border-left:1cqw solid #c8102e;background:#f2ecdf}
 .mz-page blockquote p{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:700;font-size:3.8cqw;line-height:1.25;margin:0 0 1.5cqw;color:#1b1a22}
 .mz-page blockquote cite{font-style:normal;font-family:var(--f-mono);font-size:2.2cqw;letter-spacing:.1em;text-transform:uppercase;color:#6a6878}
-.mz-back{background:#c8102e;color:#fff;justify-content:center}.mz-back .folio{position:absolute;left:0;right:0;bottom:4%}
-.mz-page .watch{margin-top:auto;display:grid;grid-template-columns:26% 1fr;gap:4cqw;align-items:center;text-decoration:none;color:#1b1a22;background:#f2ecdf;border-radius:1.4cqw;padding:2.4cqw}.mz-page .watch img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:50% 15%;border-radius:1cqw}.mz-page .watch span{font-size:2.9cqw;line-height:1.4}.mz-page .watch b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:5cqw;color:#c8102e}.mz-back .kick{color:#fde8c2}.mz-back h3{color:#fff;font-size:11cqw}.mz-back p{color:#fff}
+.mz-back{background:linear-gradient(160deg,#1b2a6b 0%,#0e1640 55%,#060a22 100%);color:#fff;justify-content:center}.mz-back .folio{position:absolute;left:0;right:0;bottom:4%}
+.mz-page .watch{margin-top:auto;display:grid;grid-template-columns:26% 1fr;gap:4cqw;align-items:center;text-decoration:none;color:#1b1a22;background:#f2ecdf;border-radius:1.4cqw;padding:2.4cqw}.mz-page .watch img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:50% 15%;border-radius:1cqw}.mz-page .watch span{font-size:2.9cqw;line-height:1.4}.mz-page .watch b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:5cqw;color:#c8102e}.mz-back .kick{color:#7cf3ff}.mz-back h3{color:#fff;font-size:11cqw}.mz-back p{color:#fff}
 .mz-back .links{display:flex;flex-direction:column;gap:3cqw;margin:4cqw 0}
-.mz-back .links a{font-family:var(--f-mono);font-size:3.2cqw;letter-spacing:.12em;text-transform:uppercase;color:#c8102e;background:#fff;padding:3cqw 4cqw;border-radius:1.2cqw;text-decoration:none;text-align:center}
+.mz-back .links a{font-family:var(--f-mono);font-size:3.2cqw;letter-spacing:.12em;text-transform:uppercase;color:#0e1640;background:#fff;padding:3cqw 4cqw;border-radius:1.2cqw;text-decoration:none;text-align:center}
 .mz-back .sign{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:6cqw;line-height:1.05;margin:2cqw 0}
-.mz-back .small{font-size:2.5cqw;opacity:.85}.mz-back .folio{color:#fde8c2}
+.mz-back .small{font-size:2.5cqw;opacity:.85}.mz-back .folio{color:#9fb3ff}
 /* cover */
 .mz-cover{display:block;padding:0;background:#f4efe4;cursor:pointer;isolation:isolate}
 .mz-cover .ph{position:absolute;inset:0;z-index:0}.mz-cover .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 0}
 .mz-cover .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,16,30,.35) 0%,transparent 22%,transparent 58%,rgba(20,16,30,.75) 100%)}
-.mz-cover .ed{position:absolute;left:0;right:0;top:3cqw;z-index:2;text-align:center;font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:700;font-size:5.4cqw;letter-spacing:.04em;color:#fff;text-shadow:0 .3cqw 1cqw rgba(0,0,0,.6)}
-.mz-cover .mast{position:absolute;left:4cqw;right:4cqw;top:10cqw;z-index:2;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:21cqw;line-height:.9;color:#c8102e;letter-spacing:-.02em;text-align:center;text-shadow:0 .4cqw 1.2cqw rgba(0,0,0,.25)}
-.mz-cover .tag{position:absolute;left:0;right:0;top:30.5cqw;z-index:2;text-align:center;font-family:var(--f-mono);font-size:2.3cqw;letter-spacing:.25em;text-transform:uppercase;color:#fff;text-shadow:0 .3cqw .8cqw rgba(0,0,0,.6)}
+.mz-cover .wm{position:absolute;left:0;right:0;top:24.5cqw;z-index:2;text-align:center;font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:700;font-size:5.6cqw;letter-spacing:.06em;color:#fff;text-shadow:0 .3cqw 1cqw rgba(0,0,0,.6)}
+.mz-cover .mast{position:absolute;left:4cqw;right:4cqw;top:4cqw;z-index:2;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:22cqw;line-height:.9;letter-spacing:-.02em;text-align:center;
+  color:#fff;background:linear-gradient(110deg,#fff 0%,#fff 38%,#ffd6f3 44%,#b8f6ff 49%,#fff6c8 54%,#fff 60%,#fff 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 .4cqw 1cqw rgba(0,0,0,.45));animation:mzholo 3.5s linear infinite}
+@keyframes mzholo{from{background-position:125% 0}to{background-position:-125% 0}}
+@media (prefers-reduced-motion:reduce){.mz-cover .mast{animation:none}}
+.mz-cover .tag{position:absolute;left:0;right:0;top:34.5cqw;z-index:2;text-align:center;font-family:var(--f-mono);font-size:2.3cqw;letter-spacing:.25em;text-transform:uppercase;color:#fff;text-shadow:0 .3cqw .8cqw rgba(0,0,0,.6)}
 .mz-cover .side{position:absolute;left:4cqw;top:46cqw;z-index:2;width:30cqw;display:flex;flex-direction:column;gap:4cqw}
 .mz-cover .side b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:5.6cqw;line-height:1;color:#fff;text-shadow:0 .4cqw 1.2cqw rgba(0,0,0,.75)}
 .mz-cover .side span{display:block;font-family:"Playfair Display",Georgia,serif;font-style:italic;font-size:3cqw;color:#fde8c2;text-shadow:0 .3cqw .8cqw rgba(0,0,0,.8)}

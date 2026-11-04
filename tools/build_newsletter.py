@@ -50,11 +50,10 @@ issue_html = f"""  <section class="wrap nli" aria-labelledby="nli-h">
     </div>
     <div class="gd">
       <div class="mw-top">
-        <span class="mono mw-label" style="color:#7cf3ff"><i style="background:#7cf3ff;box-shadow:0 0 10px #7cf3ff"></i><span>Magazine edition</span></span>
+        <span class="mono mw-label" style="color:#7cf3ff"><i style="background:#7cf3ff;box-shadow:0 0 10px #7cf3ff"></i><span>Weekly Magazine</span></span>
         <span class="mono mw-upd">{e(iss['date'])}</span>
       </div>
 {mz_html}
-      <div class="nli-cta"><span>Want next Sunday's issue in your inbox?</span><a class="btn" href="#newsletter">Sign up free</a></div>
     </div>
   </section>
 """
