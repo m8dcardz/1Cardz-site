@@ -45,8 +45,8 @@ def render(iss, root):
     lines = ''.join(f'<div><b>{e(a)}</b><span>{e(b)}</span></div>' for a, b in cv.get('lines', [])[:2])
     cover = f'''<div class="mz-page mz-cover" role="img" aria-label="Magazine cover: {e(cv.get('main') or iss.get('title'))}">
   <div class="ph"><img src="{e(cover_img)}" alt="" loading="lazy"></div>
-  <div class="mast" aria-label="1Cardz"><span class="sh">1Cardz</span><span class="sv">1Cardz</span><span class="ho" aria-hidden="true">1Cardz</span></div>
-  <div class="wm">Weekly Magazine</div>
+  <div class="mhd"><div class="mast" aria-label="1Cardz"><span class="sh">1Cardz</span><span class="sv">1Cardz</span><span class="ho" aria-hidden="true">1Cardz</span></div>
+  <div class="wm"><span>Weekly Magazine</span><span>Vol.{e(str(iss.get('vol', 1)))}</span></div></div>
   <div class="tag">Issue {e(no)} · {e(short)}</div>
   <div class="side">{lines}</div>
   <div class="big"><b>{e(cv.get('main') or iss.get('title'))}</b><span>{e(cv.get('sub', ''))}</span></div>
@@ -81,7 +81,7 @@ def render(iss, root):
         ('newsletter.html', 'Newsletter', 'This magazine, free in your inbox every Sunday.')])
     body.append(('about', 'Inside 1Cardz.news', 'About the site', f"""{run('About the site', 'Issue ' + no)}<p class="kick">Welcome to</p><h3>Inside 1Cardz.news</h3>
 <div class="hosts"><img src="img/zia.webp" alt="Zia" loading="lazy"><img src="img/luna.webp" alt="Luna" loading="lazy"><p>Trading card game news in two short clips a day: <b>Zia at 8 AM</b> and <b>Luna at 8 PM</b>, on Instagram, YouTube and TikTok.</p></div>
-<div class="about">{about}</div>""" + strip))
+<div class="about">{about}</div>"""))
     pull = f'<div class="pull">"{e(iss["pull"])}"</div>' if iss.get('pull') else ''
     body.append(('big', big_t, 'Cover story', f"""{run('Cover story', big[2])}<p class="kick">The big one</p><h3>{e(big_t)}</h3>
 <p class="first">{e(iss.get('opening', ''))}</p><p>{e(big[1])}</p>{pull}<p class="src">Source: {e(big[2])}</p>""" + (f'<a class="watch" href="archive.html"><img src="{e(_img(root, iss.get("cover_clip")))}" alt="" loading="lazy"><span><b>Watch the report</b>The 1Cardz clip on this story is in the Library. ▶</span></a>' if _img(root, iss.get('cover_clip')) else '')))
@@ -188,19 +188,20 @@ CSS = r'''
 .mz-ctl button{font:inherit;font-size:22px;width:44px;height:44px;border-radius:50%;border:0;background:var(--foil,#e9c46a);color:#12162b;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.35)}
 .mz-ctl button:disabled{opacity:.3;cursor:default}
 .mz-no{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#aab1c9;min-width:130px;text-align:center}
-.mz-page{position:relative;aspect-ratio:3/4;overflow:hidden;container-type:inline-size;background:#fbf8f1;color:#1b1a22;padding:5.5% 6.5% 4.5%;font-family:var(--f-body);display:flex;flex-direction:column}
+.mz-page{position:relative;aspect-ratio:3/4;overflow:hidden;container-type:inline-size;background:#fbf8f1;color:#9ea3ad;padding:5.5% 6.5% 4.5%;font-family:var(--f-body);display:flex;flex-direction:column}
+.mz-page h3,.mz-page .pull,.mz-page blockquote p,.mz-page .toc em{padding-bottom:.12em;background:linear-gradient(180deg,#d4d8de 0%,#a7adb7 45%,#c9cdd4 55%,#8f959f 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .mz-page .folio{margin-top:auto;padding-top:2cqw}
 .mz-page+.mz-page{box-shadow:inset 1.4cqw 0 2cqw -1cqw rgba(0,0,0,.35)}
 .mz-page .run{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:2.3cqw;letter-spacing:.14em;text-transform:uppercase;color:#6a6878;border-bottom:.3cqw solid #d8d1c3;padding-bottom:2cqw;margin-bottom:4cqw;flex:none}
 .mz-page .kick{font-family:var(--f-mono);font-size:2.6cqw;letter-spacing:.2em;text-transform:uppercase;color:#c8102e;margin:0 0 2cqw}
-.mz-page h3{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:8.6cqw;line-height:.98;margin:0 0 4cqw;color:#1b1a22;text-transform:none;letter-spacing:0}
-.mz-page p{font-size:3.3cqw;line-height:1.6;margin:0 0 3cqw;color:#2a2833;max-width:none}
+.mz-page h3{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:8.6cqw;line-height:.98;margin:0 0 3cqw;color:#9ea3ad;text-transform:none;letter-spacing:0}
+.mz-page p{font-size:3.3cqw;line-height:1.6;margin:0 0 3cqw;color:#9ea3ad;max-width:none}
 .mz-page p.first::first-letter{float:left;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:12cqw;line-height:.8;padding:1cqw 1.6cqw 0 0;color:#c8102e}
 .mz-page .pull{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:6cqw;line-height:1.08;border-top:.6cqw solid #1b1a22;border-bottom:.6cqw solid #1b1a22;padding:2.6cqw 0;margin:3.5cqw 0}
 .mz-page .toc{list-style:none;margin:0;padding:0;counter-reset:t}
 .mz-page .toc li{display:grid;grid-template-columns:8cqw 1fr auto;align-items:baseline;gap:3cqw;padding:.45cqw 0;border-bottom:.25cqw solid #d8d1c3;counter-increment:t}
 .mz-page .toc li::before{content:counter(t,decimal-leading-zero);font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:5cqw;color:#c8102e;line-height:1}
-.mz-page .toc b{display:block;font-size:3.1cqw;line-height:1.25}.mz-page .toc span{display:block;font-family:var(--f-mono);font-size:2cqw;letter-spacing:.12em;text-transform:uppercase;color:#6a6878}.mz-page .toc em{font-style:normal;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:3.6cqw;color:#1b1a22}
+.mz-page .toc b{display:block;font-size:3.1cqw;line-height:1.25}.mz-page .toc span{display:block;font-family:var(--f-mono);font-size:2cqw;letter-spacing:.12em;text-transform:uppercase;color:#6a6878}.mz-page .toc em{font-style:normal;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:3.6cqw;color:#9ea3ad}
 .mz-page .stories{display:grid;grid-template-rows:1fr 1fr;gap:4cqw;flex:1;min-height:0}
 .mz-page .st{display:grid;grid-template-columns:44% 1fr;grid-template-rows:auto auto auto 1fr;column-gap:4cqw;align-content:start;align-items:start;border-bottom:.25cqw solid #d8d1c3;padding-bottom:4cqw}.mz-page .st:last-child{border-bottom:0}
 .mz-page .st img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;object-position:50% 12%;border-radius:1.2cqw;grid-row:span 4}
@@ -227,7 +228,7 @@ CSS = r'''
 .mz-page .hosts p{margin:0;font-size:3.3cqw;line-height:1.5}
 .mz-page .about{display:grid;grid-template-columns:1fr 1fr;gap:3cqw 4cqw;margin-top:1cqw}
 .mz-page .about a{text-decoration:none}.mz-page .about b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:4.6cqw;color:#c8102e;line-height:1.1}
-.mz-page .about span{display:block;font-size:2.8cqw;line-height:1.4;margin-top:.6cqw;color:#2a2833}
+.mz-page .about span{display:block;font-size:2.8cqw;line-height:1.4;margin-top:.6cqw;color:#9ea3ad}
 .mz-page .sig{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:700;font-size:5cqw;color:#c8102e}
 .mz-page .nums{display:grid;grid-template-columns:1fr 1fr;gap:6cqw 5cqw;flex:1;align-content:space-evenly}
 .mz-page .nums b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:11cqw;line-height:1;color:#c8102e}
@@ -240,11 +241,11 @@ CSS = r'''
 .mz-page .note{font-size:2.6cqw;color:#6a6878;margin-top:3cqw}.mz-page .note a{color:#c8102e}
 .mz-page .quips{display:grid;grid-template-columns:1fr 1fr;gap:4cqw;flex:1;align-content:start}
 .mz-page blockquote{margin:0;padding:3cqw;border-left:1cqw solid #c8102e;background:#f2ecdf}
-.mz-page blockquote p{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:700;font-size:3.8cqw;line-height:1.25;margin:0 0 1.5cqw;color:#1b1a22}
+.mz-page blockquote p{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:700;font-size:3.8cqw;line-height:1.25;margin:0 0 1.5cqw;color:#9ea3ad}
 .mz-page blockquote cite{font-style:normal;font-family:var(--f-mono);font-size:2.2cqw;letter-spacing:.1em;text-transform:uppercase;color:#6a6878}
 .mz-back{background:linear-gradient(160deg,#1b2a6b 0%,#0e1640 55%,#060a22 100%);color:#fff;justify-content:center}.mz-back .folio{position:absolute;left:0;right:0;bottom:4%}
 .mz-page .radar div{display:grid;grid-template-columns:30cqw 1fr;gap:3cqw;padding:3.4cqw 0;border-top:.25cqw solid #d8d1c3;font-size:3.3cqw;line-height:1.4}.mz-page .radar b{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:4.4cqw;color:#c8102e;line-height:1.1}
-.mz-page .watch{margin-top:auto;display:grid;grid-template-columns:26% 1fr;gap:4cqw;align-items:center;text-decoration:none;color:#1b1a22;background:#f2ecdf;border-radius:1.4cqw;padding:2.4cqw}.mz-page .watch img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:50% 15%;border-radius:1cqw}.mz-page .watch span{font-size:2.9cqw;line-height:1.4}.mz-page .watch b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:5cqw;color:#c8102e}.mz-back .kick{color:#7cf3ff}.mz-back h3{color:#fff;font-size:11cqw}.mz-back p{color:#fff}
+.mz-page .watch{margin-top:auto;display:grid;grid-template-columns:26% 1fr;gap:4cqw;align-items:center;text-decoration:none;color:#9ea3ad;background:#f2ecdf;border-radius:1.4cqw;padding:2.4cqw}.mz-page .watch img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:50% 15%;border-radius:1cqw}.mz-page .watch span{font-size:2.9cqw;line-height:1.4}.mz-page .watch b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:5cqw;color:#c8102e}.mz-back .kick{color:#7cf3ff}.mz-back h3{color:#fff;font-size:11cqw}.mz-back p{color:#fff}
 .mz-back .links{display:flex;flex-direction:column;gap:3cqw;margin:4cqw 0}
 .mz-back .links a{font-family:var(--f-mono);font-size:3.2cqw;letter-spacing:.12em;text-transform:uppercase;color:#0e1640;background:#fff;padding:3cqw 4cqw;border-radius:1.2cqw;text-decoration:none;text-align:center}
 .mz-back .sign{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:6cqw;line-height:1.05;margin:2cqw 0}
@@ -253,8 +254,9 @@ CSS = r'''
 .mz-cover{display:block;padding:0;background:#f4efe4;cursor:pointer;isolation:isolate}
 .mz-cover .ph{position:absolute;inset:0;z-index:0}.mz-cover .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 0}
 .mz-cover .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,16,30,.35) 0%,transparent 22%,transparent 58%,rgba(20,16,30,.75) 100%)}
-.mz-cover .wm{position:absolute;left:0;right:0;top:24.5cqw;z-index:2;text-align:center;font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:700;font-size:5.6cqw;letter-spacing:.06em;color:#ffd23f;text-shadow:0 .3cqw 1cqw rgba(0,0,0,.65)}
-.mz-cover .mast{position:absolute;left:4cqw;right:4cqw;top:4cqw;z-index:2;display:grid;justify-items:center;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:22cqw;line-height:.9;letter-spacing:-.02em;text-align:center}
+.mz-cover .mhd{position:absolute;left:0;right:0;top:4cqw;z-index:2;display:grid;justify-content:center}
+.mz-cover .wm{display:flex;justify-content:space-between;align-items:baseline;margin-top:.7cqw;font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:700;font-size:5.6cqw;letter-spacing:.06em;color:#ffd23f;text-shadow:0 .3cqw 1cqw rgba(0,0,0,.65)}
+.mz-cover .mast{position:relative;display:grid;justify-items:center;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:22cqw;line-height:.9;letter-spacing:-.02em;text-align:center}
 .mz-cover .mast>span{grid-area:1/1}
 .mz-cover .mast .sh{color:transparent;text-shadow:0 .5cqw 1.4cqw rgba(0,0,0,.55)}
 .mz-cover .mast .sv{background:linear-gradient(180deg,#ffffff 0%,#f1f3f6 22%,#c9ced8 46%,#ffffff 54%,#dde1e8 72%,#aeb5c1 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#d9dde4}
