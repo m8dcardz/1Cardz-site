@@ -45,7 +45,7 @@ def render(iss, root):
     lines = ''.join(f'<div><b>{e(a)}</b><span>{e(b)}</span></div>' for a, b in cv.get('lines', [])[:2])
     cover = f'''<div class="mz-page mz-cover" role="img" aria-label="Magazine cover: {e(cv.get('main') or iss.get('title'))}">
   <div class="ph"><img src="{e(cover_img)}" alt="" loading="lazy"></div>
-  <div class="mast">1Cardz</div>
+  <div class="mast" aria-label="1Cardz"><span class="sh">1Cardz</span><span class="sv">1Cardz</span><span class="ho" aria-hidden="true">1Cardz</span></div>
   <div class="wm">Weekly Magazine</div>
   <div class="tag">Issue {e(no)} · {e(short)}</div>
   <div class="side">{lines}</div>
@@ -253,14 +253,16 @@ CSS = r'''
 .mz-cover{display:block;padding:0;background:#f4efe4;cursor:pointer;isolation:isolate}
 .mz-cover .ph{position:absolute;inset:0;z-index:0}.mz-cover .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 0}
 .mz-cover .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,16,30,.35) 0%,transparent 22%,transparent 58%,rgba(20,16,30,.75) 100%)}
-.mz-cover .wm{position:absolute;left:0;right:0;top:24.5cqw;z-index:2;text-align:center;font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:700;font-size:5.6cqw;letter-spacing:.06em;color:#fff;text-shadow:0 .3cqw 1cqw rgba(0,0,0,.6)}
-.mz-cover .mast{position:absolute;left:4cqw;right:4cqw;top:4cqw;z-index:2;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:22cqw;line-height:.9;letter-spacing:-.02em;text-align:center;
-  background:linear-gradient(105deg,transparent 0 18%,rgba(255,92,200,1) 26%,rgba(255,226,92,1) 33%,rgba(92,255,170,1) 40%,rgba(92,200,255,1) 47%,rgba(170,120,255,1) 54%,rgba(255,92,200,1) 61%,transparent 70% 100%) 0 0/200% 100%,
-    linear-gradient(180deg,#ffffff 0%,#e4e8ee 22%,#9aa3b2 46%,#f4f6f9 54%,#b9c0cb 72%,#6e7686 100%);
-  background-blend-mode:hard-light,normal;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#d9dde4;
-  filter:drop-shadow(0 .3cqw 0 rgba(255,255,255,.35)) drop-shadow(0 .6cqw 1.2cqw rgba(0,0,0,.55));animation:mzholo 2.6s linear infinite}
-@keyframes mzholo{from{background-position:130% 0,0 0}to{background-position:-130% 0,0 0}}
-@media (prefers-reduced-motion:reduce){.mz-cover .mast{animation:none}}
+.mz-cover .wm{position:absolute;left:0;right:0;top:24.5cqw;z-index:2;text-align:center;font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:700;font-size:5.6cqw;letter-spacing:.06em;color:#ffd23f;text-shadow:0 .3cqw 1cqw rgba(0,0,0,.65)}
+.mz-cover .mast{position:absolute;left:4cqw;right:4cqw;top:4cqw;z-index:2;display:grid;justify-items:center;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:22cqw;line-height:.9;letter-spacing:-.02em;text-align:center}
+.mz-cover .mast>span{grid-area:1/1}
+.mz-cover .mast .sh{color:transparent;text-shadow:0 .5cqw 1.4cqw rgba(0,0,0,.55)}
+.mz-cover .mast .sv{background:linear-gradient(180deg,#ffffff 0%,#e4e8ee 22%,#9aa3b2 46%,#f4f6f9 54%,#b9c0cb 72%,#6e7686 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#d9dde4}
+.mz-cover .mast .ho{background:linear-gradient(105deg,transparent 0 30%,rgba(255,92,200,.85) 36%,rgba(255,226,92,.85) 41%,rgba(92,255,170,.85) 46%,rgba(92,200,255,.85) 51%,rgba(170,120,255,.85) 56%,transparent 62% 100%);
+  background-size:300% 100%;background-repeat:no-repeat;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+  will-change:background-position;transform:translateZ(0);animation:mzholo 3.2s linear infinite}
+@keyframes mzholo{from{background-position:100% 0}to{background-position:0% 0}}
+@media (prefers-reduced-motion:reduce){.mz-cover .mast .ho{animation:none;opacity:0}}
 .mz-cover .tag{position:absolute;left:0;right:0;top:34.5cqw;z-index:2;text-align:center;font-family:var(--f-mono);font-size:2.3cqw;letter-spacing:.25em;text-transform:uppercase;color:#fff;text-shadow:0 .3cqw .8cqw rgba(0,0,0,.6)}
 .mz-cover .side{position:absolute;left:4cqw;top:46cqw;z-index:2;width:30cqw;display:flex;flex-direction:column;gap:4cqw}
 .mz-cover .side b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:5.6cqw;line-height:1;color:#fff;text-shadow:0 .4cqw 1.2cqw rgba(0,0,0,.75)}

@@ -44,7 +44,7 @@ mz_html, mz_css, mz_js = nl_magazine.render(iss, root)
 issue_html = f"""  <section class="wrap nli" aria-labelledby="nli-h">
     <div class="sheet-head">
       <div class="sheet-title">
-  <h2 id="nli-h">This week's issue</h2>
+  <h2 id="nli-h">Newsletter</h2>
   <p>{e(iss['intro'])}</p>
       </div>
     </div>
@@ -87,7 +87,7 @@ extra_css = """<style>
 .nli-img span{display:block;font-size:13px;color:#6a6f8c;margin-top:8px}
 .nli-sign{margin-top:20px !important;font-weight:700;color:#12162b !important}
 .nli-cta{position:relative;z-index:4;display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center;justify-content:center;margin-top:clamp(16px,2.4vw,24px);color:#e8ecf8;font-size:15px}
-.nlp+.nli{margin-top:clamp(24px,4vw,44px)}
+
 """+mz_css+"""
 @media (max-width:560px){.nli-mail{font-size:15px;border-radius:12px}.nli-mail h3{font-size:19px}}
 </style>"""
@@ -97,25 +97,6 @@ footer = site_parts.newsletter_section(src) + '\n' + footer + '\n\n' + site_part
 body = f"""{header}
 
 <main>
-  <section class="wrap nlp" aria-labelledby="nl-h">
-    <div class="sheet-head">
-      <div class="sheet-title">
-  <h2 id="nl-h">Newsletter</h2>
-  <p>One email every Sunday with everything worth knowing in cards. Free, no spam, unsubscribe any time.</p>
-      </div>
-    </div>
-    <div class="gd">
-      <div class="mw-top">
-        <span class="mono mw-label" style="color:#ffd23f"><i style="background:#ffd23f;box-shadow:0 0 10px #ffd23f"></i><span>Newsletter</span></span>
-        <span class="mono mw-upd">Free · every Sunday</span>
-      </div>
-      <div class="nl-soon">
-        <p class="nl-big">Sign up free</p>
-        <p>The week in trading card game news: the biggest stories from Zia and Luna, release dates to watch and the Market Watch picks. Pop your email in the box below.</p>
-        <ul aria-label="What's in it"><li>Top stories</li><li>Release dates</li><li>Market Watch</li><li>Free</li></ul>
-      </div>
-    </div>
-  </section>
 {issue_html}
 </main>
 
