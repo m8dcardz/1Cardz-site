@@ -55,6 +55,15 @@
      "Ultimate Pit Fight multiplayer is back, with new heroes Zane and Killjoy.",
      "Flesh and Blood, official"
     ]
+   ],
+   "clips": [
+    "clip4",
+    "clip9",
+    "clip1",
+    "clip10",
+    "clip21",
+    "clip22",
+    "clip2"
    ]
   },
   {
@@ -87,5 +96,27 @@
   "Shuffle up,",
   "Zia & Luna",
   "1Cardz.news"
- ]
+ ],
+ "no": "01",
+ "cover_clip": "clip11",
+ "cover": {
+  "main": "The $4.88 million Mudkip",
+  "sub": "Inside the record-breaking Goldin auction",
+  "lines": [
+   [
+    "The ban that shook One Piece",
+    "Mihawk, sheathed"
+   ],
+   [
+    "Pocket goes dual",
+    "Inside Dual Fusion"
+   ]
+  ]
+ },
+ "pull": "Mudkip just outbid your rent.",
+ "feature": {
+  "clip": "clip22",
+  "title": "Pokémon's big week",
+  "text": "From the Goldin record to Mega Rayquaza ex, Pokémon owned the headlines."
+ }
 }

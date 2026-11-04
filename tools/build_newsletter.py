@@ -39,6 +39,8 @@ for sec in iss['sections']:
     _secs += f'<h3>{e(sec["h"])}</h3>'
     for t in sec.get('p', []): _secs += f'<p>{_item(t)}</p>'
     if sec.get('li'): _secs += '<ul>' + ''.join(f'<li>{_item(t)}</li>' for t in sec['li']) + '</ul>'
+import nl_magazine
+mz_html, mz_css, mz_js = nl_magazine.render(iss, root)
 issue_html = f"""  <section class="wrap nli" aria-labelledby="nli-h">
     <div class="sheet-head">
       <div class="sheet-title">
@@ -48,22 +50,10 @@ issue_html = f"""  <section class="wrap nli" aria-labelledby="nli-h">
     </div>
     <div class="gd">
       <div class="mw-top">
-        <span class="mono mw-label" style="color:#7cf3ff"><i style="background:#7cf3ff;box-shadow:0 0 10px #7cf3ff"></i><span>Today's newsletter</span></span>
+        <span class="mono mw-label" style="color:#7cf3ff"><i style="background:#7cf3ff;box-shadow:0 0 10px #7cf3ff"></i><span>Magazine edition</span></span>
         <span class="mono mw-upd">{e(iss['date'])}</span>
       </div>
-      <article class="nli-mail">
-        <p class="nli-kick">1Cardz.news Weekly · {e(iss['date'])}</p>
-        <h3 class="nli-title">{e(iss['title'])}</h3>
-        <p class="nli-by">By Zia &amp; Luna</p>
-        <p>{e(iss['greeting'])}</p>
-        <p>{e(iss['opening'])}</p>
-        <a class="nli-img" href="archive.html"><img src="{e(iss['image'])}" alt="{e(iss['image_alt'])}" loading="lazy"><span>Watch every clip from the week in the Library Archives.</span></a>
-        {_secs}
-        <hr>
-        <h3>Watch, browse, follow</h3>
-        <p>New clips drop every day at 8 AM (Zia) and 8 PM (Luna), Hong Kong time. Every headline is on <a href="news.html">Headlines</a> and the week's prices are on <a href="market.html">Market Watch</a>.</p>
-        <p class="nli-sign">{'<br>'.join(e(x) for x in iss['signoff'])}</p>
-      </article>
+{mz_html}
       <div class="nli-cta"><span>Want next Sunday's issue in your inbox?</span><a class="btn" href="#newsletter">Sign up free</a></div>
     </div>
   </section>
@@ -99,6 +89,7 @@ extra_css = """<style>
 .nli-sign{margin-top:20px !important;font-weight:700;color:#12162b !important}
 .nli-cta{position:relative;z-index:4;display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center;justify-content:center;margin-top:clamp(16px,2.4vw,24px);color:#e8ecf8;font-size:15px}
 .nlp+.nli{margin-top:clamp(24px,4vw,44px)}
+"""+mz_css+"""
 @media (max-width:560px){.nli-mail{font-size:15px;border-radius:12px}.nli-mail h3{font-size:19px}}
 </style>"""
 
@@ -144,7 +135,7 @@ __COVER__})();
 
 out = ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
        '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
-       + head + style + '\n' + extra_css + '\n</head>\n<body>\n' + body + '\n' + scrolltop + '\n' + js + '\n</body>\n</html>\n')
+       + head + '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap">\n' + style + '\n' + extra_css + '\n</head>\n<body>\n' + body + '\n' + scrolltop + '\n' + js + '\n' + mz_js + '\n</body>\n</html>\n')
 (root/'newsletter.html').write_text(out)
 print('newsletter.html', len(out), 'bytes')
 # SEO pass (titles, share previews, structured data, sitemap.xml, robots.txt); safe to repeat

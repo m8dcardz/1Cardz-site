@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500;12..96,75..100,700;12..96,75..100,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500;12..96,75..100,700;12..96,75..100,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap"></noscript>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=VT323&family=Russo+One&family=Oxanium:wght@700&family=Press+Start+2P&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=VT323&family=Russo+One&family=Oxanium:wght@700&family=Press+Start+2P&display=swap"></noscript>
 <script id="fl-boot">document.documentElement.classList.add('fl');(document.fonts&&document.fonts.load?document.fonts.load('800 40px "Bricolage Grotesque"'):Promise.resolve()).then(()=>document.documentElement.classList.remove('fl'),()=>document.documentElement.classList.remove('fl'));setTimeout(()=>document.documentElement.classList.remove('fl'),3000)</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap">
 <style>
 /* Layout: the site is a collector's binder on a playmat. Cover first, then nine-pocket pages of sleeved cards, a rarity key, and the back cover. One committed look (a physical object), colors set explicitly. */
 :root{
@@ -1034,6 +1035,61 @@ body>header .cover .top-cover{z-index:0}
 .nli-sign{margin-top:20px !important;font-weight:700;color:#12162b !important}
 .nli-cta{position:relative;z-index:4;display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center;justify-content:center;margin-top:clamp(16px,2.4vw,24px);color:#e8ecf8;font-size:15px}
 .nlp+.nli{margin-top:clamp(24px,4vw,44px)}
+
+/* newsletter magazine (style C, Nov 4) */
+.mz{position:relative;z-index:4;padding:clamp(16px,3vw,32px) 0 0}
+.mz-book{display:grid;grid-template-columns:minmax(0,1fr);max-width:440px;margin:0 auto;border-radius:6px;overflow:hidden;box-shadow:0 26px 54px rgba(0,0,0,.55)}
+.mz-book.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr);max-width:880px}
+.mz-ctl{display:flex;justify-content:center;align-items:center;gap:14px;margin-top:16px}
+.mz-ctl button{font:inherit;font-size:22px;width:44px;height:44px;border-radius:50%;border:0;background:var(--foil,#e9c46a);color:#12162b;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.35)}
+.mz-ctl button:disabled{opacity:.3;cursor:default}
+.mz-no{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#aab1c9;min-width:130px;text-align:center}
+.mz-page{position:relative;aspect-ratio:3/4;overflow:hidden;container-type:inline-size;background:#fbf8f1;color:#1b1a22;padding:6cqw;font-family:var(--f-body)}
+.mz-page+.mz-page{box-shadow:inset 1.4cqw 0 2cqw -1cqw rgba(0,0,0,.35)}
+.mz-page .run{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:2.3cqw;letter-spacing:.14em;text-transform:uppercase;color:#6a6878;border-bottom:.3cqw solid #d8d1c3;padding-bottom:2cqw;margin-bottom:5cqw}
+.mz-page .kick{font-family:var(--f-mono);font-size:2.6cqw;letter-spacing:.2em;text-transform:uppercase;color:#c8102e;margin:0 0 2cqw}
+.mz-page h3{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:8.6cqw;line-height:.98;margin:0 0 4cqw;color:#1b1a22;text-transform:none;letter-spacing:0}
+.mz-page p{font-size:3.3cqw;line-height:1.6;margin:0 0 3cqw;color:#2a2833;max-width:none}
+.mz-page p.first::first-letter{float:left;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:12cqw;line-height:.8;padding:1cqw 1.6cqw 0 0;color:#c8102e}
+.mz-page .pull{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:6cqw;line-height:1.08;border-top:.6cqw solid #1b1a22;border-bottom:.6cqw solid #1b1a22;padding:3cqw 0;margin:5cqw 0}
+.mz-page .toc{list-style:none;margin:0;padding:0;counter-reset:t}
+.mz-page .toc li{display:grid;grid-template-columns:9cqw 1fr;gap:3cqw;padding:2.4cqw 0;border-bottom:.25cqw solid #d8d1c3;counter-increment:t}
+.mz-page .toc li::before{content:counter(t,decimal-leading-zero);font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:6cqw;color:#c8102e;line-height:1}
+.mz-page .toc b{display:block;font-size:3.3cqw;line-height:1.25}.mz-page .toc span{font-size:2.6cqw;color:#6a6878}
+.mz-page .stories{display:grid;grid-template-columns:1fr 1fr;gap:4cqw}
+.mz-page .st img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;object-position:50% 15%;border-radius:1.2cqw;margin-bottom:2cqw}
+.mz-page .st .g{font-family:var(--f-mono);font-size:2.2cqw;letter-spacing:.14em;text-transform:uppercase;color:#c8102e}
+.mz-page .st b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:4cqw;line-height:1.08;margin:1cqw 0 1.4cqw}
+.mz-page .st p{font-size:2.7cqw;line-height:1.45;margin:0}
+.mz-page .st small{display:block;font-size:2.2cqw;color:#8a8796;font-style:italic;margin-top:1cqw}
+.mz-page .cal div{display:grid;grid-template-columns:24cqw 1fr;gap:3cqw;padding:3cqw 0;border-top:.25cqw solid #d8d1c3;font-size:3.2cqw;line-height:1.4}
+.mz-page .cal b{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:4.2cqw;color:#c8102e;line-height:1.05}
+.mz-page .cal i{display:block;font-size:2.5cqw;color:#6a6878;margin-top:.6cqw}
+.mz-page .sign{margin-top:6cqw;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:6cqw;line-height:1.05}
+.mz-page .cta{display:inline-block;margin-top:4cqw;font-family:var(--f-mono);font-size:2.8cqw;letter-spacing:.12em;text-transform:uppercase;background:#c8102e;color:#fff;padding:2.4cqw 4cqw;border-radius:1.2cqw;text-decoration:none}
+.mz-page .folio{position:absolute;bottom:3cqw;left:0;right:0;text-align:center;font-family:var(--f-mono);font-size:2.2cqw;color:#6a6878}
+.mz-page .folio.light{color:#fff}
+.mz-full{padding:0}.mz-full img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 10%}
+.mz-full::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(10,8,20,.8))}
+.mz-full .cap{position:absolute;left:5cqw;right:5cqw;bottom:8cqw;z-index:2;color:#fff;font-size:3cqw;line-height:1.45;text-shadow:0 .3cqw 1cqw rgba(0,0,0,.8)}
+.mz-full .cap b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:8cqw;line-height:.95;margin-bottom:2cqw}
+.mz-full .folio{z-index:2}
+/* cover */
+.mz-cover{padding:0;background:#f4efe4;cursor:pointer;isolation:isolate}
+.mz-cover .ph{position:absolute;inset:0;z-index:0}.mz-cover .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 0}
+.mz-cover .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,16,30,.35) 0%,transparent 22%,transparent 58%,rgba(20,16,30,.75) 100%)}
+.mz-cover .ed{position:absolute;left:0;right:0;top:3cqw;z-index:2;text-align:center;font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:700;font-size:5.4cqw;letter-spacing:.04em;color:#fff;text-shadow:0 .3cqw 1cqw rgba(0,0,0,.6)}
+.mz-cover .mast{position:absolute;left:4cqw;right:4cqw;top:10cqw;z-index:2;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:21cqw;line-height:.9;color:#c8102e;letter-spacing:-.02em;text-align:center;text-shadow:0 .4cqw 1.2cqw rgba(0,0,0,.25)}
+.mz-cover .tag{position:absolute;left:0;right:0;top:30.5cqw;z-index:2;text-align:center;font-family:var(--f-mono);font-size:2.3cqw;letter-spacing:.25em;text-transform:uppercase;color:#fff;text-shadow:0 .3cqw .8cqw rgba(0,0,0,.6)}
+.mz-cover .side{position:absolute;left:4cqw;top:46cqw;z-index:2;width:30cqw;display:flex;flex-direction:column;gap:4cqw}
+.mz-cover .side b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:5.6cqw;line-height:1;color:#fff;text-shadow:0 .4cqw 1.2cqw rgba(0,0,0,.75)}
+.mz-cover .side span{display:block;font-family:"Playfair Display",Georgia,serif;font-style:italic;font-size:3cqw;color:#fde8c2;text-shadow:0 .3cqw .8cqw rgba(0,0,0,.8)}
+.mz-cover .big{position:absolute;left:4cqw;right:30cqw;bottom:4cqw;z-index:2;color:#fff}
+.mz-cover .big b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:9cqw;line-height:.92;text-shadow:0 .4cqw 1.2cqw rgba(0,0,0,.6)}
+.mz-cover .big span{display:block;font-family:"Playfair Display",Georgia,serif;font-style:italic;font-size:3.6cqw;margin-top:1.5cqw;color:#fde8c2}
+.mz-cover .bar{position:absolute;right:3.5cqw;bottom:3.5cqw;z-index:2;background:#fff;color:#000;padding:1.4cqw 2cqw 1cqw;font-family:var(--f-mono);font-size:2.2cqw;text-align:center;line-height:1.2}
+.mz-cover .bar i{display:block;width:22cqw;height:7cqw;background:repeating-linear-gradient(90deg,#000 0 .5cqw,#fff .5cqw .8cqw,#000 .8cqw 1.1cqw,#fff 1.1cqw 1.9cqw,#000 1.9cqw 2.6cqw,#fff 2.6cqw 3cqw);margin-bottom:.6cqw}
+
 @media (max-width:560px){.nli-mail{font-size:15px;border-radius:12px}.nli-mail h3{font-size:19px}}
 </style>
 <!--seo-->
@@ -1200,22 +1256,24 @@ body>header .cover .top-cover{z-index:0}
     </div>
     <div class="gd">
       <div class="mw-top">
-        <span class="mono mw-label" style="color:#7cf3ff"><i style="background:#7cf3ff;box-shadow:0 0 10px #7cf3ff"></i><span>Today's newsletter</span></span>
+        <span class="mono mw-label" style="color:#7cf3ff"><i style="background:#7cf3ff;box-shadow:0 0 10px #7cf3ff"></i><span>Magazine edition</span></span>
         <span class="mono mw-upd">Sunday, November 1, 2026</span>
       </div>
-      <article class="nli-mail">
-        <p class="nli-kick">1Cardz.news Weekly · Sunday, November 1, 2026</p>
-        <h3 class="nli-title">Mudkip outbid your rent: the week in cards</h3>
-        <p class="nli-by">By Zia &amp; Luna</p>
-        <p>Hey there,</p>
-        <p>Zia and Luna here with the week in trading cards, sleeved and numbered. Grab a coffee (Zia) or a late-night tea (Luna) and let&#x27;s flip.</p>
-        <a class="nli-img" href="archive.html"><img src="img/clip11.jpg" alt="Zia reporting on Goldin&#x27;s Pokémon 30th auction" loading="lazy"><span>Watch every clip from the week in the Library Archives.</span></a>
-        <h3>The big one</h3><p><strong>Goldin&#x27;s Pokémon 30th auction passed $28 million.</strong> The October 25 sale set 18 records, led by a PSA 10 Art Academy Mudkip promo at $4.88 million and a Trophy Pikachu over $3 million. Mudkip just outbid your rent. <em>(ICv2)</em></p><h3>Top stories this week</h3><ul><li><strong>One Piece: Dracule Mihawk OP14-020 is banned.</strong> Alternate arts included, and it&#x27;s in effect now. Sheathe the swords, rebuild the deck. <em>(One Piece Card Game, official)</em></li><li><strong>Pokémon TCG Pocket: Dual Fusion is out.</strong> Dual-type cards debut, led by Mega Mewtwo X ex and Mega Greninja ex. <em>(Pokémon, official)</em></li><li><strong>Lorcana: Into the Inkdark opens for preorder.</strong> Expected February 12, 2027, with the first serialized Illustrious cards. <em>(ICv2)</em></li><li><strong>Magic: Star Trek gets a Secret Lair Superdrop.</strong> &quot;Set Phasers to Superdrop&quot; brings five Star Trek drops, with preorders opening November 9. Meanwhile the Reality Fracture Secret Lair Bundle is delayed. <em>(ICv2)</em></li><li><strong>Yu-Gi-Oh!: Maze of Machines lands March 19, 2027.</strong> A 153-card booster set with Rampant Barrel Dragon, Slot Machine 777 and 10 new GX cards. <em>(ICv2)</em></li><li><strong>Pokémon: Mega Rayquaza ex Premium Tournament Collection.</strong> Out February 12, 2027, with four foil promos, eight booster packs and Dragon Shield sleeves. <em>(ICv2)</em></li><li><strong>Flesh and Blood: Smash Palace: Chorus of Steel is out.</strong> Ultimate Pit Fight multiplayer is back, with new heroes Zane and Killjoy. <em>(Flesh and Blood, official)</em></li></ul><h3>Coming up this week</h3><ul><li><strong>Tue, Nov 3:</strong> Doug Ferguson&#x27;s Pokémon collection goes to auction, led by a jumbo graded card of Doug himself. <em>(Reported)</em></li><li><strong>Fri, Nov 6:</strong> Pokémon Mega Evolution: Delta Reign releases. <em>(Confirmed)</em></li><li><strong>Fri, Nov 6 to Thu, Nov 12:</strong> Magic | Star Trek prerelease weekend at your local store. <em>(Confirmed)</em></li><li><strong>Mon, Nov 9:</strong> &quot;Set Phasers to Superdrop&quot; Secret Lair preorders open. <em>(Confirmed)</em></li></ul>
-        <hr>
-        <h3>Watch, browse, follow</h3>
-        <p>New clips drop every day at 8 AM (Zia) and 8 PM (Luna), Hong Kong time. Every headline is on <a href="news.html">Headlines</a> and the week's prices are on <a href="market.html">Market Watch</a>.</p>
-        <p class="nli-sign">Shuffle up,<br>Zia &amp; Luna<br>1Cardz.news</p>
-      </article>
+<div class="mz" id="mz" data-pages="7">
+  <div class="mz-book" id="mzBook" aria-live="polite"></div>
+  <div class="mz-ctl"><button type="button" class="mz-prev" aria-label="Previous page">‹</button><span class="mz-no"></span><button type="button" class="mz-next" aria-label="Next page">›</button></div>
+  <template id="mzCover"><div class="mz-page mz-cover" role="img" aria-label="Magazine cover: The $4.88 million Mudkip">
+  <div class="ph"><img src="img/nl-cover-clip11.jpg" alt="" loading="lazy"></div>
+  <div class="ed">Magazine Edition</div>
+  <div class="mast">1Cardz</div>
+  <div class="tag">The Weekly · Issue 01 · November 1, 2026</div>
+  <div class="side"><div><b>The ban that shook One Piece</b><span>Mihawk, sheathed</span></div><div><b>Pocket goes dual</b><span>Inside Dual Fusion</span></div></div>
+  <div class="big"><b>The $4.88 million Mudkip</b><span>Inside the record-breaking Goldin auction</span></div>
+  <div class="bar"><i></i>1CZ-01</div>
+</div></template>
+  <template class="mzPg"><div class="mz-page"><div class="run"><span>1Cardz Weekly</span><span>No. 01</span></div><p class="kick">In this issue</p><h3>Contents</h3><ol class="toc"><li><div><b>Goldin&#x27;s Pokémon 30th auction passed $28 million</b><span>The big one · p.3</span></div></li><li><div><b>Dracule Mihawk OP14-020 is banned</b><span>One Piece · p.5</span></div></li><li><div><b>Dual Fusion is out</b><span>Pokémon TCG Pocket · p.5</span></div></li><li><div><b>Into the Inkdark opens for preorder</b><span>Lorcana · p.5</span></div></li><li><div><b>Star Trek gets a Secret Lair Superdrop</b><span>Magic · p.5</span></div></li><li><div><b>Maze of Machines lands March 19, 2027</b><span>Yu-Gi-Oh! · p.6</span></div></li><li><div><b>Mega Rayquaza ex Premium Tournament Collection</b><span>Pokémon · p.6</span></div></li><li><div><b>Smash Palace: Chorus of Steel is out</b><span>Flesh and Blood · p.6</span></div></li><li><div><b>The week ahead</b><span>p.7</span></div></li></ol><div class="folio">2</div></div></template><template class="mzPg"><div class="mz-page"><div class="run"><span>The big one</span><span>ICv2</span></div><p class="kick">Cover story</p><h3>Goldin&#x27;s Pokémon 30th auction passed $28 million</h3>
+<p class="first">Zia and Luna here with the week in trading cards, sleeved and numbered. Grab a coffee (Zia) or a late-night tea (Luna) and let&#x27;s flip.</p><p>The October 25 sale set 18 records, led by a PSA 10 Art Academy Mudkip promo at $4.88 million and a Trophy Pikachu over $3 million. Mudkip just outbid your rent.</p><div class="pull">"Mudkip just outbid your rent."</div><div class="folio">3</div></div></template><template class="mzPg"><div class="mz-page mz-full"><img src="img/nl-clip22.jpg" alt="" loading="lazy"><div class="cap"><b>Pokémon&#x27;s big week</b>From the Goldin record to Mega Rayquaza ex, Pokémon owned the headlines.</div><div class="folio light">4</div></div></template><template class="mzPg"><div class="mz-page"><div class="run"><span>Top stories</span><span>1 of 2</span></div><div class="stories"><div class="st"><img src="img/nl-clip4.jpg" alt="" loading="lazy"><span class="g">One Piece</span><b>Dracule Mihawk OP14-020 is banned</b><p>Alternate arts included, and it&#x27;s in effect now. Sheathe the swords, rebuild the deck.</p><small>One Piece Card Game, official</small></div><div class="st"><img src="img/nl-clip9.jpg" alt="" loading="lazy"><span class="g">Pokémon TCG Pocket</span><b>Dual Fusion is out</b><p>Dual-type cards debut, led by Mega Mewtwo X ex and Mega Greninja ex.</p><small>Pokémon, official</small></div><div class="st"><img src="img/nl-clip1.jpg" alt="" loading="lazy"><span class="g">Lorcana</span><b>Into the Inkdark opens for preorder</b><p>Expected February 12, 2027, with the first serialized Illustrious cards.</p><small>ICv2</small></div><div class="st"><img src="img/nl-clip10.jpg" alt="" loading="lazy"><span class="g">Magic</span><b>Star Trek gets a Secret Lair Superdrop</b><p>&quot;Set Phasers to Superdrop&quot; brings five Star Trek drops, with preorders opening November 9. Meanwhile the Reality Fracture Secret Lair Bundle is delayed.</p><small>ICv2</small></div></div><div class="folio">5</div></div></template><template class="mzPg"><div class="mz-page"><div class="run"><span>Top stories</span><span>2 of 2</span></div><div class="stories"><div class="st"><img src="img/nl-clip21.jpg" alt="" loading="lazy"><span class="g">Yu-Gi-Oh!</span><b>Maze of Machines lands March 19, 2027</b><p>A 153-card booster set with Rampant Barrel Dragon, Slot Machine 777 and 10 new GX cards.</p><small>ICv2</small></div><div class="st"><img src="img/nl-clip22.jpg" alt="" loading="lazy"><span class="g">Pokémon</span><b>Mega Rayquaza ex Premium Tournament Collection</b><p>Out February 12, 2027, with four foil promos, eight booster packs and Dragon Shield sleeves.</p><small>ICv2</small></div><div class="st"><img src="img/nl-clip2.jpg" alt="" loading="lazy"><span class="g">Flesh and Blood</span><b>Smash Palace: Chorus of Steel is out</b><p>Ultimate Pit Fight multiplayer is back, with new heroes Zane and Killjoy.</p><small>Flesh and Blood, official</small></div></div><div class="folio">6</div></div></template><template class="mzPg"><div class="mz-page"><div class="run"><span>The week ahead</span><span>November 1, 2026</span></div><p class="kick">Mark your calendar</p><h3>The week ahead</h3><div class="cal"><div><b>Tue, Nov 3</b><span>Doug Ferguson&#x27;s Pokémon collection goes to auction, led by a jumbo graded card of Doug himself.<i>Reported</i></span></div><div><b>Fri, Nov 6</b><span>Pokémon Mega Evolution: Delta Reign releases.<i>Confirmed</i></span></div><div><b>Fri, Nov 6 to Thu, Nov 12</b><span>Magic | Star Trek prerelease weekend at your local store.<i>Confirmed</i></span></div><div><b>Mon, Nov 9</b><span>&quot;Set Phasers to Superdrop&quot; Secret Lair preorders open.<i>Confirmed</i></span></div></div><div class="sign">Shuffle up,<br>Zia &amp; Luna</div><a class="cta" href="#newsletter">Get it every Sunday · free</a><div class="folio">7</div></div></template>
+</div>
       <div class="nli-cta"><span>Want next Sunday's issue in your inbox?</span><a class="btn" href="#newsletter">Sign up free</a></div>
     </div>
   </section>
@@ -1331,6 +1389,25 @@ body>header .cover .top-cover{z-index:0}
   cc.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();cc.click()}});
   clock();setInterval(clock,1000);
 })();
+</script>
+<script id="mz-js">
+(function(){const mz=document.getElementById('mz');if(!mz)return;
+  const book=document.getElementById('mzBook'),prev=mz.querySelector('.mz-prev'),next=mz.querySelector('.mz-next'),no=mz.querySelector('.mz-no');
+  const cover=document.getElementById('mzCover').innerHTML,pgs=[...mz.querySelectorAll('template.mzPg')].map(t=>t.innerHTML),total=pgs.length+1;
+  const two=()=>matchMedia('(min-width:760px)').matches;
+  let pos=0; /* 0 = cover; then page index (0-based) into pgs */
+  function view(){if(pos===0){book.classList.remove('two');book.innerHTML=cover;no.textContent='Cover · tap to open';prev.disabled=true;next.disabled=false;
+      const c=book.querySelector('.mz-cover');if(c)c.addEventListener('click',()=>go(1));return}
+    const step=two()?2:1;let i=pos-1;if(step===2)i-=i%2;pos=i+1;
+    book.classList.toggle('two',step===2);book.innerHTML=pgs.slice(i,i+step).join('');
+    no.textContent=step===2&&i+1<pgs.length?`Pages ${i+2}–${i+3} of ${total}`:`Page ${i+2} of ${total}`;
+    prev.disabled=false;next.disabled=i+step>=pgs.length}
+  function go(d){const step=two()?2:1;if(d>0)pos=pos===0?1:Math.min(pgs.length,pos+step);else pos=pos<=1?0:pos-step;view()}
+  prev.addEventListener('click',()=>go(-1));next.addEventListener('click',()=>go(1));
+  addEventListener('keydown',e=>{const r=book.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1)});
+  let sx=null;book.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
+  book.addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx;sx=null;if(Math.abs(dx)>50)go(dx<0?1:-1)},{passive:true});
+  addEventListener('resize',()=>{if(pos)view()});view()})();
 </script>
 </body>
 </html>
