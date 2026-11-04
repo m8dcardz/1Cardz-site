@@ -131,7 +131,7 @@ js = r'''<script>
     const a=h[0][1],b=h[h.length-1][1],p=(b-a)/a*100,cls=Math.abs(p)<0.05?'flat':p>0?'up':'down',ar=cls==='up'?'▲':cls==='down'?'▼':'■';
     return '<span class="mw-chg '+cls+'">'+ar+' '+Math.abs(p).toFixed(1)+'% · '+h.length+'d</span>';
   }
-  /* 15 picks, rotated daily (Hong Kong date): round-robin across games, each game's list shifted by the day */
+  /* 15 picks, rotated daily (site date, UTC+8): round-robin across games, each game's list shifted by the day */
   const SHOW=15;
   function pick(F){const day=Math.floor((Date.now()+8*3600e3)/864e5),by={};F.forEach(i=>(by[i.game]=by[i.game]||[]).push(i));
     const gs=Object.keys(by).sort();gs.forEach((g,k)=>{const a=by[g].sort((x,y)=>y.price-x.price),o=(day+k)%a.length;by[g]=a.slice(o).concat(a.slice(0,o))});

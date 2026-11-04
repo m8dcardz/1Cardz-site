@@ -34,7 +34,7 @@ GC = {"Pokémon":"#ffd23f","Magic":"#ff8a5c","One Piece":"#ff5c7a","Lorcana":"#9
 def when(s):
     d = datetime.datetime.fromisoformat(s); h = d.hour % 12 or 12
     m = f":{d.minute:02d}" if d.minute else ":00"
-    return f"{d.strftime('%a')}, {d.strftime('%b')} {d.day} · {h}{m} {'AM' if d.hour < 12 else 'PM'} HKT"
+    return f"{d.strftime('%a')}, {d.strftime('%b')} {d.day} · {h}{m} {'AM' if d.hour < 12 else 'PM'}"
 
 import unicodedata
 def story_url(n):

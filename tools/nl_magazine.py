@@ -80,7 +80,7 @@ def render(iss, root):
         ('board.html', 'Message Board', 'The arcade hall of fame: post your pulls and hot takes.'),
         ('newsletter.html', 'Newsletter', 'This magazine, free in your inbox every Sunday.')])
     body.append(('about', 'Inside 1Cardz.news', 'About the site', f"""{run('About the site', 'Issue ' + no)}<p class="kick">Welcome to</p><h3>Inside 1Cardz.news</h3>
-<div class="hosts"><img src="img/zia.webp" alt="Zia" loading="lazy"><img src="img/luna.webp" alt="Luna" loading="lazy"><p>Trading card game news in two short clips a day: <b>Zia at 8 AM</b> and <b>Luna at 8 PM</b>, Hong Kong time, on Instagram, YouTube and TikTok.</p></div>
+<div class="hosts"><img src="img/zia.webp" alt="Zia" loading="lazy"><img src="img/luna.webp" alt="Luna" loading="lazy"><p>Trading card game news in two short clips a day: <b>Zia at 8 AM</b> and <b>Luna at 8 PM</b>, on Instagram, YouTube and TikTok.</p></div>
 <div class="about">{about}</div>""" + strip))
     pull = f'<div class="pull">"{e(iss["pull"])}"</div>' if iss.get('pull') else ''
     body.append(('big', big_t, 'Cover story', f"""{run('Cover story', big[2])}<p class="kick">The big one</p><h3>{e(big_t)}</h3>
@@ -144,7 +144,7 @@ def render(iss, root):
         body.append(('cal', 'The week ahead', 'Calendar', f"""{run('The week ahead', 'Next 7 days')}<p class="kick">Mark your calendar</p><h3>The week ahead</h3><div class="cal">{rows}</div>"""))
     sign = '<br>'.join(e(x) for x in iss.get('signoff', [])[:2])
     body.append(('back', 'Never miss an issue', 'Back page', f"""<p class="kick">See you next Sunday</p><h3>Never miss an issue</h3>
-<p>One free email every Sunday with the week in cards, the market movers and what's coming up. New clips every day at 8 AM (Zia) and 8 PM (Luna), Hong Kong time.</p>
+<p>One free email every Sunday with the week in cards, the market movers and what's coming up. New clips every day at 8 AM (Zia) and 8 PM (Luna).</p>
 <div class="links"><a href="archive.html">Watch the clips</a><a href="news.html">All headlines</a></div>
 <div class="sign">{sign}</div><p class="small">1Cardz.news · Instagram @1cardz_news · YouTube @1Cardzcom · TikTok @1cardz.com</p>"""))
 

@@ -1072,7 +1072,7 @@ body>header .cover .top-cover{z-index:0}
             <header class="nm"><h3 id="ncName">Luna</h3><span class="cost" id="ncTime" data-g="☾">8:00 PM</span></header>
 
             <div class="art"><img id="ncImg" src="img/luna.webp" alt="Luna, the next host" style="object-position:50% 10%"><span class="live">Up next</span></div>
-            <div class="typeline"><span id="ncEdition">Librarian · Limited edition</span><span>HKT</span><i class="setsym holo" aria-hidden="true">★</i></div>
+            <div class="typeline"><span id="ncEdition">Librarian · Limited edition</span><i class="setsym holo" aria-hidden="true">★</i></div>
             <div class="txt">
               <p><b id="ncLine">“Luna here!”</b></p>
               <p>On air in <span class="cd" id="ncCount">--:--:--</span></p>
@@ -1849,7 +1849,7 @@ body>header .cover .top-cover{z-index:0}
       document.getElementById('ncName').textContent=h.name;const nt=document.getElementById('ncTime');nt.textContent=h.time;nt.dataset.g=h.time.endsWith('AM')?'☀':'☾';
       const im=document.getElementById('ncImg');im.src=h.img;im.alt=h.name+', the next host';im.style.objectPosition=h.pos;
       document.getElementById('ncEdition').textContent=h.edition;document.getElementById('ncLine').textContent=h.line;
-      document.getElementById('coverCard').setAttribute('aria-label',`Up next: ${h.name} at ${h.time} Hong Kong time. Tap to flip back`)}}
+      document.getElementById('coverCard').setAttribute('aria-label',`Up next: ${h.name} at ${h.time}. Tap to flip back`)}}
   const cc=document.getElementById('coverCard'),cw=document.getElementById('coverWin');
   if(!reduce){cw.addEventListener('pointermove',e=>{const r=cw.getBoundingClientRect(),px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
       cw.style.setProperty('--mx',px*100+'%');cw.style.setProperty('--my',py*100+'%');

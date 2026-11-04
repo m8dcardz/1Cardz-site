@@ -1105,7 +1105,7 @@ body>header .cover .top-cover{z-index:0}
             <header class="nm"><h3 id="ncName">Luna</h3><span class="cost" id="ncTime" data-g="☾">8:00 PM</span></header>
 
             <div class="art"><img id="ncImg" src="img/luna.webp" alt="Luna, the next host" style="object-position:50% 10%"><span class="live">Up next</span></div>
-            <div class="typeline"><span id="ncEdition">Librarian · Limited edition</span><span>HKT</span><i class="setsym holo" aria-hidden="true">★</i></div>
+            <div class="typeline"><span id="ncEdition">Librarian · Limited edition</span><i class="setsym holo" aria-hidden="true">★</i></div>
             <div class="txt">
               <p><b id="ncLine">“Luna here!”</b></p>
               <p>On air in <span class="cd" id="ncCount">--:--:--</span></p>
@@ -1204,7 +1204,7 @@ body>header .cover .top-cover{z-index:0}
     <article class="gd" style="--c:#ffd23f">
       <div class="story-card">
         <div>
-          <p class="story-kicker"><span class="mw-game">Pokémon</span><time datetime="2026-10-30T08:00:00+08:00">Fri, Oct 30 · 8:00 AM HKT</time> · With Zia</p>
+          <p class="story-kicker"><span class="mw-game">Pokémon</span><time datetime="2026-10-30T08:00:00+08:00">Fri, Oct 30 · 8:00 AM</time> · With Zia</p>
           <h1>Goldin&#x27;s Pokémon 30th auction passes $28 million</h1>
           <p class="lead">Goldin&#x27;s October 25 auction had 18 record sales, led by a PSA 10 Art Academy Mudkip promo at $4.88 million and a Trophy Pikachu over $3 million.</p>
           <p class="quip">Mudkip just outbid your rent.</p>
@@ -1216,7 +1216,7 @@ body>header .cover .top-cover{z-index:0}
     </article>
     <div class="more">
       <h2>More headlines</h2>
-      <ul><li><a href="news-2026-11-04-pokemon-happy-meals-return-to-mcdonald-s-november-10.html"><span class="g">Pokémon · Wed, Nov 4 · 8:00 AM HKT</span><b>Pokémon Happy Meals return to McDonald&#x27;s November 10</b></a></li><li><a href="news-2026-11-03-magic-s-star-trek-reaches-mtg-arena-november-10.html"><span class="g">Magic · Tue, Nov 3 · 8:00 PM HKT</span><b>Magic&#x27;s Star Trek reaches MTG Arena November 10</b></a></li><li><a href="news-2026-11-03-delta-reign-hits-stores-friday-mega-rayquaza-returns.html"><span class="g">Pokémon · Tue, Nov 3 · 8:00 AM HKT</span><b>Delta Reign hits stores Friday, Mega Rayquaza returns</b></a></li><li><a href="news-2026-11-02-magic-s-star-trek-prerelease-starts-november-6.html"><span class="g">Magic · Mon, Nov 2 · 8:00 PM HKT</span><b>Magic&#x27;s Star Trek prerelease starts November 6</b></a></li><li><a href="news-2026-11-02-flesh-and-blood-worlds-hits-paris-this-week.html"><span class="g">Flesh and Blood · Mon, Nov 2 · 8:00 AM HKT</span><b>Flesh and Blood Worlds hits Paris this week</b></a></li><li><a href="news-2026-11-01-flesh-and-blood-moves-wager-to-the-damage-step.html"><span class="g">Flesh and Blood · Sun, Nov 1 · 8:00 PM HKT</span><b>Flesh and Blood moves Wager to the damage step</b></a></li></ul>
+      <ul><li><a href="news-2026-11-04-pokemon-happy-meals-return-to-mcdonald-s-november-10.html"><span class="g">Pokémon · Wed, Nov 4 · 8:00 AM</span><b>Pokémon Happy Meals return to McDonald&#x27;s November 10</b></a></li><li><a href="news-2026-11-03-magic-s-star-trek-reaches-mtg-arena-november-10.html"><span class="g">Magic · Tue, Nov 3 · 8:00 PM</span><b>Magic&#x27;s Star Trek reaches MTG Arena November 10</b></a></li><li><a href="news-2026-11-03-delta-reign-hits-stores-friday-mega-rayquaza-returns.html"><span class="g">Pokémon · Tue, Nov 3 · 8:00 AM</span><b>Delta Reign hits stores Friday, Mega Rayquaza returns</b></a></li><li><a href="news-2026-11-02-magic-s-star-trek-prerelease-starts-november-6.html"><span class="g">Magic · Mon, Nov 2 · 8:00 PM</span><b>Magic&#x27;s Star Trek prerelease starts November 6</b></a></li><li><a href="news-2026-11-02-flesh-and-blood-worlds-hits-paris-this-week.html"><span class="g">Flesh and Blood · Mon, Nov 2 · 8:00 AM</span><b>Flesh and Blood Worlds hits Paris this week</b></a></li><li><a href="news-2026-11-01-flesh-and-blood-moves-wager-to-the-damage-step.html"><span class="g">Flesh and Blood · Sun, Nov 1 · 8:00 PM</span><b>Flesh and Blood moves Wager to the damage step</b></a></li></ul>
     </div>
   </section>
 </main>
@@ -1309,7 +1309,7 @@ body>header .cover .top-cover{z-index:0}
       document.getElementById('ncName').textContent=h.name;const nt=document.getElementById('ncTime');nt.textContent=h.time;nt.dataset.g=h.time.endsWith('AM')?'☀':'☾';
       const im=document.getElementById('ncImg');im.src=h.img;im.alt=h.name+', the next host';im.style.objectPosition=h.pos;
       document.getElementById('ncEdition').textContent=h.edition;document.getElementById('ncLine').textContent=h.line;
-      document.getElementById('coverCard').setAttribute('aria-label',`Up next: ${h.name} at ${h.time} Hong Kong time. Tap to flip back`)}}
+      document.getElementById('coverCard').setAttribute('aria-label',`Up next: ${h.name} at ${h.time}. Tap to flip back`)}}
   const cc=document.getElementById('coverCard'),cw=document.getElementById('coverWin');
   if(!reduce){cw.addEventListener('pointermove',e=>{const r=cw.getBoundingClientRect(),px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
       cw.style.setProperty('--mx',px*100+'%');cw.style.setProperty('--my',py*100+'%');

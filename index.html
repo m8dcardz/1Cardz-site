@@ -1061,7 +1061,7 @@ body>header .cover .top-cover{z-index:0}
             <header class="nm"><h3 id="ncName">Luna</h3><span class="cost" id="ncTime" data-g="☾">8:00 PM</span></header>
 
             <div class="art"><img id="ncImg" src="img/luna.webp" alt="Luna, the next host" style="object-position:50% 10%"><span class="live">Up next</span></div>
-            <div class="typeline"><span id="ncEdition">Librarian · Limited edition</span><span>HKT</span><i class="setsym holo" aria-hidden="true">★</i></div>
+            <div class="typeline"><span id="ncEdition">Librarian · Limited edition</span><i class="setsym holo" aria-hidden="true">★</i></div>
             <div class="txt">
               <p><b id="ncLine">“Luna here!”</b></p>
               <p>On air in <span class="cd" id="ncCount">--:--:--</span></p>
@@ -1174,7 +1174,7 @@ body>header .cover .top-cover{z-index:0}
     <div class="gd-stage" aria-live="polite">
         <article class="hl on" id="hl0" role="tabpanel" aria-labelledby="hlt0">
           <div class="hl-copy">
-            <div class="hl-meta mono"><span class="hl-game">Lorcana</span><span>Oct 28 · 8:00 AM HKT</span><span>With Zia</span></div>
+            <div class="hl-meta mono"><span class="hl-game">Lorcana</span><span>Oct 28 · 8:00 AM</span><span>With Zia</span></div>
             <h3>Into the Inkdark opens for preorder</h3>
             <p>Disney Lorcana’s next set is expected on February 12, 2027, and brings the first serialized Illustrious cards.</p>
             <div class="hl-foot"><span class="mono hl-src">Source · ICv2</span><button class="hl-watch" type="button" data-card="Into the Inkdark"><span class="hl-play" aria-hidden="true">▶</span> Watch the clip</button></div>
@@ -1183,7 +1183,7 @@ body>header .cover .top-cover{z-index:0}
         </article>
         <article class="hl" id="hl1" role="tabpanel" aria-labelledby="hlt1" hidden>
           <div class="hl-copy">
-            <div class="hl-meta mono"><span class="hl-game">Flesh and Blood</span><span>Oct 27 · 8:00 PM HKT</span><span>With Luna</span></div>
+            <div class="hl-meta mono"><span class="hl-game">Flesh and Blood</span><span>Oct 27 · 8:00 PM</span><span>With Luna</span></div>
             <h3>Smash Palace: Chorus of Steel lands October 30</h3>
             <p>Ultimate Pit Fight multiplayer is back, with two new heroes, Zane and Killjoy.</p>
             <div class="hl-foot"><span class="mono hl-src">Source · Flesh and Blood official site</span><button class="hl-watch" type="button" data-card="Chorus of Steel"><span class="hl-play" aria-hidden="true">▶</span> Watch the clip</button></div>
@@ -1192,7 +1192,7 @@ body>header .cover .top-cover{z-index:0}
         </article>
         <article class="hl" id="hl2" role="tabpanel" aria-labelledby="hlt2" hidden>
           <div class="hl-copy">
-            <div class="hl-meta mono"><span class="hl-game">One Piece</span><span>Oct 27 · 12:31 PM HKT</span><span>With Luna</span></div>
+            <div class="hl-meta mono"><span class="hl-game">One Piece</span><span>Oct 27 · 12:31 PM</span><span>With Luna</span></div>
             <h3>OP14-020 Dracule Mihawk is banned</h3>
             <p>The ban covers alternate arts and is now in effect. Bandai also announced a fourth anniversary event for the OP-18 launch.</p>
             <div class="hl-foot"><span class="mono hl-src">Source · Official One Piece Card Game site</span><button class="hl-watch" type="button" data-card="Mihawk Banned"><span class="hl-play" aria-hidden="true">▶</span> Watch the clip</button></div>
@@ -1739,7 +1739,7 @@ body>header .cover .top-cover{z-index:0}
     const pockets=()=>[...document.querySelectorAll('.pockets .flip')];
     const up=()=>pockets().filter(c=>c.getAttribute('aria-pressed')==='true').length;
     const upd=()=>{if(score)score.textContent=up()+' / '+pockets().length};
-    /* daily collection (Hong Kong date), remembered in this browser */
+    /* daily collection (site date, UTC+8), remembered in this browser */
     const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Hong_Kong'}).format(new Date()),KEY='1cz-holo-found';
     let col={day:today,found:[]};try{localStorage.removeItem(KEY)}catch(e){} /* every visit starts at 0 */
     const save=()=>{};
@@ -1841,7 +1841,7 @@ body>header .cover .top-cover{z-index:0}
   const bc=document.getElementById('barcode');let seed=1209;
   for(let i=0;i<46;i++){seed=(seed*9301+49297)%233280;const w=1+Math.floor(seed/233280*3.5);const el=document.createElement('i');el.style.width=w+'px';el.style.marginRight=(i%3?1:2)+'px';bc.appendChild(el)}
 
-  /* next drop: 08:00 and 20:00 Hong Kong = 00:00 and 12:00 UTC */
+  /* next drop: 00:00 and 12:00 UTC */
   const p2=n=>String(n).padStart(2,'0');
   const ids=['count','coverCount'].map(i=>document.getElementById(i)).filter(Boolean);
   const whos=['who','coverWho'].map(i=>document.getElementById(i)).filter(Boolean);
@@ -1856,7 +1856,7 @@ body>header .cover .top-cover{z-index:0}
       document.getElementById('ncName').textContent=h.name;const nt=document.getElementById('ncTime');nt.textContent=h.time;nt.dataset.g=h.time.endsWith('AM')?'☀':'☾';
       const im=document.getElementById('ncImg');im.src=h.img;im.alt=h.name+', the next host';im.style.objectPosition=h.pos;
       document.getElementById('ncEdition').textContent=h.edition;document.getElementById('ncLine').textContent=h.line;
-      document.getElementById('coverCard').setAttribute('aria-label',`Up next: ${h.name} at ${h.time} Hong Kong time. Tap to flip back`)}}
+      document.getElementById('coverCard').setAttribute('aria-label',`Up next: ${h.name} at ${h.time}. Tap to flip back`)}}
   let shown=null;
   const HOSTS={zia:{name:'Zia',time:'8:00 AM',img:'img/zia.webp',pos:'50% 10%',edition:'Reporter · Special edition',line:'“Zia here!”'},
                luna:{name:'Luna',time:'8:00 PM',img:'img/luna.webp',pos:'50% 10%',edition:'Librarian · Limited edition',line:'“Luna here!”'}};
@@ -1980,7 +1980,7 @@ body>header .cover .top-cover{z-index:0}
   const panels=[...document.querySelectorAll('.gd-stage .hl')],tabs=[...document.querySelectorAll('.hl-tab')];if(panels.length<3)return;
   const esc=t=>String(t==null?'':t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  const fmt=w=>{const m=/^(\d{4})-(\d\d)-(\d\d)T(\d\d):(\d\d)/.exec(w||'');if(!m)return'';let h=+m[4];const ap=h>=12?'PM':'AM';h=h%12||12;return M[+m[2]-1]+' '+(+m[3])+' · '+h+':'+m[5]+' '+ap+' HKT'};
+  const fmt=w=>{const m=/^(\d{4})-(\d\d)-(\d\d)T(\d\d):(\d\d)/.exec(w||'');if(!m)return'';let h=+m[4];const ap=h>=12?'PM':'AM';h=h%12||12;return M[+m[2]-1]+' '+(+m[3])+' · '+h+':'+m[5]+' '+ap};
   const get=u=>fetch(u+'?v='+Math.floor(Date.now()/600000),{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject());
   Promise.all([get('tools/posts.json'),get('tools/news.json').catch(()=>[])]).then(([posts,news])=>{
     if(!Array.isArray(posts)||posts.length<3)return;

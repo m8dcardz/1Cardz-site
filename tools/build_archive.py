@@ -214,7 +214,7 @@ js = r'''<script>
       document.getElementById('ncName').textContent=h.name;const nt=document.getElementById('ncTime');nt.textContent=h.time;nt.dataset.g=h.time.endsWith('AM')?'☀':'☾';
       const im=document.getElementById('ncImg');im.src=h.img;im.alt=h.name+', the next host';im.style.objectPosition=h.pos;
       document.getElementById('ncEdition').textContent=h.edition;document.getElementById('ncLine').textContent=h.line;
-      document.getElementById('coverCard').setAttribute('aria-label',`Up next: ${h.name} at ${h.time} Hong Kong time. Tap to flip back`)}}
+      document.getElementById('coverCard').setAttribute('aria-label',`Up next: ${h.name} at ${h.time}. Tap to flip back`)}}
   const cc=document.getElementById('coverCard'),cw=document.getElementById('coverWin');
   if(!reduce){cw.addEventListener('pointermove',e=>{const r=cw.getBoundingClientRect(),px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
       cw.style.setProperty('--mx',px*100+'%');cw.style.setProperty('--my',py*100+'%');
