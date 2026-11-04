@@ -47,6 +47,10 @@ header = re.sub(r'<p class="home-intro">.*?</p>|<p>The trading card game news ch
 header = header.replace('<a class="btn" href="#set" id="seeLatest">See the latest</a>', '<a class="btn" href="index.html">Back home</a>')
 
 e = html.escape
+try:
+    NEWS = json.loads((pathlib.Path(__file__).resolve().parent / 'news.json').read_text())
+except Exception:
+    NEWS = []
 cards = []
 for k, p in enumerate(newest):
     num = f"{p['no']:03d}"
@@ -65,7 +69,7 @@ for k, p in enumerate(newest):
           <div class="inner">
             <div class="face back"><em>{num}/{n:03d}</em><span>Tap to flip</span></div>
             <div class="face front">
-              <header class="nm"><h3>{e(p['title'])}</h3><span class="cost">{e(p['game'])}</span></header>
+              <header class="nm"><h3>{(f'<a href="{site_parts.clip_page(p, NEWS)}" style="color:inherit;text-decoration:none" onclick="event.stopPropagation()">' + e(p['title']) + '</a>') if p.get('clip') else e(p['title'])}</h3><span class="cost">{e(p['game'])}</span></header>
               {art}
               {btn}
               <div class="typeline"><span>Clip · {e(p['host'])} · {when_label(p['when'])}</span><i class="setsym {symc}" aria-hidden="true">{sym}</i></div>

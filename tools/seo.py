@@ -10,7 +10,9 @@ It is safe to run any number of times. For every page it:
 It also writes sitemap.xml and robots.txt.
 Every page builder (build_*.py) calls it at the end, so the daily runs keep it current.
 """
-import html, json, pathlib, re, datetime
+import html, json, pathlib, re, datetime, sys, hashlib
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+import site_parts
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE = 'https://1cardz.news/'
@@ -55,16 +57,19 @@ def jsonld(page, posts, news):
         return [org, {'@type': 'WebSite', '@id': SITE + '#site', 'name': '1Cardz.news', 'url': SITE, 'publisher': {'@id': SITE + '#org'},
                       'inLanguage': 'en'}]
     title, desc = PAGES[page]
+    crumbs = {'@type': 'BreadcrumbList', 'itemListElement': [
+        {'@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': SITE},
+        {'@type': 'ListItem', 'position': 2, 'name': title.split(' | ')[0], 'item': SITE + page}]}
     web = {'@type': 'CollectionPage' if page in ('news.html', 'archive.html') else 'WebPage', 'name': title, 'description': desc,
            'url': SITE + page, 'isPartOf': {'@type': 'WebSite', 'name': '1Cardz.news', 'url': SITE}, 'publisher': org}
     if page == 'news.html' and news:
         items = sorted(news, key=lambda n: n.get('when', ''), reverse=True)[:30]
         web['mainEntity'] = {'@type': 'ItemList', 'itemListElement': [
             {'@type': 'ListItem', 'position': i + 1, 'item': {'@type': 'NewsArticle', 'headline': n.get('title', '')[:110],
-             'description': n.get('summary', ''), 'datePublished': iso(n.get('when', '')), 'url': SITE + 'news.html',
+             'description': n.get('summary', ''), 'datePublished': iso(n.get('when', '')), 'url': SITE + site_parts.story_url(n),
              'image': OG_IMG, 'author': {'@id': SITE + '#org'}, 'publisher': {'@id': SITE + '#org'}}}
             for i, n in enumerate(items)]}
-        return [org, web]
+        return [org, web, crumbs]
     if page == 'archive.html' and posts:
         vids = []
         for p in sorted(posts, key=lambda p: p.get('when', ''), reverse=True):
@@ -73,12 +78,13 @@ def jsonld(page, posts, news):
                 continue
             v = {'@type': 'VideoObject', 'name': f"{p.get('title', '')} | {p.get('game', '')} news with {p.get('host', '')}",
                  'description': p.get('blurb') or p.get('title', ''), 'thumbnailUrl': SITE + f'img/{c}.jpg',
-                 'uploadDate': iso(p.get('when', '')), 'contentUrl': SITE + f'img/{c}.mp4', 'embedUrl': SITE + 'archive.html',
+                 'uploadDate': iso(p.get('when', '')), 'contentUrl': SITE + f'img/{c}.mp4', 'embedUrl': SITE + site_parts.clip_page(p, news),
+                 'url': SITE + site_parts.clip_page(p, news),
                  'publisher': {'@id': SITE + '#org'}}
             vids.append({k: x for k, x in v.items() if x})
         web['hasPart'] = vids
-        return [org, web]
-    return [org, web]
+        return [org, web, crumbs]
+    return [org, web, crumbs]
 
 def head_block(page, posts, news):
     title, desc = PAGES[page]
@@ -128,6 +134,24 @@ def fix_page(page, posts, news):
             s = re.sub(r'(<div class="sheet-head">\s*(?:<div class="sheet-title">\s*)?)<h2([^>]*)>(.*?)</h2>', r'\1<h1\2>\3</h1>', s, count=1, flags=re.S)
     p.write_text(s)
 
+INDEXNOW_KEY = '1cardz9f3e6b2a7d4c4f81a0e5b9c2d7f6a3e1'
+
+def indexnow(sm, old):
+    """Tell Bing and other IndexNow search engines about new or changed pages (only when the sitemap changed)."""
+    (ROOT / f'{INDEXNOW_KEY}.txt').write_text(INDEXNOW_KEY)
+    new = re.findall(r'<loc>(.*?)</loc>', sm)
+    was = set(re.findall(r'<loc>(.*?)</loc>', old))
+    changed = [u for u in new if u not in was] or ([] if sm == old else new[:6])
+    if not changed or __import__('os').environ.get('NO_PING'):
+        return
+    try:
+        import urllib.request
+        body = json.dumps({'host': '1cardz.news', 'key': INDEXNOW_KEY, 'keyLocation': f'{SITE}{INDEXNOW_KEY}.txt', 'urlList': changed[:1000]}).encode()
+        req = urllib.request.Request('https://api.indexnow.org/indexnow', data=body, headers={'Content-Type': 'application/json; charset=utf-8'})
+        print('indexnow:', urllib.request.urlopen(req, timeout=15).status, len(changed), 'urls')
+    except Exception as x:
+        print('indexnow skipped:', x)
+
 def main():
     posts, news = load('posts.json'), load('news.json')
     for page in PAGES:
@@ -139,10 +163,42 @@ def main():
     pri = {'index.html': '1.0', 'news.html': '0.9', 'archive.html': '0.9', 'market.html': '0.8', 'newsletter.html': '0.6', 'board.html': '0.5'}
     urls = ''.join(f'  <url><loc>{SITE}{"" if pg == "index.html" else pg}</loc><lastmod>{last[pg]}</lastmod><changefreq>daily</changefreq><priority>{pri[pg]}</priority></url>\n'
                    for pg in PAGES if (ROOT / pg).exists())
-    for f in sorted(ROOT.glob('news-2*.html'), reverse=True):    # one page per story (built by build_news.py)
-        urls += f'  <url><loc>{SITE}{f.name}</loc><lastmod>{f.name[5:15]}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n'
-    (ROOT / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + '</urlset>\n')
-    (ROOT / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nDisallow: /tools/*.py\n\nSitemap: {SITE}sitemap.xml\n')
+    # one page per story and per clip (built by build_news.py), each with its picture and video
+    seen, fresh = set(), []
+    now = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=8)))
+    for n, p in site_parts.story_items(news, posts):
+        u = site_parts.story_url(n)
+        if u in seen or not (ROOT / u).exists():
+            continue
+        seen.add(u)
+        x = ''
+        c = (p or {}).get('clip')
+        if c and (ROOT / 'img' / f'{c}.jpg').exists():
+            x = (f'<image:image><image:loc>{SITE}img/{c}.jpg</image:loc></image:image>'
+                 f'<video:video><video:thumbnail_loc>{SITE}img/{c}.jpg</video:thumbnail_loc><video:title>{e(n["title"])}</video:title>'
+                 f'<video:description>{e((p.get("blurb") or n.get("summary") or n["title"])[:2000])}</video:description>'
+                 f'<video:content_loc>{SITE}img/{c}.mp4</video:content_loc><video:publication_date>{iso(n["when"])}</video:publication_date>'
+                 f'<video:family_friendly>yes</video:family_friendly></video:video>')
+        urls += f'  <url><loc>{SITE}{u}</loc><lastmod>{n["when"][:10]}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>{x}</url>\n'
+        try:
+            if now - datetime.datetime.fromisoformat(iso(n['when'])) < datetime.timedelta(days=2):
+                fresh.append((u, n))
+        except Exception:
+            pass
+    for f in sorted(ROOT.glob('news-2*.html'), reverse=True):   # any older story page still on the site
+        if f.name not in seen:
+            urls += f'  <url><loc>{SITE}{f.name}</loc><lastmod>{f.name[5:15]}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>\n'
+    sm = ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
+          'xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">\n' + urls + '</urlset>\n')
+    old = (ROOT / 'sitemap.xml').read_text() if (ROOT / 'sitemap.xml').exists() else ''
+    (ROOT / 'sitemap.xml').write_text(sm)
+    # Google News sitemap: stories from the last 2 days
+    nx = ''.join(f'  <url><loc>{SITE}{u}</loc><news:news><news:publication><news:name>1Cardz.news</news:name><news:language>en</news:language></news:publication>'
+                 f'<news:publication_date>{iso(n["when"])}</news:publication_date><news:title>{e(n["title"])}</news:title></news:news></url>\n' for u, n in fresh)
+    (ROOT / 'news-sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
+                                           'xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">\n' + nx + '</urlset>\n')
+    (ROOT / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nDisallow: /tools/*.py\n\nSitemap: {SITE}sitemap.xml\nSitemap: {SITE}news-sitemap.xml\n')
+    indexnow(sm, old)
     print('seo: pages, sitemap.xml and robots.txt updated')
 
 if __name__ == '__main__':

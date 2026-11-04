@@ -3,3 +3,4 @@ Allow: /
 Disallow: /tools/*.py
 
 Sitemap: https://1cardz.news/sitemap.xml
+Sitemap: https://1cardz.news/news-sitemap.xml

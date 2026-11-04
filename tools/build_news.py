@@ -166,8 +166,8 @@ story_css = """<style>
 s_header = header.replace('<h1 class="foil">', '<div class="foil h1x">', 1)
 s_header = re.sub(r'(<div class="foil h1x">.*?)</h1>', r'\1</div>', s_header, count=1, flags=re.S)
 made = []
-for k, n in enumerate(news):
-    url = story_url(n); p = posts.get(n['when'])
+for k, (n, p) in enumerate(site_parts.story_items(news, list(posts.values()))):
+    url = story_url(n)
     title = n['title']; desc = n['summary']
     img = SITE + f"img/{p['clip']}.jpg" if p else SITE + 'img/og-1cardz.jpg'
     c = GC.get(n['game'], '#7cf3ff')
@@ -208,6 +208,10 @@ for k, n in enumerate(news):
           'author': {'@type': 'Organization', 'name': '1Cardz.news', 'url': SITE},
           'publisher': {'@type': 'NewsMediaOrganization', 'name': '1Cardz.news', 'url': SITE,
                         'logo': {'@type': 'ImageObject', 'url': SITE + 'img/icon-512.png', 'width': 512, 'height': 512}}}
+    crumbs = {'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
+        {'@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': SITE},
+        {'@type': 'ListItem', 'position': 2, 'name': 'Headlines', 'item': SITE + 'news.html'},
+        {'@type': 'ListItem', 'position': 3, 'name': title, 'item': SITE + url}]}
     if p:
         ld['video'] = {'@type': 'VideoObject', 'name': title, 'description': p.get('blurb') or desc, 'thumbnailUrl': img,
                        'uploadDate': iso(n['when']), 'contentUrl': SITE + f"img/{p['clip']}.mp4", 'embedUrl': SITE + url}
@@ -226,6 +230,7 @@ for k, n in enumerate(news):
         '<meta name="twitter:card" content="summary_large_image">', f'<meta name="twitter:title" content="{q(title)}">',
         f'<meta name="twitter:description" content="{q(desc)}">', f'<meta name="twitter:image" content="{img}">',
         '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace('</', '<\\/') + '</script>',
+        '<script type="application/ld+json">' + json.dumps(crumbs, ensure_ascii=False).replace('</', '<\\/') + '</script>',
         '<!--/seo-->'])
     shead = re.sub(r'<title>.*?</title>', lambda m: f'<title>{q(title)} | 1Cardz.news</title>', head)
     shead = shead.replace('href="https://1cardz.news/news.html"', f'href="{SITE + url}"')

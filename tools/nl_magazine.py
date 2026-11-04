@@ -46,7 +46,8 @@ def render(iss, root):
     cover = f'''<div class="mz-page mz-cover" role="img" aria-label="Magazine cover: {e(cv.get('main') or iss.get('title'))}">
   <div class="ph"><img src="{e(cover_img)}" alt="" loading="lazy"></div>
   <div class="mhd"><div class="mast" aria-label="1Cardz"><span class="sh">1Cardz</span><span class="sv">1Cardz</span><span class="ho" aria-hidden="true">1Cardz</span></div>
-  <div class="wm"><span>Weekly Magazine</span><span>Vol.{e(str(iss.get('vol', 1)))}</span></div></div>
+  <div class="wm">Weekly Magazine</div></div>
+  <div class="vol">Vol.{e(str(iss.get('vol', 1)))}</div>
   <div class="tag">Issue {e(no)} · {e(short)}</div>
   <div class="side">{lines}</div>
   <div class="big"><b>{e(cv.get('main') or iss.get('title'))}</b><span>{e(cv.get('sub', ''))}</span></div>
@@ -255,7 +256,8 @@ CSS = r'''
 .mz-cover .ph{position:absolute;inset:0;z-index:0}.mz-cover .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 0}
 .mz-cover .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,16,30,.35) 0%,transparent 22%,transparent 58%,rgba(20,16,30,.75) 100%)}
 .mz-cover .mhd{position:absolute;left:0;right:0;top:4cqw;z-index:2;display:grid;justify-content:center}
-.mz-cover .wm{display:flex;justify-content:space-between;align-items:baseline;margin-top:.7cqw;font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:700;font-size:5.6cqw;letter-spacing:.06em;color:#ffd23f;text-shadow:0 .3cqw 1cqw rgba(0,0,0,.65)}
+.mz-cover .vol{position:absolute;right:4cqw;top:44cqw;z-index:2;font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:900;font-size:7cqw;line-height:1;color:#ffd23f;text-shadow:0 .4cqw 1.2cqw rgba(0,0,0,.7)}
+.mz-cover .wm{text-align:center;margin-top:.7cqw;font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:700;font-size:5.6cqw;letter-spacing:.06em;color:#ffd23f;text-shadow:0 .3cqw 1cqw rgba(0,0,0,.65)}
 .mz-cover .mast{position:relative;display:grid;justify-items:center;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:22cqw;line-height:.9;letter-spacing:-.02em;text-align:center}
 .mz-cover .mast>span{grid-area:1/1}
 .mz-cover .mast .sh{color:transparent;text-shadow:0 .5cqw 1.4cqw rgba(0,0,0,.55)}
@@ -272,7 +274,7 @@ CSS = r'''
 .mz-cover .big{position:absolute;left:4cqw;right:30cqw;bottom:4cqw;z-index:2;color:#fff}
 .mz-cover .big b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:9cqw;line-height:.92;text-shadow:0 .4cqw 1.2cqw rgba(0,0,0,.6)}
 .mz-cover .big span{display:block;font-family:"Playfair Display",Georgia,serif;font-style:italic;font-size:3.6cqw;margin-top:1.5cqw;color:#fde8c2}
-.mz-cover .bar{position:absolute;right:3.5cqw;bottom:3.5cqw;z-index:2;background:#fff;color:#000;padding:1.4cqw 2cqw 1cqw;font-family:var(--f-mono);font-size:2.2cqw;text-align:center;line-height:1.2}
+.mz-cover .bar{position:absolute;right:3.5cqw;bottom:3.5cqw;z-index:2;background:#fff;color:#8a8f99;padding:1.4cqw 2cqw 1cqw;font-family:var(--f-mono);font-size:2.2cqw;text-align:center;line-height:1.2}
 .mz-cover .bar i{display:block;width:22cqw;height:7cqw;background:repeating-linear-gradient(90deg,#000 0 .5cqw,#fff .5cqw .8cqw,#000 .8cqw 1.1cqw,#fff 1.1cqw 1.9cqw,#000 1.9cqw 2.6cqw,#fff 2.6cqw 3cqw);margin-bottom:.6cqw}
 '''
 
