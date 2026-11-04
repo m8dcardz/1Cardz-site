@@ -54,6 +54,31 @@
      "Flesh and Blood: Smash Palace: Chorus of Steel is out.",
      "Ultimate Pit Fight multiplayer is back, with new heroes Zane and Killjoy.",
      "Flesh and Blood, official"
+    ],
+    [
+     "Gundam: The Gundam Card Game heads to PAX Unplugged.",
+     "Learn to Play demo decks and Event Sealed Battles in Philadelphia, December 4-6, 2026.",
+     "Gundam Card Game, official"
+    ],
+    [
+     "Pokémon: The Valentine's Box arrives January 15.",
+     "It hits retail January 15, 2027, with 20 booster packs and To/From labels.",
+     "ICv2"
+    ],
+    [
+     "Flesh and Blood: Wager moves to the damage step.",
+     "The October 30 rules update, effective now, moves Wager before go again and restores Zane's Celebrant Broadsword combo.",
+     "Flesh and Blood, official"
+    ],
+    [
+     "Pokémon: Doug Ferguson's collection heads to auction.",
+     "Items from the collection go up for auction on November 3, led by a jumbo graded card of Doug himself.",
+     "ICv2"
+    ],
+    [
+     "Pokémon: Deck Crafter's Collection is out now.",
+     "A box packed with competitive staples.",
+     "Official announcements"
     ]
    ],
    "clips": [
@@ -63,7 +88,12 @@
     "clip10",
     "clip21",
     "clip22",
-    "clip2"
+    "clip2",
+    "clip23",
+    "clip24",
+    "clip25",
+    "clip3",
+    "clip5"
    ]
   },
   {
@@ -174,5 +204,27 @@
    "photo_title": "Two types, one pack",
    "photo_text": "Pocket's first dual-type cards, led by Mega Mewtwo X ex and Mega Greninja ex."
   }
+ ],
+ "radar": [
+  [
+   "Dec 4–6, 2026",
+   "Gundam Card Game at PAX Unplugged, Philadelphia"
+  ],
+  [
+   "Jan 15, 2027",
+   "Pokémon Valentine's Box"
+  ],
+  [
+   "Feb 12, 2027",
+   "Lorcana: Into the Inkdark"
+  ],
+  [
+   "Feb 12, 2027",
+   "Pokémon Mega Rayquaza ex Premium Tournament Collection"
+  ],
+  [
+   "Mar 19, 2027",
+   "Yu-Gi-Oh! Maze of Machines"
+  ]
  ]
 }

@@ -135,6 +135,10 @@ def render(iss, root):
     if q:
         quips = ''.join(f'<blockquote><p>"{e(x["quip"])}"</p><cite>{e(x["host"])} on {e(x["title"])}</cite></blockquote>' for x in q[-6:])
         body.append(('quips', 'Overheard in the studio', 'The best lines', f"""{run('Overheard in the studio', 'The best lines')}<p class="kick">Said on air</p><h3>Overheard in the studio</h3><div class="quips">{quips}</div>"""))
+    radar = iss.get('radar') or []
+    if radar:
+        rr = ''.join(f'<div><b>{e(d_)}</b><span>{e(t_)}</span></div>' for d_, t_ in radar)
+        body.append(('radar', 'Release radar', 'Further ahead', f"""{run('Release radar', 'Further ahead')}<p class="kick">Save the dates</p><h3>Release radar</h3><div class="radar">{rr}</div><p class="note">Dates as announced in this issue's stories. Every story is on the <a href="news.html">Headlines</a> page.</p>"""))
     if cal:
         rows = ''.join(f'<div><b>{e(c[0].rstrip(":"))}</b><span>{e(c[1])}<i>{e(c[2])}</i></span></div>' for c in cal)
         body.append(('cal', 'The week ahead', 'Calendar', f"""{run('The week ahead', 'Next 7 days')}<p class="kick">Mark your calendar</p><h3>The week ahead</h3><div class="cal">{rows}</div>"""))
@@ -153,19 +157,24 @@ def render(iss, root):
         if key == 'top':
             if seen_top: continue
             seen_top = True
-            t, sub, pg = 'Top stories of the week', games_l or 'Top stories', f'{tpages[0]}–{tpages[-1]}' if len(tpages) > 1 else str(tpages[0])
+            t, sub, pg = 'Top stories of the week', f"{len(tops)} stories · {len(games_l.split(', ')) if games_l else 0} games", f'{tpages[0]}–{tpages[-1]}' if len(tpages) > 1 else str(tpages[0])
         else:
             pg = str(3 + n)
         toc += f'<li><div><span>{e(sub)}</span><b>{e(t)}</b></div><em>{pg}</em></li>'
     pages = [f'<div class="mz-page">{run("1Cardz Weekly", "No. " + no)}<p class="kick">In this issue</p><h3>Contents</h3><ol class="toc">{toc}</ol><div class="folio">2</div></div>']
+    back_html = ''
+    if body and body[-1][0] == 'back':
+        back_html = f'<div class="mz-page mz-back">{body[-1][3]}</div>'
+        body = body[:-1]
     for n, (key, _, _, h) in enumerate(body):
         cls = ' mz-full' if key == 'feat' else (' mz-back' if key == 'back' else '')
         pages.append(f'<div class="mz-page mz-{key}{cls}">{h}<div class="folio">{3 + n}</div></div>')
 
-    html_ = f'''<div class="mz" id="mz" data-pages="{len(pages) + 1}">
+    html_ = f'''<div class="mz" id="mz" data-pages="{len(pages) + 2}">
   <div class="mz-book" id="mzBook" aria-live="polite"></div>
   <div class="mz-ctl"><button type="button" class="mz-prev" aria-label="Previous page">‹</button><span class="mz-no"></span><button type="button" class="mz-next" aria-label="Next page">›</button></div>
   <template id="mzCover">{cover}</template>
+  <template id="mzBack">{back_html}</template>
   {''.join(f'<template class="mzPg">{p}</template>' for p in pages)}
 </div>'''
     return html_, CSS, JS
@@ -189,7 +198,7 @@ CSS = r'''
 .mz-page p.first::first-letter{float:left;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:12cqw;line-height:.8;padding:1cqw 1.6cqw 0 0;color:#c8102e}
 .mz-page .pull{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:6cqw;line-height:1.08;border-top:.6cqw solid #1b1a22;border-bottom:.6cqw solid #1b1a22;padding:2.6cqw 0;margin:3.5cqw 0}
 .mz-page .toc{list-style:none;margin:0;padding:0;counter-reset:t}
-.mz-page .toc li{display:grid;grid-template-columns:8cqw 1fr auto;align-items:baseline;gap:3cqw;padding:1cqw 0;border-bottom:.25cqw solid #d8d1c3;counter-increment:t}
+.mz-page .toc li{display:grid;grid-template-columns:8cqw 1fr auto;align-items:baseline;gap:3cqw;padding:.45cqw 0;border-bottom:.25cqw solid #d8d1c3;counter-increment:t}
 .mz-page .toc li::before{content:counter(t,decimal-leading-zero);font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:5cqw;color:#c8102e;line-height:1}
 .mz-page .toc b{display:block;font-size:3.1cqw;line-height:1.25}.mz-page .toc span{display:block;font-family:var(--f-mono);font-size:2cqw;letter-spacing:.12em;text-transform:uppercase;color:#6a6878}.mz-page .toc em{font-style:normal;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:3.6cqw;color:#1b1a22}
 .mz-page .stories{display:grid;grid-template-rows:1fr 1fr;gap:4cqw;flex:1;min-height:0}
@@ -234,6 +243,7 @@ CSS = r'''
 .mz-page blockquote p{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:700;font-size:3.8cqw;line-height:1.25;margin:0 0 1.5cqw;color:#1b1a22}
 .mz-page blockquote cite{font-style:normal;font-family:var(--f-mono);font-size:2.2cqw;letter-spacing:.1em;text-transform:uppercase;color:#6a6878}
 .mz-back{background:linear-gradient(160deg,#1b2a6b 0%,#0e1640 55%,#060a22 100%);color:#fff;justify-content:center}.mz-back .folio{position:absolute;left:0;right:0;bottom:4%}
+.mz-page .radar div{display:grid;grid-template-columns:30cqw 1fr;gap:3cqw;padding:3.4cqw 0;border-top:.25cqw solid #d8d1c3;font-size:3.3cqw;line-height:1.4}.mz-page .radar b{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:4.4cqw;color:#c8102e;line-height:1.1}
 .mz-page .watch{margin-top:auto;display:grid;grid-template-columns:26% 1fr;gap:4cqw;align-items:center;text-decoration:none;color:#1b1a22;background:#f2ecdf;border-radius:1.4cqw;padding:2.4cqw}.mz-page .watch img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:50% 15%;border-radius:1cqw}.mz-page .watch span{font-size:2.9cqw;line-height:1.4}.mz-page .watch b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:5cqw;color:#c8102e}.mz-back .kick{color:#7cf3ff}.mz-back h3{color:#fff;font-size:11cqw}.mz-back p{color:#fff}
 .mz-back .links{display:flex;flex-direction:column;gap:3cqw;margin:4cqw 0}
 .mz-back .links a{font-family:var(--f-mono);font-size:3.2cqw;letter-spacing:.12em;text-transform:uppercase;color:#0e1640;background:#fff;padding:3cqw 4cqw;border-radius:1.2cqw;text-decoration:none;text-align:center}
@@ -245,9 +255,11 @@ CSS = r'''
 .mz-cover .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,16,30,.35) 0%,transparent 22%,transparent 58%,rgba(20,16,30,.75) 100%)}
 .mz-cover .wm{position:absolute;left:0;right:0;top:24.5cqw;z-index:2;text-align:center;font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:700;font-size:5.6cqw;letter-spacing:.06em;color:#fff;text-shadow:0 .3cqw 1cqw rgba(0,0,0,.6)}
 .mz-cover .mast{position:absolute;left:4cqw;right:4cqw;top:4cqw;z-index:2;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:22cqw;line-height:.9;letter-spacing:-.02em;text-align:center;
-  color:#fff;background:linear-gradient(110deg,#fff 0%,#fff 38%,#ffd6f3 44%,#b8f6ff 49%,#fff6c8 54%,#fff 60%,#fff 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 .4cqw 1cqw rgba(0,0,0,.45));animation:mzholo 3.5s linear infinite}
-@keyframes mzholo{from{background-position:125% 0}to{background-position:-125% 0}}
+  background:linear-gradient(105deg,transparent 0 18%,rgba(255,92,200,1) 26%,rgba(255,226,92,1) 33%,rgba(92,255,170,1) 40%,rgba(92,200,255,1) 47%,rgba(170,120,255,1) 54%,rgba(255,92,200,1) 61%,transparent 70% 100%) 0 0/200% 100%,
+    linear-gradient(180deg,#ffffff 0%,#e4e8ee 22%,#9aa3b2 46%,#f4f6f9 54%,#b9c0cb 72%,#6e7686 100%);
+  background-blend-mode:hard-light,normal;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#d9dde4;
+  filter:drop-shadow(0 .3cqw 0 rgba(255,255,255,.35)) drop-shadow(0 .6cqw 1.2cqw rgba(0,0,0,.55));animation:mzholo 2.6s linear infinite}
+@keyframes mzholo{from{background-position:130% 0,0 0}to{background-position:-130% 0,0 0}}
 @media (prefers-reduced-motion:reduce){.mz-cover .mast{animation:none}}
 .mz-cover .tag{position:absolute;left:0;right:0;top:34.5cqw;z-index:2;text-align:center;font-family:var(--f-mono);font-size:2.3cqw;letter-spacing:.25em;text-transform:uppercase;color:#fff;text-shadow:0 .3cqw .8cqw rgba(0,0,0,.6)}
 .mz-cover .side{position:absolute;left:4cqw;top:46cqw;z-index:2;width:30cqw;display:flex;flex-direction:column;gap:4cqw}
@@ -263,19 +275,23 @@ CSS = r'''
 JS = r'''<script id="mz-js">
 (function(){const mz=document.getElementById('mz');if(!mz)return;
   const book=document.getElementById('mzBook'),prev=mz.querySelector('.mz-prev'),next=mz.querySelector('.mz-next'),no=mz.querySelector('.mz-no');
-  const cover=document.getElementById('mzCover').innerHTML,pgs=[...mz.querySelectorAll('template.mzPg')].map(t=>t.innerHTML),total=pgs.length+1;
+  const cover=document.getElementById('mzCover').innerHTML,back=(document.getElementById('mzBack')||{}).innerHTML||'',pgs=[...mz.querySelectorAll('template.mzPg')].map(t=>t.innerHTML);
+  const total=pgs.length+1+(back?1:0);
   const two=()=>matchMedia('(min-width:760px)').matches;
-  let pos=0; /* 0 = cover; then page index (0-based) into pgs */
-  function view(){if(pos===0){book.classList.remove('two');book.innerHTML=cover;no.textContent='Cover · tap to open';prev.disabled=true;next.disabled=false;
-      const c=book.querySelector('.mz-cover');if(c)c.addEventListener('click',()=>go(1));return}
-    const step=two()?2:1;let i=pos-1;if(step===2)i-=i%2;pos=i+1;
-    book.classList.toggle('two',step===2);book.innerHTML=pgs.slice(i,i+step).join('');
-    no.textContent=step===2&&i+1<pgs.length?`Pages ${i+2}–${i+3} of ${total}`:`Page ${i+2} of ${total}`;
-    prev.disabled=false;next.disabled=i+step>=pgs.length}
-  function go(d){const step=two()?2:1;if(d>0)pos=pos===0?1:Math.min(pgs.length,pos+step);else pos=pos<=1?0:pos-step;view()}
+  /* views: cover alone, inside pages in spreads (or singles on phones), back page alone */
+  function views(){const v=[{h:cover,first:1,n:1,cov:1}],st=two()?2:1;for(let i=0;i<pgs.length;i+=st)v.push({h:pgs.slice(i,i+st).join(''),first:i+2,n:Math.min(st,pgs.length-i)});
+    if(back)v.push({h:back,first:pgs.length+2,n:1});return v}
+  let idx=0,firstShown=1;
+  function view(){const v=views();idx=Math.max(0,Math.min(idx,v.length-1));const c=v[idx];firstShown=c.first;
+    book.classList.toggle('two',c.n===2);book.innerHTML=c.h;
+    no.textContent=c.cov?'Cover · tap to open':(c.n===2?`Pages ${c.first}–${c.first+1} of ${total}`:(idx===v.length-1&&back?'Back cover':`Page ${c.first} of ${total}`));
+    prev.disabled=idx===0;next.disabled=idx===v.length-1;
+    if(c.cov){const el=book.querySelector('.mz-cover');if(el)el.addEventListener('click',()=>go(1))}}
+  function go(d){idx+=d>0?1:-1;view()}
+  addEventListener('resize',()=>{const v=views();idx=v.findIndex(x=>x.first<=firstShown&&firstShown<x.first+x.n);if(idx<0)idx=0;view()});
   prev.addEventListener('click',()=>go(-1));next.addEventListener('click',()=>go(1));
   addEventListener('keydown',e=>{const r=book.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1)});
   let sx=null;book.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
   book.addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx;sx=null;if(Math.abs(dx)>50)go(dx<0?1:-1)},{passive:true});
-  addEventListener('resize',()=>{if(pos)view()});view()})();
+  view()})();
 </script>'''
