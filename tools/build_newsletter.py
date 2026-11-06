@@ -117,6 +117,27 @@ out = ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
        '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
        + head + '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap">\n' + style + '\n' + extra_css + '\n</head>\n<body>\n' + body + '\n' + scrolltop + '\n' + js + '\n' + mz_js + '\n</body>\n</html>\n')
 (root/'newsletter.html').write_text(out)
+
+# Magazine cover picture for emails (img/magazine-cover.jpg, used by the beehiiv welcome email, Nov 6, 2026).
+# Re-rendered from the live cover whenever this page is rebuilt; skipped quietly if Playwright isn't there.
+try:
+    import subprocess, os
+    js = """const {chromium}=require('playwright');(async()=>{const b=await chromium.launch();
+const p=await b.newPage({viewport:{width:1200,height:1400},deviceScaleFactor:1.5});
+await p.goto('file://'+process.argv[1]);await p.waitForTimeout(1500);
+await p.evaluate(()=>document.querySelectorAll('.mz-cover .ho').forEach(e=>{e.style.animation='none';e.style.opacity='0'}));
+const el=await p.$('.mz-cover');await el.screenshot({path:process.argv[2]});await b.close()})().catch(e=>{console.error(e.message);process.exit(1)})"""
+    png = root/'img'/'magazine-cover.png'
+    r = subprocess.run(['node', '-e', js, str(root/'newsletter.html'), str(png)], timeout=90, capture_output=True, text=True)
+    if r.returncode == 0 and png.exists():
+        from PIL import Image
+        Image.open(png).convert('RGB').save(root/'img'/'magazine-cover.jpg', quality=84, optimize=True, progressive=True)
+        png.unlink()
+        print('magazine-cover.jpg updated')
+    else:
+        print('magazine cover skipped:', (r.stderr or '').strip()[:120])
+except Exception as _e:
+    print('magazine cover skipped:', _e)
 print('newsletter.html', len(out), 'bytes')
 # SEO pass (titles, share previews, structured data, sitemap.xml, robots.txt); safe to repeat
 try:
