@@ -147,7 +147,7 @@ def render(iss, root):
     body.append(('back', 'Never miss an issue', 'Back page', f"""<p class="kick">See you next Sunday</p><h3>Never miss an issue</h3>
 <p>One free email every Sunday with the week in cards, the market movers and what's coming up. New clips every day at 8 AM (Zia) and 8 PM (Luna).</p>
 <div class="links"><a href="archive.html">Watch the clips</a><a href="news.html">All headlines</a></div>
-<div class="sign">{sign}</div><p class="small">1Cardz.news · Instagram @1cardz_news · YouTube @1Cardzcom · TikTok @1cardz.com</p>"""))
+<div class="sign">{sign}</div><p class="small">1Cardz.news · Instagram @1cardzcom · YouTube @1Cardzcom · TikTok @1cardz.com</p>"""))
 
     # contents (page 2), then the body pages from page 3
     toc = ''; seen_top = False

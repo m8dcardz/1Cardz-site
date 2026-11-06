@@ -18,7 +18,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE = 'https://1cardz.news/'
 OG_IMG = SITE + 'img/og-1cardz.jpg'
 GOOGLE_VERIFY = 'Qn2aus3288fPHtNy3uGq67lvfgMzjwkNacnNeF72rlY'  # Google Search Console (HTML tag method, Nov 3, 2026)
-SOCIAL = ['https://www.instagram.com/1cardz_news/', 'https://www.youtube.com/@1Cardzcom', 'https://www.tiktok.com/@1cardz.com']
+SOCIAL = ['https://www.instagram.com/1cardzcom/', 'https://www.youtube.com/@1Cardzcom', 'https://www.tiktok.com/@1cardz.com']
 GAMES = 'Pokémon, Magic: The Gathering, One Piece, Yu-Gi-Oh!, Lorcana, Flesh and Blood and more'
 
 PAGES = {
