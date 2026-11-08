@@ -26,6 +26,33 @@ def _img(root, clip, cover=False):
         return 'img/' + out.name
     return f'img/{clip}.jpg' if (root / 'img' / f'{clip}.jpg').exists() else ''
 
+def _vol_pos(root, img, vol):
+    """Where the "Vol." block goes on the cover (Nov 8): the calmest, not-too-bright spot of the cover picture
+    in the right-hand column, clear of the masthead, cover lines, headline and barcode.
+    Returns CSS like "top:55cqw;right:4cqw". An issue can force it with "vol_pos" (e.g. {"top":50,"right":4})."""
+    try:
+        from PIL import Image, ImageFilter
+        im = Image.open(root / img).convert('L')
+    except Exception:
+        return ''
+    W, H = im.size
+    s = (100 * 4 / 3) / H                     # cqw per pixel (the picture fills the 3:4 page by height)
+    ox = (W * s - 100) / 2                     # cqw cropped off each side (object-position 50%)
+    edges = im.filter(ImageFilter.FIND_EDGES)
+    bw, bh = 7 * 0.62 * (len(f'Vol.{vol}')) + 2, 9   # block size in cqw (approx.)
+    best = None
+    for top in range(38, 101, 2):              # below the issue line, above the barcode
+        for right in (4, 8, 12, 16):
+            x0, x1 = 100 - right - bw, 100 - right
+            if x0 < 36: continue               # keep clear of the cover lines on the left
+            box = tuple(int(v) for v in ((x0 + ox) / s, top / s, (x1 + ox) / s, (top + bh) / s))
+            e_ = sum(edges.crop(box).getdata()) / max(1, (box[2] - box[0]) * (box[3] - box[1]))
+            b_ = sum(im.crop(box).getdata()) / max(1, (box[2] - box[0]) * (box[3] - box[1]))
+            score = e_ + max(0, b_ - 120) * 0.6 + abs(top - 58) * 0.15
+            if best is None or score < best[0]:
+                best = (score, top, right)
+    return f'top:{best[1]}cqw;right:{best[2]}cqw' if best else ''
+
 def render(iss, root):
     root = pathlib.Path(root)
     secs = {s.get('h', ''): s for s in iss.get('sections', [])}
@@ -42,12 +69,15 @@ def render(iss, root):
         g, _, t = lead.partition(': ')
         return (g, t.rstrip('.')) if t else ('', lead.rstrip('.'))
 
+    vp = iss.get('vol_pos')
+    vol_style = (f' style="top:{vp.get("top", 55)}cqw;right:{vp.get("right", 4)}cqw"' if isinstance(vp, dict)
+                 else (lambda c: f' style="{c}"' if c else '')(_vol_pos(root, cover_img, iss.get('vol', 1)) if cover_img else ''))
     lines = ''.join(f'<div><b>{e(a)}</b><span>{e(b)}</span></div>' for a, b in cv.get('lines', [])[:2])
     cover = f'''<div class="mz-page mz-cover" role="img" aria-label="Magazine cover: {e(cv.get('main') or iss.get('title'))}">
   <div class="ph"><img src="{e(cover_img)}" alt="" loading="lazy"></div>
   <div class="mhd"><div class="mast" aria-label="1Cardz"><span class="sh">1Cardz</span><span class="sv">1Cardz</span><span class="ho" aria-hidden="true">1Cardz</span></div>
   <div class="wm">Weekly Magazine</div></div>
-  <div class="vol">Vol.{e(str(iss.get('vol', 1)))}</div>
+  <div class="vol"{vol_style}>Vol.{e(str(iss.get('vol', 1)))}</div>
   <div class="tag">Issue {e(no)} · {e(short)}</div>
   <div class="side">{lines}</div>
   <div class="big"><b>{e(cv.get('main') or iss.get('title'))}</b><span>{e(cv.get('sub', ''))}</span></div>
@@ -269,15 +299,15 @@ CSS = r'''
 @keyframes mzholo{from{background-position:100% 0}to{background-position:0% 0}}
 @media (prefers-reduced-motion:reduce){.mz-cover .mast .ho{animation:none;opacity:0}}
 /* side shelves of past issues (Nov 8): 6 per side, straight down; each cover cased like a graded card */
-.mz-desk{position:relative;z-index:4;display:grid;padding:0 clamp(14px,2vw,26px);grid-template-columns:minmax(80px,90px) minmax(0,1fr) minmax(80px,90px);gap:clamp(24px,2.6vw,34px);align-items:start}
+.mz-desk{position:relative;z-index:4;display:grid;padding:0 clamp(14px,2vw,26px);grid-template-columns:minmax(178px,188px) minmax(0,1fr) minmax(178px,188px);gap:clamp(24px,2.6vw,34px);align-items:start}
 .mz-shelf{display:flex;flex-direction:column;gap:14px;padding-top:clamp(16px,3vw,32px)}
 .mz-slot{position:relative;display:block;width:100%;padding:0;border:0;background:none;color:inherit;font:inherit;text-align:left;cursor:pointer;transition:transform .2s ease}
 .mz-slot .slab{display:block;padding:4px 4px 6px;border-radius:6px;background:linear-gradient(135deg,rgba(255,255,255,.30),rgba(255,255,255,.07) 38%,rgba(255,255,255,.04) 62%,rgba(255,255,255,.20));
   border:1px solid rgba(255,255,255,.5);box-shadow:inset 0 0 0 2px rgba(255,255,255,.08),inset 0 1px 0 rgba(255,255,255,.6),0 10px 20px rgba(0,0,0,.5)}
-.mz-slot .lbl{display:block;margin-bottom:4px;padding:3px 3px 2px;background:#f6f4ee;border:1px solid #c8102e;border-radius:2px;text-align:center;font-family:var(--f-mono);text-transform:uppercase;line-height:1.25;color:#12162b;overflow:hidden;white-space:nowrap}
-.mz-slot .lbl b{display:block;font-size:8.5px;letter-spacing:.06em;font-weight:700}
-.mz-slot .lbl i{display:block;font-style:normal;font-size:6.5px;letter-spacing:.04em;color:#c8102e;overflow:hidden;text-overflow:ellipsis}
-.mz-slot .cv{display:block;min-width:68px;border-radius:2px;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.35)}
+.mz-slot .lbl{display:block;margin-bottom:3px;padding:1px 3px;font-size:8px;background:#f6f4ee;border:1px solid #c8102e;border-radius:2px;text-align:center;font-family:var(--f-mono);text-transform:uppercase;line-height:1.25;color:#12162b;overflow:hidden;white-space:nowrap}
+.mz-slot .lbl b{display:inline;font-size:8px;letter-spacing:.06em;font-weight:700}
+.mz-slot .lbl i{display:inline;margin-left:.6em;font-style:normal;font-size:8px;letter-spacing:.04em;color:#c8102e;overflow:hidden;text-overflow:ellipsis}
+.mz-slot .cv{display:block;min-width:168px;border-radius:2px;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.35)}
 .mz-slot .mz-page{pointer-events:none}
 .mz-slot .mz-cover .mast .ho{display:none}
 .mz-slot .tab{position:absolute;top:50%;right:-17px;transform:translateY(-50%);width:17px;padding:10px 0;border-radius:0 5px 5px 0;background:#ffd23f;color:#12162b;
@@ -293,7 +323,7 @@ CSS = r'''
 .mz-home[hidden]{display:none}
 @media (max-width:759px){.mz-desk{grid-template-columns:minmax(0,1fr);padding:0}
   .mz-shelf{flex-direction:row;gap:12px;padding:14px 22px 4px;overflow-x:auto;scrollbar-width:thin}
-  .mz-slot{flex:0 0 86px}
+  .mz-slot{flex:0 0 178px}
   .mz-slot .tab,.mz-shelf.r .mz-slot .tab{position:static;display:block;width:auto;margin-top:4px;padding:4px 0;border-radius:4px;transform:none;writing-mode:horizontal-tb}
   .mz-desk>.mz-mid{order:1}.mz-shelf.l{order:2}.mz-shelf.r{order:3}}
 .mz-cover .tag{position:absolute;left:0;right:0;top:34.5cqw;z-index:2;text-align:center;font-family:var(--f-mono);font-size:2.3cqw;letter-spacing:.25em;text-transform:uppercase;color:#fff;text-shadow:0 .3cqw .8cqw rgba(0,0,0,.6)}

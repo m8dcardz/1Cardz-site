@@ -71,10 +71,10 @@ def _slot(item):
         tag = d.get('date', '')
     return (f'<button type="button" class="mz-slot" data-src="mag/issue-{e(no_)}.html" data-date="{e(d.get("date", ""))}" '
             f'aria-label="Read Issue {e(no_)}, {e(d.get("date", ""))}"><span class="slab"><span class="lbl"><b>{e(tag)}</b><i>Issue {e(no_)}</i></span>'
-            f'<span class="cv">{cov}</span></span><span class="tab">Read</span></button>')
-_sl = (past + [None] * 12)[:12]
-shelf_l = '<div class="mz-shelf l" aria-label="Past issues">' + ''.join(_slot(x) for x in _sl[:6]) + '</div>'
-shelf_r = '<div class="mz-shelf r" aria-label="More past issues">' + ''.join(_slot(x) for x in _sl[6:]) + '</div>'
+            f'<span class="cv">{cov}</span></span></button>')
+_sl = (past + [None] * 10)[:10]
+shelf_l = '<div class="mz-shelf l" aria-label="Past issues">' + ''.join(_slot(x) for x in _sl[:5]) + '</div>'
+shelf_r = '<div class="mz-shelf r" aria-label="More past issues">' + ''.join(_slot(x) for x in _sl[5:]) + '</div>'
 mz_html = (f'<div class="mz-desk">{shelf_l}<div class="mz-mid"><button type="button" class="mz-home" id="mzHome" hidden>↩ This week\'s issue</button>'
            + mz_html + f'</div>{shelf_r}</div>')
 issue_html = f"""  <section class="wrap nli" aria-labelledby="nli-h">
