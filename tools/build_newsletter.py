@@ -63,10 +63,15 @@ for no_, d in sorted(issues.items(), key=lambda kv: kv[0], reverse=True):
         past.append((no_, d, cov.group(1) if cov else ''))
 def _slot(item):
     if not item:
-        return '<div class="mz-slot empty" aria-hidden="true"></div>'
+        return '<div class="mz-slot empty" aria-hidden="true"><span class="slab"><span class="lbl"><b>&nbsp;</b><i>&nbsp;</i></span><span class="cv"></span></span></div>'
     no_, d, cov = item
+    try:
+        dd = datetime.datetime.strptime(d.get('date', ''), '%A, %B %d, %Y'); tag = f"{dd.strftime('%b').upper()} {dd.day}, {dd.year}"
+    except Exception:
+        tag = d.get('date', '')
     return (f'<button type="button" class="mz-slot" data-src="mag/issue-{e(no_)}.html" data-date="{e(d.get("date", ""))}" '
-            f'aria-label="Open Issue {e(no_)}, {e(d.get("date", ""))}">{cov}</button>')
+            f'aria-label="Read Issue {e(no_)}, {e(d.get("date", ""))}"><span class="slab"><span class="lbl"><b>{e(tag)}</b><i>Issue {e(no_)}</i></span>'
+            f'<span class="cv">{cov}</span></span><span class="tab">Read</span></button>')
 _sl = (past + [None] * 12)[:12]
 shelf_l = '<div class="mz-shelf l" aria-label="Past issues">' + ''.join(_slot(x) for x in _sl[:6]) + '</div>'
 shelf_r = '<div class="mz-shelf r" aria-label="More past issues">' + ''.join(_slot(x) for x in _sl[6:]) + '</div>'
