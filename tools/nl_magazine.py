@@ -213,7 +213,7 @@ def render(iss, root):
 CSS = r'''
 /* newsletter magazine (style C, Nov 4) */
 .mz{position:relative;z-index:4;padding:clamp(16px,3vw,32px) 0 0}
-.mz-book{display:grid;grid-template-columns:minmax(0,1fr);max-width:440px;margin:0 auto;border-radius:6px;overflow:hidden;box-shadow:0 26px 54px rgba(0,0,0,.55)}
+.mz-book{display:grid;grid-template-columns:minmax(0,1fr);max-width:440px;margin:0 auto;border-radius:0;overflow:hidden;box-shadow:0 26px 54px rgba(0,0,0,.55)}
 .mz-book.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr);max-width:880px}
 .mz-book.mini .mz-page{cursor:zoom-in}.mz-book.zoom .mz-page{cursor:zoom-out}
 @media (max-width:759px){.mz{padding-left:22px;padding-right:22px}}
@@ -307,7 +307,7 @@ CSS = r'''
 .mz-slot .lbl{display:block;margin-bottom:3px;padding:1px 3px;font-size:8px;background:#f6f4ee;border:1px solid #c8102e;border-radius:2px;text-align:center;font-family:var(--f-mono);text-transform:uppercase;line-height:1.25;color:#12162b;overflow:hidden;white-space:nowrap}
 .mz-slot .lbl b{display:inline;font-size:8px;letter-spacing:.06em;font-weight:700}
 .mz-slot .lbl i{display:inline;margin-left:.6em;font-style:normal;font-size:8px;letter-spacing:.04em;color:#c8102e;overflow:hidden;text-overflow:ellipsis}
-.mz-slot .cv{display:block;min-width:168px;border-radius:2px;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.35)}
+.mz-slot .cv{display:block;min-width:168px;border-radius:0;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.35)}
 .mz-slot .mz-page{pointer-events:none}
 .mz-slot .mz-cover .mast .ho{display:none}
 .mz-slot .tab{position:absolute;top:50%;right:-17px;transform:translateY(-50%);width:17px;padding:10px 0;border-radius:0 5px 5px 0;background:#ffd23f;color:#12162b;
