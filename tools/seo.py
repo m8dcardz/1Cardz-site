@@ -152,10 +152,21 @@ def indexnow(sm, old):
     except Exception as x:
         print('indexnow skipped:', x)
 
+# GoatCounter visitor counter (Nov 8, 2026): one tag before </head> on every top-level page, story pages included
+GC_TAG = '<script id="gc-js" data-goatcounter="https://1cardz-news.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>'
+
+def add_counter():
+    for f in ROOT.glob('*.html'):
+        s = f.read_text()
+        if 'id="gc-js"' in s or '</head>' not in s:
+            continue
+        f.write_text(s.replace('</head>', GC_TAG + '\n</head>', 1))
+
 def main():
     posts, news = load('posts.json'), load('news.json')
     for page in PAGES:
         fix_page(page, posts, news)
+    add_counter()
     today = datetime.date.today().isoformat()
     newest = lambda xs: max((x.get('when', '')[:10] for x in xs if x.get('when')), default=today)
     last = {'index.html': max(newest(posts), newest(news)), 'news.html': newest(news), 'archive.html': newest(posts),
