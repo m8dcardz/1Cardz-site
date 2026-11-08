@@ -41,6 +41,37 @@ for sec in iss['sections']:
     if sec.get('li'): _secs += '<ul>' + ''.join(f'<li>{_item(t)}</li>' for t in sec['li']) + '</ul>'
 import nl_magazine
 mz_html, mz_css, mz_js = nl_magazine.render(iss, root)
+
+# Past issues (Nov 8): every issue is kept in tools/newsletters/issue-NN.json. Each one is rendered to
+# mag/issue-NN.html (just its page templates, loaded into the viewer when its cover is tapped).
+# The side shelves hold up to 6 past covers each, newest first: left shelf first, then right.
+issues = {}
+for f in sorted((root/'tools'/'newsletters').glob('issue-*.json')):
+    try:
+        d = json.loads(f.read_text()); issues[str(d.get('no'))] = d
+    except Exception as _x:
+        print('skipped', f.name, _x)
+issues[str(iss.get('no'))] = iss
+(root/'mag').mkdir(exist_ok=True)
+past = []
+for no_, d in sorted(issues.items(), key=lambda kv: kv[0], reverse=True):
+    h_ = mz_html if d is iss else nl_magazine.render(d, root)[0]
+    tpls = ''.join(re.findall(r'<template[^>]*>.*?</template>', h_, flags=re.S))
+    (root/'mag'/f'issue-{no_}.html').write_text(tpls + '\n')
+    if d is not iss:
+        cov = re.search(r'<template id="mzCover">(.*?)</template>', h_, flags=re.S)
+        past.append((no_, d, cov.group(1) if cov else ''))
+def _slot(item):
+    if not item:
+        return '<div class="mz-slot empty" aria-hidden="true"></div>'
+    no_, d, cov = item
+    return (f'<button type="button" class="mz-slot" data-src="mag/issue-{e(no_)}.html" data-date="{e(d.get("date", ""))}" '
+            f'aria-label="Open Issue {e(no_)}, {e(d.get("date", ""))}">{cov}</button>')
+_sl = (past + [None] * 12)[:12]
+shelf_l = '<div class="mz-shelf l" aria-label="Past issues">' + ''.join(_slot(x) for x in _sl[:6]) + '</div>'
+shelf_r = '<div class="mz-shelf r" aria-label="More past issues">' + ''.join(_slot(x) for x in _sl[6:]) + '</div>'
+mz_html = (f'<div class="mz-desk">{shelf_l}<div class="mz-mid"><button type="button" class="mz-home" id="mzHome" hidden>↩ This week\'s issue</button>'
+           + mz_html + f'</div>{shelf_r}</div>')
 issue_html = f"""  <section class="wrap nli" aria-labelledby="nli-h">
     <div class="sheet-head">
       <div class="sheet-title">
@@ -51,7 +82,7 @@ issue_html = f"""  <section class="wrap nli" aria-labelledby="nli-h">
     <div class="gd">
       <div class="mw-top">
         <span class="mono mw-label" style="color:#ffd23f"><i style="background:#ffd23f;box-shadow:0 0 10px #ffd23f"></i><span>Newsletter</span></span>
-        <span class="mono mw-upd">{e(iss['date'])}</span>
+        <span class="mono mw-upd" id="mzDate">{e(iss['date'])}</span>
       </div>
 {mz_html}
     </div>

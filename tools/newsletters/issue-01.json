@@ -1,0 +1,230 @@
+{
+ "date": "Sunday, November 1, 2026",
+ "title": "Mudkip outbid your rent: the week in cards",
+ "intro": "One free email every Sunday with the week in cards. Here's the latest issue as a magazine: tap the cover to open it, and sign up free at the bottom of the page.",
+ "greeting": "Hey there,",
+ "opening": "Zia and Luna here with the week in trading cards, sleeved and numbered. Grab a coffee (Zia) or a late-night tea (Luna) and let's flip.",
+ "image": "img/clip11.jpg",
+ "image_alt": "Zia reporting on Goldin's Pokémon 30th auction",
+ "sections": [
+  {
+   "h": "The big one",
+   "p": [
+    [
+     "Goldin's Pokémon 30th auction passed $28 million.",
+     "The October 25 sale set 18 records, led by a PSA 10 Art Academy Mudkip promo at $4.88 million and a Trophy Pikachu over $3 million. Mudkip just outbid your rent.",
+     "ICv2"
+    ]
+   ]
+  },
+  {
+   "h": "Top stories this week",
+   "li": [
+    [
+     "One Piece: Dracule Mihawk OP14-020 is banned.",
+     "Alternate arts included, and it's in effect now. Sheathe the swords, rebuild the deck.",
+     "One Piece Card Game, official"
+    ],
+    [
+     "Pokémon TCG Pocket: Dual Fusion is out.",
+     "Dual-type cards debut, led by Mega Mewtwo X ex and Mega Greninja ex.",
+     "Pokémon, official"
+    ],
+    [
+     "Lorcana: Into the Inkdark opens for preorder.",
+     "Expected February 12, 2027, with the first serialized Illustrious cards.",
+     "ICv2"
+    ],
+    [
+     "Magic: Star Trek gets a Secret Lair Superdrop.",
+     "\"Set Phasers to Superdrop\" brings five Star Trek drops, with preorders opening November 9. Meanwhile the Reality Fracture Secret Lair Bundle is delayed.",
+     "ICv2"
+    ],
+    [
+     "Yu-Gi-Oh!: Maze of Machines lands March 19, 2027.",
+     "A 153-card booster set with Rampant Barrel Dragon, Slot Machine 777 and 10 new GX cards.",
+     "ICv2"
+    ],
+    [
+     "Pokémon: Mega Rayquaza ex Premium Tournament Collection.",
+     "Out February 12, 2027, with four foil promos, eight booster packs and Dragon Shield sleeves.",
+     "ICv2"
+    ],
+    [
+     "Flesh and Blood: Smash Palace: Chorus of Steel is out.",
+     "Ultimate Pit Fight multiplayer is back, with new heroes Zane and Killjoy.",
+     "Flesh and Blood, official"
+    ],
+    [
+     "Gundam: The Gundam Card Game heads to PAX Unplugged.",
+     "Learn to Play demo decks and Event Sealed Battles in Philadelphia, December 4-6, 2026.",
+     "Gundam Card Game, official"
+    ],
+    [
+     "Pokémon: The Valentine's Box arrives January 15.",
+     "It hits retail January 15, 2027, with 20 booster packs and To/From labels.",
+     "ICv2"
+    ],
+    [
+     "Flesh and Blood: Wager moves to the damage step.",
+     "The October 30 rules update, effective now, moves Wager before go again and restores Zane's Celebrant Broadsword combo.",
+     "Flesh and Blood, official"
+    ],
+    [
+     "Pokémon: Doug Ferguson's collection heads to auction.",
+     "Items from the collection go up for auction on November 3, led by a jumbo graded card of Doug himself.",
+     "ICv2"
+    ],
+    [
+     "Pokémon: Deck Crafter's Collection is out now.",
+     "A box packed with competitive staples.",
+     "Official announcements"
+    ]
+   ],
+   "clips": [
+    "clip4",
+    "clip9",
+    "clip1",
+    "clip10",
+    "clip21",
+    "clip22",
+    "clip2",
+    "clip23",
+    "clip24",
+    "clip25",
+    "clip3",
+    "clip5"
+   ]
+  },
+  {
+   "h": "Coming up this week",
+   "li": [
+    [
+     "Tue, Nov 3:",
+     "Doug Ferguson's Pokémon collection goes to auction, led by a jumbo graded card of Doug himself.",
+     "Reported"
+    ],
+    [
+     "Fri, Nov 6:",
+     "Pokémon Mega Evolution: Delta Reign releases.",
+     "Confirmed"
+    ],
+    [
+     "Fri, Nov 6 to Thu, Nov 12:",
+     "Magic | Star Trek prerelease weekend at your local store.",
+     "Confirmed"
+    ],
+    [
+     "Mon, Nov 9:",
+     "\"Set Phasers to Superdrop\" Secret Lair preorders open.",
+     "Confirmed"
+    ]
+   ]
+  }
+ ],
+ "signoff": [
+  "Shuffle up,",
+  "Zia & Luna",
+  "1Cardz.news"
+ ],
+ "no": "01",
+ "cover_clip": "clip11",
+ "cover": {
+  "main": "The $4.88 million Mudkip",
+  "sub": "Inside the record-breaking Goldin auction",
+  "lines": [
+   [
+    "The ban that shook One Piece",
+    "Mihawk, sheathed"
+   ],
+   [
+    "Pocket goes dual",
+    "Inside Dual Fusion"
+   ]
+  ]
+ },
+ "pull": "Mudkip just outbid your rent.",
+ "feature": {
+  "clip": "clip22",
+  "title": "Pokémon's big week",
+  "text": "From the Goldin record to Mega Rayquaza ex, Pokémon owned the headlines."
+ },
+ "numbers": [
+  [
+   "$28M+",
+   "Goldin's Pokémon 30th auction total"
+  ],
+  [
+   "18",
+   "records set in a single sale"
+  ],
+  [
+   "$4.88M",
+   "PSA 10 Art Academy Mudkip promo"
+  ],
+  [
+   "$3M+",
+   "Trophy Pikachu"
+  ],
+  [
+   "153",
+   "cards in Yu-Gi-Oh!'s Maze of Machines"
+  ],
+  [
+   "10",
+   "new GX cards in that set"
+  ]
+ ],
+ "spreads": [
+  {
+   "story": "One Piece: Dracule Mihawk OP14-020 is banned.",
+   "clip": "clip4",
+   "kick": "One Piece",
+   "title": "Mihawk is banned",
+   "text": [
+    "Bandai has banned OP14-020 Dracule Mihawk, and the ban covers the alternate arts too. It is in effect now.",
+    "Luna broke the news on the channel. If Mihawk was in your list, it's time to sheathe the swords and rebuild the deck."
+   ],
+   "pull": "Sheathe the swords. Rebuild the deck.",
+   "src": "One Piece Card Game, official",
+   "photo_title": "Swords down",
+   "photo_text": "Mihawk OP14-020 is off the table, alternate arts included."
+  },
+  {
+   "story": "Pokémon TCG Pocket: Dual Fusion is out.",
+   "clip": "clip9",
+   "kick": "Pokémon TCG Pocket",
+   "title": "Dual Fusion is out",
+   "text": [
+    "Pokémon TCG Pocket's Dual Fusion set is out, bringing the game's first dual-type cards.",
+    "The headliners are Mega Mewtwo X ex and Mega Greninja ex. Zia covered it on the 8 AM drop."
+   ],
+   "pull": "Two types, one pack, zero chill.",
+   "src": "Pokémon, official",
+   "photo_title": "Two types, one pack",
+   "photo_text": "Pocket's first dual-type cards, led by Mega Mewtwo X ex and Mega Greninja ex."
+  }
+ ],
+ "radar": [
+  [
+   "Dec 4–6, 2026",
+   "Gundam Card Game at PAX Unplugged, Philadelphia"
+  ],
+  [
+   "Jan 15, 2027",
+   "Pokémon Valentine's Box"
+  ],
+  [
+   "Feb 12, 2027",
+   "Lorcana: Into the Inkdark"
+  ],
+  [
+   "Feb 12, 2027",
+   "Pokémon Mega Rayquaza ex Premium Tournament Collection"
+  ],
+  [
+   "Mar 19, 2027",
+   "Yu-Gi-Oh! Maze of Machines"
+  ]
+ ]
+}

@@ -85,7 +85,7 @@ def render(iss, root):
 <div class="about">{about}</div>"""))
     pull = f'<div class="pull">"{e(iss["pull"])}"</div>' if iss.get('pull') else ''
     body.append(('big', big_t, 'Cover story', f"""{run('Cover story', big[2])}<p class="kick">The big one</p><h3>{e(big_t)}</h3>
-<p class="first">{e(iss.get('opening', ''))}</p><p>{e(big[1])}</p>{pull}<p class="src">Source: {e(big[2])}</p>""" + (f'<a class="watch" href="archive.html"><img src="{e(_img(root, iss.get("cover_clip")))}" alt="" loading="lazy"><span><b>Watch the report</b>The 1Cardz clip on this story is in the Library. ▶</span></a>' if _img(root, iss.get('cover_clip')) else '')))
+<p class="first">{e(iss.get('opening', ''))}</p><p>{e(big[1])}</p>{pull}<p class="src">Source: {e(big[2])}</p>""" + (f'<a class="watch" href="archive.html"><img src="{e(_img(root, iss.get("big_clip") or iss.get("cover_clip")))}" alt="" loading="lazy"><span><b>Watch the report</b>The 1Cardz clip on this story is in the Library. ▶</span></a>' if _img(root, iss.get('big_clip') or iss.get('cover_clip')) else '')))
     f = iss.get('feature') or {}
     fimg = _img(root, f.get('clip')) or cover_img
     body.append(('feat', f.get('title') or 'Photo feature', 'Feature', f'<img class="bg" src="{e(fimg)}" alt="" loading="lazy"><div class="cap"><span class="kick">Feature</span><b>{e(f.get("title", ""))}</b>{e(f.get("text", ""))}</div>'))
@@ -268,6 +268,20 @@ CSS = r'''
   will-change:background-position;transform:translateZ(0);animation:mzholo 3.2s linear infinite}
 @keyframes mzholo{from{background-position:100% 0}to{background-position:0% 0}}
 @media (prefers-reduced-motion:reduce){.mz-cover .mast .ho{animation:none;opacity:0}}
+/* side shelves of past issues (Nov 8) */
+.mz-desk{position:relative;z-index:4;display:grid;padding:0 clamp(14px,2vw,26px);grid-template-columns:minmax(0,150px) minmax(0,1fr) minmax(0,150px);gap:clamp(12px,2vw,26px);align-items:start}
+.mz-shelf{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-top:clamp(16px,3vw,32px)}
+.mz-slot{display:block;padding:0;border:0;background:none;cursor:pointer;border-radius:3px;transition:transform .2s ease,box-shadow .2s ease;box-shadow:0 8px 18px rgba(0,0,0,.45)}
+.mz-slot .mz-page{pointer-events:none;border-radius:3px}
+.mz-slot .mz-cover .mast .ho{display:none}
+.mz-slot:hover,.mz-slot:focus-visible{transform:translateY(-3px) rotate(-1deg)}
+.mz-slot.on{box-shadow:0 0 0 2px #ffd23f,0 0 16px rgba(255,210,63,.5)}
+.mz-slot.empty{aspect-ratio:3/4;border:1px dashed rgba(255,255,255,.16);box-shadow:none;cursor:default;background:rgba(255,255,255,.02)}
+.mz-slot.empty:hover{transform:none}
+.mz-home{display:block;margin:0 auto 10px;font:inherit;font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#12162b;background:#ffd23f;border:0;border-radius:999px;padding:8px 14px;cursor:pointer}
+.mz-home[hidden]{display:none}
+@media (max-width:759px){.mz-desk{grid-template-columns:minmax(0,1fr);padding:0}.mz-shelf{grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;padding:12px 22px 0}
+  .mz-desk>.mz-mid{order:1}.mz-shelf.l{order:2}.mz-shelf.r{order:3}}
 .mz-cover .tag{position:absolute;left:0;right:0;top:34.5cqw;z-index:2;text-align:center;font-family:var(--f-mono);font-size:2.3cqw;letter-spacing:.25em;text-transform:uppercase;color:#fff;text-shadow:0 .3cqw .8cqw rgba(0,0,0,.6)}
 .mz-cover .side{position:absolute;left:4cqw;top:46cqw;z-index:2;width:30cqw;display:flex;flex-direction:column;gap:4cqw}
 .mz-cover .side b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:5.6cqw;line-height:1;color:#fff;text-shadow:0 .4cqw 1.2cqw rgba(0,0,0,.75)}
@@ -282,8 +296,9 @@ CSS = r'''
 JS = r'''<script id="mz-js">
 (function(){const mz=document.getElementById('mz');if(!mz)return;
   const book=document.getElementById('mzBook'),prev=mz.querySelector('.mz-prev'),next=mz.querySelector('.mz-next'),no=mz.querySelector('.mz-no');
-  const cover=document.getElementById('mzCover').innerHTML,back=(document.getElementById('mzBack')||{}).innerHTML||'',pgs=[...mz.querySelectorAll('template.mzPg')].map(t=>t.innerHTML);
-  const total=pgs.length+1+(back?1:0);
+  let cover,back,pgs,total;
+  function read(){cover=document.getElementById('mzCover').innerHTML;back=(document.getElementById('mzBack')||{}).innerHTML||'';pgs=[...mz.querySelectorAll('template.mzPg')].map(t=>t.innerHTML);total=pgs.length+1+(back?1:0)}
+  read();
   const two=()=>matchMedia('(min-width:760px)').matches;
   /* views: cover alone, inside pages in spreads (or singles on phones), back page alone */
   function views(){const v=[{h:cover,first:1,n:1,cov:1}],st=2;for(let i=0;i<pgs.length;i+=st)v.push({h:pgs.slice(i,i+st).join(''),first:i+2,n:Math.min(st,pgs.length-i)});
@@ -305,5 +320,12 @@ JS = r'''<script id="mz-js">
   addEventListener('keydown',e=>{const r=book.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1)});
   let sx=null;book.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
   book.addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx;sx=null;if(Math.abs(dx)>50)go(dx<0?1:-1)},{passive:true});
+  /* past issues on the side shelves (Nov 8): tap a cover to open that issue here; "This week's issue" comes back */
+  const cur=[...mz.querySelectorAll('template')].map(t=>t.outerHTML).join(''),dt=document.getElementById('mzDate'),dt0=dt?dt.textContent:'',home=document.getElementById('mzHome');
+  function load(tpl,date,slot){mz.querySelectorAll('template').forEach(t=>t.remove());mz.insertAdjacentHTML('beforeend',tpl);read();idx=0;zoom=null;view();
+    if(dt)dt.textContent=date||dt0;document.querySelectorAll('.mz-slot').forEach(b=>b.classList.toggle('on',b===slot));if(home)home.hidden=!slot}
+  document.querySelectorAll('.mz-slot[data-src]').forEach(b=>b.addEventListener('click',async()=>{
+    try{const r=await fetch(b.dataset.src);if(!r.ok)throw 0;load(await r.text(),b.dataset.date,b);mz.scrollIntoView({behavior:'smooth',block:'nearest'})}catch(_){location.href=b.dataset.src}}));
+  if(home)home.addEventListener('click',()=>load(cur,'',null));
   view()})();
 </script>'''
