@@ -1,82 +1,15 @@
 {
- "updated": "2026-11-09T20:06:00+0000",
+ "updated": "2026-11-10T20:05:49+0000",
  "source": "Market price, recent sold average (USD)",
  "items": [
-  {
-   "id": "690384-Normal",
-   "kind": "sealed",
-   "game": "Lorcana",
-   "name": "Disney Lorcana: Attack of the Vine! Booster Box",
-   "set": "Attack of the Vine!",
-   "price": 176.96,
-   "low": 173.0,
-   "history": [
-    [
-     "2026-10-27",
-     180.75
-    ],
-    [
-     "2026-10-28",
-     180.65
-    ],
-    [
-     "2026-10-29",
-     177.67
-    ],
-    [
-     "2026-10-30",
-     175.25
-    ],
-    [
-     "2026-10-31",
-     177.44
-    ],
-    [
-     "2026-11-01",
-     177.32
-    ],
-    [
-     "2026-11-02",
-     176.35
-    ],
-    [
-     "2026-11-03",
-     176.3
-    ],
-    [
-     "2026-11-04",
-     178.2
-    ],
-    [
-     "2026-11-05",
-     178.34
-    ],
-    [
-     "2026-11-06",
-     177.34
-    ],
-    [
-     "2026-11-07",
-     175.76
-    ],
-    [
-     "2026-11-08",
-     176.64
-    ],
-    [
-     "2026-11-09",
-     176.96
-    ]
-   ]
-  },
   {
    "id": "709724-Normal",
    "kind": "sealed",
    "game": "Magic",
    "name": "Mystery Booster Commander Edition Booster Display",
    "set": "Mystery Booster Commander Edition",
-   "price": 440.47,
-   "low": 478.95,
+   "price": 461.22,
+   "low": 444.99,
    "history": [
     [
      "2026-10-27",
@@ -133,6 +66,10 @@
     [
      "2026-11-09",
      440.47
+    ],
+    [
+     "2026-11-10",
+     461.22
     ]
    ]
   },
@@ -142,7 +79,7 @@
    "game": "One Piece",
    "name": "The World's Strongest Warriors Booster Box",
    "set": "The World's Strongest Warriors",
-   "price": 310.3,
+   "price": 299.65,
    "low": 288.91,
    "history": [
     [
@@ -200,6 +137,10 @@
     [
      "2026-11-09",
      310.3
+    ],
+    [
+     "2026-11-10",
+     299.65
     ]
    ]
   },
@@ -209,7 +150,7 @@
    "game": "Pokémon",
    "name": "Pitch Black Booster Box",
    "set": "Pitch Black",
-   "price": 177.49,
+   "price": 177.12,
    "low": 159.0,
    "history": [
     [
@@ -267,6 +208,10 @@
     [
      "2026-11-09",
      177.49
+    ],
+    [
+     "2026-11-10",
+     177.12
     ]
    ]
   },
@@ -276,7 +221,7 @@
    "game": "Riftbound",
    "name": "Vendetta Booster Display",
    "set": "Vendetta",
-   "price": 119.4,
+   "price": 120.13,
    "low": 110.0,
    "history": [
     [
@@ -334,6 +279,10 @@
     [
      "2026-11-09",
      119.4
+    ],
+    [
+     "2026-11-10",
+     120.13
     ]
    ]
   },
@@ -343,7 +292,7 @@
    "game": "Yu-Gi-Oh!",
    "name": "Chaos Origins Booster Box [1st Edition]",
    "set": "Chaos Origins",
-   "price": 83.06,
+   "price": 85.06,
    "low": 79.99,
    "history": [
     [
@@ -401,73 +350,81 @@
     [
      "2026-11-09",
      83.06
+    ],
+    [
+     "2026-11-10",
+     85.06
     ]
    ]
   },
   {
-   "id": "704725-Holofoil",
-   "kind": "single",
-   "game": "Lorcana",
-   "name": "Winnie the Pooh & Piglet - Hunny Mages (Enchanted)",
-   "set": "Attack of the Vine!",
-   "price": 678.5,
-   "low": 498.95,
+   "id": "693621-Normal",
+   "kind": "sealed",
+   "game": "Gundam",
+   "name": "Freedom Ascension Booster Box",
+   "set": "Freedom Ascension",
+   "price": 174.65,
+   "low": 171.9,
    "history": [
     [
      "2026-10-27",
-     755.21
+     181.09
     ],
     [
      "2026-10-28",
-     755.21
+     172.19
     ],
     [
      "2026-10-29",
-     755.21
+     160.09
     ],
     [
      "2026-10-30",
-     743.67
+     158.82
     ],
     [
      "2026-10-31",
-     743.67
+     160.9
     ],
     [
      "2026-11-01",
-     743.67
+     166.87
     ],
     [
      "2026-11-02",
-     743.67
+     169.61
     ],
     [
      "2026-11-03",
-     743.67
+     172.18
     ],
     [
      "2026-11-04",
-     743.67
+     173.42
     ],
     [
      "2026-11-05",
-     743.67
+     165.96
     ],
     [
      "2026-11-06",
-     728.75
+     165.04
     ],
     [
      "2026-11-07",
-     728.75
+     168.19
     ],
     [
      "2026-11-08",
-     711.35
+     170.09
     ],
     [
      "2026-11-09",
-     678.5
+     174.49
+    ],
+    [
+     "2026-11-10",
+     174.65
     ]
    ]
   },
@@ -478,7 +435,7 @@
    "name": "Ruby Collector",
    "set": "Mystery Booster Commander Edition",
    "price": 196.0,
-   "low": 193.94,
+   "low": 193.92,
    "history": [
     [
      "2026-11-06",
@@ -494,6 +451,10 @@
     ],
     [
      "2026-11-09",
+     196.0
+    ],
+    [
+     "2026-11-10",
      196.0
     ]
    ]
@@ -562,6 +523,10 @@
     [
      "2026-11-09",
      6100.0
+    ],
+    [
+     "2026-11-10",
+     6100.0
     ]
    ]
   },
@@ -571,7 +536,7 @@
    "game": "Pokémon",
    "name": "Mega Darkrai ex - 120/084",
    "set": "Pitch Black",
-   "price": 114.37,
+   "price": 113.23,
    "low": 112.35,
    "history": [
     [
@@ -629,6 +594,10 @@
     [
      "2026-11-09",
      114.37
+    ],
+    [
+     "2026-11-10",
+     113.23
     ]
    ]
   },
@@ -639,7 +608,7 @@
    "name": "Akali, Rogue Assassin (Signature)",
    "set": "Vendetta",
    "price": 3229.71,
-   "low": 2000.0,
+   "low": 1959.99,
    "history": [
     [
      "2026-10-27",
@@ -696,6 +665,10 @@
     [
      "2026-11-09",
      3229.71
+    ],
+    [
+     "2026-11-10",
+     3229.71
     ]
    ]
   },
@@ -705,7 +678,7 @@
    "game": "Yu-Gi-Oh!",
    "name": "Pot of Sloth (Starlight Rare)",
    "set": "Chaos Origins",
-   "price": 129.97,
+   "price": 130.3,
    "low": 129.99,
    "history": [
     [
@@ -763,6 +736,81 @@
     [
      "2026-11-09",
      129.97
+    ],
+    [
+     "2026-11-10",
+     130.3
+    ]
+   ]
+  },
+  {
+   "id": "707604-Holofoil",
+   "kind": "single",
+   "game": "Gundam",
+   "name": "Nu Gundam (LR++)",
+   "set": "Freedom Ascension",
+   "price": 1532.38,
+   "low": 1200.0,
+   "history": [
+    [
+     "2026-10-27",
+     1532.38
+    ],
+    [
+     "2026-10-28",
+     1532.38
+    ],
+    [
+     "2026-10-29",
+     1532.38
+    ],
+    [
+     "2026-10-30",
+     1532.38
+    ],
+    [
+     "2026-10-31",
+     1532.38
+    ],
+    [
+     "2026-11-01",
+     1532.38
+    ],
+    [
+     "2026-11-02",
+     1532.38
+    ],
+    [
+     "2026-11-03",
+     1532.38
+    ],
+    [
+     "2026-11-04",
+     1532.38
+    ],
+    [
+     "2026-11-05",
+     1532.38
+    ],
+    [
+     "2026-11-06",
+     1532.38
+    ],
+    [
+     "2026-11-07",
+     1532.38
+    ],
+    [
+     "2026-11-08",
+     1532.38
+    ],
+    [
+     "2026-11-09",
+     1532.38
+    ],
+    [
+     "2026-11-10",
+     1532.38
     ]
    ]
   }
@@ -774,8 +822,8 @@
    "game": "Pokémon",
    "name": "Delta Reign Booster Box",
    "set": "Delta Reign",
-   "price": 209.37,
-   "low": 205.0,
+   "price": 206.03,
+   "low": 200.0,
    "history": [
     [
      "2026-11-06",
@@ -792,6 +840,10 @@
     [
      "2026-11-09",
      209.37
+    ],
+    [
+     "2026-11-10",
+     206.03
     ]
    ]
   },
@@ -801,8 +853,8 @@
    "game": "Pokémon",
    "name": "Delta Reign Elite Trainer Box",
    "set": "Delta Reign",
-   "price": 85.5,
-   "low": 60.99,
+   "price": 86.22,
+   "low": 62.99,
    "history": [
     [
      "2026-11-06",
@@ -819,6 +871,10 @@
     [
      "2026-11-09",
      85.5
+    ],
+    [
+     "2026-11-10",
+     86.22
     ]
    ]
   },
@@ -828,8 +884,8 @@
    "game": "Pokémon",
    "name": "Mega Rayquaza ex - 138/103",
    "set": "Delta Reign",
-   "price": 311.28,
-   "low": 300.0,
+   "price": 308.69,
+   "low": 297.0,
    "history": [
     [
      "2026-11-06",
@@ -846,6 +902,10 @@
     [
      "2026-11-09",
      311.28
+    ],
+    [
+     "2026-11-10",
+     308.69
     ]
    ]
   },
@@ -855,8 +915,8 @@
    "game": "Pokémon",
    "name": "Mega Rayquaza ex - 141/103",
    "set": "Delta Reign",
-   "price": 260.91,
-   "low": 209.01,
+   "price": 257.19,
+   "low": 225.0,
    "history": [
     [
      "2026-11-06",
@@ -873,6 +933,10 @@
     [
      "2026-11-09",
      260.91
+    ],
+    [
+     "2026-11-10",
+     257.19
     ]
    ]
   },
@@ -882,8 +946,8 @@
    "game": "Pokémon",
    "name": "Raikou ex",
    "set": "Delta Reign",
-   "price": 88.86,
-   "low": 88.62,
+   "price": 89.43,
+   "low": 89.0,
    "history": [
     [
      "2026-11-06",
@@ -900,6 +964,10 @@
     [
      "2026-11-09",
      88.86
+    ],
+    [
+     "2026-11-10",
+     89.43
     ]
    ]
   },
@@ -909,7 +977,7 @@
    "game": "Pokémon",
    "name": "Pitch Black Booster Box",
    "set": "Pitch Black",
-   "price": 177.49,
+   "price": 177.12,
    "low": 159.0,
    "history": [
     [
@@ -967,6 +1035,10 @@
     [
      "2026-11-09",
      177.49
+    ],
+    [
+     "2026-11-10",
+     177.12
     ]
    ]
   },
@@ -976,7 +1048,7 @@
    "game": "Pokémon",
    "name": "Pitch Black Elite Trainer Box",
    "set": "Pitch Black",
-   "price": 67.02,
+   "price": 69.07,
    "low": 49.15,
    "history": [
     [
@@ -1034,6 +1106,10 @@
     [
      "2026-11-09",
      67.02
+    ],
+    [
+     "2026-11-10",
+     69.07
     ]
    ]
   },
@@ -1043,8 +1119,8 @@
    "game": "Pokémon",
    "name": "Mega Darkrai ex - 116/084",
    "set": "Pitch Black",
-   "price": 132.3,
-   "low": 127.44,
+   "price": 131.04,
+   "low": 125.0,
    "history": [
     [
      "2026-10-27",
@@ -1101,6 +1177,10 @@
     [
      "2026-11-09",
      132.3
+    ],
+    [
+     "2026-11-10",
+     131.04
     ]
    ]
   },
@@ -1110,7 +1190,7 @@
    "game": "Pokémon",
    "name": "Mega Darkrai ex - 120/084",
    "set": "Pitch Black",
-   "price": 114.37,
+   "price": 113.23,
    "low": 112.35,
    "history": [
     [
@@ -1168,6 +1248,10 @@
     [
      "2026-11-09",
      114.37
+    ],
+    [
+     "2026-11-10",
+     113.23
     ]
    ]
   },
@@ -1177,7 +1261,7 @@
    "game": "Pokémon",
    "name": "Morpeko ex - 117/084",
    "set": "Pitch Black",
-   "price": 55.88,
+   "price": 55.78,
    "low": 54.35,
    "history": [
     [
@@ -1235,6 +1319,10 @@
     [
      "2026-11-09",
      55.88
+    ],
+    [
+     "2026-11-10",
+     55.78
     ]
    ]
   },
@@ -1244,8 +1332,8 @@
    "game": "Magic",
    "name": "Reality Fracture Collector Booster Display",
    "set": "Reality Fracture",
-   "price": 386.87,
-   "low": 380.01,
+   "price": 385.81,
+   "low": 369.88,
    "history": [
     [
      "2026-10-27",
@@ -1302,6 +1390,10 @@
     [
      "2026-11-09",
      386.87
+    ],
+    [
+     "2026-11-10",
+     385.81
     ]
    ]
   },
@@ -1311,8 +1403,8 @@
    "game": "Magic",
    "name": "Reality Fracture Play Booster Display",
    "set": "Reality Fracture",
-   "price": 123.37,
-   "low": 115.0,
+   "price": 123.78,
+   "low": 113.0,
    "history": [
     [
      "2026-10-27",
@@ -1369,6 +1461,10 @@
     [
      "2026-11-09",
      123.37
+    ],
+    [
+     "2026-11-10",
+     123.78
     ]
    ]
   },
@@ -1388,6 +1484,10 @@
     [
      "2026-11-09",
      3100.0
+    ],
+    [
+     "2026-11-10",
+     3100.0
     ]
    ]
   },
@@ -1397,7 +1497,7 @@
    "game": "Magic",
    "name": "The Theorist, Jace Beleren (Showcase) (Fracture Foil)",
    "set": "Reality Fracture",
-   "price": 490.25,
+   "price": 486.61,
    "low": 459.99,
    "history": [
     [
@@ -1455,6 +1555,10 @@
     [
      "2026-11-09",
      490.25
+    ],
+    [
+     "2026-11-10",
+     486.61
     ]
    ]
   },
@@ -1465,7 +1569,7 @@
    "name": "Craterclaw Colossus (Borderless) (Facet Foil) (0455)",
    "set": "Reality Fracture",
    "price": 436.44,
-   "low": 365.0,
+   "low": 364.75,
    "history": [
     [
      "2026-10-27",
@@ -1522,6 +1626,10 @@
     [
      "2026-11-09",
      436.44
+    ],
+    [
+     "2026-11-10",
+     436.44
     ]
    ]
   },
@@ -1531,8 +1639,8 @@
    "game": "Magic",
    "name": "Mystery Booster Commander Edition Booster Display",
    "set": "Mystery Booster Commander Edition",
-   "price": 440.47,
-   "low": 478.95,
+   "price": 461.22,
+   "low": 444.99,
    "history": [
     [
      "2026-10-27",
@@ -1589,6 +1697,10 @@
     [
      "2026-11-09",
      440.47
+    ],
+    [
+     "2026-11-10",
+     461.22
     ]
    ]
   },
@@ -1599,7 +1711,7 @@
    "name": "Ruby Collector",
    "set": "Mystery Booster Commander Edition",
    "price": 196.0,
-   "low": 193.94,
+   "low": 193.92,
    "history": [
     [
      "2026-11-06",
@@ -1616,6 +1728,10 @@
     [
      "2026-11-09",
      196.0
+    ],
+    [
+     "2026-11-10",
+     196.0
     ]
    ]
   },
@@ -1626,7 +1742,7 @@
    "name": "Maular, the Next Evolution",
    "set": "Mystery Booster Commander Edition",
    "price": 187.49,
-   "low": 184.66,
+   "low": 183.69,
    "history": [
     [
      "2026-10-30",
@@ -1671,6 +1787,10 @@
     [
      "2026-11-09",
      187.49
+    ],
+    [
+     "2026-11-10",
+     187.49
     ]
    ]
   },
@@ -1694,6 +1814,10 @@
     [
      "2026-11-09",
      185.0
+    ],
+    [
+     "2026-11-10",
+     185.0
     ]
    ]
   },
@@ -1703,8 +1827,8 @@
    "game": "One Piece",
    "name": "Extra Booster: One Piece Heroines Edition Vol.2 Booster Box",
    "set": "Extra Booster: One Piece Heroines Edition Vol. 2",
-   "price": 232.98,
-   "low": 229.99,
+   "price": 229.06,
+   "low": 219.98,
    "history": [
     [
      "2026-10-30",
@@ -1749,6 +1873,10 @@
     [
      "2026-11-09",
      232.98
+    ],
+    [
+     "2026-11-10",
+     229.06
     ]
    ]
   },
@@ -1759,7 +1887,7 @@
    "name": "Nami (055) (Kentaro Yabuki) (Gold Stamped)",
    "set": "Extra Booster: One Piece Heroines Edition Vol. 2",
    "price": 1530.43,
-   "low": 1698.68,
+   "low": 1696.68,
    "history": [
     [
      "2026-11-01",
@@ -1796,6 +1924,10 @@
     [
      "2026-11-09",
      1530.43
+    ],
+    [
+     "2026-11-10",
+     1530.43
     ]
    ]
   },
@@ -1805,8 +1937,8 @@
    "game": "One Piece",
    "name": "Nico Robin (010) (Super Leader Alternate Art)",
    "set": "Extra Booster: One Piece Heroines Edition Vol. 2",
-   "price": 1265.49,
-   "low": 1829.99,
+   "price": 1280.94,
+   "low": 1810.0,
    "history": [
     [
      "2026-10-30",
@@ -1851,6 +1983,10 @@
     [
      "2026-11-09",
      1265.49
+    ],
+    [
+     "2026-11-10",
+     1280.94
     ]
    ]
   },
@@ -1861,7 +1997,7 @@
    "name": "Boa Hancock (ST17-004) (SP)",
    "set": "Extra Booster: One Piece Heroines Edition Vol. 2",
    "price": 764.56,
-   "low": 899.99,
+   "low": 888.99,
    "history": [
     [
      "2026-10-31",
@@ -1902,6 +2038,10 @@
     [
      "2026-11-09",
      764.56
+    ],
+    [
+     "2026-11-10",
+     764.56
     ]
    ]
   },
@@ -1911,7 +2051,7 @@
    "game": "One Piece",
    "name": "The World's Strongest Warriors Booster Box",
    "set": "The World's Strongest Warriors",
-   "price": 310.3,
+   "price": 299.65,
    "low": 288.91,
    "history": [
     [
@@ -1969,6 +2109,10 @@
     [
      "2026-11-09",
      310.3
+    ],
+    [
+     "2026-11-10",
+     299.65
     ]
    ]
   },
@@ -2035,6 +2179,10 @@
     ],
     [
      "2026-11-09",
+     6100.0
+    ],
+    [
+     "2026-11-10",
      6100.0
     ]
    ]
@@ -2103,6 +2251,10 @@
     [
      "2026-11-09",
      1470.07
+    ],
+    [
+     "2026-11-10",
+     1470.07
     ]
    ]
   },
@@ -2170,6 +2322,10 @@
     [
      "2026-11-09",
      1214.98
+    ],
+    [
+     "2026-11-10",
+     1214.98
     ]
    ]
   },
@@ -2179,8 +2335,8 @@
    "game": "Yu-Gi-Oh!",
    "name": "Beyond the Brave Booster Box [1st Edition]",
    "set": "Beyond the Brave",
-   "price": 57.3,
-   "low": 49.99,
+   "price": 56.71,
+   "low": 52.0,
    "history": [
     [
      "2026-10-27",
@@ -2237,6 +2393,10 @@
     [
      "2026-11-09",
      57.3
+    ],
+    [
+     "2026-11-10",
+     56.71
     ]
    ]
   },
@@ -2246,8 +2406,8 @@
    "game": "Yu-Gi-Oh!",
    "name": "The Great Gallant Bandit (Starlight Rare) (Extended Art)",
    "set": "Beyond the Brave",
-   "price": 290.24,
-   "low": 270.0,
+   "price": 288.84,
+   "low": 271.59,
    "history": [
     [
      "2026-10-27",
@@ -2304,6 +2464,10 @@
     [
      "2026-11-09",
      290.24
+    ],
+    [
+     "2026-11-10",
+     288.84
     ]
    ]
   },
@@ -2313,7 +2477,7 @@
    "game": "Yu-Gi-Oh!",
    "name": "Red-Eyes Black Dragon Exceed (Starlight Rare) (Extended Art)",
    "set": "Beyond the Brave",
-   "price": 258.38,
+   "price": 257.36,
    "low": 219.21,
    "history": [
     [
@@ -2371,21 +2535,25 @@
     [
      "2026-11-09",
      258.38
+    ],
+    [
+     "2026-11-10",
+     257.36
     ]
    ]
   },
   {
-   "id": "719865-1st Edition",
+   "id": "722991-1st Edition",
    "kind": "single",
    "game": "Yu-Gi-Oh!",
-   "name": "The Great Gallant Bandit (Extended Art)",
+   "name": "Hey, Space Trunade! (Starlight Rare)",
    "set": "Beyond the Brave",
-   "price": 89.96,
-   "low": 84.98,
+   "price": 94.17,
+   "low": 110.0,
    "history": [
     [
-     "2026-11-09",
-     89.96
+     "2026-11-10",
+     94.17
     ]
    ]
   },
@@ -2395,7 +2563,7 @@
    "game": "Yu-Gi-Oh!",
    "name": "Chaos Origins Booster Box [1st Edition]",
    "set": "Chaos Origins",
-   "price": 83.06,
+   "price": 85.06,
    "low": 79.99,
    "history": [
     [
@@ -2453,6 +2621,10 @@
     [
      "2026-11-09",
      83.06
+    ],
+    [
+     "2026-11-10",
+     85.06
     ]
    ]
   },
@@ -2463,7 +2635,7 @@
    "name": "Magician of Dark Chaos - Black Chaos (Starlight Rare) (Extended Art)",
    "set": "Chaos Origins",
    "price": 459.62,
-   "low": 427.41,
+   "low": 424.99,
    "history": [
     [
      "2026-10-27",
@@ -2519,6 +2691,10 @@
     ],
     [
      "2026-11-09",
+     459.62
+    ],
+    [
+     "2026-11-10",
      459.62
     ]
    ]
@@ -2587,6 +2763,10 @@
     [
      "2026-11-09",
      263.57
+    ],
+    [
+     "2026-11-10",
+     263.57
     ]
    ]
   },
@@ -2596,7 +2776,7 @@
    "game": "Yu-Gi-Oh!",
    "name": "Pot of Sloth (Starlight Rare)",
    "set": "Chaos Origins",
-   "price": 129.97,
+   "price": 130.3,
    "low": 129.99,
    "history": [
     [
@@ -2654,6 +2834,10 @@
     [
      "2026-11-09",
      129.97
+    ],
+    [
+     "2026-11-10",
+     130.3
     ]
    ]
   },
@@ -2663,7 +2847,7 @@
    "game": "Lorcana",
    "name": "Disney Lorcana: Hyperia City Booster Box",
    "set": "Hyperia City",
-   "price": 126.8,
+   "price": 124.15,
    "low": 1.0,
    "history": [
     [
@@ -2721,6 +2905,10 @@
     [
      "2026-11-09",
      126.8
+    ],
+    [
+     "2026-11-10",
+     124.15
     ]
    ]
   },
@@ -2788,6 +2976,10 @@
     [
      "2026-11-09",
      1860.82
+    ],
+    [
+     "2026-11-10",
+     1860.82
     ]
    ]
   },
@@ -2798,7 +2990,7 @@
    "name": "Cinderella - Unintentional Icon (Iconic)",
    "set": "Hyperia City",
    "price": 1121.79,
-   "low": 889.99,
+   "low": 875.0,
    "history": [
     [
      "2026-10-27",
@@ -2855,6 +3047,10 @@
     [
      "2026-11-09",
      1121.79
+    ],
+    [
+     "2026-11-10",
+     1121.79
     ]
    ]
   },
@@ -2864,8 +3060,8 @@
    "game": "Lorcana",
    "name": "Ariel - Collector of Oddities (Enchanted)",
    "set": "Hyperia City",
-   "price": 372.34,
-   "low": 326.98,
+   "price": 370.2,
+   "low": 326.0,
    "history": [
     [
      "2026-10-27",
@@ -2922,6 +3118,10 @@
     [
      "2026-11-09",
      372.34
+    ],
+    [
+     "2026-11-10",
+     370.2
     ]
    ]
   },
@@ -2931,8 +3131,8 @@
    "game": "Lorcana",
    "name": "Disney Lorcana: Attack of the Vine! Booster Box",
    "set": "Attack of the Vine!",
-   "price": 176.96,
-   "low": 173.0,
+   "price": 178.49,
+   "low": 178.99,
    "history": [
     [
      "2026-10-27",
@@ -2989,6 +3189,10 @@
     [
      "2026-11-09",
      176.96
+    ],
+    [
+     "2026-11-10",
+     178.49
     ]
    ]
   },
@@ -2999,7 +3203,7 @@
    "name": "Belle & Beast - Certain as the Sun (Iconic)",
    "set": "Attack of the Vine!",
    "price": 1725.6,
-   "low": 1000.0,
+   "low": 1275.0,
    "history": [
     [
      "2026-10-27",
@@ -3055,6 +3259,10 @@
     ],
     [
      "2026-11-09",
+     1725.6
+    ],
+    [
+     "2026-11-10",
      1725.6
     ]
    ]
@@ -3123,6 +3331,10 @@
     [
      "2026-11-09",
      1526.37
+    ],
+    [
+     "2026-11-10",
+     1526.37
     ]
    ]
   },
@@ -3133,7 +3345,7 @@
    "name": "Winnie the Pooh & Piglet - Hunny Mages (Enchanted)",
    "set": "Attack of the Vine!",
    "price": 678.5,
-   "low": 498.95,
+   "low": 489.77,
    "history": [
     [
      "2026-10-27",
@@ -3190,6 +3402,10 @@
     [
      "2026-11-09",
      678.5
+    ],
+    [
+     "2026-11-10",
+     678.5
     ]
    ]
   },
@@ -3199,8 +3415,8 @@
    "game": "Riftbound",
    "name": "Radiance Booster Display",
    "set": "Radiance",
-   "price": 106.82,
-   "low": 99.99,
+   "price": 105.02,
+   "low": 98.75,
    "history": [
     [
      "2026-10-27",
@@ -3257,6 +3473,10 @@
     [
      "2026-11-09",
      106.82
+    ],
+    [
+     "2026-11-10",
+     105.02
     ]
    ]
   },
@@ -3267,7 +3487,7 @@
    "name": "Riven, The Exile (Signature)",
    "set": "Radiance",
    "price": 1282.53,
-   "low": 1000.0,
+   "low": 940.0,
    "history": [
     [
      "2026-10-27",
@@ -3323,6 +3543,10 @@
     ],
     [
      "2026-11-09",
+     1282.53
+    ],
+    [
+     "2026-11-10",
      1282.53
     ]
    ]
@@ -3334,7 +3558,7 @@
    "name": "Seraphine, Starry-Eyed Songstress (Signature)",
    "set": "Radiance",
    "price": 1110.98,
-   "low": 910.0,
+   "low": 749.0,
    "history": [
     [
      "2026-10-27",
@@ -3391,6 +3615,10 @@
     [
      "2026-11-09",
      1110.98
+    ],
+    [
+     "2026-11-10",
+     1110.98
     ]
    ]
   },
@@ -3401,7 +3629,7 @@
    "name": "Evelynn, Agony's Embrace (Signature)",
    "set": "Radiance",
    "price": 968.75,
-   "low": 1000.0,
+   "low": 900.0,
    "history": [
     [
      "2026-11-05",
@@ -3422,6 +3650,10 @@
     [
      "2026-11-09",
      968.75
+    ],
+    [
+     "2026-11-10",
+     968.75
     ]
    ]
   },
@@ -3431,7 +3663,7 @@
    "game": "Riftbound",
    "name": "Vendetta Booster Display",
    "set": "Vendetta",
-   "price": 119.4,
+   "price": 120.13,
    "low": 110.0,
    "history": [
     [
@@ -3489,6 +3721,10 @@
     [
      "2026-11-09",
      119.4
+    ],
+    [
+     "2026-11-10",
+     120.13
     ]
    ]
   },
@@ -3499,7 +3735,7 @@
    "name": "Akali, Rogue Assassin (Signature)",
    "set": "Vendetta",
    "price": 3229.71,
-   "low": 2000.0,
+   "low": 1959.99,
    "history": [
     [
      "2026-10-27",
@@ -3555,6 +3791,10 @@
     ],
     [
      "2026-11-09",
+     3229.71
+    ],
+    [
+     "2026-11-10",
      3229.71
     ]
    ]
@@ -3565,8 +3805,8 @@
    "game": "Riftbound",
    "name": "Zed, Master of Shadows (Signature)",
    "set": "Vendetta",
-   "price": 1274.28,
-   "low": 800.0,
+   "price": 1247.31,
+   "low": 749.0,
    "history": [
     [
      "2026-10-27",
@@ -3623,6 +3863,10 @@
     [
      "2026-11-09",
      1274.28
+    ],
+    [
+     "2026-11-10",
+     1247.31
     ]
    ]
   },
@@ -3686,6 +3930,10 @@
     [
      "2026-11-09",
      1152.22
+    ],
+    [
+     "2026-11-10",
+     1152.22
     ]
    ]
   },
@@ -3695,8 +3943,8 @@
    "game": "Gundam",
    "name": "Stardust Trails Booster Box",
    "set": "Stardust Trails",
-   "price": 111.12,
-   "low": 110.91,
+   "price": 107.94,
+   "low": 100.01,
    "history": [
     [
      "2026-10-30",
@@ -3741,6 +3989,10 @@
     [
      "2026-11-09",
      111.12
+    ],
+    [
+     "2026-11-10",
+     107.94
     ]
    ]
   },
@@ -3750,8 +4002,8 @@
    "game": "Gundam",
    "name": "Infinite Justice Gundam (LR++)",
    "set": "Stardust Trails",
-   "price": 1000.0,
-   "low": 870.0,
+   "price": 929.45,
+   "low": 859.0,
    "history": [
     [
      "2026-11-04",
@@ -3776,6 +4028,10 @@
     [
      "2026-11-09",
      1000.0
+    ],
+    [
+     "2026-11-10",
+     929.45
     ]
    ]
   },
@@ -3786,7 +4042,7 @@
    "name": "Gundam Bael (LR++)",
    "set": "Stardust Trails",
    "price": 872.99,
-   "low": 872.99,
+   "low": 789.99,
    "history": [
     [
      "2026-11-05",
@@ -3807,6 +4063,10 @@
     [
      "2026-11-09",
      872.99
+    ],
+    [
+     "2026-11-10",
+     872.99
     ]
    ]
   },
@@ -3816,12 +4076,16 @@
    "game": "Gundam",
    "name": "Altron Gundam (EW) (LR+)",
    "set": "Stardust Trails",
-   "price": 98.46,
-   "low": 108.99,
+   "price": 103.75,
+   "low": 116.45,
    "history": [
     [
      "2026-11-09",
      98.46
+    ],
+    [
+     "2026-11-10",
+     103.75
     ]
    ]
   },
@@ -3831,8 +4095,8 @@
    "game": "Gundam",
    "name": "Freedom Ascension Booster Box",
    "set": "Freedom Ascension",
-   "price": 174.49,
-   "low": 172.26,
+   "price": 174.65,
+   "low": 171.9,
    "history": [
     [
      "2026-10-27",
@@ -3889,6 +4153,10 @@
     [
      "2026-11-09",
      174.49
+    ],
+    [
+     "2026-11-10",
+     174.65
     ]
    ]
   },
@@ -3955,6 +4223,10 @@
     ],
     [
      "2026-11-09",
+     3910.18
+    ],
+    [
+     "2026-11-10",
      3910.18
     ]
    ]
@@ -4023,6 +4295,10 @@
     [
      "2026-11-09",
      2561.26
+    ],
+    [
+     "2026-11-10",
+     2561.26
     ]
    ]
   },
@@ -4033,7 +4309,7 @@
    "name": "Nu Gundam (LR++)",
    "set": "Freedom Ascension",
    "price": 1532.38,
-   "low": 1248.37,
+   "low": 1200.0,
    "history": [
     [
      "2026-10-27",
@@ -4089,6 +4365,10 @@
     ],
     [
      "2026-11-09",
+     1532.38
+    ],
+    [
+     "2026-11-10",
      1532.38
     ]
    ]
