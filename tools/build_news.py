@@ -152,6 +152,13 @@ story_css = """<style>
 .story .lead{font-size:clamp(17px,1.7vw,21px);line-height:1.55;color:#dfe3f2;margin:0 0 14px;max-width:62ch}
 .story .quip{font-style:italic;color:#c9cfe4;margin:0 0 14px}
 .story .src{color:#8c93ad;font-size:14px;margin:0 0 18px}
+.story .details{margin:4px 0 20px;max-width:62ch;padding:16px 18px;border-radius:12px;background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));box-shadow:inset 0 0 0 1px rgba(124,243,255,.28)}
+.story .details h2{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#7cf3ff;margin:0 0 10px;font-weight:700}
+.story .details ul{margin:0 0 12px;padding-left:20px;color:#dfe3f2;line-height:1.55;font-size:16px}
+.story .details li{margin:0 0 6px}
+.story .details .why{margin:0;color:#ffd23f;font-size:15px;line-height:1.5}
+.story .details .why b{color:#fff}
+.story .src a{color:#7cf3ff}
 .story .actions{display:flex;flex-wrap:wrap;gap:10px}
 .story-video{width:100%;aspect-ratio:9/16;border-radius:14px;background:#05040b;box-shadow:0 0 0 1px rgba(124,243,255,.5),0 0 22px rgba(124,243,255,.25),0 18px 40px rgba(0,0,0,.45);object-fit:cover}
 .more{margin-top:clamp(22px,3vw,34px)}
@@ -178,6 +185,15 @@ for k, (n, p) in enumerate(site_parts.story_items(news, list(posts.values()))):
         clip_html = (f'<video class="story-video" controls playsinline preload="none" poster="img/{p["clip"]}.jpg" src="img/{p["clip"]}.mp4" '
                      f'aria-label="News clip with {e(p["host"])}: {e(title)}"></video>')
     host = f' · With {e(p["host"])}' if p else ''
+    d = n.get('details') or {}
+    details_html = ''
+    if d.get('facts') or d.get('why'):
+        lis = ''.join(f'<li>{e(f)}</li>' for f in d.get('facts', []))
+        why = f'<p class="why"><b>Why it matters:</b> {e(d["why"])}</p>' if d.get('why') else ''
+        details_html = f'<section class="details" aria-label="The details"><h2>The details</h2>{"<ul>"+lis+"</ul>" if lis else ""}{why}</section>'
+    src_html = e(n['source'])
+    if d.get('url', '').startswith('https://'):
+        src_html = f'<a href="{e(d["url"])}" rel="noopener" target="_blank">{e(n["source"])}</a>'
     article = f"""
 <main>
   <section class="wrap story">
@@ -189,7 +205,8 @@ for k, (n, p) in enumerate(site_parts.story_items(news, list(posts.values()))):
           <h1>{e(title)}</h1>
           <p class="lead">{e(desc)}</p>
           {f'<p class="quip">{e(p.get("quip",""))}</p>' if p and p.get('quip') else ''}
-          <p class="src">Source: {e(n['source'])}</p>
+          {details_html}
+          <p class="src">Source: {src_html}</p>
           <div class="actions"><a class="btn" href="news.html">All headlines</a>{'<a class="btn ghost" href="archive.html">Watch more clips</a>' if p else ''}</div>
         </div>
         {clip_html}
