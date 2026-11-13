@@ -313,6 +313,9 @@ body>footer{padding-block:clamp(70px,10vw,120px) 48px}
 .hl-src{color:#8c93ad}
 .hl-watch{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;color:#18203f;border:0;border-radius:6px;padding:9px 14px;
   background:linear-gradient(180deg,#fbe7a6,var(--foil));box-shadow:0 2px 0 var(--foil-2)}
+.hl-read{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:#7cf3ff;border-radius:6px;padding:8px 13px;
+  box-shadow:inset 0 0 0 1px rgba(124,243,255,.6);background:rgba(124,243,255,.06);display:inline-flex;align-items:center;gap:6px}
+.hl-read:hover,.hl-read:focus-visible{background:rgba(124,243,255,.16);color:#fff}
 .hl-shot{position:relative;aspect-ratio:9/16;max-width:100%;border-radius:12px;overflow:hidden;
   box-shadow:0 0 0 1px rgba(255,255,255,.25),0 18px 36px rgba(0,0,0,.5),0 0 30px rgba(124,243,255,.15)}
 .hl-shot img{width:100%;height:100%;object-fit:cover}
@@ -1178,7 +1181,7 @@ body>header .cover .top-cover{z-index:0}
             <div class="hl-meta mono"><span class="hl-game">Lorcana</span><span>Oct 28 · 8:00 AM</span><span>With Zia</span></div>
             <h3>Into the Inkdark opens for preorder</h3>
             <p>Disney Lorcana’s next set is expected on February 12, 2027, and brings the first serialized Illustrious cards.</p>
-            <div class="hl-foot"><span class="mono hl-src">Source · ICv2</span><button class="hl-watch" type="button" data-card="Into the Inkdark"><span class="hl-play" aria-hidden="true">▶</span> Watch the clip</button></div>
+            <div class="hl-foot"><span class="mono hl-src">Source · ICv2</span><button class="hl-watch" type="button" data-card="Into the Inkdark"><span class="hl-play" aria-hidden="true">▶</span> Watch the clip</button><a class="hl-read" href="news.html">Read the article <span aria-hidden="true">›</span></a></div>
           </div>
           <div class="hl-shot"><img src="img/clip1.jpg" alt="Still from the Lorcana news clip with Zia" fetchpriority="high"></div>
         </article>
@@ -1187,7 +1190,7 @@ body>header .cover .top-cover{z-index:0}
             <div class="hl-meta mono"><span class="hl-game">Flesh and Blood</span><span>Oct 27 · 8:00 PM</span><span>With Luna</span></div>
             <h3>Smash Palace: Chorus of Steel lands October 30</h3>
             <p>Ultimate Pit Fight multiplayer is back, with two new heroes, Zane and Killjoy.</p>
-            <div class="hl-foot"><span class="mono hl-src">Source · Flesh and Blood official site</span><button class="hl-watch" type="button" data-card="Chorus of Steel"><span class="hl-play" aria-hidden="true">▶</span> Watch the clip</button></div>
+            <div class="hl-foot"><span class="mono hl-src">Source · Flesh and Blood official site</span><button class="hl-watch" type="button" data-card="Chorus of Steel"><span class="hl-play" aria-hidden="true">▶</span> Watch the clip</button><a class="hl-read" href="news.html">Read the article <span aria-hidden="true">›</span></a></div>
           </div>
           <div class="hl-shot"><img src="img/clip2.jpg" alt="Still from the Flesh and Blood news clip with Luna" fetchpriority="high"></div>
         </article>
@@ -1196,7 +1199,7 @@ body>header .cover .top-cover{z-index:0}
             <div class="hl-meta mono"><span class="hl-game">One Piece</span><span>Oct 27 · 12:31 PM</span><span>With Luna</span></div>
             <h3>OP14-020 Dracule Mihawk is banned</h3>
             <p>The ban covers alternate arts and is now in effect. Bandai also announced a fourth anniversary event for the OP-18 launch.</p>
-            <div class="hl-foot"><span class="mono hl-src">Source · Official One Piece Card Game site</span><button class="hl-watch" type="button" data-card="Mihawk Banned"><span class="hl-play" aria-hidden="true">▶</span> Watch the clip</button></div>
+            <div class="hl-foot"><span class="mono hl-src">Source · Official One Piece Card Game site</span><button class="hl-watch" type="button" data-card="Mihawk Banned"><span class="hl-play" aria-hidden="true">▶</span> Watch the clip</button><a class="hl-read" href="news.html">Read the article <span aria-hidden="true">›</span></a></div>
           </div>
           <div class="hl-shot"><img src="img/clip4.jpg" alt="Still from the One Piece news clip with Luna" fetchpriority="high"></div>
         </article>
@@ -1994,7 +1997,9 @@ body>header .cover .top-cover{z-index:0}
       el.querySelector('.hl-meta').innerHTML='<span class="hl-game">'+esc(p.game)+'</span><span>'+esc(fmt(p.when))+'</span><span>With '+esc(p.host)+'</span>';
       const h3=el.querySelector('h3');
       if(n.title&&n.when){const sl=String(n.title).normalize('NFKD').replace(/[^\x00-\x7F]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,70).replace(/-+$/,'');
-        h3.innerHTML='<a href="news-'+esc(n.when.slice(0,10))+'-'+esc(sl)+'.html" style="color:inherit;text-decoration:none">'+esc(title)+'</a>'}else h3.textContent=title;
+        const url='news-'+esc(n.when.slice(0,10))+'-'+esc(sl)+'.html';
+        h3.innerHTML='<a href="'+url+'" style="color:inherit;text-decoration:none">'+esc(title)+'</a>';
+        const rd=el.querySelector('.hl-read');if(rd){rd.href=url;rd.setAttribute('aria-label','Read the article: '+title)}}else{h3.textContent=title;const rd=el.querySelector('.hl-read');if(rd)rd.href='news.html'}
       el.querySelector('.hl-copy > p').textContent=sum;
       el.querySelector('.hl-src').textContent='Source · '+src;
       const w=el.querySelector('.hl-watch');w.dataset.card=key;
