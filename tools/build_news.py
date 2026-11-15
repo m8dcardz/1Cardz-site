@@ -255,7 +255,7 @@ for k, (n, p) in enumerate(site_parts.story_items(news, list(posts.values()))):
     page = ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
             '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
             + shead + style + '\n' + extra_css + '\n' + story_css + '\n' + seo + '\n</head>\n<body>\n'
-            + s_header + '\n\n' + site_parts.navbar(src, 'news.html') + '\n' + article + '\n' + footer + '\n' + scrolltop + '\n' + js + '\n</body>\n</html>\n')
+            + s_header + '\n' + article + '\n' + footer + '\n' + scrolltop + '\n' + js + '\n</body>\n</html>\n')
     (root/url).write_text(page); made.append(url)
 print(len(made), 'story pages')
 # stage new story pages so the daily run's "git commit -am" includes them
