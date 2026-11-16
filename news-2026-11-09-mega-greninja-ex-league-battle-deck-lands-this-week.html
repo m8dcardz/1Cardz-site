@@ -1053,7 +1053,7 @@ body>header .cover .top-cover{z-index:0}
 /* story page */
 .story .crumbs{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#8c93ad;margin:0 0 14px}
 .story .crumbs a{color:#c9cfe4;text-decoration:none}.story .crumbs a:hover{color:#fff}
-.story-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,300px);gap:clamp(18px,3vw,40px);align-items:center;padding:clamp(18px,3vw,36px);position:relative;z-index:4}
+.story-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,300px);gap:clamp(18px,3vw,40px);align-items:start;padding:clamp(18px,3vw,36px);position:relative;z-index:4}
 .story-card.noclip{grid-template-columns:minmax(0,1fr)}
 .story-kicker{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#8c93ad;margin:0 0 12px}
 .story-kicker .mw-game{background:var(--c);color:#12162b}
@@ -1069,7 +1069,17 @@ body>header .cover .top-cover{z-index:0}
 .story .details .why b{color:#fff}
 .story .src a{color:#7cf3ff}
 .story .actions{display:flex;flex-wrap:wrap;gap:10px}
-.story-video{width:100%;aspect-ratio:9/16;border-radius:14px;background:#05040b;box-shadow:0 0 0 1px rgba(124,243,255,.5),0 0 22px rgba(124,243,255,.25),0 18px 40px rgba(0,0,0,.45);object-fit:cover}
+.story .body{max-width:62ch;margin:0 0 18px}
+.story .body p{font-size:17px;line-height:1.65;color:#dfe3f2;margin:0 0 14px}
+.story .specs{width:100%;max-width:62ch;border-collapse:collapse;margin:4px 0 20px;font-size:15px;border-radius:12px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(124,243,255,.28);background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02))}
+.story .specs caption{caption-side:top;text-align:left;font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#7cf3ff;font-weight:700;padding:0 0 8px}
+.story .specs th,.story .specs td{text-align:left;padding:10px 14px;border-top:1px solid rgba(255,255,255,.08);vertical-align:top}
+.story .specs tr:first-child th,.story .specs tr:first-child td{border-top:0}
+.story .specs th{width:38%;font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#8c93ad;font-weight:500}
+.story .specs td{color:#fff}
+.story-media{align-self:start;position:sticky;top:20px}
+.story-media-m{display:none;margin:0 0 22px}
+.story-video{display:block;border:0;width:100%;aspect-ratio:9/16;border-radius:14px;background:#05040b;box-shadow:0 0 0 1px rgba(124,243,255,.5),0 0 22px rgba(124,243,255,.25),0 18px 40px rgba(0,0,0,.45);object-fit:cover}
 .more{margin-top:clamp(22px,3vw,34px)}
 .more h2{font-family:var(--f-display);font-weight:800;font-stretch:80%;text-transform:uppercase;font-size:clamp(26px,3vw,36px);color:#fff;margin:0 0 30px}
 .more ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
@@ -1077,7 +1087,7 @@ body>header .cover .top-cover{z-index:0}
 .more li a:hover{box-shadow:inset 0 0 0 1px rgba(255,255,255,.3)}
 .more li .g{display:block;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8c93ad;margin-bottom:6px}
 .more li b{font-family:var(--f-display);font-weight:700;font-stretch:88%;font-size:19px;line-height:1.15}
-@media (max-width:760px){.story-card{grid-template-columns:minmax(0,1fr)}.story-video{max-width:300px;justify-self:center}}
+@media (max-width:760px){.story-card{grid-template-columns:minmax(0,1fr)}.story-media{display:none}.story-media-m{display:block}.story-video{max-width:300px;margin:0 auto}}
 </style>
 <!--seo-->
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -1097,7 +1107,7 @@ body>header .cover .top-cover{z-index:0}
 <meta name="twitter:title" content="Mega Greninja ex League Battle Deck lands this week">
 <meta name="twitter:description" content="Pokémon&#x27;s ready-to-play 60-card League Battle Deck, with Mega Starmie ex and Meowth ex, reaches stores this week.">
 <meta name="twitter:image" content="https://1cardz.news/img/clip40.jpg">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "NewsArticle", "headline": "Mega Greninja ex League Battle Deck lands this week", "description": "Pokémon's ready-to-play 60-card League Battle Deck, with Mega Starmie ex and Meowth ex, reaches stores this week.", "datePublished": "2026-11-09T08:00:00+08:00", "dateModified": "2026-11-09T08:00:00+08:00", "image": ["https://1cardz.news/img/clip40.jpg"], "url": "https://1cardz.news/news-2026-11-09-mega-greninja-ex-league-battle-deck-lands-this-week.html", "mainEntityOfPage": "https://1cardz.news/news-2026-11-09-mega-greninja-ex-league-battle-deck-lands-this-week.html", "articleSection": "Pokémon", "author": {"@type": "Organization", "name": "1Cardz.news", "url": "https://1cardz.news/"}, "publisher": {"@type": "NewsMediaOrganization", "name": "1Cardz.news", "url": "https://1cardz.news/", "logo": {"@type": "ImageObject", "url": "https://1cardz.news/img/icon-512.png", "width": 512, "height": 512}}, "video": {"@type": "VideoObject", "name": "Mega Greninja ex League Battle Deck lands this week", "description": "Pokémon's ready-to-play 60-card Mega Greninja ex League Battle Deck, with Mega Starmie ex, lands this week.", "thumbnailUrl": "https://1cardz.news/img/clip40.jpg", "uploadDate": "2026-11-09T08:00:00+08:00", "contentUrl": "https://1cardz.news/img/clip40.mp4", "embedUrl": "https://1cardz.news/news-2026-11-09-mega-greninja-ex-league-battle-deck-lands-this-week.html"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "NewsArticle", "headline": "Mega Greninja ex League Battle Deck lands this week", "description": "Pokémon's ready-to-play 60-card League Battle Deck, with Mega Starmie ex and Meowth ex, reaches stores this week.", "datePublished": "2026-11-09T08:00:00+08:00", "dateModified": "2026-11-09T08:00:00+08:00", "image": ["https://1cardz.news/img/clip40.jpg"], "url": "https://1cardz.news/news-2026-11-09-mega-greninja-ex-league-battle-deck-lands-this-week.html", "mainEntityOfPage": "https://1cardz.news/news-2026-11-09-mega-greninja-ex-league-battle-deck-lands-this-week.html", "articleSection": "Pokémon", "author": {"@type": "Organization", "name": "1Cardz.news", "url": "https://1cardz.news/"}, "publisher": {"@type": "NewsMediaOrganization", "name": "1Cardz.news", "url": "https://1cardz.news/", "logo": {"@type": "ImageObject", "url": "https://1cardz.news/img/icon-512.png", "width": 512, "height": 512}}, "articleBody": "The Pokémon TCG League Battle Deck: Mega Greninja ex reaches retail on November 11, 2026, according to ICv2. The box contains a ready-to-play 60-card preconstructed deck built around Mega Greninja ex, with Mega Starmie ex and Meowth ex cards also included. The Pokémon Company International designed the deck to help experienced players try Mega Greninja ex strategies on the competitive scene. Besides the deck, the box includes 6 damage-counter dice, a coin-flip die, 2 coin condition markers, a deck box, a strategy sheet and a code card to play the deck online. The deck retails for $29.99. League Battle Decks are built as tournament-ready lists, so the product is aimed at players who want a complete competitive deck without hunting for singles, and at those who want to learn how the Mega Greninja ex archetype plays before tuning it themselves. With Delta Reign released just days earlier on November 6, the deck gives players a second new option for the Mega Evolution era this month.", "wordCount": 165, "video": {"@type": "VideoObject", "name": "Mega Greninja ex League Battle Deck lands this week", "description": "Pokémon's ready-to-play 60-card Mega Greninja ex League Battle Deck, with Mega Starmie ex, lands this week.", "thumbnailUrl": "https://1cardz.news/img/clip40.jpg", "uploadDate": "2026-11-09T08:00:00+08:00", "contentUrl": "https://1cardz.news/img/clip40.mp4", "embedUrl": "https://www.youtube.com/embed/ODjj8JOZrcQ", "url": "https://www.youtube.com/shorts/ODjj8JOZrcQ"}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://1cardz.news/"}, {"@type": "ListItem", "position": 2, "name": "Headlines", "item": "https://1cardz.news/news.html"}, {"@type": "ListItem", "position": 3, "name": "Mega Greninja ex League Battle Deck lands this week", "item": "https://1cardz.news/news-2026-11-09-mega-greninja-ex-league-battle-deck-lands-this-week.html"}]}</script>
 <!--/seo-->
 <script id="gc-js" data-goatcounter="https://1cardz-news.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -1222,13 +1232,16 @@ body>header .cover .top-cover{z-index:0}
         <div>
           <p class="story-kicker"><span class="mw-game">Pokémon</span><time datetime="2026-11-09T08:00:00+08:00">Mon, Nov 9 · 8:00 AM</time> · With Zia</p>
           <h1>Mega Greninja ex League Battle Deck lands this week</h1>
+          <div class="story-media-m"><iframe class="story-video" src="https://www.youtube-nocookie.com/embed/ODjj8JOZrcQ?rel=0&amp;playsinline=1" loading="lazy" title="YouTube Short: Mega Greninja ex League Battle Deck lands this week" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
           <p class="lead">Pokémon&#x27;s ready-to-play 60-card League Battle Deck, with Mega Starmie ex and Meowth ex, reaches stores this week.</p>
+          <div class="body"><p>The Pokémon TCG League Battle Deck: Mega Greninja ex reaches retail on November 11, 2026, according to ICv2. The box contains a ready-to-play 60-card preconstructed deck built around Mega Greninja ex, with Mega Starmie ex and Meowth ex cards also included.</p><p>The Pokémon Company International designed the deck to help experienced players try Mega Greninja ex strategies on the competitive scene. Besides the deck, the box includes 6 damage-counter dice, a coin-flip die, 2 coin condition markers, a deck box, a strategy sheet and a code card to play the deck online.</p><p>The deck retails for $29.99. League Battle Decks are built as tournament-ready lists, so the product is aimed at players who want a complete competitive deck without hunting for singles, and at those who want to learn how the Mega Greninja ex archetype plays before tuning it themselves.</p><p>With Delta Reign released just days earlier on November 6, the deck gives players a second new option for the Mega Evolution era this month.</p></div>
+          <table class="specs"><caption>At a glance</caption><tbody><tr><th scope="row">Release date</th><td>November 11, 2026</td></tr><tr><th scope="row">MSRP</th><td>$29.99</td></tr><tr><th scope="row">Card count</th><td>60-card deck</td></tr><tr><th scope="row">Legal formats</th><td>Not announced</td></tr><tr><th scope="row">Contents</th><td>Deck, dice, markers, deck box, strategy sheet, online code</td></tr></tbody></table>
           <p class="quip">Sixty cards, zero excuses for a bad build.</p>
           
-          <p class="src">Source: ICv2</p>
+          <p class="src">Source: <a href="https://icv2.com/articles/news/view/63295/new-pokemon-tcg-league-battle-deck-incoming" rel="noopener" target="_blank">ICv2</a></p>
           <div class="actions"><a class="btn" href="news.html">All headlines</a><a class="btn ghost" href="archive.html">Watch more clips</a></div>
         </div>
-        <video class="story-video" controls playsinline preload="none" poster="img/clip40.jpg" src="img/clip40.mp4" aria-label="News clip with Zia: Mega Greninja ex League Battle Deck lands this week"></video>
+        <div class="story-media"><iframe class="story-video" src="https://www.youtube-nocookie.com/embed/ODjj8JOZrcQ?rel=0&amp;playsinline=1" loading="lazy" title="YouTube Short: Mega Greninja ex League Battle Deck lands this week" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
       </div>
     </article>
     <div class="more">

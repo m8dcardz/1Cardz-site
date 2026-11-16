@@ -175,7 +175,7 @@ story_css = """<style>
 /* story page */
 .story .crumbs{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#8c93ad;margin:0 0 14px}
 .story .crumbs a{color:#c9cfe4;text-decoration:none}.story .crumbs a:hover{color:#fff}
-.story-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,300px);gap:clamp(18px,3vw,40px);align-items:center;padding:clamp(18px,3vw,36px);position:relative;z-index:4}
+.story-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,300px);gap:clamp(18px,3vw,40px);align-items:start;padding:clamp(18px,3vw,36px);position:relative;z-index:4}
 .story-card.noclip{grid-template-columns:minmax(0,1fr)}
 .story-kicker{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#8c93ad;margin:0 0 12px}
 .story-kicker .mw-game{background:var(--c);color:#12162b}
@@ -191,7 +191,17 @@ story_css = """<style>
 .story .details .why b{color:#fff}
 .story .src a{color:#7cf3ff}
 .story .actions{display:flex;flex-wrap:wrap;gap:10px}
-.story-video{width:100%;aspect-ratio:9/16;border-radius:14px;background:#05040b;box-shadow:0 0 0 1px rgba(124,243,255,.5),0 0 22px rgba(124,243,255,.25),0 18px 40px rgba(0,0,0,.45);object-fit:cover}
+.story .body{max-width:62ch;margin:0 0 18px}
+.story .body p{font-size:17px;line-height:1.65;color:#dfe3f2;margin:0 0 14px}
+.story .specs{width:100%;max-width:62ch;border-collapse:collapse;margin:4px 0 20px;font-size:15px;border-radius:12px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(124,243,255,.28);background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02))}
+.story .specs caption{caption-side:top;text-align:left;font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#7cf3ff;font-weight:700;padding:0 0 8px}
+.story .specs th,.story .specs td{text-align:left;padding:10px 14px;border-top:1px solid rgba(255,255,255,.08);vertical-align:top}
+.story .specs tr:first-child th,.story .specs tr:first-child td{border-top:0}
+.story .specs th{width:38%;font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#8c93ad;font-weight:500}
+.story .specs td{color:#fff}
+.story-media{align-self:start;position:sticky;top:20px}
+.story-media-m{display:none;margin:0 0 22px}
+.story-video{display:block;border:0;width:100%;aspect-ratio:9/16;border-radius:14px;background:#05040b;box-shadow:0 0 0 1px rgba(124,243,255,.5),0 0 22px rgba(124,243,255,.25),0 18px 40px rgba(0,0,0,.45);object-fit:cover}
 .more{margin-top:clamp(22px,3vw,34px)}
 .more h2{font-family:var(--f-display);font-weight:800;font-stretch:80%;text-transform:uppercase;font-size:clamp(26px,3vw,36px);color:#fff;margin:0 0 30px}
 .more ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
@@ -199,7 +209,7 @@ story_css = """<style>
 .more li a:hover{box-shadow:inset 0 0 0 1px rgba(255,255,255,.3)}
 .more li .g{display:block;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8c93ad;margin-bottom:6px}
 .more li b{font-family:var(--f-display);font-weight:700;font-stretch:88%;font-size:19px;line-height:1.15}
-@media (max-width:760px){.story-card{grid-template-columns:minmax(0,1fr)}.story-video{max-width:300px;justify-self:center}}
+@media (max-width:760px){.story-card{grid-template-columns:minmax(0,1fr)}.story-media{display:none}.story-media-m{display:block}.story-video{max-width:300px;margin:0 auto}}
 </style>"""
 s_header = header.replace('<h1 class="foil">', '<div class="foil h1x">', 1)
 s_header = re.sub(r'(<div class="foil h1x">.*?)</h1>', r'\1</div>', s_header, count=1, flags=re.S)
@@ -212,7 +222,12 @@ for k, (n, p) in enumerate(site_parts.story_items(news, list(posts.values()))):
     more = [m for m in news if m is not n][:6]
     more_html = ''.join(f'<li><a href="{story_url(m)}"><span class="g">{e(m["game"])} · {when(m["when"])}</span><b>{e(m["title"])}</b></a></li>' for m in more)
     clip_html = ''
-    if p:
+    yt = (p or {}).get('yt')
+    if p and yt:      # Nov 16: the YouTube Short itself, so Google visitors add YouTube views
+        clip_html = (f'<iframe class="story-video" src="https://www.youtube-nocookie.com/embed/{e(yt)}?rel=0&amp;playsinline=1" loading="lazy" '
+                     f'title="YouTube Short: {e(title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" '
+                     f'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>')
+    elif p:
         clip_html = (f'<video class="story-video" controls playsinline preload="none" poster="img/{p["clip"]}.jpg" src="img/{p["clip"]}.mp4" '
                      f'aria-label="News clip with {e(p["host"])}: {e(title)}"></video>')
     host = f' · With {e(p["host"])}' if p else ''
@@ -222,9 +237,22 @@ for k, (n, p) in enumerate(site_parts.story_items(news, list(posts.values()))):
         lis = ''.join(f'<li>{e(f)}</li>' for f in d.get('facts', []))
         why = f'<p class="why"><b>Why it matters:</b> {e(d["why"])}</p>' if d.get('why') else ''
         details_html = f'<section class="details" aria-label="The details"><h2>The details</h2>{"<ul>"+lis+"</ul>" if lis else ""}{why}</section>'
+    art = [t for t in (n.get('article') or []) if str(t).strip()]
+    art_html = ''.join(f'<p>{e(t)}</p>' for t in art)
+    if art:
+        art_html = f'<div class="body">{art_html}</div>'
+        details_html = ''   # the full article replaces the short fact list
+    specs = [r for r in (n.get('specs') or []) if isinstance(r, (list, tuple)) and len(r) == 2]
+    specs_html = ''
+    if specs:
+        specs_html = ('<table class="specs"><caption>At a glance</caption><tbody>' +
+                      ''.join(f'<tr><th scope="row">{e(a)}</th><td>{e(b)}</td></tr>' for a, b in specs) + '</tbody></table>')
+    links = [u for u in (n.get('links') or []) if str(u).startswith('https://')]
     src_html = e(n['source'])
     if d.get('url', '').startswith('https://'):
         src_html = f'<a href="{e(d["url"])}" rel="noopener" target="_blank">{e(n["source"])}</a>'
+    elif links:
+        src_html = f'<a href="{e(links[0])}" rel="noopener" target="_blank">{e(n["source"])}</a>'
     article = f"""
 <main>
   <section class="wrap story">
@@ -234,13 +262,16 @@ for k, (n, p) in enumerate(site_parts.story_items(news, list(posts.values()))):
         <div>
           <p class="story-kicker"><span class="mw-game">{e(n['game'])}</span><time datetime="{iso(n['when'])}">{when(n['when'])}</time>{host}</p>
           <h1>{e(title)}</h1>
+          {f'<div class="story-media-m">{clip_html}</div>' if clip_html else ''}
           <p class="lead">{e(desc)}</p>
+          {art_html}
+          {specs_html}
           {f'<p class="quip">{e(p.get("quip",""))}</p>' if p and p.get('quip') else ''}
           {details_html}
           <p class="src">Source: {src_html}</p>
           <div class="actions"><a class="btn" href="news.html">All headlines</a>{'<a class="btn ghost" href="archive.html">Watch more clips</a>' if p else ''}</div>
         </div>
-        {clip_html}
+        {f'<div class="story-media">{clip_html}</div>' if clip_html else ''}
       </div>
     </article>
     <div class="more">
@@ -260,9 +291,14 @@ for k, (n, p) in enumerate(site_parts.story_items(news, list(posts.values()))):
         {'@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': SITE},
         {'@type': 'ListItem', 'position': 2, 'name': 'Headlines', 'item': SITE + 'news.html'},
         {'@type': 'ListItem', 'position': 3, 'name': title, 'item': SITE + url}]}
+    if art:
+        ld['articleBody'] = ' '.join(art); ld['wordCount'] = sum(len(t.split()) for t in art)
     if p:
         ld['video'] = {'@type': 'VideoObject', 'name': title, 'description': p.get('blurb') or desc, 'thumbnailUrl': img,
-                       'uploadDate': iso(n['when']), 'contentUrl': SITE + f"img/{p['clip']}.mp4", 'embedUrl': SITE + url}
+                       'uploadDate': iso(n['when']), 'contentUrl': SITE + f"img/{p['clip']}.mp4",
+                       'embedUrl': f"https://www.youtube.com/embed/{p['yt']}" if p.get('yt') else SITE + url}
+        if p.get('yt'):
+            ld['video']['url'] = f"https://www.youtube.com/shorts/{p['yt']}"
     q = lambda t: html.escape(t, quote=True)
     seo = '\n'.join([
         '<!--seo-->',

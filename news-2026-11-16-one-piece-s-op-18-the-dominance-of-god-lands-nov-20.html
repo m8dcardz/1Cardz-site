@@ -1053,7 +1053,7 @@ body>header .cover .top-cover{z-index:0}
 /* story page */
 .story .crumbs{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#8c93ad;margin:0 0 14px}
 .story .crumbs a{color:#c9cfe4;text-decoration:none}.story .crumbs a:hover{color:#fff}
-.story-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,300px);gap:clamp(18px,3vw,40px);align-items:center;padding:clamp(18px,3vw,36px);position:relative;z-index:4}
+.story-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,300px);gap:clamp(18px,3vw,40px);align-items:start;padding:clamp(18px,3vw,36px);position:relative;z-index:4}
 .story-card.noclip{grid-template-columns:minmax(0,1fr)}
 .story-kicker{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#8c93ad;margin:0 0 12px}
 .story-kicker .mw-game{background:var(--c);color:#12162b}
@@ -1069,7 +1069,17 @@ body>header .cover .top-cover{z-index:0}
 .story .details .why b{color:#fff}
 .story .src a{color:#7cf3ff}
 .story .actions{display:flex;flex-wrap:wrap;gap:10px}
-.story-video{width:100%;aspect-ratio:9/16;border-radius:14px;background:#05040b;box-shadow:0 0 0 1px rgba(124,243,255,.5),0 0 22px rgba(124,243,255,.25),0 18px 40px rgba(0,0,0,.45);object-fit:cover}
+.story .body{max-width:62ch;margin:0 0 18px}
+.story .body p{font-size:17px;line-height:1.65;color:#dfe3f2;margin:0 0 14px}
+.story .specs{width:100%;max-width:62ch;border-collapse:collapse;margin:4px 0 20px;font-size:15px;border-radius:12px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(124,243,255,.28);background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02))}
+.story .specs caption{caption-side:top;text-align:left;font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#7cf3ff;font-weight:700;padding:0 0 8px}
+.story .specs th,.story .specs td{text-align:left;padding:10px 14px;border-top:1px solid rgba(255,255,255,.08);vertical-align:top}
+.story .specs tr:first-child th,.story .specs tr:first-child td{border-top:0}
+.story .specs th{width:38%;font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#8c93ad;font-weight:500}
+.story .specs td{color:#fff}
+.story-media{align-self:start;position:sticky;top:20px}
+.story-media-m{display:none;margin:0 0 22px}
+.story-video{display:block;border:0;width:100%;aspect-ratio:9/16;border-radius:14px;background:#05040b;box-shadow:0 0 0 1px rgba(124,243,255,.5),0 0 22px rgba(124,243,255,.25),0 18px 40px rgba(0,0,0,.45);object-fit:cover}
 .more{margin-top:clamp(22px,3vw,34px)}
 .more h2{font-family:var(--f-display);font-weight:800;font-stretch:80%;text-transform:uppercase;font-size:clamp(26px,3vw,36px);color:#fff;margin:0 0 30px}
 .more ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
@@ -1077,7 +1087,7 @@ body>header .cover .top-cover{z-index:0}
 .more li a:hover{box-shadow:inset 0 0 0 1px rgba(255,255,255,.3)}
 .more li .g{display:block;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8c93ad;margin-bottom:6px}
 .more li b{font-family:var(--f-display);font-weight:700;font-stretch:88%;font-size:19px;line-height:1.15}
-@media (max-width:760px){.story-card{grid-template-columns:minmax(0,1fr)}.story-video{max-width:300px;justify-self:center}}
+@media (max-width:760px){.story-card{grid-template-columns:minmax(0,1fr)}.story-media{display:none}.story-media-m{display:block}.story-video{max-width:300px;margin:0 auto}}
 </style>
 <!--seo-->
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -1090,14 +1100,14 @@ body>header .cover .top-cover{z-index:0}
 <meta property="og:title" content="One Piece&#x27;s OP-18 The Dominance of God lands Nov 20">
 <meta property="og:description" content="One Piece Card Game&#x27;s OP-18 The Dominance of God releases in English on November 20, 2026, with six new Leaders and a 4th Anniversary Event running to December 17.">
 <meta property="og:url" content="https://1cardz.news/news-2026-11-16-one-piece-s-op-18-the-dominance-of-god-lands-nov-20.html">
-<meta property="og:image" content="https://1cardz.news/img/og-1cardz.jpg">
+<meta property="og:image" content="https://1cardz.news/img/clip54.jpg">
 <meta property="article:published_time" content="2026-11-16T20:00:00+08:00">
 <meta property="article:section" content="One Piece">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="One Piece&#x27;s OP-18 The Dominance of God lands Nov 20">
 <meta name="twitter:description" content="One Piece Card Game&#x27;s OP-18 The Dominance of God releases in English on November 20, 2026, with six new Leaders and a 4th Anniversary Event running to December 17.">
-<meta name="twitter:image" content="https://1cardz.news/img/og-1cardz.jpg">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "NewsArticle", "headline": "One Piece's OP-18 The Dominance of God lands Nov 20", "description": "One Piece Card Game's OP-18 The Dominance of God releases in English on November 20, 2026, with six new Leaders and a 4th Anniversary Event running to December 17.", "datePublished": "2026-11-16T20:00:00+08:00", "dateModified": "2026-11-16T20:00:00+08:00", "image": ["https://1cardz.news/img/og-1cardz.jpg"], "url": "https://1cardz.news/news-2026-11-16-one-piece-s-op-18-the-dominance-of-god-lands-nov-20.html", "mainEntityOfPage": "https://1cardz.news/news-2026-11-16-one-piece-s-op-18-the-dominance-of-god-lands-nov-20.html", "articleSection": "One Piece", "author": {"@type": "Organization", "name": "1Cardz.news", "url": "https://1cardz.news/"}, "publisher": {"@type": "NewsMediaOrganization", "name": "1Cardz.news", "url": "https://1cardz.news/", "logo": {"@type": "ImageObject", "url": "https://1cardz.news/img/icon-512.png", "width": 512, "height": 512}}}</script>
+<meta name="twitter:image" content="https://1cardz.news/img/clip54.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "NewsArticle", "headline": "One Piece's OP-18 The Dominance of God lands Nov 20", "description": "One Piece Card Game's OP-18 The Dominance of God releases in English on November 20, 2026, with six new Leaders and a 4th Anniversary Event running to December 17.", "datePublished": "2026-11-16T20:00:00+08:00", "dateModified": "2026-11-16T20:00:00+08:00", "image": ["https://1cardz.news/img/clip54.jpg"], "url": "https://1cardz.news/news-2026-11-16-one-piece-s-op-18-the-dominance-of-god-lands-nov-20.html", "mainEntityOfPage": "https://1cardz.news/news-2026-11-16-one-piece-s-op-18-the-dominance-of-god-lands-nov-20.html", "articleSection": "One Piece", "author": {"@type": "Organization", "name": "1Cardz.news", "url": "https://1cardz.news/"}, "publisher": {"@type": "NewsMediaOrganization", "name": "1Cardz.news", "url": "https://1cardz.news/", "logo": {"@type": "ImageObject", "url": "https://1cardz.news/img/icon-512.png", "width": 512, "height": 512}}, "articleBody": "Booster Pack The Dominance of God [OP-18] for the One Piece Card Game releases in English on November 20, 2026, at $4.99 per pack. The set has 127+1 card types, and its cards become tournament legal seven days after release in each region. OP-18 focuses on Water Seven and the Holy Knights of God, with six new Leaders: Karoo, Monkey.D.Luffy, Ms. All Sunday, Franky, Saint Gunko and Spandam. Saint Gunko and Saint Shamrock make their card game debut. The Super Alt Art card features Nico Robin, the Super Leader Alt Art features Saint Gunko, and one alt art card uses original artwork by Yoshitaka Amano. The release also kicks off the 4th Anniversary Event (OP-18 Release Event), held at local game stores from November 20 to December 17, 2026. Stores can run Constructed, Sealed or Standard Regulation. Every participant receives a 4th Anniversary Tournament Pack, the P-161 Monkey.D.Luffy promo, a 4th Anniversary Leader card and World United DON!! cards, while the winner gets a silver foil, gold stamped P-161 Luffy. Players can register through the Bandai TCG+ app, which requires a Bandai Namco ID.", "wordCount": 184, "video": {"@type": "VideoObject", "name": "One Piece's OP-18 The Dominance of God lands Nov 20", "description": "One Piece's The Dominance of God lands November 20 with six new Leaders and a 4th Anniversary Event with a Luffy promo.", "thumbnailUrl": "https://1cardz.news/img/clip54.jpg", "uploadDate": "2026-11-16T20:00:00+08:00", "contentUrl": "https://1cardz.news/img/clip54.mp4", "embedUrl": "https://www.youtube.com/embed/nHzvNmz7Hxk", "url": "https://www.youtube.com/shorts/nHzvNmz7Hxk"}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://1cardz.news/"}, {"@type": "ListItem", "position": 2, "name": "Headlines", "item": "https://1cardz.news/news.html"}, {"@type": "ListItem", "position": 3, "name": "One Piece's OP-18 The Dominance of God lands Nov 20", "item": "https://1cardz.news/news-2026-11-16-one-piece-s-op-18-the-dominance-of-god-lands-nov-20.html"}]}</script>
 <!--/seo-->
 <script id="gc-js" data-goatcounter="https://1cardz-news.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -1218,17 +1228,20 @@ body>header .cover .top-cover{z-index:0}
   <section class="wrap story">
     <p class="crumbs"><a href="index.html">Home</a> › <a href="news.html">Headlines</a> › One Piece</p>
     <article class="gd" style="--c:#ff5c7a">
-      <div class="story-card noclip">
+      <div class="story-card">
         <div>
-          <p class="story-kicker"><span class="mw-game">One Piece</span><time datetime="2026-11-16T20:00:00+08:00">Mon, Nov 16 · 8:00 PM</time></p>
+          <p class="story-kicker"><span class="mw-game">One Piece</span><time datetime="2026-11-16T20:00:00+08:00">Mon, Nov 16 · 8:00 PM</time> · With Luna</p>
           <h1>One Piece&#x27;s OP-18 The Dominance of God lands Nov 20</h1>
+          <div class="story-media-m"><iframe class="story-video" src="https://www.youtube-nocookie.com/embed/nHzvNmz7Hxk?rel=0&amp;playsinline=1" loading="lazy" title="YouTube Short: One Piece&#x27;s OP-18 The Dominance of God lands Nov 20" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
           <p class="lead">One Piece Card Game&#x27;s OP-18 The Dominance of God releases in English on November 20, 2026, with six new Leaders and a 4th Anniversary Event running to December 17.</p>
+          <div class="body"><p>Booster Pack The Dominance of God [OP-18] for the One Piece Card Game releases in English on November 20, 2026, at $4.99 per pack. The set has 127+1 card types, and its cards become tournament legal seven days after release in each region.</p><p>OP-18 focuses on Water Seven and the Holy Knights of God, with six new Leaders: Karoo, Monkey.D.Luffy, Ms. All Sunday, Franky, Saint Gunko and Spandam. Saint Gunko and Saint Shamrock make their card game debut. The Super Alt Art card features Nico Robin, the Super Leader Alt Art features Saint Gunko, and one alt art card uses original artwork by Yoshitaka Amano.</p><p>The release also kicks off the 4th Anniversary Event (OP-18 Release Event), held at local game stores from November 20 to December 17, 2026. Stores can run Constructed, Sealed or Standard Regulation. Every participant receives a 4th Anniversary Tournament Pack, the P-161 Monkey.D.Luffy promo, a 4th Anniversary Leader card and World United DON!! cards, while the winner gets a silver foil, gold stamped P-161 Luffy.</p><p>Players can register through the Bandai TCG+ app, which requires a Bandai Namco ID.</p></div>
+          <table class="specs"><caption>At a glance</caption><tbody><tr><th scope="row">Release date</th><td>November 20, 2026</td></tr><tr><th scope="row">MSRP</th><td>$4.99 per pack</td></tr><tr><th scope="row">Card count</th><td>127+1 types</td></tr><tr><th scope="row">Legal formats</th><td>Tournament legal 7 days after release</td></tr><tr><th scope="row">Publisher</th><td>Bandai</td></tr><tr><th scope="row">Anniversary event</th><td>November 20 - December 17, 2026</td></tr></tbody></table>
+          <p class="quip">Four years old and still asking for more Leaders. Franky approves.</p>
           
-          <section class="details" aria-label="The details"><h2>The details</h2><ul><li>Booster Pack THE DOMINANCE OF GOD [OP-18] releases in English on November 20, 2026; its cards are tournament legal 7 days after release.</li><li>The set features Water Seven and the Holy Knights of God, with six new Leaders: Karoo, Monkey.D.Luffy, Ms. All Sunday, Franky, Saint Gunko and Spandam.</li><li>Saint Gunko and Saint Shamrock make their card game debut; the Super Alt Art card is Nico Robin and the Super Leader Alt Art is Saint Gunko.</li><li>One alt art card has original artwork by Yoshitaka Amano.</li><li>The 4th Anniversary Event (OP-18 Release Event) runs in stores November 20 to December 17, 2026: every player gets a P-161 Monkey.D.Luffy promo, and the winner gets a silver foil, gold stamped version.</li></ul><p class="why"><b>Why it matters:</b> It&#x27;s the game&#x27;s fourth anniversary set, with a long-awaited Franky Leader and a store event promo for everyone who plays.</p></section>
           <p class="src">Source: <a href="https://en.onepiece-cardgame.com/products/op18.html" rel="noopener" target="_blank">One Piece Card Game (official)</a></p>
-          <div class="actions"><a class="btn" href="news.html">All headlines</a></div>
+          <div class="actions"><a class="btn" href="news.html">All headlines</a><a class="btn ghost" href="archive.html">Watch more clips</a></div>
         </div>
-        
+        <div class="story-media"><iframe class="story-video" src="https://www.youtube-nocookie.com/embed/nHzvNmz7Hxk?rel=0&amp;playsinline=1" loading="lazy" title="YouTube Short: One Piece&#x27;s OP-18 The Dominance of God lands Nov 20" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
       </div>
     </article>
     <div class="more">

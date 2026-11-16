@@ -1053,7 +1053,7 @@ body>header .cover .top-cover{z-index:0}
 /* story page */
 .story .crumbs{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#8c93ad;margin:0 0 14px}
 .story .crumbs a{color:#c9cfe4;text-decoration:none}.story .crumbs a:hover{color:#fff}
-.story-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,300px);gap:clamp(18px,3vw,40px);align-items:center;padding:clamp(18px,3vw,36px);position:relative;z-index:4}
+.story-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,300px);gap:clamp(18px,3vw,40px);align-items:start;padding:clamp(18px,3vw,36px);position:relative;z-index:4}
 .story-card.noclip{grid-template-columns:minmax(0,1fr)}
 .story-kicker{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#8c93ad;margin:0 0 12px}
 .story-kicker .mw-game{background:var(--c);color:#12162b}
@@ -1069,7 +1069,17 @@ body>header .cover .top-cover{z-index:0}
 .story .details .why b{color:#fff}
 .story .src a{color:#7cf3ff}
 .story .actions{display:flex;flex-wrap:wrap;gap:10px}
-.story-video{width:100%;aspect-ratio:9/16;border-radius:14px;background:#05040b;box-shadow:0 0 0 1px rgba(124,243,255,.5),0 0 22px rgba(124,243,255,.25),0 18px 40px rgba(0,0,0,.45);object-fit:cover}
+.story .body{max-width:62ch;margin:0 0 18px}
+.story .body p{font-size:17px;line-height:1.65;color:#dfe3f2;margin:0 0 14px}
+.story .specs{width:100%;max-width:62ch;border-collapse:collapse;margin:4px 0 20px;font-size:15px;border-radius:12px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(124,243,255,.28);background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02))}
+.story .specs caption{caption-side:top;text-align:left;font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#7cf3ff;font-weight:700;padding:0 0 8px}
+.story .specs th,.story .specs td{text-align:left;padding:10px 14px;border-top:1px solid rgba(255,255,255,.08);vertical-align:top}
+.story .specs tr:first-child th,.story .specs tr:first-child td{border-top:0}
+.story .specs th{width:38%;font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#8c93ad;font-weight:500}
+.story .specs td{color:#fff}
+.story-media{align-self:start;position:sticky;top:20px}
+.story-media-m{display:none;margin:0 0 22px}
+.story-video{display:block;border:0;width:100%;aspect-ratio:9/16;border-radius:14px;background:#05040b;box-shadow:0 0 0 1px rgba(124,243,255,.5),0 0 22px rgba(124,243,255,.25),0 18px 40px rgba(0,0,0,.45);object-fit:cover}
 .more{margin-top:clamp(22px,3vw,34px)}
 .more h2{font-family:var(--f-display);font-weight:800;font-stretch:80%;text-transform:uppercase;font-size:clamp(26px,3vw,36px);color:#fff;margin:0 0 30px}
 .more ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
@@ -1077,7 +1087,7 @@ body>header .cover .top-cover{z-index:0}
 .more li a:hover{box-shadow:inset 0 0 0 1px rgba(255,255,255,.3)}
 .more li .g{display:block;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8c93ad;margin-bottom:6px}
 .more li b{font-family:var(--f-display);font-weight:700;font-stretch:88%;font-size:19px;line-height:1.15}
-@media (max-width:760px){.story-card{grid-template-columns:minmax(0,1fr)}.story-video{max-width:300px;justify-self:center}}
+@media (max-width:760px){.story-card{grid-template-columns:minmax(0,1fr)}.story-media{display:none}.story-media-m{display:block}.story-video{max-width:300px;margin:0 auto}}
 </style>
 <!--seo-->
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -1097,7 +1107,7 @@ body>header .cover .top-cover{z-index:0}
 <meta name="twitter:title" content="Banlist Shock">
 <meta name="twitter:description" content="After YCS Houston, Konami&#x27;s new list hits 34 Forbidden and 8 Limited, with Called by the Grave leading the charge.">
 <meta name="twitter:image" content="https://1cardz.news/img/clip16.jpg">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "NewsArticle", "headline": "Banlist Shock", "description": "After YCS Houston, Konami's new list hits 34 Forbidden and 8 Limited, with Called by the Grave leading the charge.", "datePublished": "2026-10-23T18:00:00+08:00", "dateModified": "2026-10-23T18:00:00+08:00", "image": ["https://1cardz.news/img/clip16.jpg"], "url": "https://1cardz.news/news-2026-10-23-banlist-shock.html", "mainEntityOfPage": "https://1cardz.news/news-2026-10-23-banlist-shock.html", "articleSection": "Yu-Gi-Oh!", "author": {"@type": "Organization", "name": "1Cardz.news", "url": "https://1cardz.news/"}, "publisher": {"@type": "NewsMediaOrganization", "name": "1Cardz.news", "url": "https://1cardz.news/", "logo": {"@type": "ImageObject", "url": "https://1cardz.news/img/icon-512.png", "width": 512, "height": 512}}, "video": {"@type": "VideoObject", "name": "Banlist Shock", "description": "After YCS Houston, Konami's new list hits 34 Forbidden and 8 Limited, with Called by the Grave leading the charge.", "thumbnailUrl": "https://1cardz.news/img/clip16.jpg", "uploadDate": "2026-10-23T18:00:00+08:00", "contentUrl": "https://1cardz.news/img/clip16.mp4", "embedUrl": "https://1cardz.news/news-2026-10-23-banlist-shock.html"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "NewsArticle", "headline": "Banlist Shock", "description": "After YCS Houston, Konami's new list hits 34 Forbidden and 8 Limited, with Called by the Grave leading the charge.", "datePublished": "2026-10-23T18:00:00+08:00", "dateModified": "2026-10-23T18:00:00+08:00", "image": ["https://1cardz.news/img/clip16.jpg"], "url": "https://1cardz.news/news-2026-10-23-banlist-shock.html", "mainEntityOfPage": "https://1cardz.news/news-2026-10-23-banlist-shock.html", "articleSection": "Yu-Gi-Oh!", "author": {"@type": "Organization", "name": "1Cardz.news", "url": "https://1cardz.news/"}, "publisher": {"@type": "NewsMediaOrganization", "name": "1Cardz.news", "url": "https://1cardz.news/", "logo": {"@type": "ImageObject", "url": "https://1cardz.news/img/icon-512.png", "width": 512, "height": 512}}, "video": {"@type": "VideoObject", "name": "Banlist Shock", "description": "After YCS Houston, Konami's new list hits 34 Forbidden and 8 Limited, with Called by the Grave leading the charge.", "thumbnailUrl": "https://1cardz.news/img/clip16.jpg", "uploadDate": "2026-10-23T18:00:00+08:00", "contentUrl": "https://1cardz.news/img/clip16.mp4", "embedUrl": "https://www.youtube.com/embed/3AvtDYx5ui8", "url": "https://www.youtube.com/shorts/3AvtDYx5ui8"}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://1cardz.news/"}, {"@type": "ListItem", "position": 2, "name": "Headlines", "item": "https://1cardz.news/news.html"}, {"@type": "ListItem", "position": 3, "name": "Banlist Shock", "item": "https://1cardz.news/news-2026-10-23-banlist-shock.html"}]}</script>
 <!--/seo-->
 <script id="gc-js" data-goatcounter="https://1cardz-news.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -1222,13 +1232,16 @@ body>header .cover .top-cover{z-index:0}
         <div>
           <p class="story-kicker"><span class="mw-game">Yu-Gi-Oh!</span><time datetime="2026-10-23T18:00:00+08:00">Fri, Oct 23 · 6:00 PM</time> · With Zia</p>
           <h1>Banlist Shock</h1>
+          <div class="story-media-m"><iframe class="story-video" src="https://www.youtube-nocookie.com/embed/3AvtDYx5ui8?rel=0&amp;playsinline=1" loading="lazy" title="YouTube Short: Banlist Shock" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
           <p class="lead">After YCS Houston, Konami&#x27;s new list hits 34 Forbidden and 8 Limited, with Called by the Grave leading the charge.</p>
+          
+          
           <p class="quip">Deckboxes were opened. Tears were shed.</p>
           
           <p class="src">Source: 1Cardz on YouTube</p>
           <div class="actions"><a class="btn" href="news.html">All headlines</a><a class="btn ghost" href="archive.html">Watch more clips</a></div>
         </div>
-        <video class="story-video" controls playsinline preload="none" poster="img/clip16.jpg" src="img/clip16.mp4" aria-label="News clip with Zia: Banlist Shock"></video>
+        <div class="story-media"><iframe class="story-video" src="https://www.youtube-nocookie.com/embed/3AvtDYx5ui8?rel=0&amp;playsinline=1" loading="lazy" title="YouTube Short: Banlist Shock" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
       </div>
     </article>
     <div class="more">

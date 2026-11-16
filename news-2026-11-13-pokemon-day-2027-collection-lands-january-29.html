@@ -1053,7 +1053,7 @@ body>header .cover .top-cover{z-index:0}
 /* story page */
 .story .crumbs{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#8c93ad;margin:0 0 14px}
 .story .crumbs a{color:#c9cfe4;text-decoration:none}.story .crumbs a:hover{color:#fff}
-.story-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,300px);gap:clamp(18px,3vw,40px);align-items:center;padding:clamp(18px,3vw,36px);position:relative;z-index:4}
+.story-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,300px);gap:clamp(18px,3vw,40px);align-items:start;padding:clamp(18px,3vw,36px);position:relative;z-index:4}
 .story-card.noclip{grid-template-columns:minmax(0,1fr)}
 .story-kicker{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#8c93ad;margin:0 0 12px}
 .story-kicker .mw-game{background:var(--c);color:#12162b}
@@ -1069,7 +1069,17 @@ body>header .cover .top-cover{z-index:0}
 .story .details .why b{color:#fff}
 .story .src a{color:#7cf3ff}
 .story .actions{display:flex;flex-wrap:wrap;gap:10px}
-.story-video{width:100%;aspect-ratio:9/16;border-radius:14px;background:#05040b;box-shadow:0 0 0 1px rgba(124,243,255,.5),0 0 22px rgba(124,243,255,.25),0 18px 40px rgba(0,0,0,.45);object-fit:cover}
+.story .body{max-width:62ch;margin:0 0 18px}
+.story .body p{font-size:17px;line-height:1.65;color:#dfe3f2;margin:0 0 14px}
+.story .specs{width:100%;max-width:62ch;border-collapse:collapse;margin:4px 0 20px;font-size:15px;border-radius:12px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(124,243,255,.28);background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02))}
+.story .specs caption{caption-side:top;text-align:left;font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#7cf3ff;font-weight:700;padding:0 0 8px}
+.story .specs th,.story .specs td{text-align:left;padding:10px 14px;border-top:1px solid rgba(255,255,255,.08);vertical-align:top}
+.story .specs tr:first-child th,.story .specs tr:first-child td{border-top:0}
+.story .specs th{width:38%;font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#8c93ad;font-weight:500}
+.story .specs td{color:#fff}
+.story-media{align-self:start;position:sticky;top:20px}
+.story-media-m{display:none;margin:0 0 22px}
+.story-video{display:block;border:0;width:100%;aspect-ratio:9/16;border-radius:14px;background:#05040b;box-shadow:0 0 0 1px rgba(124,243,255,.5),0 0 22px rgba(124,243,255,.25),0 18px 40px rgba(0,0,0,.45);object-fit:cover}
 .more{margin-top:clamp(22px,3vw,34px)}
 .more h2{font-family:var(--f-display);font-weight:800;font-stretch:80%;text-transform:uppercase;font-size:clamp(26px,3vw,36px);color:#fff;margin:0 0 30px}
 .more ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
@@ -1077,7 +1087,7 @@ body>header .cover .top-cover{z-index:0}
 .more li a:hover{box-shadow:inset 0 0 0 1px rgba(255,255,255,.3)}
 .more li .g{display:block;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8c93ad;margin-bottom:6px}
 .more li b{font-family:var(--f-display);font-weight:700;font-stretch:88%;font-size:19px;line-height:1.15}
-@media (max-width:760px){.story-card{grid-template-columns:minmax(0,1fr)}.story-video{max-width:300px;justify-self:center}}
+@media (max-width:760px){.story-card{grid-template-columns:minmax(0,1fr)}.story-media{display:none}.story-media-m{display:block}.story-video{max-width:300px;margin:0 auto}}
 </style>
 <!--seo-->
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -1097,7 +1107,7 @@ body>header .cover .top-cover{z-index:0}
 <meta name="twitter:title" content="Pokémon Day 2027 Collection lands January 29">
 <meta name="twitter:description" content="The Pokémon Day 2027 Collection reaches stores January 29, 2027, with a stamped foil Pikachu promo, three booster packs, a coin and a TCG Live code card.">
 <meta name="twitter:image" content="https://1cardz.news/img/clip48.jpg">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "NewsArticle", "headline": "Pokémon Day 2027 Collection lands January 29", "description": "The Pokémon Day 2027 Collection reaches stores January 29, 2027, with a stamped foil Pikachu promo, three booster packs, a coin and a TCG Live code card.", "datePublished": "2026-11-13T20:00:00+08:00", "dateModified": "2026-11-13T20:00:00+08:00", "image": ["https://1cardz.news/img/clip48.jpg"], "url": "https://1cardz.news/news-2026-11-13-pokemon-day-2027-collection-lands-january-29.html", "mainEntityOfPage": "https://1cardz.news/news-2026-11-13-pokemon-day-2027-collection-lands-january-29.html", "articleSection": "Pokémon", "author": {"@type": "Organization", "name": "1Cardz.news", "url": "https://1cardz.news/"}, "publisher": {"@type": "NewsMediaOrganization", "name": "1Cardz.news", "url": "https://1cardz.news/", "logo": {"@type": "ImageObject", "url": "https://1cardz.news/img/icon-512.png", "width": 512, "height": 512}}, "video": {"@type": "VideoObject", "name": "Pokémon Day 2027 Collection lands January 29", "description": "The Pokémon Day 2027 Collection lands January 29 with a stamped foil Pikachu promo, three booster packs and a coin.", "thumbnailUrl": "https://1cardz.news/img/clip48.jpg", "uploadDate": "2026-11-13T20:00:00+08:00", "contentUrl": "https://1cardz.news/img/clip48.mp4", "embedUrl": "https://1cardz.news/news-2026-11-13-pokemon-day-2027-collection-lands-january-29.html"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "NewsArticle", "headline": "Pokémon Day 2027 Collection lands January 29", "description": "The Pokémon Day 2027 Collection reaches stores January 29, 2027, with a stamped foil Pikachu promo, three booster packs, a coin and a TCG Live code card.", "datePublished": "2026-11-13T20:00:00+08:00", "dateModified": "2026-11-13T20:00:00+08:00", "image": ["https://1cardz.news/img/clip48.jpg"], "url": "https://1cardz.news/news-2026-11-13-pokemon-day-2027-collection-lands-january-29.html", "mainEntityOfPage": "https://1cardz.news/news-2026-11-13-pokemon-day-2027-collection-lands-january-29.html", "articleSection": "Pokémon", "author": {"@type": "Organization", "name": "1Cardz.news", "url": "https://1cardz.news/"}, "publisher": {"@type": "NewsMediaOrganization", "name": "1Cardz.news", "url": "https://1cardz.news/", "logo": {"@type": "ImageObject", "url": "https://1cardz.news/img/icon-512.png", "width": 512, "height": 512}}, "articleBody": "The Pokémon Company International will release the Pokémon Day 2027 Collection on January 29, 2027, with an MSRP of $14.99. The boxed set celebrates Pokémon Day, which falls on February 27, 2027. The headline item is a specially stamped foil Pikachu promo card. The collection also includes three Pokémon TCG booster packs, a collectible plastic coin and a code card for Pokémon TCG Live. Pokémon Day collections have become a yearly tradition, and each one brings a new stamped promo that collectors look out for. Arriving about a month before Pokémon Day itself, the 2027 box gives fans time to pick it up before the celebrations. The collection is now available for preorder at retailers, and ICv2 lists it as a new boxed set for the Pokémon TCG. The release follows another milestone for the game: the Pokémon Trading Card Game was inducted into the National Toy Hall of Fame as part of its class of 2026 earlier in November.", "wordCount": 160, "video": {"@type": "VideoObject", "name": "Pokémon Day 2027 Collection lands January 29", "description": "The Pokémon Day 2027 Collection lands January 29 with a stamped foil Pikachu promo, three booster packs and a coin.", "thumbnailUrl": "https://1cardz.news/img/clip48.jpg", "uploadDate": "2026-11-13T20:00:00+08:00", "contentUrl": "https://1cardz.news/img/clip48.mp4", "embedUrl": "https://www.youtube.com/embed/ypYkl78B4FM", "url": "https://www.youtube.com/shorts/ypYkl78B4FM"}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://1cardz.news/"}, {"@type": "ListItem", "position": 2, "name": "Headlines", "item": "https://1cardz.news/news.html"}, {"@type": "ListItem", "position": 3, "name": "Pokémon Day 2027 Collection lands January 29", "item": "https://1cardz.news/news-2026-11-13-pokemon-day-2027-collection-lands-january-29.html"}]}</script>
 <!--/seo-->
 <script id="gc-js" data-goatcounter="https://1cardz-news.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -1222,13 +1232,16 @@ body>header .cover .top-cover{z-index:0}
         <div>
           <p class="story-kicker"><span class="mw-game">Pokémon</span><time datetime="2026-11-13T20:00:00+08:00">Fri, Nov 13 · 8:00 PM</time> · With Luna</p>
           <h1>Pokémon Day 2027 Collection lands January 29</h1>
+          <div class="story-media-m"><iframe class="story-video" src="https://www.youtube-nocookie.com/embed/ypYkl78B4FM?rel=0&amp;playsinline=1" loading="lazy" title="YouTube Short: Pokémon Day 2027 Collection lands January 29" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
           <p class="lead">The Pokémon Day 2027 Collection reaches stores January 29, 2027, with a stamped foil Pikachu promo, three booster packs, a coin and a TCG Live code card.</p>
+          <div class="body"><p>The Pokémon Company International will release the Pokémon Day 2027 Collection on January 29, 2027, with an MSRP of $14.99. The boxed set celebrates Pokémon Day, which falls on February 27, 2027.</p><p>The headline item is a specially stamped foil Pikachu promo card. The collection also includes three Pokémon TCG booster packs, a collectible plastic coin and a code card for Pokémon TCG Live.</p><p>Pokémon Day collections have become a yearly tradition, and each one brings a new stamped promo that collectors look out for. Arriving about a month before Pokémon Day itself, the 2027 box gives fans time to pick it up before the celebrations. The collection is now available for preorder at retailers, and ICv2 lists it as a new boxed set for the Pokémon TCG.</p><p>The release follows another milestone for the game: the Pokémon Trading Card Game was inducted into the National Toy Hall of Fame as part of its class of 2026 earlier in November.</p></div>
+          <table class="specs"><caption>At a glance</caption><tbody><tr><th scope="row">Release date</th><td>January 29, 2027</td></tr><tr><th scope="row">MSRP</th><td>$14.99</td></tr><tr><th scope="row">Card count</th><td>1 stamped foil Pikachu promo + 3 booster packs</td></tr><tr><th scope="row">Legal formats</th><td>Not announced</td></tr><tr><th scope="row">Publisher</th><td>The Pokémon Company International</td></tr><tr><th scope="row">Contents</th><td>Collectible coin, Pokémon TCG Live code card</td></tr></tbody></table>
           <p class="quip">Pikachu&#x27;s birthday party comes with its own party favors.</p>
-          <section class="details" aria-label="The details"><h2>The details</h2><ul><li>Pokémon Day 2027 Collection releases January 29, 2027 (The Pokémon Company International).</li><li>It includes a specially stamped foil Pikachu promo card.</li><li>Also inside: three Pokémon TCG booster packs and a collectible coin.</li><li>A code card for Pokémon TCG Live comes in the box.</li><li>Pokémon Day itself is February 27, 2027.</li></ul><p class="why"><b>Why it matters:</b> A new stamped Pikachu promo is a yearly collector favourite, and it lands a month before Pokémon Day.</p></section>
+          
           <p class="src">Source: <a href="https://icv2.com/articles/news/view/63870/pokemon-day-2027-collection-hits-preorder" rel="noopener" target="_blank">ICv2</a></p>
           <div class="actions"><a class="btn" href="news.html">All headlines</a><a class="btn ghost" href="archive.html">Watch more clips</a></div>
         </div>
-        <video class="story-video" controls playsinline preload="none" poster="img/clip48.jpg" src="img/clip48.mp4" aria-label="News clip with Luna: Pokémon Day 2027 Collection lands January 29"></video>
+        <div class="story-media"><iframe class="story-video" src="https://www.youtube-nocookie.com/embed/ypYkl78B4FM?rel=0&amp;playsinline=1" loading="lazy" title="YouTube Short: Pokémon Day 2027 Collection lands January 29" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
       </div>
     </article>
     <div class="more">
