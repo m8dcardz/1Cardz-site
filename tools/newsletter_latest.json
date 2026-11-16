@@ -12,7 +12,7 @@
  "big_clip": "clip50",
  "cover": {
   "main": "Magic hits Netflix",
-  "sub": "Planeswalker puts Chandra on screen in 2027",
+  "sub": "Planeswalker puts Chandra\non screen in 2027",
   "lines": [
    [
     "Riven is banned",
@@ -353,5 +353,10 @@
  "signoff": [
   "Shuffle up,",
   "Zia & Luna"
- ]
+ ],
+ "cover_image": "img/nl-cover-vol3.jpg",
+ "vol_pos": {
+  "top": 38,
+  "right": 4
+ }
 }

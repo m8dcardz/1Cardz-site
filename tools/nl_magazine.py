@@ -194,7 +194,7 @@ def render(iss, root):
     root = pathlib.Path(root)
     no = iss.get('no', '')
     cv = iss.get('cover', {})
-    cover_img = _img(root, iss.get('cover_clip'), cover=True) or iss.get('image', '')
+    cover_img = iss.get('cover_image') or _img(root, iss.get('cover_clip'), cover=True) or iss.get('image', '')   # cover_image: a supplied picture (Nov 16)
     short = iss.get('date', '').split(', ', 1)[-1] if iss.get('date') else ''
     try:
         idate = datetime.datetime.strptime(iss.get('date', ''), '%A, %B %d, %Y').date()
@@ -218,7 +218,7 @@ def render(iss, root):
   <div class="vol"{vol_style}>Vol.{e(str(iss.get('vol', 1)))}</div>
   <div class="tag">Issue {e(no)} · {e(short)}</div>
   <div class="side{' three' if len(cv.get('lines', [])) > 2 else ''}">{lines}</div>
-  <div class="big"><b>{e(cv.get('main') or iss.get('title'))}</b><span>{e(cv.get('sub', ''))}</span></div>
+  <div class="big"><b>{e(cv.get('main') or iss.get('title'))}</b><span>{e(cv.get('sub', '')).replace(chr(10), '<br>')}</span></div>
   <div class="bar"><i></i>1CZ-{e(no)}</div>
 </div>'''
 
@@ -503,7 +503,7 @@ CSS = r'''
 .mz-cover .side span{display:block;font-family:"Playfair Display",Georgia,serif;font-style:italic;font-size:3cqw;color:#fde8c2;text-shadow:0 .3cqw .8cqw rgba(0,0,0,.8)}
 .mz-cover .big{position:absolute;left:4cqw;right:30cqw;bottom:4cqw;z-index:2;color:#fff}
 .mz-cover .big b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:9cqw;line-height:.92;text-shadow:0 .4cqw 1.2cqw rgba(0,0,0,.6)}
-.mz-cover .big span{display:block;font-family:"Playfair Display",Georgia,serif;font-style:italic;font-size:3.6cqw;margin-top:1.5cqw;color:#fde8c2}
+.mz-cover .big span{display:block;font-family:"Playfair Display",Georgia,serif;font-style:italic;font-size:3.6cqw;line-height:1.15;margin-top:1.5cqw;color:#fde8c2}
 .mz-cover .bar{position:absolute;right:3.5cqw;bottom:3.5cqw;z-index:2;background:#fff;color:#8a8f99;padding:1.4cqw 2cqw 1cqw;font-family:var(--f-mono);font-size:2.2cqw;text-align:center;line-height:1.2}
 .mz-cover .bar i{display:block;width:22cqw;height:7cqw;background:repeating-linear-gradient(90deg,#000 0 .5cqw,#fff .5cqw .8cqw,#000 .8cqw 1.1cqw,#fff 1.1cqw 1.9cqw,#000 1.9cqw 2.6cqw,#fff 2.6cqw 3cqw);margin-bottom:.6cqw}
 '''

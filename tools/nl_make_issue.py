@@ -4,7 +4,7 @@ The week = stories posted after last Sunday 7:47 AM up to this Sunday 7:47 AM (t
 Stories come from tools/news.json (title, summary, source, details) and tools/posts.json (clip, host, quip).
 
   python3 tools/nl_make_issue.py --date 2026-11-15 --big clip50 [--clips clip49,clip47,...]
-      [--cover-clip clip50] [--cover-main "..."] [--cover-sub "..."] [--line "Title|sub" (up to 3)]
+      [--cover-clip clip50 | --cover-image img/<file>.jpg (3:4)] [--cover-main "..."] [--cover-sub "..."] [--line "Title|sub" (up to 3)]
       [--title "..."] [--opening "..."] [--pull "..."] [--calendar release-calendar.md] [--no 03]
 
 --big     the cover story's clip. --clips  the top stories' clips in order (default: the rest of the week, newest first, max 12: 4 in the photo sets, 8 on the top-stories pages; clips used in an earlier issue are skipped).
@@ -15,7 +15,7 @@ import argparse, datetime, json, pathlib, re
 root = pathlib.Path(__file__).resolve().parent.parent
 ap = argparse.ArgumentParser()
 ap.add_argument('--date', required=True); ap.add_argument('--big', required=True); ap.add_argument('--clips', default='')
-ap.add_argument('--cover-clip'); ap.add_argument('--cover-main'); ap.add_argument('--cover-sub', default='')
+ap.add_argument('--cover-clip'); ap.add_argument('--cover-image'); ap.add_argument('--cover-main'); ap.add_argument('--cover-sub', default='')
 ap.add_argument('--line', action='append', default=[]); ap.add_argument('--title'); ap.add_argument('--opening', default='')
 ap.add_argument('--pull'); ap.add_argument('--calendar'); ap.add_argument('--no')
 a = ap.parse_args()
@@ -85,6 +85,7 @@ issue = {
     'cover': {'main': a.cover_main or b0['title'], 'sub': a.cover_sub,
               'lines': [l.split('|', 1) if '|' in l else [l, ''] for l in a.line][:3] or [[s['title'], s['game']] for s in sts[1:4]]},
     'pull': a.pull or b0.get('quip', ''),
+    **({'cover_image': a.cover_image} if a.cover_image else {}),
     'stories': sts,
     'radar': radar,
     'sections': [
