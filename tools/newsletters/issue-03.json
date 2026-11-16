@@ -1,0 +1,309 @@
+{
+ "no": "03",
+ "vol": 3,
+ "date": "Sunday, November 15, 2026",
+ "title": "Magic is coming to Netflix: the week in cards",
+ "intro": "One free email every Sunday with the week in cards. Here's the latest issue as a magazine: tap the cover to open it, and sign up free at the bottom of the page.",
+ "greeting": "Hey there,",
+ "opening": "Zia and Luna here with Issue 03. Magic just landed a Netflix series, Riftbound swung the ban hammer, Star Trek boarded Magic, and Pikachu got his own birthday box.",
+ "image": "img/clip50.jpg",
+ "image_alt": "Luna reports: Magic's Planeswalker series comes to Netflix in 2027",
+ "cover_clip": "clip50",
+ "big_clip": "clip50",
+ "cover": {
+  "main": "Magic hits Netflix",
+  "sub": "Planeswalker puts Chandra on screen in 2027",
+  "lines": [
+   [
+    "Riven is banned",
+    "Riftbound's Radiance ban list"
+   ],
+   [
+    "Engage",
+    "Star Trek Magic is out"
+   ],
+   [
+    "Pikachu's party box",
+    "Pokémon Day 2027 Collection"
+   ]
+  ]
+ },
+ "pull": "Finally, a reason to binge-watch that counts as deck research.",
+ "stories": [
+  {
+   "clip": "clip50",
+   "when": "2026-11-14T20:00",
+   "game": "Magic",
+   "title": "Magic's Planeswalker series comes to Netflix in 2027",
+   "summary": "Netflix revealed PLANESWALKER on November 13, 2026: an animated Magic: The Gathering series centered on Chandra, premiering in 2027.",
+   "source": "Magic: The Gathering (official)",
+   "host": "Luna",
+   "quip": "Finally, a reason to binge-watch that counts as deck research.",
+   "details": {
+    "facts": [
+     "Netflix and Wizards of the Coast revealed PLANESWALKER, an animated series based on Magic: The Gathering, on November 13, 2026.",
+     "The series premieres on Netflix in 2027.",
+     "The story centers on Chandra, a volatile pyromancer hunted for her gifts, alongside some of the most legendary Planeswalkers.",
+     "Terry Matalas is showrunner, Cindy Appel co-showrunner and Patrick Osborne supervising director.",
+     "Animation is by the studio Digic, with Hasbro Entertainment among the producers."
+    ],
+    "why": "Magic's first big streaming series puts Chandra and the Planeswalkers in front of a whole new audience.",
+    "url": "https://magic.wizards.com/en/news/announcements/netflix-reveals-magic-the-gathering-animated-series-planeswalker"
+   }
+  },
+  {
+   "clip": "clip49",
+   "when": "2026-11-14T08:00",
+   "game": "Riftbound",
+   "title": "Riftbound bans Riven, Dazzling Aurora and more",
+   "summary": "Riftbound's Radiance ban list adds eight cards and two battlefields to Standard and 2v2 Constructed, effective Monday, November 23, 2026.",
+   "source": "Riftbound (official)",
+   "host": "Zia",
+   "quip": "Riven players, it's time to find a new main.",
+   "details": {
+    "facts": [
+     "Announced November 13, 2026; the bans take effect Monday, November 23, 2026, in Standard and 2v2 Constructed.",
+     "Eight cards are banned: Riven, Broken Blade; Zhonya's Hourglass; Stellacorn Herder; Nocturne, Horrifying; Rhasa the Sunderer; Brynhir Thundersong; Dazzling Aurora; and Baited Hook.",
+     "Two battlefields are banned too: Emperor's Dais and Star Spring.",
+     "Riven made up 43% of decks at the European Regional Championship and took 3 of the top 4 spots.",
+     "Korea and Traditional Chinese regions aren't affected until Radiance releases there; from 2027, bans come in set windows around each Continental."
+    ],
+    "why": "Riven, Kennen and Kai'Sa decks all lose key cards, so the competitive meta resets before December's North America Regional Championship.",
+    "url": "https://playriftbound.com/en-us/news/announcements/radiance-ban-list-updates-effective-november-23-2026/"
+   }
+  },
+  {
+   "clip": "clip47",
+   "when": "2026-11-13T08:00",
+   "game": "Magic",
+   "title": "Magic's Star Trek is out; To Boldly Go league starts",
+   "summary": "Magic: The Gathering | Star Trek releases November 13, 2026, and the To Boldly Go sealed league runs in stores through January 28, 2027.",
+   "source": "Wizards of the Coast (WPN)",
+   "host": "Zia",
+   "quip": "Six boosters, four quadrants, one promotion to Captain. Engage.",
+   "details": {
+    "facts": [
+     "Magic: The Gathering | Star Trek is in stores today, November 13, 2026.",
+     "To Boldly Go is a Sealed league at WPN stores, running November 13, 2026 to January 28, 2027.",
+     "Players start with six Star Trek Play Boosters and can add more boosters as they rank up.",
+     "Play three games at Starfleet Academy, then explore four quadrants (Alpha, Beta, Gamma and Delta), each with its own rules.",
+     "Every three matches in a quadrant earns a rank pip; reaching Captain earns a league promo card."
+    ],
+    "why": "It's a casual, months-long way to play the new set at your local store, with a promo at the end.",
+    "url": "https://wpn.wizards.com/en/event/magic-presents-to-boldly-go"
+   }
+  },
+  {
+   "clip": "clip48",
+   "when": "2026-11-13T20:00",
+   "game": "Pokémon",
+   "title": "Pokémon Day 2027 Collection lands January 29",
+   "summary": "The Pokémon Day 2027 Collection reaches stores January 29, 2027, with a stamped foil Pikachu promo, three booster packs, a coin and a TCG Live code card.",
+   "source": "ICv2",
+   "host": "Luna",
+   "quip": "Pikachu's birthday party comes with its own party favors.",
+   "details": {
+    "facts": [
+     "Pokémon Day 2027 Collection releases January 29, 2027 (The Pokémon Company International).",
+     "It includes a specially stamped foil Pikachu promo card.",
+     "Also inside: three Pokémon TCG booster packs and a collectible coin.",
+     "A code card for Pokémon TCG Live comes in the box.",
+     "Pokémon Day itself is February 27, 2027."
+    ],
+    "why": "A new stamped Pikachu promo is a yearly collector favourite, and it lands a month before Pokémon Day.",
+    "url": "https://icv2.com/articles/news/view/63870/pokemon-day-2027-collection-hits-preorder"
+   }
+  },
+  {
+   "clip": "clip42",
+   "when": "2026-11-10T08:00",
+   "game": "Flesh and Blood",
+   "title": "Fang wins Flesh and Blood Worlds in Paris",
+   "summary": "Nicolas Jamoulle won World Championship: Paris (November 5-8, 2026) on Fang, Dracai of Blades; runner-up Jin Han Toh also played Fang.",
+   "source": "Flesh and Blood (official)",
+   "host": "Zia",
+   "quip": "Paris had one dragon on top, and another right behind it."
+  },
+  {
+   "clip": "clip45",
+   "when": "2026-11-11T20:00",
+   "game": "Flesh and Blood",
+   "title": "Flesh and Blood's 2027 season: three $200K Pro Tours",
+   "summary": "The 2027 World Tour brings three $200,000 Pro Tours, one Global Leaderboard and a $10,000 Player of the Year crowned in Kobe; Pro Quests start February 13, 2027.",
+   "source": "Flesh and Blood (official)",
+   "host": "Luna",
+   "quip": "Three Pro Tours, zero excuses to skip practice."
+  },
+  {
+   "clip": "clip41",
+   "when": "2026-11-09T20:00",
+   "game": "Yu-Gi-Oh!",
+   "title": "Yu-Gi-Oh!'s Magnificent Maestros lands this Friday",
+   "summary": "Konami's 125-card set hits stores November 13, 2026, with 18 reimagined anime cards that also come as Grand Master Rares, serial-numbered 001 to 100.",
+   "source": "Konami (official); ICv2",
+   "host": "Luna",
+   "quip": "One hundred copies. Please stop checking your binder."
+  },
+  {
+   "clip": "clip43",
+   "when": "2026-11-10T20:00",
+   "game": "Magic",
+   "title": "Magic's Rise of the Polygons Secret Lair goes retro",
+   "summary": "Wizards' polygon-era Secret Lair, with Balefire Dragon and Young Pyromancer, sells November 16-30, 2026, with half the sale price going to Extra Life.",
+   "source": "ICv2",
+   "host": "Luna",
+   "quip": "Low poly, high charity, maximum dragon."
+  },
+  {
+   "clip": "clip46",
+   "when": "2026-11-12T20:00",
+   "game": "My Little Pony",
+   "title": "My Little Pony TCG's The Coronation lands Feb 19",
+   "summary": "Kayou's fifth English My Little Pony TCG booster set, The Coronation, reaches retail February 19, 2027, with new mechanics Leap In, Revelation and Triumph.",
+   "source": "ICv2",
+   "host": "Luna",
+   "quip": "Friendship is magic. Pulling the chase card is luck."
+  }
+ ],
+ "radar": [
+  [
+   "Nov 27, 2026",
+   "Pokémon: Aura Seeker (Japan; basis of Flowing Fists) (reported)"
+  ],
+  [
+   "Dec 4, 2026",
+   "Yu-Gi-Oh!: Glorious Victors (EU Dec 3)"
+  ],
+  [
+   "Dec 4, 2026",
+   "Magic: Magic Presents: Marvel Double Issue, Two-Headed Giant event (to Dec 31)"
+  ],
+  [
+   "Dec 4, 2026",
+   "Gundam: Gundam Card Game at PAX Unplugged, Philadelphia (to Dec 6)"
+  ],
+  [
+   "Dec 4, 2026",
+   "Gundam: \"Claim Miorine\" 3-on-3 Battle in stores (to Dec 31; again Jan 8–28)"
+  ],
+  [
+   "Dec 13, 2026",
+   "Riftbound: Legacy previews at Convergence Fest (to Dec 15)"
+  ],
+  [
+   "Dec 18, 2026",
+   "Dragon Ball Super Fusion World: FB12 Reach the God (English) (reported)"
+  ]
+ ],
+ "sections": [
+  {
+   "h": "The big one",
+   "p": [
+    [
+     "Magic's Planeswalker series comes to Netflix in 2027.",
+     "Netflix revealed PLANESWALKER on November 13, 2026: an animated Magic: The Gathering series centered on Chandra, premiering in 2027.",
+     "Magic: The Gathering (official)"
+    ]
+   ]
+  },
+  {
+   "h": "Top stories this week",
+   "li": [
+    [
+     "Riftbound: Riftbound bans Riven, Dazzling Aurora and more.",
+     "Riftbound's Radiance ban list adds eight cards and two battlefields to Standard and 2v2 Constructed, effective Monday, November 23, 2026.",
+     "Riftbound (official)"
+    ],
+    [
+     "Magic: Magic's Star Trek is out; To Boldly Go league starts.",
+     "Magic: The Gathering | Star Trek releases November 13, 2026, and the To Boldly Go sealed league runs in stores through January 28, 2027.",
+     "Wizards of the Coast (WPN)"
+    ],
+    [
+     "Pokémon: Pokémon Day 2027 Collection lands January 29.",
+     "The Pokémon Day 2027 Collection reaches stores January 29, 2027, with a stamped foil Pikachu promo, three booster packs, a coin and a TCG Live code card.",
+     "ICv2"
+    ],
+    [
+     "Flesh and Blood: Fang wins Flesh and Blood Worlds in Paris.",
+     "Nicolas Jamoulle won World Championship: Paris (November 5-8, 2026) on Fang, Dracai of Blades; runner-up Jin Han Toh also played Fang.",
+     "Flesh and Blood (official)"
+    ],
+    [
+     "Flesh and Blood: Flesh and Blood's 2027 season: three $200K Pro Tours.",
+     "The 2027 World Tour brings three $200,000 Pro Tours, one Global Leaderboard and a $10,000 Player of the Year crowned in Kobe; Pro Quests start February 13, 2027.",
+     "Flesh and Blood (official)"
+    ],
+    [
+     "Yu-Gi-Oh!: Yu-Gi-Oh!'s Magnificent Maestros lands this Friday.",
+     "Konami's 125-card set hits stores November 13, 2026, with 18 reimagined anime cards that also come as Grand Master Rares, serial-numbered 001 to 100.",
+     "Konami (official); ICv2"
+    ],
+    [
+     "Magic: Magic's Rise of the Polygons Secret Lair goes retro.",
+     "Wizards' polygon-era Secret Lair, with Balefire Dragon and Young Pyromancer, sells November 16-30, 2026, with half the sale price going to Extra Life.",
+     "ICv2"
+    ],
+    [
+     "My Little Pony: My Little Pony TCG's The Coronation lands Feb 19.",
+     "Kayou's fifth English My Little Pony TCG booster set, The Coronation, reaches retail February 19, 2027, with new mechanics Leap In, Revelation and Triumph.",
+     "ICv2"
+    ]
+   ],
+   "clips": [
+    "clip49",
+    "clip47",
+    "clip48",
+    "clip42",
+    "clip45",
+    "clip41",
+    "clip43",
+    "clip46"
+   ]
+  },
+  {
+   "h": "Coming up this week",
+   "li": [
+    [
+     "Now to Nov 15",
+     "Magic: MagicCon Atlanta + World Championship 32",
+     "Confirmed"
+    ],
+    [
+     "Now to Jan 28",
+     "Magic: Magic Presents: To Boldly Go sealed league",
+     "Confirmed"
+    ],
+    [
+     "Now to Nov 16",
+     "Riftbound: T1 Worlds Champion Player Bundle + Worlds 2026 Edition drawing, registration",
+     "Confirmed"
+    ],
+    [
+     "Fri, Nov 20",
+     "One Piece: OP-18 The Dominance of God (English)",
+     "Confirmed"
+    ],
+    [
+     "Fri, Nov 20",
+     "One Piece: 4th Anniversary Event for OP-18 (to Dec 17)",
+     "Confirmed"
+    ],
+    [
+     "Fri, Nov 20",
+     "Star Wars Unlimited: Icons 2027 Edition",
+     "Confirmed"
+    ],
+    [
+     "Fri, Nov 20",
+     "Star Wars Unlimited: Gift Box (8 boosters, 3 exclusive promos)",
+     "Confirmed"
+    ]
+   ]
+  }
+ ],
+ "signoff": [
+  "Shuffle up,",
+  "Zia & Luna"
+ ]
+}

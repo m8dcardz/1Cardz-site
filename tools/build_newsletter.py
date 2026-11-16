@@ -162,7 +162,7 @@ try:
 const p=await b.newPage({viewport:{width:1200,height:1400},deviceScaleFactor:1.5});
 await p.goto('file://'+process.argv[1]);await p.waitForTimeout(1500);
 await p.evaluate(()=>document.querySelectorAll('.mz-cover .ho').forEach(e=>{e.style.animation='none';e.style.opacity='0'}));
-const el=await p.$('.mz-cover');await el.screenshot({path:process.argv[2]});await b.close()})().catch(e=>{console.error(e.message);process.exit(1)})"""
+const el=await p.$('#mzBook .mz-cover');await el.screenshot({path:process.argv[2]});await b.close()})().catch(e=>{console.error(e.message);process.exit(1)})"""
     png = root/'img'/'magazine-cover.png'
     r = subprocess.run(['node', '-e', js, str(root/'newsletter.html'), str(png)], timeout=90, capture_output=True, text=True)
     if r.returncode == 0 and png.exists():

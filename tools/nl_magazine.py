@@ -1,12 +1,22 @@
-"""Newsletter page: this week's issue as a magazine (Nov 4, 2026, style C "Classic glossy").
-render(iss, root) -> (html, css, js). Reads tools/newsletter_latest.json fields:
-  no, date, title, opening, image, cover_clip, cover{main, sub, lines[[title, sub]..]}, pull,
-  feature{clip, title, text}, sections[ {h:'The big one', p:[[lead,text,src]]},
-  {h:'Top stories this week', li:[[lead,text,src]..], clips:[clipN..]}, {h:'Coming up this week', li:[[date,text,status]..]} ],
-  signoff. Missing fields fall back gracefully.
-Images: img/nl-cover-<clip>.jpg (cover, crop of the clip above the captions) and img/nl-<clip>.jpg (story photos)
-are made with ffmpeg from img/<clip>.mp4 the first time; without ffmpeg the clip posters are used."""
-import html, json, shutil, subprocess, pathlib
+"""Newsletter page: the week's issue as a flip-through magazine (style C "Classic glossy", Nov 4, 2026;
+layout v2, Nov 16, 2026: every story gets a full-page studio photo with its text in the clear space beside the reporter).
+
+render(iss, root) -> (html, css, js). Issue JSON (tools/newsletters/issue-NN.json, newsletter_latest.json = the current one):
+  no, vol, date ("Sunday, November 15, 2026"), title, opening, cover_clip, cover{main, sub, lines[[title, sub]..]}, vol_pos?,
+  pull?, signoff[..], radar[[date, what]..],
+  stories: [{game, title, summary, source, clip, host?, quip?, when?, details?{facts[], why, url}}, ..]   (first = the big one)
+  sections: the email sections ({h:'Coming up this week', li:[[date, text, status]..]} feeds the week-ahead page)
+Older issues without "stories" are read from their sections (The big one / Top stories this week + clips).
+Each story is matched to tools/news.json and tools/posts.json (by clip) to fill in details, quip, host and its story page.
+
+Pages: 1 cover · 2 contents · 3 Inside 1Cardz.news · cover story (photo page + "The details" page) · one photo page per
+top story · Overheard in the studio · The week ahead (next 7 days + further ahead) · back cover.
+The inside pages are kept even (Inside 1Cardz.news is dropped if needed) so every page has a facing page.
+
+Images: img/nl-cover-<clip>.jpg (cover) and img/nl-p-<clip>.jpg (3:4 story photos, 540x720) are cut from img/<clip>.mp4
+with ffmpeg the first time. For story photos a frame is picked where the reporter's face (OpenCV) can sit to one side;
+the text goes on the other side. Choices are cached in tools/nl_photos.json."""
+import html, json, re, shutil, subprocess, pathlib, datetime, unicodedata
 
 e = lambda t: html.escape(str(t if t is not None else ''), quote=True)
 
@@ -26,6 +36,94 @@ def _img(root, clip, cover=False):
         return 'img/' + out.name
     return f'img/{clip}.jpg' if (root / 'img' / f'{clip}.jpg').exists() else ''
 
+def _photo(root, clip):
+    """(src, side) for a story's full-page photo. side = 'l' or 'r': where the text goes (the reporter is on the other side)."""
+    if not clip:
+        return '', 'r', None
+    root = pathlib.Path(root)
+    cache_f = root / 'tools' / 'nl_photos.json'
+    try:
+        cache = json.loads(cache_f.read_text())
+    except Exception:
+        cache = {}
+    out = root / 'img' / f'nl-p-{clip}.jpg'
+    if out.exists() and clip in cache:
+        return 'img/' + out.name, cache[clip].get('side', 'r'), cache[clip].get('face')
+    src = root / 'img' / f'{clip}.mp4'
+    best = None
+    if src.exists() and shutil.which('ffmpeg'):
+        try:
+            import cv2, numpy as np
+            casc = cv2.CascadeClassifier(str(root / 'tools' / 'haarcascade_frontalface_default.xml'))   # OpenCV's own file, kept in the repo
+            for t in (0.8, 1.4, 2.2, 3.2, 4.4, 5.6, 6.8):
+                raw = subprocess.run(['ffmpeg', '-v', 'error', '-ss', str(t), '-i', str(src), '-frames:v', '1',
+                                      '-f', 'image2pipe', '-vcodec', 'png', '-'], capture_output=True, timeout=60).stdout
+                if not raw:
+                    continue
+                fr = cv2.imdecode(np.frombuffer(raw, np.uint8), cv2.IMREAD_COLOR)
+                H, W = fr.shape[:2]
+                cw, ch = int(W * 0.75), int(W * 0.75 * 4 / 3)          # 540x720 from a 720x1280 clip
+                ymax = max(0, int(H * 0.62) - ch)                      # stay above the burned-in captions
+                faces = casc.detectMultiScale(cv2.cvtColor(fr, cv2.COLOR_BGR2GRAY), 1.1, 6, minSize=(int(W * .06), int(W * .06)))
+                faces = [f for f in faces if f[1] + f[3] / 2 < H * 0.55]
+                if len(faces) == 0:
+                    continue
+                fx, fy, fw, fh = max(faces, key=lambda f: f[2] * f[3])
+                cx, cy = fx + fw / 2, fy + fh / 2
+                for side, want in (('r', 0.30), ('l', 0.70)):          # text right -> face at 30%, text left -> face at 70%
+                    x0 = int(min(max(cx - want * cw, 0), W - cw))
+                    p = (cx - x0) / cw
+                    y0 = int(min(max(cy - 0.30 * ch, 0), ymax))
+                    off = abs(p - 0.5)                                   # how far the face sits from the middle
+                    size = fw / cw
+                    score = off * 3 - max(0, size - 0.22) * 10 - max(0, 0.08 - size) * 6 - (0.02 if t < 1 else 0)
+                    if (side == 'r' and p > 0.5) or (side == 'l' and p < 0.5):
+                        score -= 1
+                    if best is None or score > best[0]:
+                        best = (score, t, side, x0, y0, cw, ch, [round((cx - x0) / cw, 3), round((cy - y0) / ch, 3), round(fw / cw, 3), round(fh / ch, 3)])
+        except Exception as _x:
+            print('nl photo: face check skipped for', clip, _x)
+        try:
+            if best:
+                _, t, side, x0, y0, cw, ch, face = best
+                vf = f'crop={cw}:{ch}:{x0}:{y0}'
+            else:
+                t, side, vf, face = 2.2, 'r', 'crop=iw*0.75:iw:iw*0.125:0', None
+            subprocess.run(['ffmpeg', '-v', 'error', '-y', '-ss', str(t), '-i', str(src), '-frames:v', '1', '-vf', vf,
+                            '-q:v', '3', str(out)], timeout=60)
+            if out.exists():
+                cache[clip] = {'side': side, 't': t, 'face': face}
+                cache_f.write_text(json.dumps(cache, indent=1, sort_keys=True) + '\n')
+                return 'img/' + out.name, side, face
+        except Exception:
+            pass
+    im = _img(root, clip)
+    return im, 'r', None
+
+def _wrap(side, face):
+    """A float whose curved edge follows the reporter's outline (head, neck, shoulders), so the story text
+    wraps around her (Nov 16). face = [x, y, w, h] as fractions of the photo; the text box is the page minus
+    5.5% top/9% bottom/5.5% sides, so photo fractions are mapped into it."""
+    px, py, fw, fh = face if face else ([0.3, 0.3, 0.2, 0.15] if side == 'r' else [0.7, 0.3, 0.2, 0.15])
+    pad = 0.035
+    # outline offsets from the face centre, as (y in face heights, x in face widths), top to bottom
+    prof = [(-9, .25), (-2.2, .35), (-1.5, .62), (-.8, .78), (0, .8), (.6, .72), (1.0, .6), (1.4, .9), (1.9, 1.35), (2.6, 1.6), (4, 1.75), (20, 1.8)]
+    T, B, S = 4.5 / 133.3, 9 / 133.3, 0.055      # text box inset as fractions of the page (top, bottom, side)
+    pts = []
+    for dy, dx in prof:
+        y = py + dy * fh
+        x = px + dx * fw + pad if side == 'r' else px - dx * fw - pad
+        y = (min(max(y, 0), 1) - T) / (1 - T - B)
+        x = (x - S) / (1 - 2 * S)
+        x = min(max(x, 0.30), 0.62) if side == 'r' else min(max(x, 0.38), 0.70)
+        pts.append((x, min(max(y, 0), 1)))
+    pts[0] = (pts[0][0], 0); pts[-1] = (pts[-1][0], 1)
+    if side == 'r':
+        poly = ['0% 0%'] + [f'{x * 100:.1f}% {y * 100:.1f}%' for x, y in pts] + ['0% 100%']
+        return f'<i class="wrap" style="float:left;shape-outside:polygon({",".join(poly)})"></i>'
+    poly = ['100% 0%'] + [f'{x * 100:.1f}% {y * 100:.1f}%' for x, y in pts] + ['100% 100%']
+    return f'<i class="wrap" style="float:right;shape-outside:polygon({",".join(poly)})"></i>'
+
 def _vol_pos(root, img, vol):
     """Where the "Vol." block goes on the cover (Nov 8): the calmest, not-too-bright spot of the cover picture
     in the right-hand column, clear of the masthead, cover lines, headline and barcode.
@@ -36,15 +134,15 @@ def _vol_pos(root, img, vol):
     except Exception:
         return ''
     W, H = im.size
-    s = (100 * 4 / 3) / H                     # cqw per pixel (the picture fills the 3:4 page by height)
-    ox = (W * s - 100) / 2                     # cqw cropped off each side (object-position 50%)
+    s = (100 * 4 / 3) / H
+    ox = (W * s - 100) / 2
     edges = im.filter(ImageFilter.FIND_EDGES)
-    bw, bh = 7 * 0.62 * (len(f'Vol.{vol}')) + 2, 9   # block size in cqw (approx.)
+    bw, bh = 7 * 0.62 * (len(f'Vol.{vol}')) + 2, 9
     best = None
-    for top in range(38, 101, 2):              # below the issue line, above the barcode
+    for top in range(38, 101, 2):
         for right in (4, 8, 12, 16):
             x0, x1 = 100 - right - bw, 100 - right
-            if x0 < 36: continue               # keep clear of the cover lines on the left
+            if x0 < 36: continue
             box = tuple(int(v) for v in ((x0 + ox) / s, top / s, (x1 + ox) / s, (top + bh) / s))
             e_ = sum(edges.crop(box).getdata()) / max(1, (box[2] - box[0]) * (box[3] - box[1]))
             b_ = sum(im.crop(box).getdata()) / max(1, (box[2] - box[0]) * (box[3] - box[1]))
@@ -53,38 +151,51 @@ def _vol_pos(root, img, vol):
                 best = (score, top, right)
     return f'top:{best[1]}cqw;right:{best[2]}cqw' if best else ''
 
+def story_url(when, title):
+    t = unicodedata.normalize('NFKD', title).encode('ascii', 'ignore').decode().lower()
+    t = re.sub(r'[^a-z0-9]+', '-', t).strip('-')[:70].rstrip('-')
+    return f'news-{when[:10]}-{t}.html'
+
+def stories(iss, root):
+    """The issue's stories as dicts (first = the big one), filled in from news.json / posts.json."""
+    root = pathlib.Path(root)
+    try: news = json.loads((root / 'tools' / 'news.json').read_text())
+    except Exception: news = []
+    try: posts = json.loads((root / 'tools' / 'posts.json').read_text())
+    except Exception: posts = []
+    by_clip = {p.get('clip'): p for p in posts}
+    by_when = {n.get('when'): n for n in news}
+    out = [dict(s) for s in iss.get('stories', [])]
+    if not out:                                                 # older issues: read the email sections
+        secs = {s.get('h', ''): s for s in iss.get('sections', [])}
+        big = (secs.get('The big one', {}).get('p') or [])
+        if big:
+            lead, txt, src = big[0]
+            out.append({'title': lead.rstrip('.'), 'summary': txt, 'source': src, 'clip': iss.get('big_clip') or iss.get('cover_clip')})
+        top = secs.get('Top stories this week', {})
+        for n, (lead, txt, src) in enumerate(top.get('li', [])):
+            g, _, t = lead.partition(': ')
+            out.append({'game': g if t else '', 'title': (t or lead).rstrip('.'), 'summary': txt, 'source': src,
+                        'clip': (top.get('clips') or [None] * 99)[n] if n < len(top.get('clips') or []) else None})
+    for s in out:
+        p = by_clip.get(s.get('clip')) or {}
+        n = by_when.get(s.get('when') or p.get('when')) or {}
+        s.setdefault('game', n.get('game') or p.get('game', ''))
+        if not s.get('game'): s['game'] = n.get('game') or p.get('game', '')
+        s.setdefault('host', p.get('host', ''))
+        s.setdefault('quip', p.get('quip', ''))
+        if not s.get('details') and n.get('details'): s['details'] = n['details']
+        w = s.get('when') or n.get('when')
+        if w and n and (root / story_url(w, n['title'])).exists():
+            s['page'] = story_url(w, n['title'])
+    return out
+
 def render(iss, root):
     root = pathlib.Path(root)
-    secs = {s.get('h', ''): s for s in iss.get('sections', [])}
-    big = (secs.get('The big one', {}).get('p') or [['', '', '']])[0]
-    top = secs.get('Top stories this week', {})
-    tops = top.get('li', []); tclips = top.get('clips', [])
-    cal = secs.get('Coming up this week', {}).get('li', [])
     no = iss.get('no', '')
     cv = iss.get('cover', {})
     cover_img = _img(root, iss.get('cover_clip'), cover=True) or iss.get('image', '')
     short = iss.get('date', '').split(', ', 1)[-1] if iss.get('date') else ''
-
-    def game_title(lead):
-        g, _, t = lead.partition(': ')
-        return (g, t.rstrip('.')) if t else ('', lead.rstrip('.'))
-
-    vp = iss.get('vol_pos')
-    vol_style = (f' style="top:{vp.get("top", 55)}cqw;right:{vp.get("right", 4)}cqw"' if isinstance(vp, dict)
-                 else (lambda c: f' style="{c}"' if c else '')(_vol_pos(root, cover_img, iss.get('vol', 1)) if cover_img else ''))
-    lines = ''.join(f'<div><b>{e(a)}</b><span>{e(b)}</span></div>' for a, b in cv.get('lines', [])[:2])
-    cover = f'''<div class="mz-page mz-cover" role="img" aria-label="Magazine cover: {e(cv.get('main') or iss.get('title'))}">
-  <div class="ph"><img src="{e(cover_img)}" alt="" loading="lazy"></div>
-  <div class="mhd"><div class="mast" aria-label="1Cardz"><span class="sh">1Cardz</span><span class="sv">1Cardz</span><span class="ho" aria-hidden="true">1Cardz</span></div>
-  <div class="wm">Weekly Magazine</div></div>
-  <div class="vol"{vol_style}>Vol.{e(str(iss.get('vol', 1)))}</div>
-  <div class="tag">Issue {e(no)} · {e(short)}</div>
-  <div class="side">{lines}</div>
-  <div class="big"><b>{e(cv.get('main') or iss.get('title'))}</b><span>{e(cv.get('sub', ''))}</span></div>
-  <div class="bar"><i></i>1CZ-{e(no)}</div>
-</div>'''
-
-    import datetime, re as _re
     try:
         idate = datetime.datetime.strptime(iss.get('date', ''), '%A, %B %d, %Y').date()
     except Exception:
@@ -94,15 +205,27 @@ def render(iss, root):
         posts = [x for x in json.loads((root / 'tools' / 'posts.json').read_text()) if wk0 <= x.get('when', '')[:10] <= wk1]
     except Exception:
         posts = []
-    try:
-        market = json.loads((root / 'data' / 'market.json').read_text()).get('items', [])
-    except Exception:
-        market = []
+
+    # ---- cover (unchanged) ----
+    vp = iss.get('vol_pos')
+    vol_style = (f' style="top:{vp.get("top", 55)}cqw;right:{vp.get("right", 4)}cqw"' if isinstance(vp, dict)
+                 else (lambda c: f' style="{c}"' if c else '')(_vol_pos(root, cover_img, iss.get('vol', 1)) if cover_img else ''))
+    lines = ''.join(f'<div><b>{e(a)}</b><span>{e(b)}</span></div>' for a, b in cv.get('lines', [])[:3])
+    cover = f'''<div class="mz-page mz-cover" role="img" aria-label="Magazine cover: {e(cv.get('main') or iss.get('title'))}">
+  <div class="ph"><img src="{e(cover_img)}" alt="" loading="lazy"></div>
+  <div class="mhd"><div class="mast" aria-label="1Cardz"><span class="sh">1Cardz</span><span class="sv">1Cardz</span><span class="ho" aria-hidden="true">1Cardz</span></div>
+  <div class="wm">Weekly Magazine</div></div>
+  <div class="vol"{vol_style}>Vol.{e(str(iss.get('vol', 1)))}</div>
+  <div class="tag">Issue {e(no)} · {e(short)}</div>
+  <div class="side{' three' if len(cv.get('lines', [])) > 2 else ''}">{lines}</div>
+  <div class="big"><b>{e(cv.get('main') or iss.get('title'))}</b><span>{e(cv.get('sub', ''))}</span></div>
+  <div class="bar"><i></i>1CZ-{e(no)}</div>
+</div>'''
 
     run = lambda a, b: f'<div class="run"><span>{e(a)}</span><span>{e(b)}</span></div>'
+    st = stories(iss, root)
     body = []          # (key, toc title, toc sub, html-without-folio)
-    big_t = big[0].rstrip('.')
-    strip = (f'<div class="strip"><div><b>{len(posts)}</b><span>clips this week</span></div><div><b>{len({x["game"] for x in posts})}</b><span>games covered</span></div><div><b>2</b><span>drops a day</span></div></div>' if posts else '')
+
     about = ''.join(f'<div><a href="{h}"><b>{t}</b></a><span>{d}</span></div>' for h, t, d in [
         ('index.html', 'Home', 'The binder: the Shuffle Machine game, the headline box and every host card.'),
         ('news.html', 'Headlines', 'Every story from the daily drops, newest first, each with its own page.'),
@@ -113,93 +236,117 @@ def render(iss, root):
     body.append(('about', 'Inside 1Cardz.news', 'About the site', f"""{run('About the site', 'Issue ' + no)}<p class="kick">Welcome to</p><h3>Inside 1Cardz.news</h3>
 <div class="hosts"><img src="img/zia.webp" alt="Zia" loading="lazy"><img src="img/luna.webp" alt="Luna" loading="lazy"><p>Trading card game news in two short clips a day: <b>Zia at 8 AM</b> and <b>Luna at 8 PM</b>, on Instagram, YouTube and TikTok.</p></div>
 <div class="about">{about}</div>"""))
-    pull = f'<div class="pull">"{e(iss["pull"])}"</div>' if iss.get('pull') else ''
-    body.append(('big', big_t, 'Cover story', f"""{run('Cover story', big[2])}<p class="kick">The big one</p><h3>{e(big_t)}</h3>
-<p class="first">{e(iss.get('opening', ''))}</p><p>{e(big[1])}</p>{pull}<p class="src">Source: {e(big[2])}</p>""" + (f'<a class="watch" href="archive.html"><img src="{e(_img(root, iss.get("big_clip") or iss.get("cover_clip")))}" alt="" loading="lazy"><span><b>Watch the report</b>The 1Cardz clip on this story is in the Library. ▶</span></a>' if _img(root, iss.get('big_clip') or iss.get('cover_clip')) else '')))
-    f = iss.get('feature') or {}
-    fimg = _img(root, f.get('clip')) or cover_img
-    body.append(('feat', f.get('title') or 'Photo feature', 'Feature', f'<img class="bg" src="{e(fimg)}" alt="" loading="lazy"><div class="cap"><span class="kick">Feature</span><b>{e(f.get("title", ""))}</b>{e(f.get("text", ""))}</div>'))
-    sp_stories = set()
-    for sp in iss.get('spreads', []):
-        sp_stories.add(sp.get('story'))
-        im = _img(root, sp.get('clip'))
-        paras = ''.join(f'<p{" class=first" if k == 0 else ""}>{e(t)}</p>' for k, t in enumerate(sp.get('text', [])))
-        pq = f'<div class="pull">"{e(sp["pull"])}"</div>' if sp.get('pull') else ''
-        watch = f'<a class="watch" href="archive.html"><img src="{e(im)}" alt="" loading="lazy"><span><b>Watch the report</b>The 1Cardz clip on this story is in the Library. ▶</span></a>' if im else ''
-        body.append(('story', sp.get('title', ''), sp.get('kick', 'Feature'), f"""{run(sp.get('kick', 'Feature'), sp.get('src', ''))}<p class="kick">{e(sp.get('kick', ''))}</p><h3>{e(sp.get('title', ''))}</h3>
-{paras}{pq}<p class="src">Source: {e(sp.get('src', ''))}</p>{watch}"""))
-        if im:
-            body.append(('feat', sp.get('photo_title', ''), 'Feature', f'<img class="bg" src="{e(im)}" alt="" loading="lazy"><div class="cap"><span class="kick">{e(sp.get("kick", ""))}</span><b>{e(sp.get("photo_title", ""))}</b>{e(sp.get("photo_text", ""))}</div>'))
-    keep = [n for n, t in enumerate(tops) if t[0] not in sp_stories]
-    tops = [tops[n] for n in keep]; tclips = [tclips[n] for n in keep if n < len(tclips)]
-    per = 2
-    npages = (len(tops) + per - 1) // per
-    for k in range(0, len(tops), per):
-        cards = ''
-        for jx, t in enumerate(tops[k:k + per]):
-            g, ti = game_title(t[0])
-            im = _img(root, tclips[k + jx]) if k + jx < len(tclips) else ''
-            cards += (f'<div class="st">' + (f'<img src="{e(im)}" alt="" loading="lazy">' if im else '') +
-                      f'<span class="g">{e(g)}</span><b>{e(ti)}</b><p>{e(t[1])}</p><small>Source: {e(t[2])}</small></div>')
-        firsts = ' & '.join(game_title(t[0])[1] for t in tops[k:k + per])
-        if len(firsts) > 46: firsts = ' · '.join(dict.fromkeys(game_title(t[0])[0] or game_title(t[0])[1] for t in tops[k:k + per]))
-        body.append(('top', firsts, 'Top stories', f'{run("Top stories", f"{k // per + 1} of {npages}")}<div class="stories">{cards}</div>'))
-    nums = iss.get('numbers') or []
-    if posts:
-        games = sorted({x['game'] for x in posts})
-        nums = nums + [[str(len(posts)), 'news clips from Zia & Luna this week'], [str(len(games)), 'games covered on the channel']]
-    if nums:
-        body.append(('nums', 'By the numbers', 'The week in stats', f"""{run('By the numbers', short)}<p class="kick">The week in stats</p><h3>By the numbers</h3>
-<div class="nums">{''.join(f'<div><b>{e(a)}</b><span>{e(b)}</span></div>' for a, b in nums[:8])}</div>"""))
-    def chg(it):
-        h = [x for x in it.get('history', []) if x[0] <= wk1]
-        if len(h) < 2 or not h[0][1]:
-            return None
-        return h[-1][1], (h[-1][1] - h[0][1]) / h[0][1] * 100
-    mv = [(it, chg(it)) for it in market if it.get('price') is not None]
-    mv = sorted([x for x in mv if x[1]], key=lambda x: -abs(x[1][1]))[:5]
-    if mv:
-        rows = ''.join(f'<div><span class="g">{e(it["game"])}</span><b>{e(it["name"])}</b><em>${c[0]:,.2f}</em><i class="{"up" if c[1] > 0 else "down"}">{"▲" if c[1] > 0 else "▼"} {abs(c[1]):.1f}%</i></div>' for it, c in mv)
-        body.append(('mkt', 'Market Watch: the movers', 'Prices', f"""{run('Market Watch', 'Week to ' + short)}<p class="kick">Prices</p><h3>The week's movers</h3>
-<div class="mv">{rows}</div><p class="note">Recent sold averages in USD, change over the week. Daily prices on the <a href="market.html">Market</a> page.</p>"""))
+
+    def photo_page(s, kick, extra=''):
+        im, side, face = _photo(root, s.get('clip'))
+        d = s.get('details') or {}
+        facts = d.get('facts') or []
+        link = f' · <a href="{e(s["page"])}">Read the full story ›</a>' if s.get('page') else ''
+        return (f'<img class="bg" src="{e(im)}" alt="" loading="lazy"><div class="shade"></div><div class="mzt">{_wrap(side, face)}'
+                f'<p class="kick">{e(kick)}</p><h3>{e(s.get("title", ""))}</h3><p class="sum">{e(s.get("summary", ""))}</p>{extra}'
+                + (f'<ul class="facts">{"".join(f"<li>{e(x)}</li>" for x in facts[1:4])}</ul>' if facts and not extra else '')
+                + (f'<p class="why"><b>Why it matters</b>{e(d["why"])}</p>' if d.get('why') else '')
+                + (f'<p class="quip">“{e(s["quip"])}”<span>{e(s.get("host", ""))}</span></p>' if s.get('quip') and (extra or not d.get('why')) else '')
+                + f'<p class="src">Source: {e(s.get("source", ""))}{link}</p></div>'), side
+
+    if st:
+        b0 = st[0]
+        h_, side = photo_page(b0, 'Cover story · ' + (b0.get('game') or 'The big one'), extra=' ')
+        body.append(('photo t-' + side, b0.get('title', ''), 'Cover story', h_))
+        d = b0.get('details') or {}
+        facts = ''.join(f'<li>{e(x)}</li>' for x in (d.get('facts') or []))
+        pull = iss.get('pull') if iss.get('pull') and iss.get('pull') != b0.get('quip') else ''
+        watch_im = _img(root, b0.get('clip'))
+        body.append(('detail', b0.get('title', ''), 'Cover story', f"""{run('Cover story', b0.get('source', ''))}<p class="kick">The big one</p><h3>{'The details' if facts else e(b0.get('title', ''))}</h3>
+""" + (f'<ul class="dets">{facts}</ul>' if facts else f'<p>{e(b0.get("summary", ""))}</p>')
+            + (f'<div class="pull">“{e(pull)}”</div>' if pull else '')
+            + f'<p class="src">Source: {e(b0.get("source", ""))}' + (f' · <a href="{e(b0["page"])}">Read the full story ›</a>' if b0.get('page') else '') + '</p>'
+            + (f'<a class="watch" href="archive.html"><img src="{e(watch_im)}" alt="" loading="lazy"><span><b>Watch the report</b>{e(b0.get("host") or "The 1Cardz")} on this story, in the Library. ▶</span></a>' if watch_im else '')))
+        # top stories in spreads (Nov 16): a photo page on the left, a regular written page on the right
+        for k, s in enumerate(st[1:5]):        # 3 photo sets per issue (Nov 16): the cover story + 2 top-story spreads
+            if k % 2 == 0:
+                h_, side = photo_page(s, ' · '.join(x for x in (s.get('game'), 'Top story') if x))
+                body.append(('photo t-' + side, s.get('title', ''), s.get('game') or 'Top story', h_))
+                continue
+            d = s.get('details') or {}
+            facts = ''.join(f'<li>{e(x)}</li>' for x in (d.get('facts') or [])[1:])
+            im = _img(root, s.get('clip'))
+            body.append(('story', s.get('title', ''), s.get('game') or 'Top story',
+                f"""{run(s.get('game') or 'Top story', s.get('source', ''))}<p class="kick">{e(s.get('game') or 'Top story')}</p><h3>{e(s.get('title', ''))}</h3>
+<p class="first">{e(s.get('summary', ''))}</p>""" + (f'<ul class="dets">{facts}</ul>' if facts else '')
+                + (f'<p class="why"><b>Why it matters</b>{e(d["why"])}</p>' if d.get('why') else '')
+                + (f'<div class="pull">“{e(s["quip"])}”<span>{e(s.get("host", ""))}</span></div>' if s.get('quip') else '')
+                + f'<p class="src">Source: {e(s.get("source", ""))}' + (f' · <a href="{e(s["page"])}">Read the full story ›</a>' if s.get('page') else '') + '</p>'
+                + (f'<a class="watch" href="archive.html"><img src="{e(im)}" alt="" loading="lazy"><span><b>Watch the report</b>{e(s.get("host") or "The 1Cardz")} on this story, in the Library. ▶</span></a>' if im else '')))
+
+        # sets 1 and 3 have the photo on the right-hand page (Nov 16): swap their two pages
+        ph = [n for n, b in enumerate(body) if b[0].startswith('photo')]
+        for j in (ph[0:1] + ph[2:3]):
+            if j + 1 < len(body):
+                body[j], body[j + 1] = body[j + 1], body[j]
+
+        rest = st[5:9]
+        for k in range(0, len(rest), 2):
+            cards = ''
+            for s in rest[k:k + 2]:
+                d = s.get('details') or {}
+                fact = (d.get('facts') or [None, None])[1] if len(d.get('facts') or []) > 1 else ''
+                cards += (f'<div class="brief"><p class="kick">{e(s.get("game") or "Top story")}</p><h4>{e(s.get("title", ""))}</h4><p>{e(s.get("summary", ""))}</p>'
+                          + (f'<p class="fact">{e(fact)}</p>' if fact else '')
+                          + (f'<p class="q">“{e(s["quip"])}” <span>{e(s.get("host", ""))}</span></p>' if s.get('quip') else '')
+                          + f'<p class="src">Source: {e(s.get("source", ""))}' + (f' · <a href="{e(s["page"])}">Read the full story ›</a>' if s.get('page') else '') + '</p></div>')
+            body.append(('briefs', ' & '.join(x.get('game') or x.get('title', '') for x in rest[k:k + 2]), 'More top stories',
+                         f'{run("More top stories", f"{k // 2 + 1} of {(len(rest) + 1) // 2}")}<div class="briefs">{cards}</div>'))
+
     q = [x for x in posts if x.get('quip')]
     if q:
-        quips = ''.join(f'<blockquote><p>"{e(x["quip"])}"</p><cite>{e(x["host"])} on {e(x["title"])}</cite></blockquote>' for x in q[-6:])
+        quips = ''.join(f'<blockquote><p>“{e(x["quip"])}”</p><cite>{e(x["host"])} on {e(x["title"])}</cite></blockquote>' for x in q[-6:])
         body.append(('quips', 'Overheard in the studio', 'The best lines', f"""{run('Overheard in the studio', 'The best lines')}<p class="kick">Said on air</p><h3>Overheard in the studio</h3><div class="quips">{quips}</div>"""))
-    radar = iss.get('radar') or []
-    if radar:
-        rr = ''.join(f'<div><b>{e(d_)}</b><span>{e(t_)}</span></div>' for d_, t_ in radar)
-        body.append(('radar', 'Release radar', 'Further ahead', f"""{run('Release radar', 'Further ahead')}<p class="kick">Save the dates</p><h3>Release radar</h3><div class="radar">{rr}</div><p class="note">Dates as announced in this issue's stories. Every story is on the <a href="news.html">Headlines</a> page.</p>"""))
-    if cal:
-        rows = ''.join(f'<div><b>{e(c[0].rstrip(":"))}</b><span>{e(c[1])}<i>{e(c[2])}</i></span></div>' for c in cal)
-        body.append(('cal', 'The week ahead', 'Calendar', f"""{run('The week ahead', 'Next 7 days')}<p class="kick">Mark your calendar</p><h3>The week ahead</h3><div class="cal">{rows}</div>"""))
-    sign = '<br>'.join(e(x) for x in iss.get('signoff', [])[:2])
-    body.append(('back', 'Never miss an issue', 'Back page', f"""<p class="kick">See you next Sunday</p><h3>Never miss an issue</h3>
-<p>One free email every Sunday with the week in cards, the market movers and what's coming up. New clips every day at 8 AM (Zia) and 8 PM (Luna).</p>
+
+    # The week ahead + release radar on one page (Nov 16): next 7 days first, then "Further ahead"
+    secs = {s.get('h', ''): s for s in iss.get('sections', [])}
+    cal = secs.get('Coming up this week', {}).get('li', [])
+    radar = [[re.sub(r',? ' + str(idate.year) + r'$', '', d_), t_] for d_, t_ in (iss.get('radar') or [])]
+    def _h(d_, t_):
+        return max(-(-len(t_) // 58), -(-len(d_) // 13), 1) * 3.8 + 3.4
+    room, keep_c, keep_r = 94.0, [], []
+    for c in cal:
+        need = _h(c[0], c[1] + ' ' + c[2] + '   ')
+        if room - need < 0: break
+        room -= need; keep_c.append(c)
+    room -= 7 if radar else 0
+    for r_ in radar:
+        need = _h(*r_)
+        if room - need < 0: break
+        room -= need; keep_r.append(r_)
+    if keep_c or keep_r:
+        rows = ''.join(f'<div><b>{e(c[0].rstrip(":"))}</b><span>{e(c[1])}<i>{e(c[2])}</i></span></div>' for c in keep_c)
+        rr = ''.join(f'<div><b>{e(d_)}</b><span>{e(t_)}</span></div>' for d_, t_ in keep_r)
+        body.append(('cal', 'The week ahead', 'Calendar', f"""{run('The week ahead', 'Save the dates')}<p class="kick">Mark your calendar</p><h3>The week ahead</h3>"""
+                     + (f'<p class="sub">Next 7 days</p><div class="cal">{rows}</div>' if keep_c else '')
+                     + (f'<p class="sub">Further ahead</p><div class="cal radar">{rr}</div>' if keep_r else '')))
+
+    # keep the inside pages even (contents + body): drop "Inside 1Cardz.news" if the count is odd
+    if (len(body) + 1) % 2 and body and body[0][0] == 'about':
+        body = body[1:]
+
+    sign = '<br>'.join(e(x) for x in iss.get('signoff', [])[:2]) or 'Shuffle up,<br>Zia &amp; Luna'
+    back_html = f"""<div class="mz-page mz-back"><p class="kick">See you next Sunday</p><h3>Never miss an issue</h3>
+<p>One free email every Sunday with the week in cards and what's coming up. New clips every day at 8 AM (Zia) and 8 PM (Luna).</p>
 <div class="links"><a href="archive.html">Watch the clips</a><a href="news.html">All headlines</a></div>
-<div class="sign">{sign}</div><p class="small">1Cardz.news · Instagram @1cardzcom · YouTube @1Cardzcom · TikTok @1cardz.com</p>"""))
+<div class="sign">{sign}</div><p class="small">1Cardz.news · Instagram @1cardzcom · YouTube @1Cardzcom · TikTok @1cardz.com</p></div>"""
 
     # contents (page 2), then the body pages from page 3
-    toc = ''; seen_top = False
-    tpages = [3 + n for n, b in enumerate(body) if b[0] == 'top']
-    games_l = ', '.join(dict.fromkeys(game_title(t[0])[0] for t in tops if game_title(t[0])[0]))
+    toc = ''; seen = set()
     for n, (key, t, sub, _) in enumerate(body):
-        if key in ('feat', 'back'): continue
-        if key == 'top':
-            if seen_top: continue
-            seen_top = True
-            t, sub, pg = 'Top stories of the week', f"{len(tops)} stories · {len(games_l.split(', ')) if games_l else 0} games", f'{tpages[0]}–{tpages[-1]}' if len(tpages) > 1 else str(tpages[0])
-        else:
-            pg = str(3 + n)
-        toc += f'<li><div><span>{e(sub)}</span><b>{e(t)}</b></div><em>{pg}</em></li>'
+        if key == 'about' or (key.startswith('photo') and sub == 'Cover story'): continue
+        if key == 'briefs':
+            if 'briefs' in seen: continue
+            seen.add('briefs'); n_b = sum(1 for x in body if x[0] == 'briefs'); t = 'More top stories'; sub = f'{len(st[5:9])} stories'
+        toc += f'<li><div><span>{e(sub)}</span><b>{e(t)}</b></div><em>{3 + n}</em></li>'
     pages = [f'<div class="mz-page">{run("1Cardz Weekly", "No. " + no)}<p class="kick">In this issue</p><h3>Contents</h3><ol class="toc">{toc}</ol><div class="folio">2</div></div>']
-    back_html = ''
-    if body and body[-1][0] == 'back':
-        back_html = f'<div class="mz-page mz-back">{body[-1][3]}</div>'
-        body = body[:-1]
     for n, (key, _, _, h) in enumerate(body):
-        cls = ' mz-full' if key == 'feat' else (' mz-back' if key == 'back' else '')
-        pages.append(f'<div class="mz-page mz-{key}{cls}">{h}<div class="folio">{3 + n}</div></div>')
+        pages.append(f'<div class="mz-page mz-{key}">{h}<div class="folio">{3 + n}</div></div>')
 
     html_ = f'''<div class="mz" id="mz" data-pages="{len(pages) + 2}">
   <div class="mz-book" id="mzBook" aria-live="polite"></div>
@@ -209,6 +356,7 @@ def render(iss, root):
   {''.join(f'<template class="mzPg">{p}</template>' for p in pages)}
 </div>'''
     return html_, CSS, JS
+
 
 CSS = r'''
 /* newsletter magazine (style C, Nov 4) */
@@ -230,58 +378,78 @@ CSS = r'''
 .mz-page p{font-size:3.3cqw;line-height:1.6;margin:0 0 3cqw;color:#7a7a7a;max-width:none}
 .mz-page p.first::first-letter{float:left;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:12cqw;line-height:.8;padding:1cqw 1.6cqw 0 0;color:#c8102e}
 .mz-page .pull{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:6cqw;line-height:1.08;border-top:.6cqw solid #1b1a22;border-bottom:.6cqw solid #1b1a22;padding:2.6cqw 0;margin:3.5cqw 0}
-.mz-page .toc{list-style:none;margin:0;padding:0;counter-reset:t}
-.mz-page .toc li{display:grid;grid-template-columns:8cqw 1fr auto;align-items:baseline;gap:3cqw;padding:.45cqw 0;border-bottom:.25cqw solid #d8d1c3;counter-increment:t}
-.mz-page .toc li::before{content:counter(t,decimal-leading-zero);font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:5cqw;color:#c8102e;line-height:1}
-.mz-page .toc b{display:block;font-size:3.1cqw;line-height:1.25}.mz-page .toc span{display:block;font-family:var(--f-mono);font-size:2cqw;letter-spacing:.12em;text-transform:uppercase;color:#6a6878}.mz-page .toc em{font-style:normal;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:3.6cqw;color:#7a7a7a}
-.mz-page .stories{display:grid;grid-template-rows:1fr 1fr;gap:4cqw;flex:1;min-height:0}
-.mz-page .st{display:grid;grid-template-columns:44% 1fr;grid-template-rows:auto auto auto 1fr;column-gap:4cqw;align-content:start;align-items:start;border-bottom:.25cqw solid #d8d1c3;padding-bottom:4cqw}.mz-page .st:last-child{border-bottom:0}
-.mz-page .st img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;object-position:50% 12%;border-radius:1.2cqw;grid-row:span 4}
-.mz-page .st .g{font-family:var(--f-mono);font-size:2.5cqw;letter-spacing:.14em;text-transform:uppercase;color:#c8102e}
-.mz-page .st b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:5.6cqw;line-height:1.05;margin:1cqw 0 2cqw}
-.mz-page .st p{font-size:3.3cqw;line-height:1.5;margin:0}
-.mz-page .st small{display:block;font-size:2.5cqw;color:#8a8796;font-style:italic;margin-top:1cqw}
-.mz-page .cal div{display:grid;grid-template-columns:24cqw 1fr;gap:3cqw;padding:3cqw 0;border-top:.25cqw solid #d8d1c3;font-size:3.2cqw;line-height:1.4}
-.mz-page .cal b{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:4.2cqw;color:#c8102e;line-height:1.05}
-.mz-page .cal i{display:block;font-size:2.5cqw;color:#6a6878;margin-top:.6cqw}
-.mz-page .sign{margin-top:6cqw;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:6cqw;line-height:1.05}
-.mz-page .cta{display:inline-block;margin-top:4cqw;font-family:var(--f-mono);font-size:2.8cqw;letter-spacing:.12em;text-transform:uppercase;background:#c8102e;color:#fff;padding:2.4cqw 4cqw;border-radius:1.2cqw;text-decoration:none}
+.mz-page .toc{list-style:none;margin:0;padding:0;counter-reset:t;flex:1;display:flex;flex-direction:column;justify-content:space-between}
+.mz-page .toc li{display:grid;grid-template-columns:8cqw 1fr auto;align-items:baseline;gap:3cqw;padding:.9cqw 0 1.4cqw;border-bottom:.25cqw solid #d8d1c3;counter-increment:t}.mz-page .toc li:last-child{border-bottom:0}
+.mz-page .toc li::before{content:counter(t,decimal-leading-zero);font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:4.4cqw;color:#c8102e;line-height:1}
+.mz-page .toc b{display:block;font-size:3.2cqw;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mz-page .toc li>div{min-width:0}.mz-page .toc span{display:block;font-family:var(--f-mono);font-size:2cqw;letter-spacing:.12em;text-transform:uppercase;color:#6a6878}.mz-page .toc em{font-style:normal;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:3.6cqw;color:#7a7a7a}
+.mz-page .sub{font-family:var(--f-mono);font-size:2.4cqw;letter-spacing:.16em;text-transform:uppercase;color:#1b1a22;border-bottom:.6cqw solid #1b1a22;padding-bottom:1.2cqw;margin:1cqw 0 0}.mz-page .cal+.sub{margin-top:4cqw}
+.mz-page .cal div{display:grid;grid-template-columns:21cqw 1fr;gap:3cqw;padding:1.7cqw 0;border-top:.25cqw solid #d8d1c3;font-size:2.8cqw;line-height:1.35}.mz-page .cal div:first-child{border-top:0}
+.mz-page .cal b{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:3.3cqw;color:#c8102e;line-height:1.1}
+.mz-page .cal i{display:inline;font-style:normal;font-family:var(--f-mono);font-size:2.1cqw;letter-spacing:.1em;text-transform:uppercase;color:#6a6878;margin-left:1.6cqw;white-space:nowrap}
 .mz-page .folio{text-align:center;font-family:var(--f-mono);font-size:2.2cqw;color:#6a6878;flex:none}
 .mz-page .folio.light{color:#fff}
-.mz-full{padding:0;color:#fff}.mz-full .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 10%}
-.mz-full::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(10,8,20,.85))}
-.mz-full .cap{position:absolute;left:6.5cqw;right:6.5cqw;bottom:10cqw;z-index:2;font-size:3.3cqw;line-height:1.45;text-shadow:0 .3cqw 1cqw rgba(0,0,0,.8)}
-.mz-full .cap .kick{color:#fde8c2}
-.mz-full .cap b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:9cqw;line-height:.95;margin-bottom:2cqw}
-.mz-full .folio{position:absolute;left:0;right:0;bottom:4cqw;z-index:2;color:#fff}
 .mz-page .src{font-size:2.6cqw;color:#6a6878;font-style:italic}
-.mz-page .hosts{display:flex;gap:3cqw;margin:0 0 4cqw;align-items:center}.mz-page .hosts img{flex:none;width:20cqw;height:20cqw;border-radius:50%;object-fit:cover;object-position:50% 15%;box-shadow:0 0 0 .5cqw #fff,0 1cqw 2cqw rgba(0,0,0,.2)}
-.mz-page .strip{margin-top:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:3cqw;border-top:.6cqw solid #1b1a22;padding-top:3cqw}.mz-page .strip b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:8cqw;line-height:1;color:#c8102e}.mz-page .strip span{font-family:var(--f-mono);font-size:2.2cqw;letter-spacing:.12em;text-transform:uppercase;color:#6a6878}
+.mz-page .hosts{display:flex;gap:3cqw;margin:0 0 4cqw;align-items:center}.mz-page .hosts img{flex:none;width:23cqw;height:23cqw;border-radius:50%;object-fit:cover;object-position:50% 15%;box-shadow:0 0 0 .5cqw #fff,0 1cqw 2cqw rgba(0,0,0,.2)}
 .mz-page .hosts p{margin:0;font-size:3.3cqw;line-height:1.5}
-.mz-page .about{display:grid;grid-template-columns:1fr 1fr;gap:3cqw 4cqw;margin-top:1cqw}
+.mz-page .about{display:grid;grid-template-columns:1fr 1fr;gap:3cqw 5cqw;margin-top:1cqw;flex:1;align-content:space-evenly;border-top:.6cqw solid #1b1a22;padding-top:2cqw}
 .mz-page .about a{text-decoration:none}.mz-page .about b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:4.6cqw;color:#c8102e;line-height:1.1}
-.mz-page .about span{display:block;font-size:2.8cqw;line-height:1.4;margin-top:.6cqw;color:#7a7a7a}
-.mz-page .sig{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:700;font-size:5cqw;color:#c8102e}
-.mz-page .nums{display:grid;grid-template-columns:1fr 1fr;gap:6cqw 5cqw;flex:1;align-content:space-evenly}
-.mz-page .nums b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:11cqw;line-height:1;color:#c8102e}
-.mz-page .nums span{display:block;font-size:3cqw;line-height:1.35;margin-top:1cqw}
-.mz-page .mv div{display:grid;grid-template-columns:1fr auto;gap:.4cqw 3cqw;padding:2cqw 0;border-top:.25cqw solid #d8d1c3}
-.mz-page .mv .g{grid-column:1/-1;font-family:var(--f-mono);font-size:2.3cqw;letter-spacing:.14em;text-transform:uppercase;color:#c8102e}
-.mz-page .mv b{font-size:3cqw;line-height:1.3}.mz-page .mv em{font-style:normal;font-family:var(--f-mono);font-size:3.2cqw;text-align:right}
-.mz-page .mv i{grid-column:2;font-style:normal;font-family:var(--f-mono);font-size:3cqw;text-align:right}.mz-page .mv i.up{color:#1a8f4a}.mz-page .mv i.down{color:#c8102e}
-.mz-page .mv em{grid-row:2;grid-column:2}.mz-page .mv i{grid-row:3}
+.mz-page .about span{display:block;font-size:3.1cqw;line-height:1.45;margin-top:.8cqw;color:#7a7a7a}
 .mz-page .note{font-size:2.6cqw;color:#6a6878;margin-top:3cqw}.mz-page .note a{color:#c8102e}
-.mz-page .quips{display:grid;grid-template-columns:1fr 1fr;gap:4cqw;flex:1;align-content:start}
-.mz-page blockquote{margin:0;padding:3cqw;border-left:1cqw solid #c8102e;background:#f2ecdf}
+.mz-page .quips{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:1fr;gap:4cqw;flex:1;min-height:0}
+.mz-page blockquote{margin:0;padding:3cqw;border-left:1cqw solid #c8102e;background:#f2ecdf;display:flex;flex-direction:column;justify-content:space-between}
 .mz-page blockquote p{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:700;font-size:3.8cqw;line-height:1.25;margin:0 0 1.5cqw;color:#7a7a7a}
 .mz-page blockquote cite{font-style:normal;font-family:var(--f-mono);font-size:2.2cqw;letter-spacing:.1em;text-transform:uppercase;color:#6a6878}
 .mz-back{background:linear-gradient(160deg,#1b2a6b 0%,#0e1640 55%,#060a22 100%);color:#fff;justify-content:center}.mz-back .folio{position:absolute;left:0;right:0;bottom:4%}
-.mz-page .radar div{display:grid;grid-template-columns:30cqw 1fr;gap:3cqw;padding:3.4cqw 0;border-top:.25cqw solid #d8d1c3;font-size:3.3cqw;line-height:1.4}.mz-page .radar b{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:4.4cqw;color:#c8102e;line-height:1.1}
 .mz-page .watch{margin-top:auto;display:grid;grid-template-columns:26% 1fr;gap:4cqw;align-items:center;text-decoration:none;color:#7a7a7a;background:#f2ecdf;border-radius:1.4cqw;padding:2.4cqw}.mz-page .watch img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:50% 15%;border-radius:1cqw}.mz-page .watch span{font-size:2.9cqw;line-height:1.4}.mz-page .watch b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:5cqw;color:#c8102e}.mz-back .kick{color:#7cf3ff}.mz-back h3{color:#fff;font-size:11cqw}.mz-back p{color:#fff}
 .mz-back .links{display:flex;flex-direction:column;gap:3cqw;margin:4cqw 0}
 .mz-back .links a{font-family:var(--f-mono);font-size:3.2cqw;letter-spacing:.12em;text-transform:uppercase;color:#0e1640;background:#fff;padding:3cqw 4cqw;border-radius:1.2cqw;text-decoration:none;text-align:center}
 .mz-back .sign{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:6cqw;line-height:1.05;margin:2cqw 0}
 .mz-back .small{font-size:2.5cqw;opacity:.85}.mz-back .folio{color:#9fb3ff}
+/* layout v2 (Nov 16): story photo pages, text in the clear space beside the reporter */
+.mz-photo{padding:0;color:#fff;background:#120e1f}
+.mz-photo .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.mz-photo .shade{position:absolute;inset:0;z-index:1}
+.mz-photo.t-r .shade{background:linear-gradient(90deg,transparent 22%,rgba(12,9,24,.43) 42%,rgba(12,9,24,.6) 70%)}
+.mz-photo.t-l .shade{background:linear-gradient(270deg,transparent 22%,rgba(12,9,24,.43) 42%,rgba(12,9,24,.6) 70%)}
+.mz-photo .mzt{position:absolute;z-index:2;top:4.5%;bottom:9%;left:5.5%;right:5.5%;display:block;overflow:hidden;text-shadow:0 .2cqw .8cqw rgba(0,0,0,.6)}
+.mz-photo .wrap{display:block;width:100%;height:100%;shape-margin:1.2cqw}
+.mz-photo .mzt>*:not(.wrap){position:relative}
+.mz-photo .kick{color:#ffd23f;font-size:2.3cqw;margin-bottom:1.6cqw}
+.mz-photo h3{color:#fff;font-size:5.6cqw;line-height:1.02;margin:0 0 2.4cqw}
+.mz-photo p{color:#eef0f6;font-size:2.9cqw;line-height:1.45;margin:0 0 2.2cqw}
+.mz-photo .facts{list-style:none;margin:0 0 2.2cqw;padding:0}
+.mz-photo .facts li{font-size:2.6cqw;line-height:1.4;color:#eef0f6;padding:0;margin:0 0 1.4cqw}
+.mz-photo .facts li::before{content:"";display:inline-block;width:1.3cqw;height:1.3cqw;background:#ffd23f;margin-right:1.4cqw;vertical-align:.15em}
+.mz-photo .why{font-size:2.7cqw}
+.mz-photo .why b{display:block;font-family:var(--f-mono);font-weight:400;font-size:2.1cqw;letter-spacing:.14em;text-transform:uppercase;color:#ffd23f;margin-bottom:.6cqw}
+.mz-photo .quip{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:700;font-size:3.8cqw;line-height:1.2;color:#fff}
+.mz-photo .quip span{display:block;font-family:var(--f-mono);font-style:normal;font-weight:400;font-size:2.1cqw;letter-spacing:.14em;text-transform:uppercase;color:#ffd23f;margin-top:1cqw}
+.mz-photo .src{margin-top:2.4cqw;margin-bottom:0;font-size:2.3cqw;color:#c9cde0;font-style:italic}
+.mz-page .src a{color:#c8102e;font-style:normal;font-weight:700;text-decoration:none}
+.mz-photo .mzt .src a{color:#ffd23f}
+.mz-photo .folio{position:absolute;left:0;right:0;bottom:3.5cqw;z-index:2;color:#fff}
+.mz-page .dets{list-style:none;margin:0 0 3cqw;padding:0;counter-reset:d}
+.mz-page .dets li{position:relative;counter-increment:d;font-size:3.1cqw;line-height:1.45;padding:1.8cqw 0 1.8cqw 7cqw;border-top:.25cqw solid #d8d1c3}
+.mz-page .dets li::before{content:counter(d,decimal-leading-zero);position:absolute;left:0;top:1.5cqw;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:4cqw;color:#c8102e}
+.mz-detail .pull{font-size:4.8cqw;margin:1cqw 0 3cqw}
+.mz-detail .watch{margin-top:auto}
+.mz-detail p.first{font-size:3.1cqw}
+
+.mz-photo.t-r .mzt{text-align:right}.mz-photo.t-l .mzt{text-align:left}
+.mz-story .first{font-size:3.2cqw}
+.mz-story .why,.mz-detail .why{font-size:3.1cqw;line-height:1.45;background:#f2ecdf;border-left:1cqw solid #c8102e;padding:2.4cqw 3cqw;margin:0 0 3cqw}
+.mz-story .why b,.mz-detail .why b{display:block;font-family:var(--f-mono);font-weight:400;font-size:2.2cqw;letter-spacing:.14em;text-transform:uppercase;color:#c8102e;margin-bottom:.8cqw}
+.mz-story .pull{font-size:4.6cqw;margin:0 0 3cqw}.mz-story .pull span,.mz-detail .pull span{display:block;font-family:var(--f-mono);font-weight:400;font-size:2.1cqw;letter-spacing:.14em;text-transform:uppercase;color:#c8102e;margin-top:1.2cqw}
+.mz-story .watch{margin-top:auto}
+
+.mz-page .briefs{flex:1;min-height:0;display:grid;grid-template-rows:1fr 1fr;gap:3cqw}
+.mz-page .brief{border-bottom:.25cqw solid #d8d1c3;padding-bottom:3cqw;overflow:hidden}.mz-page .brief:last-child{border-bottom:0}
+.mz-page .brief h4{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:6cqw;line-height:1.02;margin:0 0 2.4cqw;color:#7a7a7a}
+.mz-page .brief p{font-size:3.1cqw;line-height:1.5;margin:0 0 1.8cqw}
+.mz-page .brief .kick{margin-bottom:1.2cqw}
+.mz-page .brief .fact{border-left:.8cqw solid #c8102e;padding-left:2.2cqw}
+.mz-page .brief .q{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:700;font-size:3.5cqw;line-height:1.3}
+.mz-page .brief .q span{font-family:var(--f-mono);font-style:normal;font-weight:400;font-size:2.1cqw;letter-spacing:.14em;text-transform:uppercase;color:#c8102e}
 /* cover */
 .mz-cover{display:block;padding:0;background:#f4efe4;cursor:pointer;isolation:isolate}
 .mz-cover .ph{position:absolute;inset:0;z-index:0}.mz-cover .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 0}
@@ -298,6 +466,9 @@ CSS = r'''
   will-change:background-position;transform:translateZ(0);animation:mzholo 3.2s linear infinite}
 @keyframes mzholo{from{background-position:100% 0}to{background-position:0% 0}}
 @media (prefers-reduced-motion:reduce){.mz-cover .mast .ho{animation:none;opacity:0}}
+
+/* three cover lines (Nov 16): same column, a little tighter so it clears the main headline */
+.mz-cover .side.three{top:40cqw;gap:3cqw}.mz-cover .side.three b{font-size:5cqw}.mz-cover .side.three span{line-height:1.25;margin-top:.5cqw}
 /* side shelves of past issues (Nov 8): 6 per side, straight down; each cover cased like a graded card */
 .mz-desk{position:relative;z-index:4;display:grid;padding:0 clamp(14px,2vw,26px);grid-template-columns:minmax(178px,188px) minmax(0,1fr) minmax(178px,188px);gap:clamp(24px,2.6vw,34px);align-items:start}
 .mz-shelf{display:flex;flex-direction:column;gap:14px;padding-top:clamp(16px,3vw,32px)}
@@ -354,6 +525,15 @@ JS = r'''<script id="mz-js">
     book.classList.toggle('two',n===2);book.classList.toggle('mini',n===2&&!two());book.classList.toggle('zoom',z);book.innerHTML=h;
     no.textContent=c.cov?'Cover · tap to open':z?`Page ${c.first+zoom} · tap to close`:(c.n===2?(two()?`Pages ${c.first}–${c.first+1} of ${total}`:`Pages ${c.first}–${c.first+1} · tap a page`):(idx===v.length-1&&back?'Back cover':`Page ${c.first} of ${total}`));
     prev.disabled=idx===0&&!z;next.disabled=idx===v.length-1&&!z;
+    /* story photo pages (Nov 16): if the text doesn't fit, drop facts from the end, then "why it matters", then the summary's tail */
+    book.querySelectorAll('.mz-photo .mzt').forEach(t=>{const f=[...t.querySelectorAll('.facts li')];while(t.scrollHeight>t.clientHeight+1&&f.length)f.pop().remove();
+      const fl=t.querySelector('.facts');if(fl&&!fl.children.length)fl.remove();const w=t.querySelector('.why,.quip');if(t.scrollHeight>t.clientHeight+1&&w)w.remove()});
+    book.querySelectorAll('.mz-detail,.mz-story').forEach(pg=>{const f=[...pg.querySelectorAll('.dets li')];const w=pg.querySelector('.watch'),p=pg.querySelector('.pull');
+      const fits=()=>pg.scrollHeight<=pg.clientHeight+1;if(!fits()&&w)w.remove();if(!fits()&&p){p.remove();if(w){pg.querySelector('.folio').before(w);if(!fits())w.remove()}}while(!fits()&&f.length>2)f.pop().remove()});
+    book.querySelectorAll('.mz-page .brief').forEach(b=>{for(const sel of ['.q','.fact'])if(b.scrollHeight>b.clientHeight+1){const x=b.querySelector(sel);if(x)x.remove()}});
+    /* the week ahead page: drop "Further ahead" rows from the end until it fits (Nov 16) */
+    book.querySelectorAll('.mz-cal').forEach(pg=>{const r=[...pg.querySelectorAll('.radar div')];while(pg.scrollHeight>pg.clientHeight+1&&r.length)r.pop().remove();
+      const rd=pg.querySelector('.radar');if(rd&&!rd.children.length){rd.previousElementSibling.remove();rd.remove()}});
     if(c.cov){const el=book.querySelector('.mz-cover');if(el)el.addEventListener('click',()=>go(1))}}
   function go(d){if(zoom!==null){zoom+=d>0?1:-1;if(zoom>1){idx++;zoom=0}else if(zoom<0){idx--;zoom=1}}else idx+=d>0?1:-1;view()}
   book.addEventListener('click',e=>{if(two())return;const c=views()[idx];const pg=e.target.closest('.mz-page');if(!pg||c.cov||c.n!==2)return;
