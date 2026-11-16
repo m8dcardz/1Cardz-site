@@ -43,18 +43,24 @@ def story_url(n):
     t = re.sub(r'[^a-z0-9]+', '-', t).strip('-')[:70].rstrip('-')
     return f"news-{n['when'][:10]}-{t}.html"
 
+# Headlines page (Nov 16, 2026, user): only the newest 35 stories (25 on phones, hidden by CSS); each box shows the title only and
+# expands down to the story when tapped. Every story still has its own page (built below from all of news.json).
+shown = news[:35]
 tiles = []
-for k, n in enumerate(news):
+for k, n in enumerate(shown):
     tiles.append(f'''        <li class="news-tile{' lead' if k == 0 else ''}" data-game="{e(n['game'])}" style="--c:{GC.get(n['game'], '#7cf3ff')}">
           <div class="t-top"><span class="mw-game">{e(n['game'])}</span><time class="t-when" datetime="{e(n['when'])}:00+08:00">{when(n['when'])}</time></div>
-          <h3 class="t-head"><a href="{story_url(n)}">{e(n['title'])}</a></h3>
-          <p class="t-sum">{e(n['summary'])}</p>
-          <p class="t-src">Source: {e(n['source'])}</p>
+          <h3 class="t-head"><button type="button" class="t-tog" aria-expanded="false" aria-controls="tb{k}"><span>{e(n['title'])}</span><i aria-hidden="true"></i></button></h3>
+          <div class="t-body" id="tb{k}"><div>
+            <p class="t-sum">{e(n['summary'])}</p>
+            <p class="t-src">Source: {e(n['source'])}</p>
+            <a class="t-more" href="{story_url(n)}">Read the full story ›</a>
+          </div></div>
         </li>''')
-games = sorted({n['game'] for n in news})
+games = sorted({n['game'] for n in shown})
 chips = ['<button type="button" class="chip" data-g="all" aria-pressed="true">All games</button>']
 chips += [f'<button type="button" class="chip" data-g="{e(g)}" aria-pressed="false">{e(g)}</button>' for g in games]
-first = datetime.datetime.fromisoformat(news[-1]['when']); last = datetime.datetime.fromisoformat(news[0]['when'])
+first = datetime.datetime.fromisoformat(shown[-1]['when']); last = datetime.datetime.fromisoformat(shown[0]['when'])
 
 extra_css = '''<style>
 /* news headlines page: card grid */
@@ -79,7 +85,22 @@ extra_css = '''<style>
 .news-tile .t-head a{color:inherit;text-decoration:none}.news-tile .t-head a:hover{text-decoration:underline;text-decoration-color:var(--c)}
 .news-tile .t-head{font-family:var(--f-display);font-weight:700;font-stretch:88%;font-size:22px;line-height:1.1;color:#fff;margin:2px 0 0}
 .news-tile .t-sum{margin:0;color:#cfd4e6;font-size:15px;line-height:1.5}
-.news-tile .t-src{margin:auto 0 0;padding-top:6px;color:#8c93ad;font-size:12.5px}
+/* title only; tap to expand the story (Nov 16) */
+.news-grid{align-items:start}
+.news-tile{cursor:pointer}
+.news-tile .t-tog{all:unset;box-sizing:border-box;display:flex;width:100%;align-items:flex-start;justify-content:space-between;gap:12px;cursor:pointer;color:inherit;font:inherit}
+.news-tile .t-tog:focus-visible{outline:2px solid var(--c);outline-offset:4px;border-radius:4px}
+.news-tile .t-tog i{flex:none;width:11px;height:11px;margin-top:.35em;border-right:2px solid var(--c);border-bottom:2px solid var(--c);transform:rotate(45deg);transition:transform .25s}
+.news-tile.open .t-tog i{transform:rotate(-135deg) translate(-3px,-3px)}
+.news-tile .t-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
+.news-tile.open .t-body{grid-template-rows:1fr}
+.news-tile .t-body>div{overflow:hidden;display:flex;flex-direction:column;gap:8px;min-height:0}
+.news-tile .t-body>div>:first-child{margin-top:4px}
+.news-tile .t-more{align-self:flex-start;margin-bottom:2px;font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--c);text-decoration:none}
+.news-tile .t-more:hover{text-decoration:underline}
+@media (prefers-reduced-motion:reduce){.news-tile .t-body,.news-tile .t-tog i{transition:none}}
+@media (max-width:759px){.news-tile:nth-child(n+26){display:none}}
+.news-tile .t-src{margin:0;color:#8c93ad;font-size:12.5px}
 @media (min-width:640px){.news-tile.lead{grid-column:span 2}.news-tile.lead .t-head{font-size:32px}.news-tile.lead .t-sum{font-size:17px}}
 @media (max-width:560px){.news-grid{grid-template-columns:1fr;gap:10px;padding:12px}.news-tile .t-head{font-size:20px}}
 </style>'''
@@ -100,8 +121,8 @@ body = f'''{header}
     <div class="gd">
       <div class="mw-top">
         <span class="mono mw-label" style="color:#ffd23f"><i style="background:#ffd23f;box-shadow:0 0 10px #ffd23f"></i><span>Headlines</span></span>
-        <span class="mono news-count" id="newsCount">{len(news)} stories</span>
-        <span class="mono mw-upd">{first.strftime('%b')} {first.day} – {last.strftime('%b')} {last.day}, {last.year}</span>
+        <span class="mono news-count" id="newsCount">{len(shown)} stories</span>
+        <span class="mono mw-upd" id="newsRange">{first.strftime('%b')} {first.day} – {last.strftime('%b')} {last.day}, {last.year}</span>
       </div>
       <ol class="news-grid" id="newsGrid">
 {chr(10).join(tiles)}
@@ -120,10 +141,20 @@ js = r'''<script>
     cov.addEventListener('pointermove',e=>{const r=cov.getBoundingClientRect();cov.classList.add('hover');
       ch.style.setProperty('--hx',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');ch.style.setProperty('--hy',((e.clientY-r.top)/r.height*100).toFixed(1)+'%')});
     cov.addEventListener('pointerleave',()=>{cov.classList.remove('hover');ch.style.removeProperty('--hx');ch.style.removeProperty('--hy')})});
+  /* tap a box to open its story, tap again to close (Nov 16) */
+  document.querySelectorAll('.news-tile').forEach(t=>{const b=t.querySelector('.t-tog');if(!b)return;
+    const flip=()=>{const o=!t.classList.contains('open');t.classList.toggle('open',o);b.setAttribute('aria-expanded',String(o))};
+    t.addEventListener('click',ev=>{if(ev.target.closest('a'))return;flip()})});
   /* game filter */
   const chips=[...document.querySelectorAll('.chip')],tiles=[...document.querySelectorAll('.news-tile')],cnt=document.getElementById('newsCount');
   chips.forEach(c=>c.addEventListener('click',()=>{chips.forEach(x=>x.setAttribute('aria-pressed',String(x===c)));const g=c.dataset.g;let n=0;
-    tiles.forEach(t=>{const ok=g==='all'||t.dataset.game===g;t.hidden=!ok;if(ok)n++});cnt.textContent=n+(n===1?' story':' stories')}));
+    tiles.forEach(t=>{const ok=g==='all'||t.dataset.game===g;t.hidden=!ok});count()}));
+  /* count and date range of the boxes actually showing (35 on desktop, 25 on phones) */
+  const rng=document.getElementById('newsRange'),M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function count(){const v=tiles.filter(t=>t.offsetParent);cnt.textContent=v.length+(v.length===1?' story':' stories');
+    const d=v.map(t=>t.querySelector('time').getAttribute('datetime').slice(0,10)).sort();if(rng&&d.length){const a=d[0].split('-'),b=d[d.length-1].split('-');
+      rng.textContent=M[+a[1]-1]+' '+(+a[2])+' – '+M[+b[1]-1]+' '+(+b[2])+', '+b[0]}}
+  count();addEventListener('resize',count);
 __COVER__})();
 </script>'''.replace('__COVER__', cover_js)
 
