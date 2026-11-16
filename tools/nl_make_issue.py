@@ -7,7 +7,7 @@ Stories come from tools/news.json (title, summary, source, details) and tools/po
       [--cover-clip clip50] [--cover-main "..."] [--cover-sub "..."] [--line "Title|sub" (up to 3)]
       [--title "..."] [--opening "..."] [--pull "..."] [--calendar release-calendar.md] [--no 03]
 
---big     the cover story's clip. --clips  the top stories' clips in order (default: the rest of the week, newest first, max 8).
+--big     the cover story's clip. --clips  the top stories' clips in order (default: the rest of the week, newest first, max 12: 4 in the photo sets, 8 on the top-stories pages; clips used in an earlier issue are skipped).
 --calendar  the project's release calendar (markdown table) for "The week ahead" and "Further ahead".
 Anything not given gets a plain default from the stories. Then run tools/build_newsletter.py."""
 import argparse, datetime, json, pathlib, re
@@ -36,7 +36,13 @@ def story(clip):
     if n.get('details'): s['details'] = n['details']
     return s
 
-clips = [c for c in a.clips.split(',') if c] or [p['clip'] for p in week if p['clip'] != a.big][:8]
+# skip clips already used in last week's issue
+_prev = set()
+for f in (root / 'tools' / 'newsletters').glob('issue-*.json'):
+    _d = json.loads(f.read_text())
+    if _d.get('date') and datetime.datetime.strptime(_d['date'], '%A, %B %d, %Y').date() < d:
+        _prev |= {s.get('clip') for s in _d.get('stories', [])} | set((_d.get('sections') or [{}, {}])[1].get('clips', []) if len(_d.get('sections') or []) > 1 else []) | {_d.get('big_clip'), _d.get('cover_clip')}
+clips = [c for c in a.clips.split(',') if c] or [p['clip'] for p in week if p['clip'] != a.big and p['clip'] not in _prev][:12]
 sts = [story(a.big)] + [story(c) for c in clips]
 
 if a.no:

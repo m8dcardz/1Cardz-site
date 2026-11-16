@@ -285,18 +285,18 @@ def render(iss, root):
             if j + 1 < len(body):
                 body[j], body[j + 1] = body[j + 1], body[j]
 
-        rest = st[5:9]
+        # after the 3 sets (Nov 16): the earlier top-stories style, 2 per page with the clip photo, up to 4 pages
+        rest = st[5:13]
+        npages = (len(rest) + 1) // 2
         for k in range(0, len(rest), 2):
             cards = ''
             for s in rest[k:k + 2]:
-                d = s.get('details') or {}
-                fact = (d.get('facts') or [None, None])[1] if len(d.get('facts') or []) > 1 else ''
-                cards += (f'<div class="brief"><p class="kick">{e(s.get("game") or "Top story")}</p><h4>{e(s.get("title", ""))}</h4><p>{e(s.get("summary", ""))}</p>'
-                          + (f'<p class="fact">{e(fact)}</p>' if fact else '')
-                          + (f'<p class="q">“{e(s["quip"])}” <span>{e(s.get("host", ""))}</span></p>' if s.get('quip') else '')
-                          + f'<p class="src">Source: {e(s.get("source", ""))}' + (f' · <a href="{e(s["page"])}">Read the full story ›</a>' if s.get('page') else '') + '</p></div>')
-            body.append(('briefs', ' & '.join(x.get('game') or x.get('title', '') for x in rest[k:k + 2]), 'More top stories',
-                         f'{run("More top stories", f"{k // 2 + 1} of {(len(rest) + 1) // 2}")}<div class="briefs">{cards}</div>'))
+                im = _img(root, s.get('clip'))
+                link = f' · <a href="{e(s["page"])}">Read the full story ›</a>' if s.get('page') else ''
+                cards += (f'<div class="st">' + (f'<img src="{e(im)}" alt="" loading="lazy">' if im else '') +
+                          f'<span class="g">{e(s.get("game", ""))}</span><b>{e(s.get("title", ""))}</b><p>{e(s.get("summary", ""))}</p><small>Source: {e(s.get("source", ""))}{link}</small></div>')
+            body.append(('top', ' & '.join(x.get('game') or x.get('title', '') for x in rest[k:k + 2]), 'Top stories',
+                         f'{run("Top stories", f"{k // 2 + 1} of {npages}")}<div class="stories">{cards}</div>'))
 
     q = [x for x in posts if x.get('quip')]
     if q:
@@ -340,9 +340,9 @@ def render(iss, root):
     toc = ''; seen = set()
     for n, (key, t, sub, _) in enumerate(body):
         if key == 'about' or (key.startswith('photo') and sub == 'Cover story'): continue
-        if key == 'briefs':
-            if 'briefs' in seen: continue
-            seen.add('briefs'); n_b = sum(1 for x in body if x[0] == 'briefs'); t = 'More top stories'; sub = f'{len(st[5:9])} stories'
+        if key == 'top':
+            if 'top' in seen: continue
+            seen.add('top'); t = 'More top stories'; sub = f'{len(st[5:13])} stories'
         toc += f'<li><div><span>{e(sub)}</span><b>{e(t)}</b></div><em>{3 + n}</em></li>'
     pages = [f'<div class="mz-page">{run("1Cardz Weekly", "No. " + no)}<p class="kick">In this issue</p><h3>Contents</h3><ol class="toc">{toc}</ol><div class="folio">2</div></div>']
     for n, (key, _, _, h) in enumerate(body):
@@ -442,14 +442,14 @@ CSS = r'''
 .mz-story .pull{font-size:4.6cqw;margin:0 0 3cqw}.mz-story .pull span,.mz-detail .pull span{display:block;font-family:var(--f-mono);font-weight:400;font-size:2.1cqw;letter-spacing:.14em;text-transform:uppercase;color:#c8102e;margin-top:1.2cqw}
 .mz-story .watch{margin-top:auto}
 
-.mz-page .briefs{flex:1;min-height:0;display:grid;grid-template-rows:1fr 1fr;gap:3cqw}
-.mz-page .brief{border-bottom:.25cqw solid #d8d1c3;padding-bottom:3cqw;overflow:hidden}.mz-page .brief:last-child{border-bottom:0}
-.mz-page .brief h4{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:6cqw;line-height:1.02;margin:0 0 2.4cqw;color:#7a7a7a}
-.mz-page .brief p{font-size:3.1cqw;line-height:1.5;margin:0 0 1.8cqw}
-.mz-page .brief .kick{margin-bottom:1.2cqw}
-.mz-page .brief .fact{border-left:.8cqw solid #c8102e;padding-left:2.2cqw}
-.mz-page .brief .q{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:700;font-size:3.5cqw;line-height:1.3}
-.mz-page .brief .q span{font-family:var(--f-mono);font-style:normal;font-weight:400;font-size:2.1cqw;letter-spacing:.14em;text-transform:uppercase;color:#c8102e}
+.mz-page .stories{display:grid;grid-template-rows:1fr 1fr;gap:4cqw;flex:1;min-height:0}
+.mz-page .st{display:grid;grid-template-columns:44% 1fr;grid-template-rows:auto auto auto 1fr;column-gap:4cqw;align-content:start;align-items:start;border-bottom:.25cqw solid #d8d1c3;padding-bottom:4cqw;min-height:0;overflow:hidden}.mz-page .st:last-child{border-bottom:0}
+.mz-page .st img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;object-position:50% 12%;border-radius:1.2cqw;grid-row:span 4}
+.mz-page .st .g{font-family:var(--f-mono);font-size:2.5cqw;letter-spacing:.14em;text-transform:uppercase;color:#c8102e}
+.mz-page .st b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:5.2cqw;line-height:1.05;margin:1cqw 0 2cqw}
+.mz-page .st p{font-size:3.1cqw;line-height:1.45;margin:0}
+.mz-page .st small{display:block;font-size:2.5cqw;color:#8a8796;font-style:italic;margin-top:1cqw}
+.mz-page .st small a{color:#c8102e;font-style:normal;font-weight:700;text-decoration:none}
 /* cover */
 .mz-cover{display:block;padding:0;background:#f4efe4;cursor:pointer;isolation:isolate}
 .mz-cover .ph{position:absolute;inset:0;z-index:0}.mz-cover .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 0}
@@ -530,7 +530,6 @@ JS = r'''<script id="mz-js">
       const fl=t.querySelector('.facts');if(fl&&!fl.children.length)fl.remove();const w=t.querySelector('.why,.quip');if(t.scrollHeight>t.clientHeight+1&&w)w.remove()});
     book.querySelectorAll('.mz-detail,.mz-story').forEach(pg=>{const f=[...pg.querySelectorAll('.dets li')];const w=pg.querySelector('.watch'),p=pg.querySelector('.pull');
       const fits=()=>pg.scrollHeight<=pg.clientHeight+1;if(!fits()&&w)w.remove();if(!fits()&&p){p.remove();if(w){pg.querySelector('.folio').before(w);if(!fits())w.remove()}}while(!fits()&&f.length>2)f.pop().remove()});
-    book.querySelectorAll('.mz-page .brief').forEach(b=>{for(const sel of ['.q','.fact'])if(b.scrollHeight>b.clientHeight+1){const x=b.querySelector(sel);if(x)x.remove()}});
     /* the week ahead page: drop "Further ahead" rows from the end until it fits (Nov 16) */
     book.querySelectorAll('.mz-cal').forEach(pg=>{const r=[...pg.querySelectorAll('.radar div')];while(pg.scrollHeight>pg.clientHeight+1&&r.length)r.pop().remove();
       const rd=pg.querySelector('.radar');if(rd&&!rd.children.length){rd.previousElementSibling.remove();rd.remove()}});
