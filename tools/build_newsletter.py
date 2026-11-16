@@ -72,7 +72,7 @@ def _slot(item):
     return (f'<button type="button" class="mz-slot" data-src="mag/issue-{e(no_)}.html" data-date="{e(d.get("date", ""))}" '
             f'aria-label="Read Issue {e(no_)}, {e(d.get("date", ""))}"><span class="slab"><span class="lbl"><b>{e(tag)}</b><i>Issue {e(no_)}</i></span>'
             f'<span class="cv">{cov}</span></span></button>')
-_sl = (sorted(past, key=lambda x: int(x[0]))[-10:] + [None] * 10)[:10]   # oldest first: Vol.1 at the top left, then to the right (Nov 16)
+_sl = (sorted(past, key=lambda x: int(x[0]))[-12:] + [None] * 12)[:12]   # 2 rows of 6 on desktop   # oldest first: Vol.1 at the top left, then to the right (Nov 16)
 # one shelf under the magazine (Nov 16): 5 per row on desktop, 3 per row on phones; phones hide the empty
 # slots after the last full row of 3 (class "mh")
 _n = sum(1 for x in _sl if x); _keep = max(3, -(-_n // 3) * 3)
