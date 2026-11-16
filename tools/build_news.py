@@ -248,11 +248,9 @@ for k, (n, p) in enumerate(site_parts.story_items(news, list(posts.values()))):
         specs_html = ('<table class="specs"><caption>At a glance</caption><tbody>' +
                       ''.join(f'<tr><th scope="row">{e(a)}</th><td>{e(b)}</td></tr>' for a, b in specs) + '</tbody></table>')
     links = [u for u in (n.get('links') or []) if str(u).startswith('https://')]
+    # No external links on the site (user rule, Nov 16, 2026): the source is named in plain text.
+    # details.url and "links" are kept in news.json only as an internal record.
     src_html = e(n['source'])
-    if d.get('url', '').startswith('https://'):
-        src_html = f'<a href="{e(d["url"])}" rel="noopener" target="_blank">{e(n["source"])}</a>'
-    elif links:
-        src_html = f'<a href="{e(links[0])}" rel="noopener" target="_blank">{e(n["source"])}</a>'
     article = f"""
 <main>
   <section class="wrap story">
