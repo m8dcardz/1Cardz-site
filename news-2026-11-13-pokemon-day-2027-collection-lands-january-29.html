@@ -1030,7 +1030,22 @@ body>header .cover .top-cover{z-index:0}
 .news-tile .t-head a{color:inherit;text-decoration:none}.news-tile .t-head a:hover{text-decoration:underline;text-decoration-color:var(--c)}
 .news-tile .t-head{font-family:var(--f-display);font-weight:700;font-stretch:88%;font-size:22px;line-height:1.1;color:#fff;margin:2px 0 0}
 .news-tile .t-sum{margin:0;color:#cfd4e6;font-size:15px;line-height:1.5}
-.news-tile .t-src{margin:auto 0 0;padding-top:6px;color:#8c93ad;font-size:12.5px}
+/* title only; tap to expand the story (Nov 16) */
+.news-grid{align-items:start}
+.news-tile{cursor:pointer}
+.news-tile .t-tog{all:unset;box-sizing:border-box;display:flex;width:100%;align-items:flex-start;justify-content:space-between;gap:12px;cursor:pointer;color:inherit;font:inherit}
+.news-tile .t-tog:focus-visible{outline:2px solid var(--c);outline-offset:4px;border-radius:4px}
+.news-tile .t-tog i{flex:none;width:11px;height:11px;margin-top:.35em;border-right:2px solid var(--c);border-bottom:2px solid var(--c);transform:rotate(45deg);transition:transform .25s}
+.news-tile.open .t-tog i{transform:rotate(-135deg) translate(-3px,-3px)}
+.news-tile .t-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
+.news-tile.open .t-body{grid-template-rows:1fr}
+.news-tile .t-body>div{overflow:hidden;display:flex;flex-direction:column;gap:8px;min-height:0}
+.news-tile .t-body>div>:first-child{margin-top:4px}
+.news-tile .t-more{align-self:flex-start;margin-bottom:2px;font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--c);text-decoration:none}
+.news-tile .t-more:hover{text-decoration:underline}
+@media (prefers-reduced-motion:reduce){.news-tile .t-body,.news-tile .t-tog i{transition:none}}
+@media (max-width:759px){.news-tile:nth-child(n+26){display:none}}
+.news-tile .t-src{margin:0;color:#8c93ad;font-size:12.5px}
 @media (min-width:640px){.news-tile.lead{grid-column:span 2}.news-tile.lead .t-head{font-size:32px}.news-tile.lead .t-sum{font-size:17px}}
 @media (max-width:560px){.news-grid{grid-template-columns:1fr;gap:10px;padding:12px}.news-tile .t-head{font-size:20px}}
 </style>
@@ -1218,7 +1233,7 @@ body>header .cover .top-cover{z-index:0}
     </article>
     <div class="more">
       <h2>More headlines</h2>
-      <ul><li><a href="news-2026-11-16-stefan-schutz-wins-magic-world-championship-32.html"><span class="g">Magic · Mon, Nov 16 · 8:00 AM</span><b>Stefan Schütz wins Magic World Championship 32</b></a></li><li><a href="news-2026-11-15-magic-s-first-god-packs-arrive-with-nauctis.html"><span class="g">Magic · Sun, Nov 15 · 8:00 PM</span><b>Magic&#x27;s first God Packs arrive with Nauctis</b></a></li><li><a href="news-2026-11-15-yu-gi-oh-s-hero-force-structure-deck-goes-all-foil.html"><span class="g">Yu-Gi-Oh! · Sun, Nov 15 · 8:00 AM</span><b>Yu-Gi-Oh!&#x27;s HERO Force Structure Deck goes all-foil</b></a></li><li><a href="news-2026-11-14-magic-s-planeswalker-series-comes-to-netflix-in-2027.html"><span class="g">Magic · Sat, Nov 14 · 8:00 PM</span><b>Magic&#x27;s Planeswalker series comes to Netflix in 2027</b></a></li><li><a href="news-2026-11-14-riftbound-bans-riven-dazzling-aurora-and-more.html"><span class="g">Riftbound · Sat, Nov 14 · 8:00 AM</span><b>Riftbound bans Riven, Dazzling Aurora and more</b></a></li><li><a href="news-2026-11-13-magic-s-star-trek-is-out-to-boldly-go-league-starts.html"><span class="g">Magic · Fri, Nov 13 · 8:00 AM</span><b>Magic&#x27;s Star Trek is out; To Boldly Go league starts</b></a></li></ul>
+      <ul><li><a href="news-2026-11-16-one-piece-s-op-18-the-dominance-of-god-lands-nov-20.html"><span class="g">One Piece · Mon, Nov 16 · 8:00 PM</span><b>One Piece&#x27;s OP-18 The Dominance of God lands Nov 20</b></a></li><li><a href="news-2026-11-16-stefan-schutz-wins-magic-world-championship-32.html"><span class="g">Magic · Mon, Nov 16 · 8:00 AM</span><b>Stefan Schütz wins Magic World Championship 32</b></a></li><li><a href="news-2026-11-15-magic-s-first-god-packs-arrive-with-nauctis.html"><span class="g">Magic · Sun, Nov 15 · 8:00 PM</span><b>Magic&#x27;s first God Packs arrive with Nauctis</b></a></li><li><a href="news-2026-11-15-yu-gi-oh-s-hero-force-structure-deck-goes-all-foil.html"><span class="g">Yu-Gi-Oh! · Sun, Nov 15 · 8:00 AM</span><b>Yu-Gi-Oh!&#x27;s HERO Force Structure Deck goes all-foil</b></a></li><li><a href="news-2026-11-14-magic-s-planeswalker-series-comes-to-netflix-in-2027.html"><span class="g">Magic · Sat, Nov 14 · 8:00 PM</span><b>Magic&#x27;s Planeswalker series comes to Netflix in 2027</b></a></li><li><a href="news-2026-11-14-riftbound-bans-riven-dazzling-aurora-and-more.html"><span class="g">Riftbound · Sat, Nov 14 · 8:00 AM</span><b>Riftbound bans Riven, Dazzling Aurora and more</b></a></li></ul>
     </div>
   </section>
 </main>
@@ -1281,10 +1296,20 @@ body>header .cover .top-cover{z-index:0}
     cov.addEventListener('pointermove',e=>{const r=cov.getBoundingClientRect();cov.classList.add('hover');
       ch.style.setProperty('--hx',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');ch.style.setProperty('--hy',((e.clientY-r.top)/r.height*100).toFixed(1)+'%')});
     cov.addEventListener('pointerleave',()=>{cov.classList.remove('hover');ch.style.removeProperty('--hx');ch.style.removeProperty('--hy')})});
+  /* tap a box to open its story, tap again to close (Nov 16) */
+  document.querySelectorAll('.news-tile').forEach(t=>{const b=t.querySelector('.t-tog');if(!b)return;
+    const flip=()=>{const o=!t.classList.contains('open');t.classList.toggle('open',o);b.setAttribute('aria-expanded',String(o))};
+    t.addEventListener('click',ev=>{if(ev.target.closest('a'))return;flip()})});
   /* game filter */
   const chips=[...document.querySelectorAll('.chip')],tiles=[...document.querySelectorAll('.news-tile')],cnt=document.getElementById('newsCount');
   chips.forEach(c=>c.addEventListener('click',()=>{chips.forEach(x=>x.setAttribute('aria-pressed',String(x===c)));const g=c.dataset.g;let n=0;
-    tiles.forEach(t=>{const ok=g==='all'||t.dataset.game===g;t.hidden=!ok;if(ok)n++});cnt.textContent=n+(n===1?' story':' stories')}));
+    tiles.forEach(t=>{const ok=g==='all'||t.dataset.game===g;t.hidden=!ok});count()}));
+  /* count and date range of the boxes actually showing (35 on desktop, 25 on phones) */
+  const rng=document.getElementById('newsRange'),M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function count(){const v=tiles.filter(t=>t.offsetParent);cnt.textContent=v.length+(v.length===1?' story':' stories');
+    const d=v.map(t=>t.querySelector('time').getAttribute('datetime').slice(0,10)).sort();if(rng&&d.length){const a=d[0].split('-'),b=d[d.length-1].split('-');
+      rng.textContent=M[+a[1]-1]+' '+(+a[2])+' – '+M[+b[1]-1]+' '+(+b[2])+', '+b[0]}}
+  count();addEventListener('resize',count);
   /* binder videos: top first, bottom last */
   (function(){const v=document.querySelector('video.top-cover');if(!v)return;v.src=v.dataset.src;if(!reduce){v.autoplay=true;const pr=v.play();if(pr)pr.catch(()=>{})}})();
   document.querySelectorAll('video.lazy-cover').forEach(v=>{
