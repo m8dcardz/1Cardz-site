@@ -473,14 +473,14 @@ CSS = r'''
 /* Nov 16: the past-issue shelves sit under the magazine as rows on every screen; the magazine is bigger */
 .mz-desk{position:relative;z-index:4;display:grid;padding:0 clamp(14px,2vw,26px);grid-template-columns:minmax(0,1fr);gap:clamp(14px,1.6vw,22px);align-items:start}
 .mz-desk>.mz-mid{order:1}.mz-shelf.l{order:2}.mz-shelf.r{order:3}
-.mz-shelf{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:center;gap:16px;padding-top:0}
+.mz-shelf{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:flex-start;gap:16px;padding-top:0;max-width:954px;margin:0 auto;width:100%}
 .mz-shelf .mz-slot{flex:0 0 178px;width:178px}
 .mz-slot{position:relative;display:block;width:100%;padding:0;border:0;background:none;color:inherit;font:inherit;text-align:left;cursor:pointer;transition:transform .2s ease}
 .mz-slot .slab{display:block;padding:4px 4px 6px;border-radius:6px;background:linear-gradient(135deg,rgba(255,255,255,.30),rgba(255,255,255,.07) 38%,rgba(255,255,255,.04) 62%,rgba(255,255,255,.20));
   border:1px solid rgba(255,255,255,.5);box-shadow:inset 0 0 0 2px rgba(255,255,255,.08),inset 0 1px 0 rgba(255,255,255,.6),0 10px 20px rgba(0,0,0,.5)}
-.mz-slot .lbl{display:block;margin-bottom:3px;padding:1px 3px;font-size:8px;background:#f6f4ee;border:1px solid #c8102e;border-radius:2px;text-align:center;font-family:var(--f-mono);text-transform:uppercase;line-height:1.25;color:#12162b;overflow:hidden;white-space:nowrap}
-.mz-slot .lbl b{display:inline;font-size:8px;letter-spacing:.06em;font-weight:700}
-.mz-slot .lbl i{display:inline;margin-left:.6em;font-style:normal;font-size:8px;letter-spacing:.04em;color:#c8102e;overflow:hidden;text-overflow:ellipsis}
+.mz-slot .lbl{display:block;margin-bottom:3px;padding:7.5px 3px;font-size:9px;background:#f6f4ee;border:1px solid #c8102e;border-radius:2px;text-align:center;font-family:var(--f-mono);text-transform:uppercase;line-height:1.25;color:#12162b;overflow:hidden;white-space:nowrap}
+.mz-slot .lbl b{display:inline;font-size:9px;letter-spacing:.06em;font-weight:700}
+.mz-slot .lbl i{display:inline;margin-left:.6em;font-style:normal;font-size:9px;letter-spacing:.04em;color:#c8102e;overflow:hidden;text-overflow:ellipsis}
 .mz-slot .cv{display:block;min-width:168px;border-radius:0;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.35)}
 .mz-slot .mz-page{pointer-events:none}
 .mz-slot .mz-cover .mast .ho{display:none}
@@ -496,8 +496,10 @@ CSS = r'''
 .mz-home{display:block;margin:0 auto 10px;font:inherit;font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#12162b;background:#ffd23f;border:0;border-radius:999px;padding:8px 14px;cursor:pointer}
 .mz-home[hidden]{display:none}
 @media (max-width:759px){.mz-desk{grid-template-columns:minmax(0,1fr);padding:0}
-  .mz-shelf{flex-direction:row;flex-wrap:nowrap;justify-content:flex-start;gap:12px;padding:14px 22px 4px;overflow-x:auto;scrollbar-width:thin}
-  .mz-slot{flex:0 0 178px}
+  .mz-shelf{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 10px;padding:14px 22px 4px;max-width:none}
+  .mz-shelf .mz-slot{width:auto;flex:none}.mz-slot.mh{display:none}
+  .mz-slot .cv{min-width:0}
+  .mz-slot .lbl{padding:4px 2px;white-space:normal;line-height:1.3}.mz-slot .lbl b,.mz-slot .lbl i{display:block;margin:0;font-size:8.5px}
   .mz-slot .tab,.mz-shelf.r .mz-slot .tab{position:static;display:block;width:auto;margin-top:4px;padding:4px 0;border-radius:4px;transform:none;writing-mode:horizontal-tb}
   .mz-desk>.mz-mid{order:1}.mz-shelf.l{order:2}.mz-shelf.r{order:3}}
 .mz-cover .tag{position:absolute;left:0;right:0;top:34.5cqw;z-index:2;text-align:center;font-family:var(--f-mono);font-size:2.3cqw;letter-spacing:.25em;text-transform:uppercase;color:#fff;text-shadow:0 .3cqw .8cqw rgba(0,0,0,.6)}

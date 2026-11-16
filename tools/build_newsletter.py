@@ -72,11 +72,14 @@ def _slot(item):
     return (f'<button type="button" class="mz-slot" data-src="mag/issue-{e(no_)}.html" data-date="{e(d.get("date", ""))}" '
             f'aria-label="Read Issue {e(no_)}, {e(d.get("date", ""))}"><span class="slab"><span class="lbl"><b>{e(tag)}</b><i>Issue {e(no_)}</i></span>'
             f'<span class="cv">{cov}</span></span></button>')
-_sl = (past + [None] * 10)[:10]
-shelf_l = '<div class="mz-shelf l" aria-label="Past issues">' + ''.join(_slot(x) for x in _sl[:5]) + '</div>'
-shelf_r = '<div class="mz-shelf r" aria-label="More past issues">' + ''.join(_slot(x) for x in _sl[5:]) + '</div>'
-mz_html = (f'<div class="mz-desk">{shelf_l}<div class="mz-mid"><button type="button" class="mz-home" id="mzHome" hidden>↩ This week\'s issue</button>'
-           + mz_html + f'</div>{shelf_r}</div>')
+_sl = (sorted(past, key=lambda x: int(x[0]))[-10:] + [None] * 10)[:10]   # oldest first: Vol.1 at the top left, then to the right (Nov 16)
+# one shelf under the magazine (Nov 16): 5 per row on desktop, 3 per row on phones; phones hide the empty
+# slots after the last full row of 3 (class "mh")
+_n = sum(1 for x in _sl if x); _keep = max(3, -(-_n // 3) * 3)
+shelf = ('<div class="mz-shelf" aria-label="Past issues">'
+         + ''.join(_slot(x).replace('class="mz-slot empty"', 'class="mz-slot empty mh"', 1) if (not x and k >= _keep) else _slot(x) for k, x in enumerate(_sl)) + '</div>')
+mz_html = (f'<div class="mz-desk"><div class="mz-mid"><button type="button" class="mz-home" id="mzHome" hidden>↩ This week\'s issue</button>'
+           + mz_html + f'</div>{shelf}</div>')
 issue_html = f"""  <section class="wrap nli" aria-labelledby="nli-h">
     <div class="sheet-head">
       <div class="sheet-title">
