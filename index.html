@@ -97,12 +97,12 @@ main,body>footer,body>header{overflow-x:clip}
 /* die-cut window showing a sleeved card */
 .window{position:relative;z-index:3;justify-self:center;width:min(100%,280px);aspect-ratio:63/88;border-radius:14px;padding:0;
   background:none;box-shadow:0 16px 34px rgba(0,0,0,.35)}
-/* top card edge: running yellow gradient light (Nov 16) */
+/* top card edge: running gold gradient light (Nov 16) */
 @property --ra{syntax:'<angle>';inherits:false;initial-value:0deg}
 .window>.runlight{position:absolute;inset:-1px;border-radius:15px;z-index:5;pointer-events:none;
-  filter:drop-shadow(0 0 3px rgba(255,210,63,.95)) drop-shadow(0 0 9px rgba(255,190,40,.6))}
+  filter:drop-shadow(0 0 3px rgba(230,175,50,.95)) drop-shadow(0 0 9px rgba(200,140,30,.6))}
 .window>.runlight::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:2px;
-  background:conic-gradient(from var(--ra),rgba(233,196,106,.45) 0deg,rgba(233,196,106,.45) 40deg,#ffb81f 95deg,#ffe36a 140deg,#fffbe0 165deg,#ffd23f 175deg,rgba(233,196,106,.45) 200deg,rgba(233,196,106,.45) 220deg,#ffb81f 275deg,#ffe36a 320deg,#fffbe0 345deg,#ffd23f 355deg,rgba(233,196,106,.45) 360deg);
+  background:conic-gradient(from var(--ra),#7a5a1e 0deg,#8c6a24 40deg,#b8862b 95deg,#e2b04a 140deg,#fbe7a1 165deg,#d4a537 175deg,#8c6a24 200deg,#7a5a1e 220deg,#b8862b 275deg,#e2b04a 320deg,#fbe7a1 345deg,#d4a537 355deg,#7a5a1e 360deg);
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
   mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);
   animation:runlight 3.2s linear infinite}
