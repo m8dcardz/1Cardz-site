@@ -94,7 +94,17 @@ main,body>footer,body>header{overflow-x:clip}
 /* die-cut window showing a sleeved card */
 .window{position:relative;z-index:3;justify-self:center;width:min(100%,280px);aspect-ratio:63/88;border-radius:14px;padding:0;
   background:none;box-shadow:0 16px 34px rgba(0,0,0,.35)}
-.window::after{content:"";position:absolute;inset:0;border-radius:14px;box-shadow:0 0 0 1px rgba(233,196,106,.7);z-index:5;pointer-events:none}
+/* top card edge: running yellow gradient light (Nov 16) */
+@property --ra{syntax:'<angle>';inherits:false;initial-value:0deg}
+.window>.runlight{position:absolute;inset:-1px;border-radius:15px;z-index:5;pointer-events:none;
+  filter:drop-shadow(0 0 3px rgba(255,210,63,.95)) drop-shadow(0 0 9px rgba(255,190,40,.6))}
+.window>.runlight::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:2px;
+  background:conic-gradient(from var(--ra),rgba(233,196,106,.45) 0deg,rgba(233,196,106,.45) 40deg,#ffb81f 95deg,#ffe36a 140deg,#fffbe0 165deg,#ffd23f 175deg,rgba(233,196,106,.45) 200deg,rgba(233,196,106,.45) 220deg,#ffb81f 275deg,#ffe36a 320deg,#fffbe0 345deg,#ffd23f 355deg,rgba(233,196,106,.45) 360deg);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);
+  animation:runlight 3.2s linear infinite}
+@keyframes runlight{to{--ra:360deg}}
+@media (prefers-reduced-motion: reduce){.window>.runlight::before{animation:none}}
 .window .back{width:100%;height:100%;border-radius:14px;background:url(img/card.webp) center/cover;position:relative;overflow:hidden;
   box-shadow:none}
 .window .back::after{content:"";position:absolute;inset:-50%;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.35) 50%,transparent 60%);animation:glint 5s ease-in-out infinite}
@@ -310,6 +320,9 @@ body>footer{padding-block:clamp(70px,10vw,120px) 48px}
 .hl-src{color:#8c93ad}
 .hl-watch{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;color:#18203f;border:0;border-radius:6px;padding:9px 14px;
   background:linear-gradient(180deg,#fbe7a6,var(--foil));box-shadow:0 2px 0 var(--foil-2)}
+.hl-read{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:#7cf3ff;border-radius:6px;padding:8px 13px;
+  box-shadow:inset 0 0 0 1px rgba(124,243,255,.6);background:rgba(124,243,255,.06);display:inline-flex;align-items:center;gap:6px}
+.hl-read:hover,.hl-read:focus-visible{background:rgba(124,243,255,.16);color:#fff}
 .hl-shot{position:relative;aspect-ratio:9/16;max-width:100%;border-radius:12px;overflow:hidden;
   box-shadow:0 0 0 1px rgba(255,255,255,.25),0 18px 36px rgba(0,0,0,.5),0 0 30px rgba(124,243,255,.15)}
 .hl-shot img{width:100%;height:100%;object-fit:cover}
@@ -1081,7 +1094,6 @@ body>header .cover .top-cover{z-index:0}
 .mb-admin button.hide{background:#ff3b5c;color:#fff}
 @media (max-width:760px){.board li{grid-template-columns:4.3em 4.3em minmax(0,1fr) 2.4em}}
 </style>
-<script id="gc-js" data-goatcounter="https://1cardz-news.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <!--seo-->
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <meta name="theme-color" content="#0b1030">
@@ -1104,6 +1116,7 @@ body>header .cover .top-cover{z-index:0}
 <meta name="twitter:image" content="https://1cardz.news/img/og-1cardz.jpg">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "NewsMediaOrganization", "@id": "https://1cardz.news/#org", "name": "1Cardz.news", "url": "https://1cardz.news/", "logo": {"@type": "ImageObject", "url": "https://1cardz.news/img/icon-512.png", "width": 512, "height": 512}, "sameAs": ["https://www.instagram.com/1cardzcom/", "https://www.youtube.com/@1Cardzcom", "https://www.tiktok.com/@1cardz.com"]}, {"@type": "WebPage", "name": "TCG Fan Message Board | 1Cardz.news", "description": "The 1Cardz.news arcade hall of fame: trading card fans post their best pulls, hot takes and shout-outs to Zia and Luna.", "url": "https://1cardz.news/board.html", "isPartOf": {"@type": "WebSite", "name": "1Cardz.news", "url": "https://1cardz.news/"}, "publisher": {"@type": "NewsMediaOrganization", "@id": "https://1cardz.news/#org", "name": "1Cardz.news", "url": "https://1cardz.news/", "logo": {"@type": "ImageObject", "url": "https://1cardz.news/img/icon-512.png", "width": 512, "height": 512}, "sameAs": ["https://www.instagram.com/1cardzcom/", "https://www.youtube.com/@1Cardzcom", "https://www.tiktok.com/@1cardz.com"]}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://1cardz.news/"}, {"@type": "ListItem", "position": 2, "name": "TCG Fan Message Board", "item": "https://1cardz.news/board.html"}]}]}</script>
 <!--/seo-->
+<script id="gc-js" data-goatcounter="https://1cardz-news.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
 <header class="wrap cover-zone">
@@ -1124,7 +1137,7 @@ body>header .cover .top-cover{z-index:0}
       </div>
     </div>
     <div class="window holo" id="coverWin">
-      <div class="fan fan1" aria-hidden="true"></div><div class="fan fan2" aria-hidden="true"></div>
+      <div class="fan fan1" aria-hidden="true"></div><div class="fan fan2" aria-hidden="true"></div><div class="runlight" aria-hidden="true"></div>
       <div class="coverflip" id="coverCard" role="button" tabindex="0" aria-pressed="false" data-face="back" aria-label="Tap to flip and see which host is up next">
         <div class="cside back-side">
           <div class="back"></div><video class="globe" src="img/globe.mp4" poster="img/globe-poster.jpg" autoplay muted loop playsinline aria-hidden="true"></video>
