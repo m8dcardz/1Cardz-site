@@ -821,6 +821,9 @@ body>footer .cover .copy>.mono{color:#fff !important;text-shadow:0 1px 3px rgba(
 /* cards: no footer text; Fresh Hits cards 1-3 holo 15% lighter */
 .tcg .face .foot,.coverflip .face .foot{display:none !important}
 .pockets>.pocket:nth-child(-n+3) .holo .shine,.pockets>.pocket:nth-child(-n+3) .tcg.holo>.shine{opacity:calc(.051 + var(--o) * .425)}
+/* Zia + Luna cards (pockets 1-2): holo at half that strength (Nov 17) */
+.pockets>.pocket:nth-child(-n+2) .holo .shine,.pockets>.pocket:nth-child(-n+2) .tcg.holo>.shine{opacity:calc(.0255 + var(--o) * .2125)}
+.pockets>.pocket:nth-child(-n+2) .glare{background:radial-gradient(circle at var(--mx) var(--my),rgba(255,255,255,calc(.04 + var(--o) * .225)),transparent 55%)}
 /* no caption line under the card pages */
 .sheet-foot{display:none !important}
 /* Shuffle Machine (was Hit The Holo) game box (5:1, under the top binder) */
