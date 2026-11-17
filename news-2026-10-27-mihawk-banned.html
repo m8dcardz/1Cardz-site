@@ -1333,7 +1333,7 @@ body>header .cover .top-cover{z-index:0}
     tiles.forEach(t=>{const ok=g==='all'||t.dataset.game===g;t.hidden=!ok});count()}));
   /* count and date range of the boxes actually showing (35 on desktop, 25 on phones) */
   const rng=document.getElementById('newsRange'),M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  function count(){const v=tiles.filter(t=>t.offsetParent);cnt.textContent=v.length+(v.length===1?' story':' stories');
+  function count(){if(!cnt)return;const v=tiles.filter(t=>t.offsetParent);cnt.textContent=v.length+(v.length===1?' story':' stories');
     const d=v.map(t=>t.querySelector('time').getAttribute('datetime').slice(0,10)).sort();if(rng&&d.length){const a=d[0].split('-'),b=d[d.length-1].split('-');
       rng.textContent=M[+a[1]-1]+' '+(+a[2])+' – '+M[+b[1]-1]+' '+(+b[2])+', '+b[0]}}
   count();addEventListener('resize',count);
