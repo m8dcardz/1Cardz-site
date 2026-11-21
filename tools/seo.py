@@ -199,6 +199,14 @@ def main():
     for f in sorted(ROOT.glob('news-2*.html'), reverse=True):   # any older story page still on the site
         if f.name not in seen:
             urls += f'  <url><loc>{SITE}{f.name}</loc><lastmod>{f.name[5:15]}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>\n'
+    # evergreen guides (Nov 21, 2026): tools/guides.json, pages built by build_news.py
+    try:
+        for g in json.loads((ROOT / 'tools' / 'guides.json').read_text()):
+            if (ROOT / g['slug']).exists():
+                gi = f'<image:image><image:loc>{SITE}{g["image"]}</image:loc></image:image>' if g.get('image') else ''
+                urls += f'  <url><loc>{SITE}{g["slug"]}</loc><lastmod>{g["updated"][:10]}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority>{gi}</url>\n'
+    except Exception:
+        pass
     sm = ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
           'xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">\n' + urls + '</urlset>\n')
     old = (ROOT / 'sitemap.xml').read_text() if (ROOT / 'sitemap.xml').exists() else ''

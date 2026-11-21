@@ -105,6 +105,36 @@ extra_css = '''<style>
 @media (max-width:560px){.news-grid{grid-template-columns:1fr;gap:10px;padding:12px}.news-tile .t-head{font-size:20px}}
 </style>'''
 
+# ---------- Guides (evergreen articles, Nov 21, 2026): tools/guides.json + tools/<fragment> ----------
+try:
+    guides = sorted(json.loads((root/'tools'/'guides.json').read_text()), key=lambda g: g['published'], reverse=True)
+except Exception:
+    guides = []
+guide_css = """<style>
+.guides{margin-top:clamp(22px,3vw,34px)}
+.guides h2{font-family:var(--f-display);font-weight:800;font-stretch:80%;text-transform:uppercase;font-size:clamp(26px,3vw,36px);color:#fff;margin:0 0 18px}
+.guides ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.guides li a{display:block;height:100%;border-radius:12px;padding:16px 18px;text-decoration:none;color:#fff;background:linear-gradient(160deg,rgba(233,196,106,.16),rgba(255,255,255,.03));box-shadow:inset 0 0 0 1px rgba(233,196,106,.45)}
+.guides li a:hover{box-shadow:inset 0 0 0 1px rgba(233,196,106,.9)}
+.guides li .g{display:block;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--foil);margin-bottom:6px}
+.guides li b{font-family:var(--f-display);font-weight:700;font-stretch:88%;font-size:20px;line-height:1.15}
+.guide .body h2{font-family:var(--f-display);font-weight:800;font-stretch:88%;font-size:clamp(24px,2.6vw,32px);color:var(--foil);margin:34px 0 12px;line-height:1.1}
+.guide .body h3{font-family:var(--f-display);font-weight:700;font-size:21px;color:#fff;margin:24px 0 8px}
+.guide .body strong{color:#fff}
+.guide-fig{margin:22px 0;max-width:100%}.guide-fig svg{display:block;width:100%;height:auto;border-radius:16px;box-shadow:0 0 0 1px rgba(124,243,255,.25),0 18px 40px rgba(0,0,0,.4)}
+.guide-hero{margin:0 0 26px}
+.guide-table{overflow-x:auto;margin:6px 0 18px;border-radius:12px;box-shadow:inset 0 0 0 1px rgba(124,243,255,.28);background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02))}
+.guide-table table{width:100%;border-collapse:collapse;font-size:15px}
+.guide-table th{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#7cf3ff;text-align:left;padding:10px 14px}
+.guide-table td{color:#fff;padding:9px 14px;border-top:1px solid rgba(255,255,255,.08)}
+.guide .story-card{grid-template-columns:minmax(0,1fr)}.guide .body{max-width:72ch}
+</style>"""
+extra_css = extra_css + '\n' + guide_css
+guides_strip = ''
+if guides:
+    guides_strip = ('<section class="wrap guides" aria-labelledby="guides-h"><h2 id="guides-h">Guides</h2><ul>' +
+        ''.join(f'<li><a href="{e(g["slug"])}"><span class="g">{e(g["game"])} · Guide</span><b>{e(g["title"])}</b></a></li>' for g in guides) +
+        '</ul></section>')
 header = header + '\n\n' + site_parts.navbar(src, 'news.html')
 footer = site_parts.newsletter_section(src) + '\n' + footer + '\n\n' + site_parts.newsletter_script(src)
 body = f'''{header}
@@ -129,6 +159,7 @@ body = f'''{header}
       </ol>
     </div>
   </section>
+  {guides_strip}
 </main>
 
 {footer}
@@ -328,6 +359,85 @@ if (root/'.git').exists() and made:
     try:
         import subprocess
         subprocess.run(['git', 'add', '--'] + made, cwd=root, timeout=60)
+    except Exception as _e:
+        print('git add skipped:', _e)
+
+# ---------- one page per guide (Nov 21, 2026) ----------
+g_made = []
+for g in guides:
+    frag_p = root/'tools'/g['fragment']
+    if not frag_p.exists():
+        continue
+    url = g['slug']; title = g['title']; desc = g.get('description') or g['summary']
+    img = SITE + g['image'] if g.get('image') else SITE + 'img/og-1cardz.jpg'
+    c = GC.get(g['game'], '#7cf3ff')
+    upd = datetime.datetime.fromisoformat(g['updated'])
+    more_html = ''.join(f'<li><a href="{story_url(m)}"><span class="g">{e(m["game"])} · {when(m["when"])}</span><b>{e(m["title"])}</b></a></li>'
+                        for m in [m for m in news if m['game'] == g['game']][:6] or news[:6])
+    article = f"""
+<main>
+  <section class="wrap story guide">
+    <p class="crumbs"><a href="index.html">Home</a> › <a href="news.html">Headlines</a> › Guides</p>
+    <article class="gd" style="--c:{c}">
+      <div class="story-card noclip">
+        <div>
+          <p class="story-kicker"><span class="mw-game">{e(g['game'])}</span><span>Guide</span><time datetime="{iso(g['updated'])}">Updated {upd.strftime('%B')} {upd.day}, {upd.year}</time></p>
+          <h1>{e(title)}</h1>
+          <p class="lead">{e(g['summary'])}</p>
+          <div class="body">{frag_p.read_text()}</div>
+          <p class="src">Source: {e(g['source'])}</p>
+          <div class="actions"><a class="btn" href="news.html">All headlines</a><a class="btn ghost" href="archive.html">Watch the clips</a></div>
+        </div>
+      </div>
+    </article>
+    <div class="more">
+      <h2>More {e(g['game'])} news</h2>
+      <ul>{more_html}</ul>
+    </div>
+  </section>
+</main>
+"""
+    ld = {'@context': 'https://schema.org', '@type': 'Article', 'headline': title[:110], 'description': desc,
+          'datePublished': iso(g['published']), 'dateModified': iso(g['updated']), 'image': [img], 'url': SITE + url,
+          'mainEntityOfPage': SITE + url, 'articleSection': g['game'],
+          'author': {'@type': 'Organization', 'name': '1Cardz.news', 'url': SITE},
+          'publisher': {'@type': 'NewsMediaOrganization', 'name': '1Cardz.news', 'url': SITE,
+                        'logo': {'@type': 'ImageObject', 'url': SITE + 'img/icon-512.png', 'width': 512, 'height': 512}}}
+    crumbs = {'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
+        {'@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': SITE},
+        {'@type': 'ListItem', 'position': 2, 'name': 'Headlines', 'item': SITE + 'news.html'},
+        {'@type': 'ListItem', 'position': 3, 'name': title, 'item': SITE + url}]}
+    q = lambda t: html.escape(t, quote=True)
+    seo = '\n'.join([
+        '<!--seo-->',
+        '<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">',
+        '<meta name="theme-color" content="#0b1030">',
+        '<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">',
+        '<link rel="icon" type="image/png" sizes="192x192" href="img/icon-192.png">',
+        '<link rel="apple-touch-icon" href="img/apple-touch-icon.png">',
+        '<meta property="og:type" content="article">', '<meta property="og:site_name" content="1Cardz.news">',
+        f'<meta property="og:title" content="{q(title)}">', f'<meta property="og:description" content="{q(desc)}">',
+        f'<meta property="og:url" content="{SITE + url}">', f'<meta property="og:image" content="{img}">',
+        f'<meta property="article:published_time" content="{iso(g["published"])}">', f'<meta property="article:modified_time" content="{iso(g["updated"])}">',
+        f'<meta property="article:section" content="{q(g["game"])}">',
+        '<meta name="twitter:card" content="summary_large_image">', f'<meta name="twitter:title" content="{q(title)}">',
+        f'<meta name="twitter:description" content="{q(desc)}">', f'<meta name="twitter:image" content="{img}">',
+        '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace('</', '<\\/') + '</script>',
+        '<script type="application/ld+json">' + json.dumps(crumbs, ensure_ascii=False).replace('</', '<\\/') + '</script>',
+        '<!--/seo-->'])
+    shead = re.sub(r'<title>.*?</title>', lambda m: f'<title>{q(title)} | 1Cardz.news</title>', head)
+    shead = shead.replace('href="https://1cardz.news/news.html"', f'href="{SITE + url}"')
+    shead = re.sub(r'<meta name="description"[^>]*>', lambda m: f'<meta name="description" content="{q(desc)}">', shead)
+    page = ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
+            '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
+            + shead + style + '\n' + extra_css + '\n' + story_css + '\n' + seo + '\n</head>\n<body>\n'
+            + s_header + '\n' + article + '\n' + footer + '\n' + scrolltop + '\n' + js + '\n</body>\n</html>\n')
+    (root/url).write_text(page); g_made.append(url)
+print(len(g_made), 'guide pages')
+if (root/'.git').exists() and g_made:
+    try:
+        import subprocess
+        subprocess.run(['git', 'add', '--'] + g_made, cwd=root, timeout=60)
     except Exception as _e:
         print('git add skipped:', _e)
 
