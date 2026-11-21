@@ -1082,6 +1082,23 @@ body>header .cover .top-cover{z-index:0}
 .guide-table th{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#7cf3ff;text-align:left;padding:10px 14px}
 .guide-table td{color:#fff;padding:9px 14px;border-top:1px solid rgba(255,255,255,.08)}
 .guide .story-card{grid-template-columns:minmax(0,1fr)}.guide .body{max-width:72ch}
+.story.guide .body{max-width:920px}
+.story.guide .body>p,.story.guide .body>h2,.story.guide .body>h3{max-width:68ch}
+.guide-products{list-style:none;margin:18px 0 22px;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}
+.guide-products.six{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+.guide-products.two{grid-template-columns:repeat(auto-fill,minmax(220px,280px))}
+.guide-products li{display:flex;flex-direction:column;gap:4px;border-radius:14px;padding:10px 10px 14px;background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.02));box-shadow:inset 0 0 0 1px rgba(124,243,255,.22)}
+.guide-products figure{margin:0 0 6px;aspect-ratio:1/1;display:grid;place-items:center;border-radius:10px;background:radial-gradient(circle at 50% 45%,rgba(124,243,255,.12),transparent 70%)}
+.guide-products img{width:100%;height:auto;display:block;filter:drop-shadow(0 10px 18px rgba(0,0,0,.5))}
+.guide-products b{font-family:var(--f-display);font-weight:700;font-stretch:88%;font-size:17px;line-height:1.15;color:#fff}
+.guide-products span{font-size:13px;line-height:1.4;color:#c9cfe4}
+.guide-leaders{display:flex;flex-wrap:wrap;gap:18px;margin:16px 0 24px}
+.guide-leaders figure{margin:0;flex:1 1 200px;max-width:260px}
+.guide-leaders img{width:100%;height:auto;display:block;border-radius:12px;box-shadow:0 0 0 1px rgba(233,196,106,.6),0 18px 36px rgba(0,0,0,.5)}
+.guide-leaders figcaption,.guide-photo figcaption{margin-top:8px;font-size:13px;color:#c9cfe4}
+.guide-photo{margin:14px 0 18px;max-width:560px}.guide-photo img{width:100%;height:auto;display:block;border-radius:14px;background:radial-gradient(circle at 50% 40%,rgba(124,243,255,.14),rgba(255,255,255,.02) 70%)}
+.guide-credit{font-size:12.5px;color:#8c93ad;margin-top:26px;max-width:68ch}
+.story.guide .body>p.guide-credit{font-size:12.5px;line-height:1.5;color:#8c93ad}
 </style>
 <style>
 .guides-grid{list-style:none;margin:0;padding:clamp(14px,2vw,22px);display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;position:relative;z-index:4}
@@ -1094,6 +1111,7 @@ body>header .cover .top-cover{z-index:0}
 .guides-grid .s{color:#cfd4e6;font-size:15px;line-height:1.5}
 .guides-grid .r{margin-top:auto;font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--foil)}
 </style>
+<script id="gc-js" data-goatcounter="https://1cardz-news.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <!--seo-->
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <meta name="theme-color" content="#0b1030">
@@ -1116,7 +1134,6 @@ body>header .cover .top-cover{z-index:0}
 <meta name="twitter:image" content="https://1cardz.news/img/og-1cardz.jpg">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "NewsMediaOrganization", "@id": "https://1cardz.news/#org", "name": "1Cardz.news", "url": "https://1cardz.news/", "logo": {"@type": "ImageObject", "url": "https://1cardz.news/img/icon-512.png", "width": 512, "height": 512}, "sameAs": ["https://www.instagram.com/1cardzcom/", "https://www.youtube.com/@1Cardzcom", "https://www.tiktok.com/@1cardz.com"]}, {"@type": "WebPage", "name": "TCG Guides: Starter Decks, Sets & Cards | 1Cardz.news", "description": "Trading card game guides from 1Cardz.news: starter decks, sets and the cards everyone searches for, kept up to date.", "url": "https://1cardz.news/guides.html", "isPartOf": {"@type": "WebSite", "name": "1Cardz.news", "url": "https://1cardz.news/"}, "publisher": {"@type": "NewsMediaOrganization", "@id": "https://1cardz.news/#org", "name": "1Cardz.news", "url": "https://1cardz.news/", "logo": {"@type": "ImageObject", "url": "https://1cardz.news/img/icon-512.png", "width": 512, "height": 512}, "sameAs": ["https://www.instagram.com/1cardzcom/", "https://www.youtube.com/@1Cardzcom", "https://www.tiktok.com/@1cardz.com"]}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://1cardz.news/"}, {"@type": "ListItem", "position": 2, "name": "TCG Guides: Starter Decks, Sets & Cards", "item": "https://1cardz.news/guides.html"}]}]}</script>
 <!--/seo-->
-<script id="gc-js" data-goatcounter="https://1cardz-news.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
 <header class="wrap cover-zone">
@@ -1242,9 +1259,11 @@ body>header .cover .top-cover{z-index:0}
     <div class="gd">
       <div class="mw-top">
         <span class="mono mw-label" style="color:#e9c46a"><i style="background:#e9c46a;box-shadow:0 0 10px #e9c46a"></i><span>Guides</span></span>
-        <span class="mono news-count">1 guide</span>
+        <span class="mono news-count">3 guides</span>
       </div>
       <ol class="guides-grid">
+<li><a href="guide-most-expensive-pokemon-cards.html"><img src="img/guide-most-expensive-pokemon-cards.png" alt="" loading="lazy" width="1200" height="520"><span class="g">Pokémon · Guide · Updated Nov 22, 2026</span><b>Most Expensive Pokémon Cards Ever Sold: The Top 10 Sales and the Rarest Cards</b><span class="s">A PSA 10 Pikachu Illustrator sold for $16.49 million in February 2026, a world record for any trading card. Here are the ten biggest Pokémon card sales, the rare prize cards behind them, and what makes a Pokémon card worth millions.</span><span class="r">Read the guide ›</span></a></li>
+<li><a href="guide-black-lotus-the-one-ring-mtg.html"><img src="img/guide-black-lotus-the-one-ring.png" alt="" loading="lazy" width="1200" height="520"><span class="g">Magic · Guide · Updated Nov 22, 2026</span><b>Black Lotus and The One Ring: Magic&#x27;s Most Expensive Cards Explained</b><span class="s">An Alpha Black Lotus sold for $3 million in 2024 and Post Malone paid a reported $2 million for the only One Ring 001/001. Here&#x27;s what these Magic: The Gathering cards are, their record sales, and why they cost so much.</span><span class="r">Read the guide ›</span></a></li>
 <li><a href="guide-one-piece-card-game-starter-decks.html"><img src="img/guide-one-piece-starter-decks.png" alt="" loading="lazy" width="1200" height="520"><span class="g">One Piece · Guide · Updated Nov 21, 2026</span><b>One Piece Card Game Starter Decks: Every Deck and Which to Start With</b><span class="s">There are now 38 One Piece Card Game starter decks, from ST-01 Straw Hat Crew in 2022 to two Alabasta decks landing December 18, 2026. Here&#x27;s what a starter deck is, every deck in order, and the best place to begin today.</span><span class="r">Read the guide ›</span></a></li>
       </ol>
     </div>

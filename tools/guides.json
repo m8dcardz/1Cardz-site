@@ -10,5 +10,29 @@
   "updated": "2026-11-21T22:00",
   "source": "ONE PIECE CARD GAME (official), product pages and Development Team letter, January 9, 2026. Prices are US MSRPs; store prices vary.",
   "image": "img/guide-one-piece-starter-decks.png"
+ },
+ {
+  "slug": "guide-most-expensive-pokemon-cards.html",
+  "fragment": "guide-most-expensive-pokemon-cards.frag.html",
+  "title": "Most Expensive Pokémon Cards Ever Sold: The Top 10 Sales and the Rarest Cards",
+  "summary": "A PSA 10 Pikachu Illustrator sold for $16.49 million in February 2026, a world record for any trading card. Here are the ten biggest Pokémon card sales, the rare prize cards behind them, and what makes a Pokémon card worth millions.",
+  "description": "The most expensive Pokémon cards ever sold, from the $16.49M Pikachu Illustrator to Trophy Pikachu and Charizard, plus the rarest Pokémon cards and why they cost so much.",
+  "game": "Pokémon",
+  "published": "2026-11-22T01:10",
+  "updated": "2026-11-22T01:10",
+  "source": "Public sale results incl. buyer's premium: Guinness World Records, Goldin, Heritage, Fanatics Collect via ICv2, SI Collectibles, Kotaku. Checked Nov 22, 2026.",
+  "image": "img/guide-most-expensive-pokemon-cards.png"
+ },
+ {
+  "slug": "guide-black-lotus-the-one-ring-mtg.html",
+  "fragment": "guide-black-lotus-the-one-ring-mtg.frag.html",
+  "title": "Black Lotus and The One Ring: Magic's Most Expensive Cards Explained",
+  "summary": "An Alpha Black Lotus sold for $3 million in 2024 and Post Malone paid a reported $2 million for the only One Ring 001/001. Here's what these Magic: The Gathering cards are, their record sales, and why they cost so much.",
+  "description": "Black Lotus MTG and The One Ring explained: what the cards are, every record sale from $27K to $3M, how many exist, and why Magic: The Gathering collectors pay millions.",
+  "game": "Magic",
+  "published": "2026-11-22T01:10",
+  "updated": "2026-11-22T01:10",
+  "source": "Guinness World Records, CGC Cards, Goldin via ICv2, Star City Games, Polygon. Card images © Wizards of the Coast via Scryfall. Checked Nov 22, 2026.",
+  "image": "img/guide-black-lotus-the-one-ring.png"
  }
 ]
