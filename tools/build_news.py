@@ -300,7 +300,7 @@ for k, (n, p) in enumerate(site_parts.story_items(news, list(posts.values()))):
     art_html = ''.join(f'<p>{e(t)}</p>' for t in art)
     if art:
         art_html = f'<div class="body">{art_html}</div>'
-        details_html = ''   # the full article replaces the short fact list
+        # Nov 22, 2026 (user): every story page keeps the "The details" box (facts + why it matters), article or not
     specs = [r for r in (n.get('specs') or []) if isinstance(r, (list, tuple)) and len(r) == 2]
     specs_html = ''
     if specs:

@@ -2,7 +2,8 @@
 """Merge queued stories into tools/news.json.
 Usage: python3 tools/add_news.py <queue.json>
 The queue is a JSON array of {"when","game","title","summary","source","published"},
-plus an optional "details": {"facts": [3-5 short lines], "why": "one line", "url": "source article"},
+plus "details": {"facts": [3-5 short lines], "why": "one line", "url": "source article"} (Nov 22, 2026: every story page shows
+the "The details" box under the article, so always include it),
 and (Nov 16, 2026) optional "article": [3-4 paragraphs, 150-250 words], "specs": [[label, value], ...] and "links": [source URLs].
 Entries with published:true are ignored; entries whose "when" already exists in news.json are skipped.
 Prints the titles it added (one per line) and nothing else."""
