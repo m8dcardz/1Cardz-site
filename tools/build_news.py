@@ -130,11 +130,7 @@ guide_css = """<style>
 .guide .story-card{grid-template-columns:minmax(0,1fr)}.guide .body{max-width:72ch}
 </style>"""
 extra_css = extra_css + '\n' + guide_css
-guides_strip = ''
-if guides:
-    guides_strip = ('<section class="wrap guides" aria-labelledby="guides-h"><h2 id="guides-h">Guides</h2><ul>' +
-        ''.join(f'<li><a href="{e(g["slug"])}"><span class="g">{e(g["game"])} · Guide</span><b>{e(g["title"])}</b></a></li>' for g in guides) +
-        '</ul></section>')
+guides_strip = ''   # guides moved to their own page, guides.html (nav button "Guides", Nov 22, 2026)
 header = header + '\n\n' + site_parts.navbar(src, 'news.html')
 footer = site_parts.newsletter_section(src) + '\n' + footer + '\n\n' + site_parts.newsletter_script(src)
 body = f'''{header}
@@ -362,8 +358,11 @@ if (root/'.git').exists() and made:
     except Exception as _e:
         print('git add skipped:', _e)
 
-# ---------- one page per guide (Nov 21, 2026) ----------
+# ---------- one page per guide (Nov 21, 2026) + the Guides page, guides.html (Nov 22, 2026) ----------
 g_made = []
+_ni = '<p>News Headlines. Every story from the 8 AM and 8 PM drops, newest first, in plain text.</p>'
+_gi = '<p>Guides. Evergreen explainers for collectors and players, kept up to date.</p>'
+g_header = s_header.replace(site_parts.navbar(src, 'news.html'), site_parts.navbar(src, 'guides.html')).replace(_ni, _gi)
 for g in guides:
     frag_p = root/'tools'/g['fragment']
     if not frag_p.exists():
@@ -377,7 +376,7 @@ for g in guides:
     article = f"""
 <main>
   <section class="wrap story guide">
-    <p class="crumbs"><a href="index.html">Home</a> › <a href="news.html">Headlines</a> › Guides</p>
+    <p class="crumbs"><a href="index.html">Home</a> › <a href="guides.html">Guides</a> › {e(g["game"])}</p>
     <article class="gd" style="--c:{c}">
       <div class="story-card noclip">
         <div>
@@ -386,7 +385,7 @@ for g in guides:
           <p class="lead">{e(g['summary'])}</p>
           <div class="body">{frag_p.read_text()}</div>
           <p class="src">Source: {e(g['source'])}</p>
-          <div class="actions"><a class="btn" href="news.html">All headlines</a><a class="btn ghost" href="archive.html">Watch the clips</a></div>
+          <div class="actions"><a class="btn" href="guides.html">All guides</a><a class="btn ghost" href="news.html">Latest headlines</a></div>
         </div>
       </div>
     </article>
@@ -405,7 +404,7 @@ for g in guides:
                         'logo': {'@type': 'ImageObject', 'url': SITE + 'img/icon-512.png', 'width': 512, 'height': 512}}}
     crumbs = {'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
         {'@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': SITE},
-        {'@type': 'ListItem', 'position': 2, 'name': 'Headlines', 'item': SITE + 'news.html'},
+        {'@type': 'ListItem', 'position': 2, 'name': 'Guides', 'item': SITE + 'guides.html'},
         {'@type': 'ListItem', 'position': 3, 'name': title, 'item': SITE + url}]}
     q = lambda t: html.escape(t, quote=True)
     seo = '\n'.join([
@@ -431,9 +430,62 @@ for g in guides:
     page = ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
             '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
             + shead + style + '\n' + extra_css + '\n' + story_css + '\n' + seo + '\n</head>\n<body>\n'
-            + s_header + '\n' + article + '\n' + footer + '\n' + scrolltop + '\n' + js + '\n</body>\n</html>\n')
+            + g_header + '\n' + article + '\n' + footer + '\n' + scrolltop + '\n' + js + '\n</body>\n</html>\n')
     (root/url).write_text(page); g_made.append(url)
-print(len(g_made), 'guide pages')
+# the Guides page (guides.html): every guide, newest first
+def _gd(g):
+    d = datetime.datetime.fromisoformat(g['updated'])
+    return f"{d.strftime('%b')} {d.day}, {d.year}"
+cards = '\n'.join(
+    f'<li><a href="{e(g["slug"])}">'
+    + (f'<img src="{e(g["image"])}" alt="" loading="lazy" width="1200" height="520">' if g.get('image') else '')
+    + f'<span class="g">{e(g["game"])} · Guide · Updated {_gd(g)}</span><b>{e(g["title"])}</b>'
+    + f'<span class="s">{e(g["summary"])}</span><span class="r">Read the guide ›</span></a></li>'
+    for g in guides)
+gi_css = """<style>
+.guides-grid{list-style:none;margin:0;padding:clamp(14px,2vw,22px);display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;position:relative;z-index:4}
+.guides-grid a{display:flex;flex-direction:column;gap:8px;height:100%;border-radius:14px;padding:0 0 16px;overflow:hidden;text-decoration:none;color:#fff;background:linear-gradient(160deg,rgba(233,196,106,.14),rgba(255,255,255,.03));box-shadow:inset 0 0 0 1px rgba(233,196,106,.45),0 14px 30px rgba(0,0,0,.3);transition:transform .2s,box-shadow .2s}
+.guides-grid a:hover{transform:translateY(-3px);box-shadow:inset 0 0 0 1px rgba(233,196,106,.9),0 20px 38px rgba(0,0,0,.42)}
+.guides-grid img{display:block;width:100%;height:auto;aspect-ratio:1200/520;object-fit:cover}
+.guides-grid .g,.guides-grid b,.guides-grid .s,.guides-grid .r{padding:0 16px}
+.guides-grid .g{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--foil);margin-top:6px}
+.guides-grid b{font-family:var(--f-display);font-weight:700;font-stretch:88%;font-size:24px;line-height:1.1}
+.guides-grid .s{color:#cfd4e6;font-size:15px;line-height:1.5}
+.guides-grid .r{margin-top:auto;font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--foil)}
+</style>"""
+gi_head = re.sub(r'<title>.*?</title>', '<title>TCG Guides | 1Cardz.news</title>', head)
+gi_head = gi_head.replace('href="https://1cardz.news/news.html"', 'href="https://1cardz.news/guides.html"')
+gi_head = re.sub(r'<meta name="description"[^>]*>', '<meta name="description" content="Trading card game guides from 1Cardz.news: starter decks, sets and the cards everyone searches for, kept up to date.">', gi_head)
+gi_header = header.replace(site_parts.navbar(src, 'news.html'), site_parts.navbar(src, 'guides.html')).replace(_ni, _gi)
+gi_body = f"""{gi_header}
+
+<main>
+  <section class="wrap news" aria-labelledby="guides-h">
+    <div class="sheet-head">
+      <div class="sheet-title">
+  <h2 id="guides-h">Guides</h2>
+  <p>Evergreen explainers for collectors and players: every deck, set and card worth knowing, kept up to date.</p>
+      </div>
+    </div>
+    <div class="gd">
+      <div class="mw-top">
+        <span class="mono mw-label" style="color:#e9c46a"><i style="background:#e9c46a;box-shadow:0 0 10px #e9c46a"></i><span>Guides</span></span>
+        <span class="mono news-count">{len(guides)} guide{'' if len(guides) == 1 else 's'}</span>
+      </div>
+      <ol class="guides-grid">
+{cards}
+      </ol>
+    </div>
+  </section>
+</main>
+
+{footer}
+"""
+gi_page = ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
+           '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
+           + gi_head + style + '\n' + extra_css + '\n' + gi_css + '\n</head>\n<body>\n' + gi_body + '\n' + scrolltop + '\n' + js + '\n</body>\n</html>\n')
+(root/'guides.html').write_text(gi_page); g_made.append('guides.html')
+print(len(g_made), 'guide pages (incl. guides.html)')
 if (root/'.git').exists() and g_made:
     try:
         import subprocess

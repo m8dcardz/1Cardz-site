@@ -32,6 +32,8 @@ PAGES = {
                     'Daily trading card game market prices for booster boxes and chase singles from the newest sets across seven games, with recent price changes.'),
     'newsletter.html': ('Free Weekly TCG Newsletter | 1Cardz.news',
                         "The week in trading card game news in one free email every Sunday: top stories, release dates and Market Watch picks. Read this week's issue."),
+    'guides.html': ('TCG Guides: Starter Decks, Sets & Cards | 1Cardz.news',
+                    'Trading card game guides from 1Cardz.news: starter decks, sets and the cards everyone searches for, kept up to date.'),
     'board.html': ('TCG Fan Message Board | 1Cardz.news',
                    'The 1Cardz.news arcade hall of fame: trading card fans post their best pulls, hot takes and shout-outs to Zia and Luna.'),
 }
@@ -170,8 +172,8 @@ def main():
     today = datetime.date.today().isoformat()
     newest = lambda xs: max((x.get('when', '')[:10] for x in xs if x.get('when')), default=today)
     last = {'index.html': max(newest(posts), newest(news)), 'news.html': newest(news), 'archive.html': newest(posts),
-            'market.html': today, 'newsletter.html': today, 'board.html': today}
-    pri = {'index.html': '1.0', 'news.html': '0.9', 'archive.html': '0.9', 'market.html': '0.8', 'newsletter.html': '0.6', 'board.html': '0.5'}
+            'market.html': today, 'newsletter.html': today, 'board.html': today, 'guides.html': today}
+    pri = {'index.html': '1.0', 'news.html': '0.9', 'archive.html': '0.9', 'market.html': '0.8', 'newsletter.html': '0.6', 'board.html': '0.5', 'guides.html': '0.8'}
     urls = ''.join(f'  <url><loc>{SITE}{"" if pg == "index.html" else pg}</loc><lastmod>{last[pg]}</lastmod><changefreq>daily</changefreq><priority>{pri[pg]}</priority></url>\n'
                    for pg in PAGES if (ROOT / pg).exists())
     # one page per story and per clip (built by build_news.py), each with its picture and video
