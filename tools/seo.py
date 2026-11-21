@@ -23,12 +23,12 @@ GAMES = 'Pokémon, Magic: The Gathering, One Piece, Yu-Gi-Oh!, Lorcana, Flesh an
 
 PAGES = {
     'index.html': ('1Cardz.news: Daily TCG News for Pokémon, Magic, One Piece & More',
-                   f'Daily trading card game news in two short clips a day from hosts Zia and Luna: {GAMES}. Headlines, market prices and a free weekly newsletter.'),
+                   'Daily trading card game news from hosts Zia and Luna: Pokémon, Magic, One Piece, Lorcana, Yu-Gi-Oh! and more, plus market prices and a free newsletter.'),
     'news.html': ('TCG News Headlines Today | 1Cardz.news',
                   'The latest trading card game news, newest first: set releases, bans, auctions and events for Pokémon, Magic, One Piece, Lorcana, Yu-Gi-Oh! and more.'),
     'archive.html': ('TCG News Clips Library | Zia & Luna | 1Cardz.news',
                      'Every 1Cardz.news video clip from hosts Zia and Luna: short trading card game news for Pokémon, Magic, One Piece, Flesh and Blood and more.'),
-    'market.html': ('TCG Market Prices Today: Sealed Product & Chase Singles | 1Cardz.news',
+    'market.html': ('TCG Market Prices Today: Booster Boxes & Singles | 1Cardz.news',
                     'Daily trading card game market prices for booster boxes and chase singles from the newest sets across seven games, with recent price changes.'),
     'newsletter.html': ('Free Weekly TCG Newsletter | 1Cardz.news',
                         "The week in trading card game news in one free email every Sunday: top stories, release dates and Market Watch picks. Read this week's issue."),
@@ -199,7 +199,7 @@ def main():
         except Exception:
             pass
     for f in sorted(ROOT.glob('news-2*.html'), reverse=True):   # any older story page still on the site
-        if f.name not in seen:
+        if f.name not in seen and 'http-equiv="refresh"' not in f.read_text():   # skip moved-story stubs (Nov 22)
             urls += f'  <url><loc>{SITE}{f.name}</loc><lastmod>{f.name[5:15]}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>\n'
     # evergreen guides (Nov 21, 2026): tools/guides.json, pages built by build_news.py
     try:
@@ -218,7 +218,7 @@ def main():
                  f'<news:publication_date>{iso(n["when"])}</news:publication_date><news:title>{e(n["title"])}</news:title></news:news></url>\n' for u, n in fresh)
     (ROOT / 'news-sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
                                            'xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">\n' + nx + '</urlset>\n')
-    (ROOT / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nDisallow: /tools/*.py\n\nSitemap: {SITE}sitemap.xml\nSitemap: {SITE}news-sitemap.xml\n')
+    (ROOT / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nDisallow: /tools/*.py\nDisallow: /mag/\n\nSitemap: {SITE}sitemap.xml\nSitemap: {SITE}news-sitemap.xml\n')
     indexnow(sm, old)
     print('seo: pages, sitemap.xml and robots.txt updated')
 

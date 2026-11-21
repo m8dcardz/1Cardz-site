@@ -8,14 +8,17 @@
 <link rel="preload" as="image" href="img/clip2.jpg">
 <link rel="preload" as="image" href="img/clip4.jpg">
 <link rel="canonical" href="https://1cardz.news/">
-<meta name="description" content="Daily trading card game news in two short clips a day from hosts Zia and Luna: Pokémon, Magic: The Gathering, One Piece, Yu-Gi-Oh!, Lorcana, Flesh and Blood and more. Headlines, market prices and a free weekly newsletter.">
+<meta name="description" content="Daily trading card game news from hosts Zia and Luna: Pokémon, Magic, One Piece, Lorcana, Yu-Gi-Oh! and more, plus market prices and a free newsletter.">
 <meta name="claude:viewport-fit-sides" content="cover">
+<link as="font" rel="preload" href="fonts/press-start-2p-latin.woff2" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500;12..96,75..100,700;12..96,75..100,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500;12..96,75..100,700;12..96,75..100,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap"></noscript>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=VT323&family=Russo+One&family=Oxanium:wght@700&family=Press+Start+2P&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=VT323&family=Russo+One&family=Oxanium:wght@700&family=Press+Start+2P&display=swap"></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=VT323&family=Russo+One&family=Oxanium:wght@700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=VT323&family=Russo+One&family=Oxanium:wght@700&display=swap"></noscript>
 <script id="fl-boot">document.documentElement.classList.add('fl');(document.fonts&&document.fonts.load?document.fonts.load('800 40px "Bricolage Grotesque"'):Promise.resolve()).then(()=>document.documentElement.classList.remove('fl'),()=>document.documentElement.classList.remove('fl'));setTimeout(()=>document.documentElement.classList.remove('fl'),3000)</script>
 <style>
+/* nav font, self-hosted; "optional" so a late font never shifts the layout (audit, Nov 22) */
+@font-face{font-family:"Press Start 2P";font-style:normal;font-weight:400;font-display:optional;src:url(fonts/press-start-2p-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 /* Layout: the site is a collector's binder on a playmat. Cover first, then nine-pocket pages of sleeved cards, a rarity key, and the back cover. One committed look (a physical object), colors set explicitly. */
 :root{
   --mat:#121621;          /* playmat under the binder */
@@ -1037,14 +1040,14 @@ body>header .cover .top-cover{z-index:0}
 <meta property="og:site_name" content="1Cardz.news">
 <meta property="og:locale" content="en_US">
 <meta property="og:title" content="1Cardz.news: Daily TCG News for Pokémon, Magic, One Piece &amp; More">
-<meta property="og:description" content="Daily trading card game news in two short clips a day from hosts Zia and Luna: Pokémon, Magic: The Gathering, One Piece, Yu-Gi-Oh!, Lorcana, Flesh and Blood and more. Headlines, market prices and a free weekly newsletter.">
+<meta property="og:description" content="Daily trading card game news from hosts Zia and Luna: Pokémon, Magic, One Piece, Lorcana, Yu-Gi-Oh! and more, plus market prices and a free newsletter.">
 <meta property="og:url" content="https://1cardz.news/">
 <meta property="og:image" content="https://1cardz.news/img/og-1cardz.jpg">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Hosts Zia and Luna in the 1Cardz.news arcade-library studio">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="1Cardz.news: Daily TCG News for Pokémon, Magic, One Piece &amp; More">
-<meta name="twitter:description" content="Daily trading card game news in two short clips a day from hosts Zia and Luna: Pokémon, Magic: The Gathering, One Piece, Yu-Gi-Oh!, Lorcana, Flesh and Blood and more. Headlines, market prices and a free weekly newsletter.">
+<meta name="twitter:description" content="Daily trading card game news from hosts Zia and Luna: Pokémon, Magic, One Piece, Lorcana, Yu-Gi-Oh! and more, plus market prices and a free newsletter.">
 <meta name="twitter:image" content="https://1cardz.news/img/og-1cardz.jpg">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "NewsMediaOrganization", "@id": "https://1cardz.news/#org", "name": "1Cardz.news", "url": "https://1cardz.news/", "logo": {"@type": "ImageObject", "url": "https://1cardz.news/img/icon-512.png", "width": 512, "height": 512}, "sameAs": ["https://www.instagram.com/1cardzcom/", "https://www.youtube.com/@1Cardzcom", "https://www.tiktok.com/@1cardz.com"]}, {"@type": "WebSite", "@id": "https://1cardz.news/#site", "name": "1Cardz.news", "url": "https://1cardz.news/", "publisher": {"@id": "https://1cardz.news/#org"}, "inLanguage": "en"}]}</script>
 <!--/seo-->
@@ -1054,7 +1057,7 @@ body>header .cover .top-cover{z-index:0}
 <header class="wrap cover-zone">
   <div class="cover">
     <span class="cv-glow" aria-hidden="true"><span class="cv-edge"><i></i></span></span>
-    <video class="cover-video top-cover" data-src="img/cover-loop-v3.mp4" poster="img/cover-poster.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
+    <video class="cover-video top-cover" data-src="img/cover-loop-v3.mp4" data-src-m="img/cover-loop-v3-m.mp4" poster="img/cover-poster.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
     <span class="cv-in" aria-hidden="true"></span>
     <div class="cover-holo" aria-hidden="true"></div>
     <div class="cover-gloss" aria-hidden="true"></div>
@@ -1079,7 +1082,7 @@ body>header .cover .top-cover{z-index:0}
           <div class="face holo">
             <header class="nm"><h3 id="ncName">Luna</h3><span class="cost" id="ncTime" data-g="☾">8:00 PM</span></header>
 
-            <div class="art"><img id="ncImg" src="img/luna.webp" alt="Luna, the next host" style="object-position:50% 10%"><span class="live">Up next</span></div>
+            <div class="art"><img id="ncImg" src="img/luna.webp" width="640" height="960" alt="Luna, the next host" style="object-position:50% 10%"><span class="live">Up next</span></div>
             <div class="typeline"><span id="ncEdition">Librarian · Limited edition</span><i class="setsym holo" aria-hidden="true">★</i></div>
             <div class="txt">
               <p><b id="ncLine">“Luna here!”</b></p>
@@ -1240,7 +1243,7 @@ body>header .cover .top-cover{z-index:0}
             <div class="face back"><em>001/101</em><span>Tap to flip</span></div>
             <div class="face front">
               <header class="nm"><h3>Zia</h3><span class="cost" data-g="☀">8:00 AM</span></header>
-              <div class="art"><img src="img/zia.webp" alt="Zia with silver ponytail and round tortoiseshell glasses" style="object-position:50% 10%"><div class="shine"></div></div>
+              <div class="art"><img src="img/zia.webp" width="640" height="960" alt="Zia with silver ponytail and round tortoiseshell glasses" style="object-position:50% 10%"><div class="shine"></div></div>
               <div class="typeline"><span>Reporter · Special edition</span><span>Lead</span><i class="setsym holo" aria-hidden="true">★</i></div>
               <div class="txt">
                 <p><b>Opener.</b> “Zia here!” and the story is out before your coffee is.</p>
@@ -1258,7 +1261,7 @@ body>header .cover .top-cover{z-index:0}
             <div class="face back"><em>002/101</em><span>Tap to flip</span></div>
             <div class="face front">
               <header class="nm"><h3>Luna</h3><span class="cost" data-g="☾">8:00 PM</span></header>
-              <div class="art"><img src="img/luna.webp" alt="Luna with a black low bun and black rectangular glasses" style="object-position:50% 10%"><div class="shine"></div></div>
+              <div class="art"><img src="img/luna.webp" width="640" height="960" alt="Luna with a black low bun and black rectangular glasses" style="object-position:50% 10%"><div class="shine"></div></div>
               <div class="typeline"><span>Librarian · Limited edition</span><span>Co-host</span><i class="setsym holo" aria-hidden="true">★</i></div>
               <div class="txt">
                 <p><b>Opener.</b> “Luna here!” Then tonight’s news, no late fees.</p>
@@ -1535,7 +1538,7 @@ body>header .cover .top-cover{z-index:0}
 </section>
 <footer class="wrap">
   <div class="cover cover-back">
-    <img class="cover-video cover-still" src="img/footer-tap2.jpg" style="object-position:50% 30%" alt="" loading="lazy" decoding="async" aria-hidden="true">
+    <img class="cover-video cover-still" src="img/footer-tap2.jpg" width="1280" height="720" style="object-position:50% 30%" alt="" loading="lazy" decoding="async" aria-hidden="true">
     <div class="cover-holo" aria-hidden="true"></div>
     <div class="cover-gloss" aria-hidden="true"></div>
     <div class="stitch" aria-hidden="true"></div>
@@ -1669,10 +1672,12 @@ body>header .cover .top-cover{z-index:0}
   function hydrate(c){const v=c.querySelector('video[data-poster]');if(v&&!v.poster){v.poster=v.dataset.poster}
     const a=c.querySelector('.art[data-p]');if(a&&!a.style.getPropertyValue('--p'))a.style.setProperty('--p','url('+a.dataset.p+')')}
   document.querySelectorAll('.flip').forEach(c=>{new MutationObserver(()=>{if(c.getAttribute('aria-pressed')==='true')hydrate(c)}).observe(c,{attributes:true,attributeFilter:['aria-pressed']})});
-  document.querySelectorAll('.flip[aria-pressed="true"]').forEach(hydrate);
+  /* face-up cards get their stills only when they come near the screen (audit, Nov 22) */
+  if('IntersectionObserver' in window){const hio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&e.target.getAttribute('aria-pressed')==='true'){hydrate(e.target);hio.unobserve(e.target)}}),{rootMargin:'800px 0px'});document.querySelectorAll('.flip').forEach(c=>hio.observe(c))}
+  else document.querySelectorAll('.flip[aria-pressed="true"]').forEach(hydrate);
   /* headline box first: start the top binder video only once the headline stills are in */
   (function(){const v=document.querySelector('video.top-cover');if(!v)return;let done=false;
-    const go=()=>{if(done)return;done=true;v.src=v.dataset.src;if(!reduce){v.autoplay=true;const pr=v.play();if(pr)pr.catch(()=>{})}};
+    const go=()=>{if(done)return;done=true;v.src=(v.dataset.srcM&&matchMedia('(max-width:700px)').matches)?v.dataset.srcM:v.dataset.src;if(!reduce){v.autoplay=true;const pr=v.play();if(pr)pr.catch(()=>{})}};
     const imgs=[...document.querySelectorAll('.hl-shot img')];
     Promise.all(imgs.map(i=>i.complete?1:new Promise(r=>{i.addEventListener('load',r,{once:true});i.addEventListener('error',r,{once:true})}))).then(go);
     setTimeout(go,2500);})();

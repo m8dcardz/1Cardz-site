@@ -257,10 +257,25 @@ story_css = """<style>
 </style>"""
 s_header = header.replace('<h1 class="foil">', '<div class="foil h1x">', 1)
 s_header = re.sub(r'(<div class="foil h1x">.*?)</h1>', r'\1</div>', s_header, count=1, flags=re.S)
+def seo_title(t):
+    """<title>: keep the brand suffix only when the whole thing fits Google's ~65 characters (audit, Nov 22)."""
+    return f'{t} | 1Cardz.news' if len(t) <= 50 else t
+
+def meta_desc(d, limit=160):
+    """Meta description: at most ~160 characters, cut at a sentence end, else at a word, with an ellipsis."""
+    d = ' '.join(d.split())
+    if len(d) <= limit:
+        return d
+    cut = d[:limit]
+    ends = [m.end() for m in re.finditer(r'[.!?](?=\s)', cut)]
+    if ends and ends[-1] >= 70:
+        return cut[:ends[-1]]
+    return cut[:cut.rstrip().rfind(' ')].rstrip(',;:') + '…'
+
 made = []
 for k, (n, p) in enumerate(site_parts.story_items(news, list(posts.values()))):
     url = story_url(n)
-    title = n['title']; desc = n['summary']
+    title = n['title']; desc = n['summary']; mdesc = meta_desc(desc)
     img = SITE + f"img/{p['clip']}.jpg" if p else SITE + 'img/og-1cardz.jpg'
     c = GC.get(n['game'], '#7cf3ff')
     more = [m for m in news if m is not n][:6]
@@ -350,17 +365,17 @@ for k, (n, p) in enumerate(site_parts.story_items(news, list(posts.values()))):
         '<link rel="icon" type="image/png" sizes="192x192" href="img/icon-192.png">',
         '<link rel="apple-touch-icon" href="img/apple-touch-icon.png">',
         '<meta property="og:type" content="article">', '<meta property="og:site_name" content="1Cardz.news">',
-        f'<meta property="og:title" content="{q(title)}">', f'<meta property="og:description" content="{q(desc)}">',
+        f'<meta property="og:title" content="{q(title)}">', f'<meta property="og:description" content="{q(mdesc)}">',
         f'<meta property="og:url" content="{SITE + url}">', f'<meta property="og:image" content="{img}">',
         f'<meta property="article:published_time" content="{iso(n["when"])}">', f'<meta property="article:section" content="{q(n["game"])}">',
         '<meta name="twitter:card" content="summary_large_image">', f'<meta name="twitter:title" content="{q(title)}">',
-        f'<meta name="twitter:description" content="{q(desc)}">', f'<meta name="twitter:image" content="{img}">',
+        f'<meta name="twitter:description" content="{q(mdesc)}">', f'<meta name="twitter:image" content="{img}">',
         '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace('</', '<\\/') + '</script>',
         '<script type="application/ld+json">' + json.dumps(crumbs, ensure_ascii=False).replace('</', '<\\/') + '</script>',
         '<!--/seo-->'])
-    shead = re.sub(r'<title>.*?</title>', lambda m: f'<title>{q(title)} | 1Cardz.news</title>', head)
+    shead = re.sub(r'<title>.*?</title>', lambda m: f'<title>{q(seo_title(title))}</title>', head)
     shead = shead.replace('href="https://1cardz.news/news.html"', f'href="{SITE + url}"')
-    shead = re.sub(r'<meta name="description"[^>]*>', lambda m: f'<meta name="description" content="{q(desc)}">', shead)
+    shead = re.sub(r'<meta name="description"[^>]*>', lambda m: f'<meta name="description" content="{q(mdesc)}">', shead)
     page = ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
             '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
             + shead + style + '\n' + extra_css + '\n' + story_css + '\n' + seo + '\n</head>\n<body>\n'
@@ -384,7 +399,7 @@ for g in guides:
     frag_p = root/'tools'/g['fragment']
     if not frag_p.exists():
         continue
-    url = g['slug']; title = g['title']; desc = g.get('description') or g['summary']
+    url = g['slug']; title = g['title']; desc = g.get('description') or g['summary']; mdesc = meta_desc(desc)
     img = SITE + g['image'] if g.get('image') else SITE + 'img/og-1cardz.jpg'
     c = GC.get(g['game'], '#7cf3ff')
     upd = datetime.datetime.fromisoformat(g['updated'])
@@ -432,18 +447,18 @@ for g in guides:
         '<link rel="icon" type="image/png" sizes="192x192" href="img/icon-192.png">',
         '<link rel="apple-touch-icon" href="img/apple-touch-icon.png">',
         '<meta property="og:type" content="article">', '<meta property="og:site_name" content="1Cardz.news">',
-        f'<meta property="og:title" content="{q(title)}">', f'<meta property="og:description" content="{q(desc)}">',
+        f'<meta property="og:title" content="{q(title)}">', f'<meta property="og:description" content="{q(mdesc)}">',
         f'<meta property="og:url" content="{SITE + url}">', f'<meta property="og:image" content="{img}">',
         f'<meta property="article:published_time" content="{iso(g["published"])}">', f'<meta property="article:modified_time" content="{iso(g["updated"])}">',
         f'<meta property="article:section" content="{q(g["game"])}">',
         '<meta name="twitter:card" content="summary_large_image">', f'<meta name="twitter:title" content="{q(title)}">',
-        f'<meta name="twitter:description" content="{q(desc)}">', f'<meta name="twitter:image" content="{img}">',
+        f'<meta name="twitter:description" content="{q(mdesc)}">', f'<meta name="twitter:image" content="{img}">',
         '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace('</', '<\\/') + '</script>',
         '<script type="application/ld+json">' + json.dumps(crumbs, ensure_ascii=False).replace('</', '<\\/') + '</script>',
         '<!--/seo-->'])
-    shead = re.sub(r'<title>.*?</title>', lambda m: f'<title>{q(title)} | 1Cardz.news</title>', head)
+    shead = re.sub(r'<title>.*?</title>', lambda m: f'<title>{q(seo_title(g.get("seo_title") or title))}</title>', head)
     shead = shead.replace('href="https://1cardz.news/news.html"', f'href="{SITE + url}"')
-    shead = re.sub(r'<meta name="description"[^>]*>', lambda m: f'<meta name="description" content="{q(desc)}">', shead)
+    shead = re.sub(r'<meta name="description"[^>]*>', lambda m: f'<meta name="description" content="{q(mdesc)}">', shead)
     page = ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
             '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
             + shead + style + '\n' + extra_css + '\n' + story_css + '\n' + seo + '\n</head>\n<body>\n'
@@ -509,6 +524,37 @@ if (root/'.git').exists() and g_made:
         subprocess.run(['git', 'add', '--'] + g_made, cwd=root, timeout=60)
     except Exception as _e:
         print('git add skipped:', _e)
+
+# 404 page: GitHub Pages serves 404.html for any missing URL (audit, Nov 22)
+nf_head = re.sub(r'<title>.*?</title>', '<title>Page not found | 1Cardz.news</title>', head)
+nf_head = re.sub(r'<link rel="canonical"[^>]*>\n?', '', nf_head)
+nf_head = re.sub(r'<meta name="robots"[^>]*>', '', nf_head)
+nf_head = re.sub(r'<meta name="description"[^>]*>', '<meta name="description" content="This page could not be found on 1Cardz.news.">', nf_head)
+nf_head = '<base href="/">\n<meta name="robots" content="noindex">\n' + nf_head
+nf_header = header.replace(site_parts.navbar(src, 'news.html'), site_parts.navbar(src, ''))
+nf_body = f"""{nf_header}
+
+<main>
+  <section class="wrap news" aria-labelledby="nf-h">
+    <div class="sheet-head">
+      <div class="sheet-title">
+  <h2 id="nf-h">Card not found</h2>
+  <p>This page isn't in the binder. It may have moved, or the link has a typo.</p>
+      </div>
+    </div>
+    <div class="actions" style="display:flex;flex-wrap:wrap;gap:12px;margin:8px 0 40px">
+      <a class="btn" href="index.html">Go to the homepage</a>
+      <a class="btn ghost" href="news.html">Latest headlines</a>
+      <a class="btn ghost" href="guides.html">Guides</a>
+    </div>
+  </section>
+</main>
+
+{footer}
+"""
+(root/'404.html').write_text('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
+    '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
+    + nf_head + style + '\n' + extra_css + '\n' + story_css + '\n</head>\n<body>\n' + nf_body + '\n' + scrolltop + '\n' + js + '\n</body>\n</html>\n')
 
 # SEO pass (titles, share previews, structured data, sitemap.xml, robots.txt); safe to repeat
 try:

@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /tools/*.py
+Disallow: /mag/
 
 Sitemap: https://1cardz.news/sitemap.xml
 Sitemap: https://1cardz.news/news-sitemap.xml
