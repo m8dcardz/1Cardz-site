@@ -37,15 +37,16 @@ def story_items(news, posts):
     nw = {n.get('when') for n in news}
     out = [(n, pw.get(n.get('when'))) for n in news]
     for p in posts:
-        if p.get('when') not in nw and p.get('title') and p.get('clip'):
+        if p.get('when') not in nw and p.get('title') and p.get('clip') and not p.get('story_when'):
             out.append(({'title': p['title'], 'summary': p.get('blurb') or p['title'], 'game': p.get('game', ''),
                          'when': p['when'], 'source': p.get('source', '')}, p))
     out.sort(key=lambda x: x[0].get('when', ''), reverse=True)
     return out
 
 def clip_page(p, news):
-    """URL of the page that carries this clip."""
+    """URL of the page that carries this clip (a duplicate clip points at its story via story_when)."""
+    w = p.get('story_when') or p.get('when')
     for n in news:
-        if n.get('when') == p.get('when'):
+        if n.get('when') == w:
             return story_url(n)
     return story_url(p)
