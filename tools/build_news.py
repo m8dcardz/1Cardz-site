@@ -128,6 +128,22 @@ guide_css = """<style>
 .guide-table th{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#7cf3ff;text-align:left;padding:10px 14px}
 .guide-table td{color:#fff;padding:9px 14px;border-top:1px solid rgba(255,255,255,.08)}
 .guide .story-card{grid-template-columns:minmax(0,1fr)}.guide .body{max-width:72ch}
+.story.guide .body{max-width:920px}
+.story.guide .body>p,.story.guide .body>h2,.story.guide .body>h3{max-width:68ch}
+.guide-products{list-style:none;margin:18px 0 22px;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}
+.guide-products.six{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+.guide-products.two{grid-template-columns:repeat(auto-fill,minmax(220px,280px))}
+.guide-products li{display:flex;flex-direction:column;gap:4px;border-radius:14px;padding:10px 10px 14px;background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.02));box-shadow:inset 0 0 0 1px rgba(124,243,255,.22)}
+.guide-products figure{margin:0 0 6px;aspect-ratio:1/1;display:grid;place-items:center;border-radius:10px;background:radial-gradient(circle at 50% 45%,rgba(124,243,255,.12),transparent 70%)}
+.guide-products img{width:100%;height:auto;display:block;filter:drop-shadow(0 10px 18px rgba(0,0,0,.5))}
+.guide-products b{font-family:var(--f-display);font-weight:700;font-stretch:88%;font-size:17px;line-height:1.15;color:#fff}
+.guide-products span{font-size:13px;line-height:1.4;color:#c9cfe4}
+.guide-leaders{display:flex;flex-wrap:wrap;gap:18px;margin:16px 0 24px}
+.guide-leaders figure{margin:0;flex:1 1 200px;max-width:260px}
+.guide-leaders img{width:100%;height:auto;display:block;border-radius:12px;box-shadow:0 0 0 1px rgba(233,196,106,.6),0 18px 36px rgba(0,0,0,.5)}
+.guide-leaders figcaption,.guide-photo figcaption{margin-top:8px;font-size:13px;color:#c9cfe4}
+.guide-photo{margin:14px 0 18px;max-width:560px}.guide-photo img{width:100%;height:auto;display:block;border-radius:14px;background:radial-gradient(circle at 50% 40%,rgba(124,243,255,.14),rgba(255,255,255,.02) 70%)}
+.guide-credit{font-size:12.5px;color:#8c93ad;margin-top:26px;max-width:68ch}
 </style>"""
 extra_css = extra_css + '\n' + guide_css
 guides_strip = ''   # guides moved to their own page, guides.html (nav button "Guides", Nov 22, 2026)
