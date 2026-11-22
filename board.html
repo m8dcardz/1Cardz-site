@@ -10,7 +10,7 @@
 <link as="font" rel="preload" href="fonts/press-start-2p-latin.woff2" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500;12..96,75..100,700;12..96,75..100,800&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500;12..96,75..100,700;12..96,75..100,800&display=swap"></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500;12..96,75..100,700;12..96,75..100,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500;12..96,75..100,700;12..96,75..100,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap"></noscript>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=VT323&family=Russo+One&family=Oxanium:wght@700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=VT323&family=Russo+One&family=Oxanium:wght@700&display=swap"></noscript>
 <script id="fl-boot">document.documentElement.classList.add('fl');(document.fonts&&document.fonts.load?document.fonts.load('40px "DM Serif Display"'):Promise.resolve()).then(()=>document.documentElement.classList.remove('fl'),()=>document.documentElement.classList.remove('fl'));setTimeout(()=>document.documentElement.classList.remove('fl'),3000)</script>
 <style>
@@ -1027,6 +1027,9 @@ body>header .cover .top-cover{z-index:0}
 @media (prefers-reduced-motion:reduce){.cv-edge i{animation:none}}
 
 html{font-synthesis-weight:none}
+/* bottom Newsletter box keeps its original fonts (user, Nov 22, 2026: "Do not change the bottom Newsletter section. revert it") */
+.signup-deck,.signup-deck+footer,footer.cover-zone,body>footer{--f-display:"Bricolage Grotesque","Arial Narrow",system-ui,sans-serif;--f-body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;font-synthesis-weight:auto}
+.signup-deck,body>footer{font-family:var(--f-body)}
 </style>
 <style>
 /* message board: arcade score board hall */
@@ -1105,7 +1108,6 @@ html{font-synthesis-weight:none}
 .mb-admin button.hide{background:#ff3b5c;color:#fff}
 @media (max-width:760px){.board li{grid-template-columns:4.3em 4.3em minmax(0,1fr) 2.4em}}
 </style>
-<script id="gc-js" data-goatcounter="https://1cardz-news.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <!--seo-->
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <meta name="theme-color" content="#0b1030">
@@ -1128,6 +1130,7 @@ html{font-synthesis-weight:none}
 <meta name="twitter:image" content="https://1cardz.news/img/og-1cardz.jpg">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "NewsMediaOrganization", "@id": "https://1cardz.news/#org", "name": "1Cardz.news", "url": "https://1cardz.news/", "logo": {"@type": "ImageObject", "url": "https://1cardz.news/img/icon-512.png", "width": 512, "height": 512}, "sameAs": ["https://www.instagram.com/1cardzcom/", "https://www.youtube.com/@1Cardzcom", "https://www.tiktok.com/@1cardz.com"]}, {"@type": "WebPage", "name": "TCG Fan Message Board | 1Cardz.news", "description": "The 1Cardz.news arcade hall of fame: trading card fans post their best pulls, hot takes and shout-outs to Zia and Luna.", "url": "https://1cardz.news/board.html", "isPartOf": {"@type": "WebSite", "name": "1Cardz.news", "url": "https://1cardz.news/"}, "publisher": {"@type": "NewsMediaOrganization", "@id": "https://1cardz.news/#org", "name": "1Cardz.news", "url": "https://1cardz.news/", "logo": {"@type": "ImageObject", "url": "https://1cardz.news/img/icon-512.png", "width": 512, "height": 512}, "sameAs": ["https://www.instagram.com/1cardzcom/", "https://www.youtube.com/@1Cardzcom", "https://www.tiktok.com/@1cardz.com"]}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://1cardz.news/"}, {"@type": "ListItem", "position": 2, "name": "TCG Fan Message Board", "item": "https://1cardz.news/board.html"}]}]}</script>
 <!--/seo-->
+<script id="gc-js" data-goatcounter="https://1cardz-news.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
 <header class="wrap cover-zone">
