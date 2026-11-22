@@ -33,7 +33,7 @@ PAGES = {
     'newsletter.html': ('Free Weekly TCG Newsletter | 1Cardz.news',
                         "The week in trading card game news in one free email every Sunday: top stories, release dates and Market Watch picks. Read this week's issue."),
     'guides.html': ('TCG Guides: Starter Decks, Sets & Cards | 1Cardz.news',
-                    'Trading card game guides from 1Cardz.news: starter decks, sets and the cards everyone searches for, kept up to date.'),
+                    'Starter decks, record sales and the cards everyone asks about, explained in plain English and updated as new sets land.'),
     'board.html': ('TCG Fan Message Board | 1Cardz.news',
                    'The 1Cardz.news arcade hall of fame: trading card fans post their best pulls, hot takes and shout-outs to Zia and Luna.'),
 }

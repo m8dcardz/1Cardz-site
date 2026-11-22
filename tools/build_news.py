@@ -411,7 +411,7 @@ if (root/'.git').exists() and made:
 # ---------- one page per guide (Nov 21, 2026) + the Guides page, guides.html (Nov 22, 2026) ----------
 g_made = []
 _ni = '<p>News Headlines. Every story from the 8 AM and 8 PM drops, newest first, in plain text.</p>'
-_gi = '<p>Guides. Evergreen explainers for collectors and players, kept up to date.</p>'
+_gi = '<p>Your first deck, your next box, the card you dream about: plain-English guides from Zia and Luna, kept current as each new set lands.</p>'
 g_header = s_header.replace(site_parts.navbar(src, 'news.html'), site_parts.navbar(src, 'guides.html')).replace(_ni, _gi)
 for g in guides:
     frag_p = root/'tools'/g['fragment']
@@ -508,7 +508,7 @@ gi_css = """<style>
 </style>"""
 gi_head = re.sub(r'<title>.*?</title>', '<title>TCG Guides | 1Cardz.news</title>', head)
 gi_head = gi_head.replace('href="https://1cardz.news/news.html"', 'href="https://1cardz.news/guides.html"')
-gi_head = re.sub(r'<meta name="description"[^>]*>', '<meta name="description" content="Trading card game guides from 1Cardz.news: starter decks, sets and the cards everyone searches for, kept up to date.">', gi_head)
+gi_head = re.sub(r'<meta name="description"[^>]*>', '<meta name="description" content="Starter decks, record sales and the cards everyone asks about, explained in plain English and updated as new sets land.">', gi_head)
 gi_header = header.replace(site_parts.navbar(src, 'news.html'), site_parts.navbar(src, 'guides.html')).replace(_ni, _gi)
 gi_body = f"""{gi_header}
 
@@ -517,7 +517,7 @@ gi_body = f"""{gi_header}
     <div class="sheet-head">
       <div class="sheet-title">
   <h2 id="guides-h">Guides</h2>
-  <p>Evergreen explainers for collectors and players: every deck, set and card worth knowing, kept up to date.</p>
+  <p>Where to start, what to buy and which cards matter in every game. Checked against official sources, kept up to date.</p>
       </div>
     </div>
     <div class="gd">
