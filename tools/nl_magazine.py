@@ -36,6 +36,11 @@ def _img(root, clip, cover=False):
         return 'img/' + out.name
     return f'img/{clip}.jpg' if (root / 'img' / f'{clip}.jpg').exists() else ''
 
+def _ver(f):
+    """?v=<content hash> so browsers drop a cached photo when the file is replaced (Nov 22)."""
+    import hashlib
+    return '?v=' + hashlib.md5(f.read_bytes()).hexdigest()[:8]
+
 def _photo(root, clip):
     """(src, side) for a story's full-page photo. side = 'l' or 'r': where the text goes (the reporter is on the other side)."""
     if not clip:
@@ -48,7 +53,7 @@ def _photo(root, clip):
         cache = {}
     out = root / 'img' / f'nl-p-{clip}.jpg'
     if out.exists() and clip in cache:
-        return 'img/' + out.name, cache[clip].get('side', 'r'), cache[clip].get('face')
+        return 'img/' + out.name + _ver(out), cache[clip].get('side', 'r'), cache[clip].get('face')
     src = root / 'img' / f'{clip}.mp4'
     best = None
     if src.exists() and shutil.which('ffmpeg'):
@@ -94,7 +99,7 @@ def _photo(root, clip):
             if out.exists():
                 cache[clip] = {'side': side, 't': t, 'face': face}
                 cache_f.write_text(json.dumps(cache, indent=1, sort_keys=True) + '\n')
-                return 'img/' + out.name, side, face
+                return 'img/' + out.name + _ver(out), side, face
         except Exception:
             pass
     im = _img(root, clip)
