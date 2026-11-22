@@ -446,5 +446,9 @@
  "signoff": [
   "Shuffle up,",
   "Zia & Luna"
- ]
+ ],
+ "vol_pos": {
+  "top": 48,
+  "right": 6
+ }
 }
