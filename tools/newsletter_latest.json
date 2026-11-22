@@ -1,204 +1,312 @@
 {
- "no": "03",
- "vol": 3,
- "date": "Sunday, November 15, 2026",
- "title": "Magic is coming to Netflix: the week in cards",
+ "no": "04",
+ "vol": 4,
+ "date": "Sunday, November 22, 2026",
+ "title": "Lucario brought both fists: the week in cards",
  "intro": "One free email every Sunday with the week in cards. Here's the latest issue as a magazine: tap the cover to open it, and sign up free at the bottom of the page.",
  "greeting": "Hey there,",
- "opening": "Zia and Luna here with Issue 03. Magic just landed a Netflix series, Riftbound swung the ban hammer, Star Trek boarded Magic, and Pikachu got his own birthday box.",
- "image": "img/clip50.jpg",
- "image_alt": "Luna reports: Magic's Planeswalker series comes to Netflix in 2027",
- "cover_clip": "clip50",
- "big_clip": "clip50",
+ "opening": "Zia and Luna here with your Sunday shuffle. Lucario showed up with both fists and a Z, Lorcana is moving into your phone, and Magic handed Commander players a whole desert of new Dune legends.",
+ "image": "img/clip61.jpg",
+ "image_alt": "Zia reports: Pokémon TCG's Flowing Fists revealed for Feb 6, 2027",
+ "cover_clip": "clip61",
+ "big_clip": "clip61",
  "cover": {
-  "main": "Magic hits Netflix",
-  "sub": "Planeswalker puts Chandra\non screen in 2027",
+  "main": "Lucario's Z fists",
+  "sub": "Flowing Fists lands\nFeb 6, 2027",
   "lines": [
    [
-    "Riven is banned",
-    "Riftbound's Radiance ban list"
+    "Lorcana goes digital",
+    "Every card, crossplay"
    ],
    [
-    "Engage",
-    "Star Trek Magic is out"
+    "Dune comes to Magic",
+    "Secret Lair Superdrop"
    ],
    [
-    "Pikachu's party box",
-    "Pokémon Day 2027 Collection"
+    "Schütz wins Worlds",
+    "Izzet Mission takes $100K"
    ]
   ]
  },
- "pull": "Finally, a reason to binge-watch that counts as deck research.",
+ "pull": "Lucario brought both fists and a Z.",
  "stories": [
   {
-   "clip": "clip50",
-   "when": "2026-11-14T20:00",
+   "clip": "clip61",
+   "when": "2026-11-20T08:00",
+   "game": "Pokémon",
+   "title": "Pokémon TCG's Flowing Fists revealed for Feb 6, 2027",
+   "summary": "The Pokémon Company's Mega Evolution—Flowing Fists releases February 6, 2027 with over 110 cards, led by Mega Lucario Z ex and Mega Garchomp Z ex.",
+   "source": "Pokémon (official); ICv2",
+   "host": "Zia",
+   "quip": "Lucario brought both fists and a Z.",
+   "details": {
+    "facts": [
+     "Mega Evolution—Flowing Fists releases February 6, 2027, as part of the Mega Evolution Series.",
+     "The expansion includes over 110 cards, with artwork inspired by the excitement of a tournament atmosphere.",
+     "Mega Lucario Z ex leads the set, with Mega Absol Z ex, Mega Garchomp Z ex and Mega Glimmora ex also featured.",
+     "ICv2 counts 15 Pokémon and Trainer cards with special illustrations.",
+     "It comes in Elite Trainer Boxes, Build & Battle boxes, 3-booster blisters, booster displays and hanger packs (ICv2)."
+    ],
+    "why": "It's the next English Pokémon TCG expansion, with a new group of Mega Pokémon ex for players and collectors to chase.",
+    "url": "https://www.pokemon.com/us/news/the-pokemon-tcg-mega-evolution-flowing-fists-expansion-arrives-february-6-2027"
+   }
+  },
+  {
+   "clip": "clip65",
+   "when": "2026-11-22T08:00",
+   "game": "Pokémon",
+   "title": "Pokémon's Aura Seeker hits Japan Nov 27, all cards out",
+   "summary": "Japan's Aura Seeker expansion, starring Mega Lucario Z ex, releases November 27, 2026; all 78 main-set cards are revealed ahead of English Flowing Fists (Feb 6, 2027).",
+   "source": "Pokémon Card Game (official, Japan); PokéBeach",
+   "host": "Zia",
+   "quip": "78 cards, one very determined Lucario.",
+   "details": {
+    "facts": [
+     "The Pokémon Card Game MEGA expansion pack Aura Seeker (Hadou Seeker in Japanese) releases in Japan on Friday, November 27, 2026, with 5 cards per pack.",
+     "All 78 main-set cards are now revealed; it is Japan's seventh Mega Evolution set, starring Mega Lucario Z ex.",
+     "It is the first set with the Z Mega Evolutions from the Mega Dimension DLC: Mega Lucario Z ex, Mega Absol Z ex and Mega Garchomp Z ex, plus Mega Glimmora ex.",
+     "A special art rare of Crasher Wake's Fervor is drawn by manga artist Tetsuo Hara.",
+     "English players get the set's cards in Mega Evolution—Flowing Fists on February 6, 2027."
+    ],
+    "why": "It's the first full look at the cards coming to the English Pokémon TCG in Flowing Fists early next year.",
+    "url": "https://www.pokebeach.com/2026/11/aura-seeker-all-78-main-set-cards-revealed"
+   }
+  },
+  {
+   "clip": "clip63",
+   "when": "2026-11-21T08:00",
+   "game": "Lorcana",
+   "title": "Disney Lorcana is going digital: every card, crossplay",
+   "summary": "Ravensburger's first Disney Lorcana digital game dev blog (November 20, 2026) promises every card from every set, mobile and desktop crossplay and ranked play; no release date yet.",
+   "source": "Disney Lorcana (official)",
+   "host": "Zia",
+   "quip": "Finally, a deck you can shuffle on the bus.",
+   "details": {
+    "facts": [
+     "Ravensburger posted the first developer blog for the Disney Lorcana TCG digital game on November 20, 2026; the game was first announced at D23 in August 2026.",
+     "The goal is to include every card from every set released: characters, songs, actions and locations.",
+     "It follows the same rules with the same cards as the tabletop game, so decks built digitally can be brought to the table.",
+     "One account works on mobile and desktop with crossplay, plus ranked matchmaking and replayable practice matches for new players.",
+     "There is no release date yet; fans can sign up at the Disney Lorcana site to hear first when testing begins."
+    ],
+    "why": "Lorcana players will be able to test decks and new cards any time, with skills that carry over to game night.",
+    "url": "https://disneylorcana.com/en/news/2026/11/disney-lorcana-digital-game-dev-blog-1/"
+   }
+  },
+  {
+   "clip": "clip60",
+   "when": "2026-11-19T20:00",
    "game": "Magic",
-   "title": "Magic's Planeswalker series comes to Netflix in 2027",
-   "summary": "Netflix revealed PLANESWALKER on November 13, 2026: an animated Magic: The Gathering series centered on Chandra, premiering in 2027.",
+   "title": "Magic's Dune Secret Lair Superdrop lands November 30",
+   "summary": "Secret Lair x Dune, My Arrakis, My Superdrop, launches November 30, 2026 with eight new-to-Magic Dune legends and a new Shai-Hulud card.",
    "source": "Magic: The Gathering (official)",
    "host": "Luna",
-   "quip": "Finally, a reason to binge-watch that counts as deck research.",
+   "quip": "Walk without rhythm to the checkout queue.",
    "details": {
     "facts": [
-     "Netflix and Wizards of the Coast revealed PLANESWALKER, an animated series based on Magic: The Gathering, on November 13, 2026.",
-     "The series premieres on Netflix in 2027.",
-     "The story centers on Chandra, a volatile pyromancer hunted for her gifts, alongside some of the most legendary Planeswalkers.",
-     "Terry Matalas is showrunner, Cindy Appel co-showrunner and Patrick Osborne supervising director.",
-     "Animation is by the studio Digic, with Hasbro Entertainment among the producers."
+     "My Arrakis, My Superdrop launches November 30, 2026, only on the Secret Lair store, with a pre-queue opening an hour before the 9 a.m. PT sale.",
+     "Secret Lair x Dune: Balance of Power has eight new-to-Magic legendary creatures, including Paul Atreides, Ducal Heir, Baron Vladimir Harkonnen and Princess Irulan Corrino.",
+     "Secret Lair x Dune: Deserts of Arrakis adds a new-to-Magic Shai-Hulud card, plus Crysknife, Thumper and Sandworm Incursion versions of existing cards.",
+     "Secret Lair x Dune: Spice is all halo foil, with Water of Life and Atreides and Harkonnen Spice Harvesters.",
+     "The new cards are legal in Commander, Legacy and Vintage; non-foil Balance of Power and Deserts of Arrakis come to WPN game stores at a later date."
     ],
-    "why": "Magic's first big streaming series puts Chandra and the Planeswalkers in front of a whole new audience.",
-    "url": "https://magic.wizards.com/en/news/announcements/netflix-reveals-magic-the-gathering-animated-series-planeswalker"
+    "why": "It's Magic's biggest Dune crossover, adding brand-new legends that Commander players can build around.",
+    "url": "https://magic.wizards.com/en/news/announcements/secret-lair-my-arrakis-my-superdrop"
    }
   },
   {
-   "clip": "clip49",
-   "when": "2026-11-14T08:00",
+   "clip": "clip58",
+   "when": "2026-11-18T20:00",
+   "game": "Magic",
+   "title": "Magic's Nauctis drops Play Boosters for Booster Packs",
+   "summary": "Nauctis: The Sunken Realm (February 5, 2027) sells 14-card Booster Packs, 30 per box, instead of Play Boosters, and Collector Boosters drop from 15 cards to 12.",
+   "source": "ICv2; Magic: The Gathering (official)",
+   "host": "Luna",
+   "quip": "Fewer cards per Collector pack, more room in the binder.",
+   "details": {
+    "facts": [
+     "Nauctis: The Sunken Realm releases February 5, 2027 (MTG Arena February 2), with prereleases January 29 to February 4.",
+     "ICv2 reports Wizards has done away with Play Boosters for the set in favour of Booster Packs.",
+     "Each Booster Pack holds 14 cards plus a double-sided token, and a Booster Pack box holds 30 packs.",
+     "Collector Boosters now hold 12 cards instead of 15, with 12 Collector Boosters per box.",
+     "Both box types include a Sunken Treasures box topper, and about 1 in 1,000 Booster Packs and 1 in 300 Collector Boosters is a God Pack."
+    ],
+    "why": "It changes what every Nauctis pack and box holds, for players drafting the set and collectors opening boxes.",
+    "url": "https://icv2.com/articles/news/view/63889/wizards-coast-reveals-product-line-deets-magic-the-gathering-nauctis-the-sunken-realm"
+   }
+  },
+  {
+   "clip": "clip53",
+   "when": "2026-11-16T08:00",
+   "game": "Magic",
+   "title": "Stefan Schütz wins Magic World Championship 32",
+   "summary": "Stefan Schütz won Magic World Championship 32 in Atlanta on November 15, 2026 with Izzet Mission, taking the $100,000 first prize.",
+   "source": "Magic: The Gathering (official)",
+   "host": "Zia",
+   "quip": "Mission accomplished. Literally, it was the deck name.",
+   "details": {
+    "facts": [
+     "Stefan Schütz won Magic World Championship 32 at MagicCon: Atlanta, which ran November 13-15, 2026.",
+     "He played Izzet Mission in Standard, a deck built around Anthropological Mission, a Star Trek card that joined Standard a week before the event.",
+     "First place pays $100,000, plus invitations to every 2027 Pro Tour and the 2027 Limited Championship.",
+     "Eduardo Sajgalik finished second ($50,000), with Kellen Pastore and James Drake rounding out the Top 4.",
+     "The World Champion also gets the chance to appear on an upcoming Magic card."
+    ],
+    "why": "Worlds caps the 2026 season, and a card from a set released days earlier powered the winning deck.",
+    "url": "https://magic.gg/news/magic-world-championship-32-final-standings"
+   }
+  },
+  {
+   "clip": "clip54",
+   "when": "2026-11-16T20:00",
+   "game": "One Piece",
+   "title": "One Piece's OP-18 The Dominance of God lands Nov 20",
+   "summary": "One Piece Card Game's OP-18 The Dominance of God releases in English on November 20, 2026, with six new Leaders and a 4th Anniversary Event running to December 17.",
+   "source": "One Piece Card Game (official)",
+   "host": "Luna",
+   "quip": "Four years old and still asking for more Leaders. Franky approves.",
+   "details": {
+    "facts": [
+     "Booster Pack THE DOMINANCE OF GOD [OP-18] releases in English on November 20, 2026; its cards are tournament legal 7 days after release.",
+     "The set features Water Seven and the Holy Knights of God, with six new Leaders: Karoo, Monkey.D.Luffy, Ms. All Sunday, Franky, Saint Gunko and Spandam.",
+     "Saint Gunko and Saint Shamrock make their card game debut; the Super Alt Art card is Nico Robin and the Super Leader Alt Art is Saint Gunko.",
+     "One alt art card has original artwork by Yoshitaka Amano.",
+     "The 4th Anniversary Event (OP-18 Release Event) runs in stores November 20 to December 17, 2026: every player gets a P-161 Monkey.D.Luffy promo, and the winner gets a silver foil, gold stamped version."
+    ],
+    "why": "It's the game's fourth anniversary set, with a long-awaited Franky Leader and a store event promo for everyone who plays.",
+    "url": "https://en.onepiece-cardgame.com/products/op18.html"
+   }
+  },
+  {
+   "clip": "clip55",
+   "when": "2026-11-17T08:00",
+   "game": "Star Wars",
+   "title": "Star Wars: Unlimited's Icons 2027 Edition lands Nov 20",
+   "summary": "Star Wars: Unlimited's Icons 2027 Edition, a mini-set of over 190 cards, releases November 20, 2026, with a Darth Vader and Leia Organa Starter Box.",
+   "source": "Star Wars: Unlimited (official)",
+   "host": "Zia",
+   "quip": "Vader or Leia? Pick a side before Friday, the box won't do it for you.",
+   "details": {
+    "facts": [
+     "Icons 2027 Edition releases November 20, 2026, the first Icons set for Star Wars: Unlimited.",
+     "It's a mini-set of over 190 cards focused on fan-favourite characters and straightforward mechanics.",
+     "Each booster pack has 9 cards: about 5 commons, 2 uncommons, 1 rare or legendary card and 1 Hyperspace foil.",
+     "The Starter Box has two pre-built 30-card decks led by Darth Vader and Leia Organa, plus deckbuilding packs and two Icons boosters.",
+     "The Booster 4-Pack adds an exclusive Cassian Andor variant card."
+    ],
+    "why": "It's built as an easy way into the game, with two famous leaders in a ready-to-play box for two players.",
+    "url": "https://starwarsunlimited.com/products/icons-2027-edition"
+   }
+  },
+  {
+   "clip": "clip57",
+   "when": "2026-11-18T08:00",
    "game": "Riftbound",
-   "title": "Riftbound bans Riven, Dazzling Aurora and more",
-   "summary": "Riftbound's Radiance ban list adds eight cards and two battlefields to Standard and 2v2 Constructed, effective Monday, November 23, 2026.",
+   "title": "Riftbound's Convergence Fest hits Vegas Dec 11-13",
+   "summary": "Riftbound's Convergence Fest runs December 11-13, 2026 in Las Vegas, and participating US stores give out an exclusive Ionic Spark battlefield promo December 9-15.",
    "source": "Riftbound (official)",
    "host": "Zia",
-   "quip": "Riven players, it's time to find a new main.",
+   "quip": "Can't fly to Vegas? Your local store just became the after-party.",
    "details": {
     "facts": [
-     "Announced November 13, 2026; the bans take effect Monday, November 23, 2026, in Standard and 2v2 Constructed.",
-     "Eight cards are banned: Riven, Broken Blade; Zhonya's Hourglass; Stellacorn Herder; Nocturne, Horrifying; Rhasa the Sunderer; Brynhir Thundersong; Dazzling Aurora; and Baited Hook.",
-     "Two battlefields are banned too: Emperor's Dais and Star Spring.",
-     "Riven made up 43% of decks at the European Regional Championship and took 3 of the top 4 spots.",
-     "Korea and Traditional Chinese regions aren't affected until Radiance releases there; from 2027, bans come in set windows around each Continental."
+     "Convergence Fest brings Riftbound and Teamfight Tactics to the Las Vegas Convention Center, December 11-13, 2026.",
+     "Side event tickets go on sale November 18 at 8 AM PT, for anyone with a Convergence Fest Attendee, TFT Competitor or Riftbound Competitor pass; prizes come from a shared Prize Wall.",
+     "From December 9 to 15, participating US local game stores hand out an exclusive Ionic Spark battlefield promo, while supplies last; it is also available to Convergence Fest attendees.",
+     "Each store decides how to give it out (demos, in-store events or watch parties), and Riot told stores not to use it as a purchase incentive.",
+     "The Encore after-party with DJ Sona follows on December 13 at Lot A outside AREA15."
     ],
-    "why": "Riven, Kennen and Kai'Sa decks all lose key cards, so the competitive meta resets before December's North America Regional Championship.",
-    "url": "https://playriftbound.com/en-us/news/announcements/radiance-ban-list-updates-effective-november-23-2026/"
+    "why": "It's Riftbound's big North American weekend, and the store promo lets players who can't travel to Vegas take part.",
+    "url": "https://playriftbound.com/en-us/news/announcements/celebrate-convergence-fest-at-american-game-stores/"
    }
   },
   {
-   "clip": "clip47",
-   "when": "2026-11-13T08:00",
+   "clip": "clip62",
+   "when": "2026-11-20T20:00",
+   "game": "Lorcana",
+   "title": "Disney Lorcana returns to EPCOT with a Figment glimmer",
+   "summary": "Disney Lorcana returns to EPCOT International Festival of the Arts January 15 to March 1, 2027, with a festival-only Figment glimmer and Minnie, Belle and Alice promos.",
+   "source": "Disney Lorcana (official)",
+   "host": "Luna",
+   "quip": "Figment says one little spark is all it takes. And a Quest Booklet.",
+   "details": {
+    "facts": [
+     "Disney Lorcana returns to the EPCOT International Festival of the Arts at Walt Disney World, January 15 to March 1, 2027, its second year at the festival.",
+     "A free Quest Booklet from the Creations Shop starts the Collection Quest; trade with other guests for four cards to earn the Minnie Mouse, Musical Artist promo.",
+     "The Ink & Find Scavenger Hunt rewards the Belle, Reflective Writer promo, and a Hyperia City Illumineer's Trove bought in the park comes with Alice, Tea Alchemist (limit 2 per guest, while supplies last).",
+     "The six-card 2027 Festival Collection, sold only at the festival, includes a Figment glimmer plus Mickey Mouse, Little John, Powerline, Piglet and Tiana.",
+     "A premium foil Figment playmat, an art print and card artist signings on select days round out the festival."
+    ],
+    "why": "It's a festival-only Figment card and three new Magical Places promos for Lorcana collectors visiting Walt Disney World early next year.",
+    "url": "https://disneylorcana.com/en/news/2026/11/the-disney-lorcana-tcg-returns-to-the-epcot-international-festival-of-the-arts-in-2027/"
+   }
+  },
+  {
+   "clip": "clip64",
+   "when": "2026-11-21T20:00",
    "game": "Magic",
-   "title": "Magic's Star Trek is out; To Boldly Go league starts",
-   "summary": "Magic: The Gathering | Star Trek releases November 13, 2026, and the To Boldly Go sealed league runs in stores through January 28, 2027.",
-   "source": "Wizards of the Coast (WPN)",
-   "host": "Zia",
-   "quip": "Six boosters, four quadrants, one promotion to Captain. Engage.",
+   "title": "Magic's Star Trek Commander Party runs Nov 20-26",
+   "summary": "Magic: The Gathering | Star Trek Commander Party runs in WPN stores November 20-26, 2026 (again January 15-21, 2027), with Highly Illogical or Munitions Enthusiast promos.",
+   "source": "Magic: The Gathering (official); Wizards Play Network",
+   "host": "Luna",
+   "quip": "Beam me up, but only after my commander resolves.",
    "details": {
     "facts": [
-     "Magic: The Gathering | Star Trek is in stores today, November 13, 2026.",
-     "To Boldly Go is a Sealed league at WPN stores, running November 13, 2026 to January 28, 2027.",
-     "Players start with six Star Trek Play Boosters and can add more boosters as they rank up.",
-     "Play three games at Starfleet Academy, then explore four quadrants (Alpha, Beta, Gamma and Delta), each with its own rules.",
-     "Every three matches in a quadrant earns a rank pip; reaching Captain earns a league promo card."
+     "Commander Party for Magic: The Gathering | Star Trek runs at WPN stores November 20-26, 2026, and again January 15-21, 2027.",
+     "It's a casual Commander event: on your turn you can tap a legendary creature to send an away team on a mission from the mission deck.",
+     "That creature becomes the mission specialist, and the mission's effects stay active until another player sends an away team; players without a legend can recruit an away team leader.",
+     "Each pod of three to four players gets a play aid, and stores receive mission cards and participation promos.",
+     "Players receive either a Munitions Enthusiast or Highly Illogical promo card (non-foil, traditional foil at WPN Premium stores), while supplies last."
     ],
-    "why": "It's a casual, months-long way to play the new set at your local store, with a promo at the end.",
-    "url": "https://wpn.wizards.com/en/event/magic-presents-to-boldly-go"
+    "why": "It's a free-form, story-driven way to play the new Star Trek cards in Commander at your local store, with a promo for taking part.",
+    "url": "https://magic.wizards.com/en/news/feature/where-to-play-star-trek"
    }
   },
   {
-   "clip": "clip48",
-   "when": "2026-11-13T20:00",
-   "game": "Pokémon",
-   "title": "Pokémon Day 2027 Collection lands January 29",
-   "summary": "The Pokémon Day 2027 Collection reaches stores January 29, 2027, with a stamped foil Pikachu promo, three booster packs, a coin and a TCG Live code card.",
-   "source": "ICv2",
+   "clip": "clip52",
+   "when": "2026-11-15T20:00",
+   "game": "Magic",
+   "title": "Magic's first God Packs arrive with Nauctis",
+   "summary": "Nauctis: The Sunken Realm (February 5, 2027) brings Magic's first God Packs: about 1 in 1,000 Booster Packs is all rares and mythics, plus ~500 Abyssal Lotus headliners.",
+   "source": "Magic: The Gathering (official)",
    "host": "Luna",
-   "quip": "Pikachu's birthday party comes with its own party favors.",
+   "quip": "One in a thousand. Start practicing your shocked face now.",
    "details": {
     "facts": [
-     "Pokémon Day 2027 Collection releases January 29, 2027 (The Pokémon Company International).",
-     "It includes a specially stamped foil Pikachu promo card.",
-     "Also inside: three Pokémon TCG booster packs and a collectible coin.",
-     "A code card for Pokémon TCG Live comes in the box.",
-     "Pokémon Day itself is February 27, 2027."
+     "Nauctis: The Sunken Realm releases February 5, 2027 (MTG Arena February 2); prereleases run January 29 to February 4.",
+     "It's the first set with God Packs: every nonbasic card in a God Pack is a rare or mythic rare, with a God Pack celebration card inside.",
+     "About 1 in every 1,000 Booster Packs is a Booster God Pack, and about 1 in every 300 Collector Boosters is a Collector God Pack.",
+     "Collector Boosters can hold a textless raised foil Abyssal Lotus headliner; about 500 will be printed.",
+     "Each Booster Pack box and Collector Booster box includes a Sunken Treasures Box Topper with one pearlescent card."
     ],
-    "why": "A new stamped Pikachu promo is a yearly collector favourite, and it lands a month before Pokémon Day.",
-    "url": "https://icv2.com/articles/news/view/63870/pokemon-day-2027-collection-hits-preorder"
+    "why": "God Packs turn any Nauctis pack into a possible jackpot, and they're coming to Magic's Multiverse sets from now on.",
+    "url": "https://magic.wizards.com/en/news/feature/collecting-nauctis-the-sunken-realm"
    }
   },
   {
-   "clip": "clip42",
-   "when": "2026-11-10T08:00",
-   "game": "Flesh and Blood",
-   "title": "Fang wins Flesh and Blood Worlds in Paris",
-   "summary": "Nicolas Jamoulle won World Championship: Paris (November 5-8, 2026) on Fang, Dracai of Blades; runner-up Jin Han Toh also played Fang.",
-   "source": "Flesh and Blood (official)",
-   "host": "Zia",
-   "quip": "Paris had one dragon on top, and another right behind it."
-  },
-  {
-   "clip": "clip45",
-   "when": "2026-11-11T20:00",
-   "game": "Flesh and Blood",
-   "title": "Flesh and Blood's 2027 season: three $200K Pro Tours",
-   "summary": "The 2027 World Tour brings three $200,000 Pro Tours, one Global Leaderboard and a $10,000 Player of the Year crowned in Kobe; Pro Quests start February 13, 2027.",
-   "source": "Flesh and Blood (official)",
-   "host": "Luna",
-   "quip": "Three Pro Tours, zero excuses to skip practice."
-  },
-  {
-   "clip": "clip41",
-   "when": "2026-11-09T20:00",
+   "clip": "clip51",
+   "when": "2026-11-15T08:00",
    "game": "Yu-Gi-Oh!",
-   "title": "Yu-Gi-Oh!'s Magnificent Maestros lands this Friday",
-   "summary": "Konami's 125-card set hits stores November 13, 2026, with 18 reimagined anime cards that also come as Grand Master Rares, serial-numbered 001 to 100.",
-   "source": "Konami (official); ICv2",
-   "host": "Luna",
-   "quip": "One hundred copies. Please stop checking your binder."
-  },
-  {
-   "clip": "clip43",
-   "when": "2026-11-10T20:00",
-   "game": "Magic",
-   "title": "Magic's Rise of the Polygons Secret Lair goes retro",
-   "summary": "Wizards' polygon-era Secret Lair, with Balefire Dragon and Young Pyromancer, sells November 16-30, 2026, with half the sale price going to Extra Life.",
-   "source": "ICv2",
-   "host": "Luna",
-   "quip": "Low poly, high charity, maximum dragon."
-  },
-  {
-   "clip": "clip46",
-   "when": "2026-11-12T20:00",
-   "game": "My Little Pony",
-   "title": "My Little Pony TCG's The Coronation lands Feb 19",
-   "summary": "Kayou's fifth English My Little Pony TCG booster set, The Coronation, reaches retail February 19, 2027, with new mechanics Leap In, Revelation and Triumph.",
-   "source": "ICv2",
-   "host": "Luna",
-   "quip": "Friendship is magic. Pulling the chase card is luck."
-  },
-  {
-   "clip": "clip40",
-   "when": "2026-11-09T08:00",
-   "game": "Pokémon",
-   "title": "Mega Greninja ex League Battle Deck lands this week",
-   "summary": "Pokémon's ready-to-play 60-card League Battle Deck, with Mega Starmie ex and Meowth ex, reaches stores this week.",
-   "source": "ICv2",
+   "title": "Yu-Gi-Oh!'s HERO Force Structure Deck goes all-foil",
+   "summary": "Konami's 55-card all-foil Structure Deck of Jaden and Aster's HEROes arrives February 26, 2027, with two brand-new Ultra Rare cards and a bonus Secret Rare.",
+   "source": "Yu-Gi-Oh! TCG (official); ICv2",
    "host": "Zia",
-   "quip": "Sixty cards, zero excuses for a bad build."
-  },
-  {
-   "clip": "clip44",
-   "when": "2026-11-11T08:00",
-   "game": "Magic",
-   "title": "Magic teams up with Burger King in Italy",
-   "summary": "Burger King Italy's Great Gathering meal comes with a burger-box style deck box and 100 sleeves, November 10-30, 2026, in Italy only.",
-   "source": "ICv2",
-   "host": "Zia",
-   "quip": "Have it your way: extra sleeves, hold the pickles."
-  },
-  {
-   "clip": "clip39",
-   "when": "2026-11-08T20:00",
-   "game": "Magic",
-   "title": "Magic's Star Trek lands Friday with actor-signed cards",
-   "summary": "Magic: The Gathering | Star Trek releases November 13, 2026; Collector Boosters can hold Headliner cards hand-signed by Star Trek actors.",
-   "source": "Wizards of the Coast; ICv2",
-   "host": "Luna",
-   "quip": "Live long and pull an autograph."
+   "quip": "Every card a foil. Your sleeves are about to work overtime.",
+   "details": {
+    "facts": [
+     "Structure Deck: HERO Force (All-Foil Edition) is tournament legal February 26, 2027.",
+     "Official tournament stores get it from February 24, 2027.",
+     "It's a 55-card deck built on Jaden and Aster's HEROes, with every card in foil.",
+     "Two brand-new Ultra Rare cards are inside, plus a bonus Secret Rare that can upgrade to a Starlight Rare."
+    ],
+    "why": "HERO players get a fully foiled, ready-built upgrade with brand-new support cards.",
+    "url": ""
+   }
   }
  ],
  "radar": [
   [
-   "Nov 27, 2026",
-   "Pokémon: Aura Seeker (Japan; basis of Flowing Fists) (reported)"
+   "Nov 30, 2026",
+   "Magic: Secret Lair x Dune \"My Arrakis, My Superdrop\" on sale"
   ],
   [
    "Dec 4, 2026",
@@ -210,6 +318,10 @@
   ],
   [
    "Dec 4, 2026",
+   "Pokémon: Unova Heavy Hitters Premium Collection"
+  ],
+  [
+   "Dec 4, 2026",
    "Gundam: Gundam Card Game at PAX Unplugged, Philadelphia (to Dec 6)"
   ],
   [
@@ -217,12 +329,12 @@
    "Gundam: \"Claim Miorine\" 3-on-3 Battle in stores (to Dec 31; again Jan 8–28)"
   ],
   [
-   "Dec 13, 2026",
-   "Riftbound: Legacy previews at Convergence Fest (to Dec 15)"
+   "Dec 9, 2026",
+   "Riftbound: Convergence Fest store events with the Ionic Spark battlefield promo (to Dec 15)"
   ],
   [
-   "Dec 18, 2026",
-   "Dragon Ball Super Fusion World: FB12 Reach the God (English) (reported)"
+   "Dec 11, 2026",
+   "Riftbound: Convergence Fest, Las Vegas (to Dec 13)"
   ]
  ],
  "sections": [
@@ -230,9 +342,9 @@
    "h": "The big one",
    "p": [
     [
-     "Magic's Planeswalker series comes to Netflix in 2027.",
-     "Netflix revealed PLANESWALKER on November 13, 2026: an animated Magic: The Gathering series centered on Chandra, premiering in 2027.",
-     "Magic: The Gathering (official)"
+     "Pokémon TCG's Flowing Fists revealed for Feb 6, 2027.",
+     "The Pokémon Company's Mega Evolution—Flowing Fists releases February 6, 2027 with over 110 cards, led by Mega Lucario Z ex and Mega Garchomp Z ex.",
+     "Pokémon (official); ICv2"
     ]
    ]
   },
@@ -240,111 +352,92 @@
    "h": "Top stories this week",
    "li": [
     [
-     "Riftbound: Riftbound bans Riven, Dazzling Aurora and more.",
-     "Riftbound's Radiance ban list adds eight cards and two battlefields to Standard and 2v2 Constructed, effective Monday, November 23, 2026.",
+     "Pokémon: Pokémon's Aura Seeker hits Japan Nov 27, all cards out.",
+     "Japan's Aura Seeker expansion, starring Mega Lucario Z ex, releases November 27, 2026; all 78 main-set cards are revealed ahead of English Flowing Fists (Feb 6, 2027).",
+     "Pokémon Card Game (official, Japan); PokéBeach"
+    ],
+    [
+     "Lorcana: Disney Lorcana is going digital: every card, crossplay.",
+     "Ravensburger's first Disney Lorcana digital game dev blog (November 20, 2026) promises every card from every set, mobile and desktop crossplay and ranked play; no release date yet.",
+     "Disney Lorcana (official)"
+    ],
+    [
+     "Magic: Magic's Dune Secret Lair Superdrop lands November 30.",
+     "Secret Lair x Dune, My Arrakis, My Superdrop, launches November 30, 2026 with eight new-to-Magic Dune legends and a new Shai-Hulud card.",
+     "Magic: The Gathering (official)"
+    ],
+    [
+     "Magic: Magic's Nauctis drops Play Boosters for Booster Packs.",
+     "Nauctis: The Sunken Realm (February 5, 2027) sells 14-card Booster Packs, 30 per box, instead of Play Boosters, and Collector Boosters drop from 15 cards to 12.",
+     "ICv2; Magic: The Gathering (official)"
+    ],
+    [
+     "Magic: Stefan Schütz wins Magic World Championship 32.",
+     "Stefan Schütz won Magic World Championship 32 in Atlanta on November 15, 2026 with Izzet Mission, taking the $100,000 first prize.",
+     "Magic: The Gathering (official)"
+    ],
+    [
+     "One Piece: One Piece's OP-18 The Dominance of God lands Nov 20.",
+     "One Piece Card Game's OP-18 The Dominance of God releases in English on November 20, 2026, with six new Leaders and a 4th Anniversary Event running to December 17.",
+     "One Piece Card Game (official)"
+    ],
+    [
+     "Star Wars: Star Wars: Unlimited's Icons 2027 Edition lands Nov 20.",
+     "Star Wars: Unlimited's Icons 2027 Edition, a mini-set of over 190 cards, releases November 20, 2026, with a Darth Vader and Leia Organa Starter Box.",
+     "Star Wars: Unlimited (official)"
+    ],
+    [
+     "Riftbound: Riftbound's Convergence Fest hits Vegas Dec 11-13.",
+     "Riftbound's Convergence Fest runs December 11-13, 2026 in Las Vegas, and participating US stores give out an exclusive Ionic Spark battlefield promo December 9-15.",
      "Riftbound (official)"
     ],
     [
-     "Magic: Magic's Star Trek is out; To Boldly Go league starts.",
-     "Magic: The Gathering | Star Trek releases November 13, 2026, and the To Boldly Go sealed league runs in stores through January 28, 2027.",
-     "Wizards of the Coast (WPN)"
+     "Lorcana: Disney Lorcana returns to EPCOT with a Figment glimmer.",
+     "Disney Lorcana returns to EPCOT International Festival of the Arts January 15 to March 1, 2027, with a festival-only Figment glimmer and Minnie, Belle and Alice promos.",
+     "Disney Lorcana (official)"
     ],
     [
-     "Pokémon: Pokémon Day 2027 Collection lands January 29.",
-     "The Pokémon Day 2027 Collection reaches stores January 29, 2027, with a stamped foil Pikachu promo, three booster packs, a coin and a TCG Live code card.",
-     "ICv2"
+     "Magic: Magic's Star Trek Commander Party runs Nov 20-26.",
+     "Magic: The Gathering | Star Trek Commander Party runs in WPN stores November 20-26, 2026 (again January 15-21, 2027), with Highly Illogical or Munitions Enthusiast promos.",
+     "Magic: The Gathering (official); Wizards Play Network"
     ],
     [
-     "Flesh and Blood: Fang wins Flesh and Blood Worlds in Paris.",
-     "Nicolas Jamoulle won World Championship: Paris (November 5-8, 2026) on Fang, Dracai of Blades; runner-up Jin Han Toh also played Fang.",
-     "Flesh and Blood (official)"
+     "Magic: Magic's first God Packs arrive with Nauctis.",
+     "Nauctis: The Sunken Realm (February 5, 2027) brings Magic's first God Packs: about 1 in 1,000 Booster Packs is all rares and mythics, plus ~500 Abyssal Lotus headliners.",
+     "Magic: The Gathering (official)"
     ],
     [
-     "Flesh and Blood: Flesh and Blood's 2027 season: three $200K Pro Tours.",
-     "The 2027 World Tour brings three $200,000 Pro Tours, one Global Leaderboard and a $10,000 Player of the Year crowned in Kobe; Pro Quests start February 13, 2027.",
-     "Flesh and Blood (official)"
-    ],
-    [
-     "Yu-Gi-Oh!: Yu-Gi-Oh!'s Magnificent Maestros lands this Friday.",
-     "Konami's 125-card set hits stores November 13, 2026, with 18 reimagined anime cards that also come as Grand Master Rares, serial-numbered 001 to 100.",
-     "Konami (official); ICv2"
-    ],
-    [
-     "Magic: Magic's Rise of the Polygons Secret Lair goes retro.",
-     "Wizards' polygon-era Secret Lair, with Balefire Dragon and Young Pyromancer, sells November 16-30, 2026, with half the sale price going to Extra Life.",
-     "ICv2"
-    ],
-    [
-     "My Little Pony: My Little Pony TCG's The Coronation lands Feb 19.",
-     "Kayou's fifth English My Little Pony TCG booster set, The Coronation, reaches retail February 19, 2027, with new mechanics Leap In, Revelation and Triumph.",
-     "ICv2"
-    ],
-    [
-     "Pokémon: Mega Greninja ex League Battle Deck lands this week.",
-     "Pokémon's ready-to-play 60-card League Battle Deck, with Mega Starmie ex and Meowth ex, reaches stores this week.",
-     "ICv2"
-    ],
-    [
-     "Magic: Magic teams up with Burger King in Italy.",
-     "Burger King Italy's Great Gathering meal comes with a burger-box style deck box and 100 sleeves, November 10-30, 2026, in Italy only.",
-     "ICv2"
-    ],
-    [
-     "Magic: Magic's Star Trek lands Friday with actor-signed cards.",
-     "Magic: The Gathering | Star Trek releases November 13, 2026; Collector Boosters can hold Headliner cards hand-signed by Star Trek actors.",
-     "Wizards of the Coast; ICv2"
+     "Yu-Gi-Oh!: Yu-Gi-Oh!'s HERO Force Structure Deck goes all-foil.",
+     "Konami's 55-card all-foil Structure Deck of Jaden and Aster's HEROes arrives February 26, 2027, with two brand-new Ultra Rare cards and a bonus Secret Rare.",
+     "Yu-Gi-Oh! TCG (official); ICv2"
     ]
    ],
    "clips": [
-    "clip49",
-    "clip47",
-    "clip48",
-    "clip42",
-    "clip45",
-    "clip41",
-    "clip43",
-    "clip46",
-    "clip40",
-    "clip44",
-    "clip39"
+    "clip65",
+    "clip63",
+    "clip60",
+    "clip58",
+    "clip53",
+    "clip54",
+    "clip55",
+    "clip57",
+    "clip62",
+    "clip64",
+    "clip52",
+    "clip51"
    ]
   },
   {
    "h": "Coming up this week",
    "li": [
     [
-     "Now to Nov 15",
-     "Magic: MagicCon Atlanta + World Championship 32",
+     "Mon, Nov 23",
+     "Riftbound: Radiance ban list takes effect (8 cards + 2 battlefields, Standard and 2v2)",
      "Confirmed"
     ],
     [
-     "Now to Jan 28",
-     "Magic: Magic Presents: To Boldly Go sealed league",
-     "Confirmed"
-    ],
-    [
-     "Now to Nov 16",
-     "Riftbound: T1 Worlds Champion Player Bundle + Worlds 2026 Edition drawing, registration",
-     "Confirmed"
-    ],
-    [
-     "Fri, Nov 20",
-     "One Piece: OP-18 The Dominance of God (English)",
-     "Confirmed"
-    ],
-    [
-     "Fri, Nov 20",
-     "One Piece: 4th Anniversary Event for OP-18 (to Dec 17)",
-     "Confirmed"
-    ],
-    [
-     "Fri, Nov 20",
-     "Star Wars Unlimited: Icons 2027 Edition",
-     "Confirmed"
-    ],
-    [
-     "Fri, Nov 20",
-     "Star Wars Unlimited: Gift Box (8 boosters, 3 exclusive promos)",
+     "Fri, Nov 27",
+     "Pokémon: Aura Seeker (Japan; basis of Flowing Fists)",
      "Confirmed"
     ]
    ]
@@ -353,10 +446,5 @@
  "signoff": [
   "Shuffle up,",
   "Zia & Luna"
- ],
- "cover_image": "img/nl-cover-vol3-s.jpg",
- "vol_pos": {
-  "top": 38,
-  "right": 4
- }
+ ]
 }
