@@ -154,7 +154,7 @@ __COVER__})();
 
 out = ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
        '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
-       + head + '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap">\n' + style + '\n' + extra_css + '\n</head>\n<body>\n' + body + '\n' + scrolltop + '\n' + js + '\n' + mz_js + '\n</body>\n</html>\n')
+       + head + '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Lato:wght@400;700;900&family=DM+Serif+Display:ital@0;1&display=swap">\n' + style + '\n' + extra_css + '\n</head>\n<body>\n' + body + '\n' + scrolltop + '\n' + js + '\n' + mz_js + '\n</body>\n</html>\n')
 (root/'newsletter.html').write_text(out)
 
 # Magazine cover picture for emails (img/magazine-cover.jpg, used by the beehiiv welcome email, Nov 6, 2026).

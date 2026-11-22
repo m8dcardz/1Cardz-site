@@ -516,6 +516,44 @@ CSS = r'''
 .mz-cover .big span{display:block;font-family:"Playfair Display",Georgia,serif;font-style:italic;font-size:3.6cqw;line-height:1.15;margin-top:1.5cqw;color:#fde8c2}
 .mz-cover .bar{position:absolute;right:3.5cqw;bottom:3.5cqw;z-index:2;background:#fff;color:#8a8f99;padding:1.4cqw 2cqw 1cqw;font-family:var(--f-mono);font-size:2.2cqw;text-align:center;line-height:1.2}
 .mz-cover .bar i{display:block;width:22cqw;height:7cqw;background:repeating-linear-gradient(90deg,#000 0 .5cqw,#fff .5cqw .8cqw,#000 .8cqw 1.1cqw,#fff 1.1cqw 1.9cqw,#000 1.9cqw 2.6cqw,#fff 2.6cqw 3cqw);margin-bottom:.6cqw}
+/* EDITORIAL STYLE (user, Nov 22, 2026: "I want this #3 writing style to be used in the magazine").
+   From editorial sample 3 (sickn33 editorial-design): Playfair Display headings + Lato body, ink text on paper,
+   dark-red accent, Lato caps labels, hairline rules, pull quotes between rules. Cover, back cover and the dark
+   photo pages keep their own look. Remove this block to go back to the Nov 16 look. */
+.mz-page:not(.mz-back){background:#f9f8f4;color:#2a2a2a;font-family:Lato,"Helvetica Neue",Arial,sans-serif}
+.mz-page:not(.mz-back) .run{font-family:Lato,sans-serif;font-weight:700;font-size:2.2cqw;letter-spacing:.16em;color:#6d6a63;border-bottom:.5cqw double #121212;border-bottom-width:.8cqw;border-bottom-style:double}
+.mz-page:not(.mz-back) .kick,.mz-page:not(.mz-back) .st .g,.mz-story .why b,.mz-detail .why b,.mz-story .pull span,.mz-detail .pull span{font-family:Lato,sans-serif;font-weight:900;letter-spacing:.2em;color:#8b0000}
+.mz-page:not(.mz-back) h3{font-style:italic;color:#121212;letter-spacing:-.01em;padding-bottom:2.6cqw;border-bottom:.25cqw solid #121212}
+.mz-page:not(.mz-back) p,.mz-page:not(.mz-back) .dets li,.mz-page:not(.mz-back) .st p,.mz-page:not(.mz-back) .hosts p,.mz-page:not(.mz-back) .about span,.mz-page:not(.mz-back) .toc b{color:#2a2a2a}
+.mz-page:not(.mz-back) p.first::first-letter,.mz-page:not(.mz-back) .toc li::before,.mz-page:not(.mz-back) .cal b,.mz-page:not(.mz-back) .about b,.mz-page:not(.mz-back) .dets li::before,.mz-page:not(.mz-back) .watch b{color:#8b0000}
+.mz-page:not(.mz-back) .toc em{color:#121212}
+.mz-page:not(.mz-back) .toc span,.mz-page:not(.mz-back) .cal i,.mz-page:not(.mz-back) blockquote cite,.mz-page:not(.mz-back) .folio,.mz-page:not(.mz-back) .sub{font-family:Lato,sans-serif;font-weight:700}
+.mz-page:not(.mz-back) .toc li,.mz-page:not(.mz-back) .cal div,.mz-page:not(.mz-back) .dets li,.mz-page:not(.mz-back) .st{border-color:#d9d5cc}
+.mz-page:not(.mz-back) .sub{color:#121212;border-bottom-color:#121212}
+.mz-page:not(.mz-back) .pull{font-style:italic;font-weight:900;color:#121212;text-align:center;border-top:.5cqw solid #121212;border-bottom:.5cqw solid #121212}
+.mz-page:not(.mz-back) blockquote{background:transparent;border-left:0;border-top:.5cqw solid #121212;border-bottom:.25cqw solid #d9d5cc;padding:2.6cqw .5cqw}
+.mz-page:not(.mz-back) blockquote p{color:#121212;font-weight:900}
+.mz-page:not(.mz-back) .st b{color:#121212}
+.mz-page:not(.mz-back) .st img{border-radius:0}
+.mz-page:not(.mz-back) .st small,.mz-page:not(.mz-back) .src,.mz-page:not(.mz-back) .note{color:#6d6a63}
+.mz-page:not(.mz-back) .st small a,.mz-page:not(.mz-back) .src a,.mz-page:not(.mz-back) .note a{color:#8b0000}
+.mz-page:not(.mz-back) .watch{background:transparent;border-top:.5cqw solid #121212;border-bottom:.25cqw solid #d9d5cc;border-radius:0;color:#2a2a2a}
+.mz-page:not(.mz-back) .watch img{border-radius:0}
+.mz-page:not(.mz-back) .about{border-top-color:#121212}
+.mz-story .why,.mz-detail .why{background:transparent;border-left:0;border-top:.25cqw solid #121212;border-bottom:.25cqw solid #121212;padding:2.2cqw 0;font-style:italic;font-family:"Playfair Display",Georgia,serif;color:#121212}
+.mz-story .why b,.mz-detail .why b{font-style:normal}
+
+.mz-page.mz-photo{background:#120e1f;color:#fff}
+.mz-page.mz-photo .kick{color:#ffd23f}
+.mz-page.mz-photo h3{color:#fff;font-style:italic;border-bottom:0;padding-bottom:0}
+.mz-page.mz-photo p,.mz-page.mz-photo .facts li,.mz-page.mz-photo .why{color:#eef0f6}
+.mz-page.mz-photo .why b,.mz-page.mz-photo .quip span{font-family:Lato,sans-serif;font-weight:900;letter-spacing:.2em;color:#ffd23f}
+.mz-page.mz-photo .src{color:#c9cde0}.mz-photo .mzt .src a{color:#ffd23f}
+
+/* Heading font (user picked option C, Nov 22, 2026): DM Serif Display, upright, for inside-page headings,
+   story titles, pull quotes, big numbers and drop caps. Labels and body stay Lato. */
+.mz-page:not(.mz-back) h3,.mz-page.mz-photo h3,.mz-page:not(.mz-back) .st b,.mz-page:not(.mz-back) .pull,.mz-page:not(.mz-back) blockquote p,.mz-page:not(.mz-back) p.first::first-letter,.mz-page:not(.mz-back) .about b,.mz-page:not(.mz-back) .toc li::before,.mz-page:not(.mz-back) .cal b,.mz-page:not(.mz-back) .dets li::before,.mz-page:not(.mz-back) .watch b,.mz-page:not(.mz-back) .toc em,.mz-page.mz-photo .quip,.mz-story .why,.mz-detail .why{font-family:"DM Serif Display",Georgia,serif;font-style:normal;font-weight:400}
+
 '''
 
 JS = r'''<script id="mz-js">
