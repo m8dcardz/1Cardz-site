@@ -411,7 +411,7 @@ if (root/'.git').exists() and made:
 # ---------- one page per guide (Nov 21, 2026) + the Guides page, guides.html (Nov 22, 2026) ----------
 g_made = []
 _ni = '<p>News Headlines. Every story from the 8 AM and 8 PM drops, newest first, in plain text.</p>'
-_gi = '<p>Your first deck, your next box, the card you dream about: plain-English guides from Zia and Luna, kept current as each new set lands.</p>'
+_gi = '<p>Your first deck, your next box, the card you dream about: plain-English guides, kept current as each new set lands.</p>'
 g_header = s_header.replace(site_parts.navbar(src, 'news.html'), site_parts.navbar(src, 'guides.html')).replace(_ni, _gi)
 for g in guides:
     frag_p = root/'tools'/g['fragment']
@@ -503,6 +503,7 @@ gi_css = """<style>
 .guides-grid .s{color:#cfd4e6;font-size:15px;line-height:1.5}
 .guides-grid .r{margin-top:auto;font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--foil)}
 /* Guides typography (Nov 22, 2026): DM Serif Display titles, Inter text */
+@media (max-width:560px){.sheet-title .gx{display:none}}
 .guides-grid b{font-family:"DM Serif Display",Georgia,serif;font-weight:400;font-stretch:normal;font-size:25px;line-height:1.12}
 .guides-grid .s{font-family:Inter,system-ui,sans-serif}
 </style>"""
@@ -517,7 +518,7 @@ gi_body = f"""{gi_header}
     <div class="sheet-head">
       <div class="sheet-title">
   <h2 id="guides-h">Guides</h2>
-  <p>Where to start, what to buy and which cards matter in every game. Checked against official sources, kept up to date.</p>
+  <p>Where to start, what to buy and which cards matter in every game<span class="gx">: starter decks, record sales and the cards everyone asks about</span>. Checked against official sources, kept up to date.</p>
       </div>
     </div>
     <div class="gd">
