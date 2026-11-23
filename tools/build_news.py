@@ -175,7 +175,7 @@ body = f'''{header}
     <div class="sheet-head">
       <div class="sheet-title">
   <h2 id="news-h">News Headlines</h2>
-  <p>Every story from the 8 AM and 8 PM drops, newest first. Text only, with the source for each one.</p>
+  <p>All the latest trading card game news, newest first. Pick a game, tap a headline for the summary and source, then read the full story.</p>
       </div>
       <div class="chips" role="group" aria-label="Filter by game">{"".join(chips)}</div>
     </div>

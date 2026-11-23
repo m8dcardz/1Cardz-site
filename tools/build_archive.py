@@ -116,7 +116,7 @@ body = f'''{header}
     <div class="sheet-head">
       <div class="sheet-title">
   <h2 id="set-h">Library Archives</h2>
-  <p>Every clip from the 8 AM and 8 PM drops, {n} so far ({span}). Tap a clip to watch it big, or tap Sound to hear it here.</p>
+  <p>Catch up on every clip from the 8 AM and 8 PM drops. Tap a clip to watch it big, or tap Sound to hear it here.</p>
       </div>
       <div class="chips" role="group" aria-label="Filter posts">{"".join(chips)}</div>
     </div>
