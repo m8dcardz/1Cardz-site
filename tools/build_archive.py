@@ -63,7 +63,8 @@ for k, p in enumerate(newest):
         art = f'<div class="art clip ytart" data-p="img/yt-{yt}.jpg"></div>'
         btn = f'<a class="snd ytwatch" href="https://www.youtube.com/shorts/{yt}" target="_blank" rel="noopener" aria-label="Watch {e(p["title"])} on YouTube">▶ Watch</a>'
     else:
-        art = f'<div class="art clip" data-p="img/{c}.jpg"><video src="img/{c}-s.mp4" data-full="img/{c}.mp4" data-poster="img/{c}.jpg" muted loop playsinline preload="none"></video></div>'
+        vq = f"?v={p['post_id']}" if p.get('post_id') else ''   # version tag (Nov 24, 2026): a replaced clip gets a new address
+        art = f'<div class="art clip" data-p="img/{c}.jpg{vq}"><video src="img/{c}-s.mp4{vq}" data-full="img/{c}.mp4{vq}" data-poster="img/{c}.jpg{vq}" muted loop playsinline preload="none"></video></div>'
         btn = '<button class="snd" type="button" aria-pressed="false" aria-label="Turn sound on">Sound off</button>'
     cards.append(f'''        <div class="pocket" data-host="{e(p['host'])}" data-game="{e(p['game'])}"><div class="{cls}" role="button" tabindex="0" aria-pressed="true" aria-label="Clip: {e(p['title'])}, {e(p['game'])}, post {num}. Tap to flip and play">
           <div class="inner">

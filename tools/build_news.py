@@ -305,7 +305,7 @@ for k, (n, p) in enumerate(site_parts.story_items(news, list(posts.values()))):
                      f'title="YouTube Short: {e(title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" '
                      f'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>')
     elif p:
-        clip_html = (f'<video class="story-video" controls playsinline preload="none" poster="img/{p["clip"]}.jpg" src="img/{p["clip"]}.mp4" '
+        clip_html = (f'<video class="story-video" controls playsinline preload="none" poster="img/{p["clip"]}.jpg{('?v=' + str(p['post_id'])) if p.get('post_id') else ''}" src="img/{p["clip"]}.mp4{('?v=' + str(p['post_id'])) if p.get('post_id') else ''}" '
                      f'aria-label="News clip with {e(p["host"])}: {e(title)}"></video>')
     host = f' · With {e(p["host"])}' if p else ''
     d = n.get('details') or {}

@@ -2020,14 +2020,15 @@ html{font-synthesis-weight:none}
     const nw={};(Array.isArray(N)?N:[]).forEach(n=>{nw[n.when]=n});
     const top=P.filter(p=>p.clip).sort((a,b)=>a.when<b.when?1:-1).slice(0,cards.length);
     cards.forEach(card=>{const p=top[+card.dataset.pk];if(!p)return;
-      const v=card.querySelector('video');if(v&&v.getAttribute('src')===`img/${p.clip}-s.mp4`)return;
+      const vq=p.post_id?'?v='+p.post_id:'';/* version tag (Nov 24, 2026): a replaced clip gets a new address, so browsers never show the old one */
+      const v=card.querySelector('video');if(v&&v.getAttribute('src')===`img/${p.clip}-s.mp4${vq}`)return;
       const q=(sel,txt)=>{const el=card.querySelector(sel);if(el)el.textContent=txt};
       q('.nm h3',p.title);q('.nm .cost',p.game);q('.typeline span','Clip · '+p.host+' · '+tl(p.when));
       const ps=card.querySelectorAll('.txt p');if(ps[0])ps[0].textContent=p.blurb||'';if(ps[1])ps[1].textContent=p.quip||'';
       if(ps[2])ps[2].textContent='Source: '+((nw[p.when]||{}).source||p.source||'');
-      const art=card.querySelector('.art');if(art)art.dataset.p=`img/${p.clip}.jpg`;
-      if(art&&art.style.getPropertyValue('--p'))art.style.setProperty('--p',`url(img/${p.clip}.jpg)`);
-      if(v){v.setAttribute('src',`img/${p.clip}-s.mp4`);v.dataset.full=`img/${p.clip}.mp4`;v.dataset.poster=`img/${p.clip}.jpg`;if(v.poster)v.poster=v.dataset.poster;}
+      const art=card.querySelector('.art');if(art)art.dataset.p=`img/${p.clip}.jpg${vq}`;
+      if(art&&art.style.getPropertyValue('--p'))art.style.setProperty('--p',`url(img/${p.clip}.jpg${vq})`);
+      if(v){v.setAttribute('src',`img/${p.clip}-s.mp4${vq}`);v.dataset.full=`img/${p.clip}.mp4${vq}`;v.dataset.poster=`img/${p.clip}.jpg${vq}`;if(v.poster)v.poster=v.dataset.poster;}
       card.setAttribute('aria-label',card.getAttribute('aria-label').replace(/^Clip: .*?, [^,]+, /,`Clip: ${p.title}, ${p.game}, `))});
   });
 })();
@@ -2047,7 +2048,7 @@ html{font-synthesis-weight:none}
     let box=document.getElementById('hlCards');if(!box){box=document.createElement('div');box.id='hlCards';box.hidden=true;document.body.appendChild(box)}
     box.innerHTML='';
     top.forEach((p,i)=>{const n=byWhen[p.when]||{},title=n.title||p.title,sum=n.summary||p.blurb,src=n.source||p.source,el=panels[i],tb=tabs[i];
-      const key='hl-'+p.clip;
+      const key='hl-'+p.clip,vq=p.post_id?'?v='+p.post_id:'';
       el.querySelector('.hl-meta').innerHTML='<span class="hl-game">'+esc(p.game)+'</span><span>'+esc(fmt(p.when))+'</span><span>With '+esc(p.host)+'</span>';
       const h3=el.querySelector('h3');
       if(n.title&&n.when){const sl=String(n.title).normalize('NFKD').replace(/[^\x00-\x7F]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,70).replace(/-+$/,'');
@@ -2057,12 +2058,12 @@ html{font-synthesis-weight:none}
       el.querySelector('.hl-copy > p').textContent=sum;
       el.querySelector('.hl-src').textContent='Source · '+src;
       const w=el.querySelector('.hl-watch');w.dataset.card=key;
-      const img=el.querySelector('.hl-shot img');img.src='img/'+p.clip+'.jpg';img.alt='Still from the '+p.game+' news clip with '+p.host;
+      const img=el.querySelector('.hl-shot img');img.src='img/'+p.clip+'.jpg'+vq;img.alt='Still from the '+p.game+' news clip with '+p.host;
       const sh=el.querySelector('.hl-shot');if(sh)sh.setAttribute('aria-label','Play the clip: '+title);
       if(tb){const sp=tb.querySelector('span');if(sp)sp.textContent=p.game}
       /* a hidden clip card so "Watch the clip" opens this clip in the pop-up player */
       const c=document.createElement('div');c.className='flip clipcard hl-live-card';c.setAttribute('aria-pressed','true');
-      c.dataset.key=key;c.innerHTML='<h3>'+esc(title)+'</h3><div class="art clip"><video data-full="img/'+esc(p.clip)+'.mp4" data-poster="img/'+esc(p.clip)+'.jpg" src="img/'+esc(p.clip)+'-s.mp4" preload="none" muted playsinline></video></div><div class="typeline"><span>'+esc(p.game)+' · '+esc(p.host)+'</span></div><div class="txt"><p>'+esc(p.quip||sum)+'</p></div>';
+      c.dataset.key=key;c.innerHTML='<h3>'+esc(title)+'</h3><div class="art clip"><video data-full="img/'+esc(p.clip)+'.mp4'+vq+'" data-poster="img/'+esc(p.clip)+'.jpg'+vq+'" src="img/'+esc(p.clip)+'-s.mp4'+vq+'" preload="none" muted playsinline></video></div><div class="typeline"><span>'+esc(p.game)+' · '+esc(p.host)+'</span></div><div class="txt"><p>'+esc(p.quip||sum)+'</p></div>';
       box.appendChild(c);
     });
     document.querySelectorAll('.hl-watch').forEach(b=>{if(b.dataset.live)return;b.dataset.live=1;b.addEventListener('click',e=>{
